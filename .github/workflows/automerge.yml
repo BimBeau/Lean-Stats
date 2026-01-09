@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
 
-permissions:           # indispensable pour écrire dans la PR + déclencher un autre workflow
+permissions:
   contents: write
   pull-requests: write
   actions: write
 
-concurrency:           # un seul job actif par PR
+concurrency:
   group: "automerge-${{ github.event.pull_request.number }}"
   cancel-in-progress: true
 
@@ -39,7 +39,6 @@ jobs:
             exit 0
           fi
 
-      # 🔁 IMPORTANT : un merge effectué via GITHUB_TOKEN ne déclenche pas toujours les workflows "on: push"
       # On déclenche donc explicitement le workflow "Build plugin zip" une fois la PR effectivement mergée.
       - name: Déclencher Build plugin zip si PR mergée
         env:
@@ -48,9 +47,11 @@ jobs:
           set -eo pipefail
           PR="${{ github.event.pull_request.number }}"
 
-          MERGED=$(gh pr view "$PR" --json merged --jq .merged)
-          if [ "$MERGED" = "true" ]; then
-            echo "PR #$PR mergée -> déclenchement du workflow 'Build plugin zip' sur main"
+          # mergedAt existe toujours (alors que "merged" n'existe pas selon la version de gh)
+          MERGED_AT=$(gh pr view "$PR" --json mergedAt --jq .mergedAt)
+
+          if [ "$MERGED_AT" != "null" ]; then
+            echo "PR #$PR mergée à $MERGED_AT -> déclenchement du workflow 'Build plugin zip' sur main"
             gh workflow run "Build plugin zip" --ref main
           else
             echo "PR #$PR pas encore mergée (merge queue probable) -> pas de déclenchement du build"
