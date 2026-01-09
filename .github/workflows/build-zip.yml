@@ -11,27 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # Récupère le contenu du dépôt
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload plugin artifact (single zip)
+      # Configure Node.js (version ≥ 18 recommandée par @wordpress/scripts)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Installe les dépendances du projet
+      - name: Install NPM dependencies
+        run: npm ci
+
+      # Construit les assets et prépare le ZIP via le script build-plugin-zip.sh
+      # Cela exécute d’abord "npm run build" pour générer le dossier "build",
+      # puis synchronise les fichiers utiles et crée l’archive dans "dist/"
+      - name: Build plugin and create ZIP
+        run: npm run build:zip
+
+      # Téléverse l’archive générée comme artefact de workflow
+      # Le fichier se trouve dans dist/ et porte le nom "lean-stats-<version>.zip"
+      - name: Upload plugin archive
         uses: actions/upload-artifact@v4
         with:
           name: lean-stats
-          path: |
-            ./
-            !.git/**
-            !.github/**
-            !node_modules/**
-            !tests/**
-            !docs/**
-            !scripts/**
-            !src/**
-            !assets/js/__tests__/**
-            !package.json
-            !package-lock.json
-            !webpack.config.js
-            !phpcs.xml
-            !phpunit.xml.dist
-            !AGENTS.md
-
+          path: dist/*.zip
