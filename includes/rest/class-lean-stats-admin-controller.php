@@ -147,6 +147,12 @@ class Lean_Stats_Admin_Controller {
         global $wpdb;
 
         $range = $this->get_day_range($request);
+        $cache_key = $this->get_cache_key('kpis', $range);
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         $query = $wpdb->prepare(
@@ -167,13 +173,14 @@ class Lean_Stats_Admin_Controller {
             'uniqueReferrers' => isset($row['unique_referrers']) ? (int) $row['unique_referrers'] : 0,
         ];
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'kpis' => $data,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'kpis' => $data,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -215,6 +222,18 @@ class Lean_Stats_Admin_Controller {
 
         $range = $this->get_day_range($request);
         $limit = $this->normalize_limit($request->get_param('limit'));
+        $cache_key = $this->get_cache_key(
+            'top-pages',
+            [
+                'range' => $range,
+                'limit' => $limit,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         $query = $wpdb->prepare(
@@ -240,13 +259,14 @@ class Lean_Stats_Admin_Controller {
             $rows ?: []
         );
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'items' => $items,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -257,6 +277,18 @@ class Lean_Stats_Admin_Controller {
 
         $range = $this->get_day_range($request);
         $limit = $this->normalize_limit($request->get_param('limit'));
+        $cache_key = $this->get_cache_key(
+            'referrers',
+            [
+                'range' => $range,
+                'limit' => $limit,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         $query = $wpdb->prepare(
@@ -282,13 +314,14 @@ class Lean_Stats_Admin_Controller {
             $rows ?: []
         );
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'items' => $items,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -298,6 +331,12 @@ class Lean_Stats_Admin_Controller {
         global $wpdb;
 
         $range = $this->get_day_range($request);
+        $cache_key = $this->get_cache_key('timeseries-day', $range);
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         $query = $wpdb->prepare(
@@ -321,13 +360,14 @@ class Lean_Stats_Admin_Controller {
             $rows ?: []
         );
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'items' => $items,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -337,6 +377,12 @@ class Lean_Stats_Admin_Controller {
         global $wpdb;
 
         $range = $this->get_hour_range($request);
+        $cache_key = $this->get_cache_key('timeseries-hour', $range);
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_hourly';
 
         $query = $wpdb->prepare(
@@ -360,13 +406,14 @@ class Lean_Stats_Admin_Controller {
             $rows ?: []
         );
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'items' => $items,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -376,6 +423,12 @@ class Lean_Stats_Admin_Controller {
         global $wpdb;
 
         $range = $this->get_day_range($request);
+        $cache_key = $this->get_cache_key('device-split', $range);
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         $query = $wpdb->prepare(
@@ -399,13 +452,14 @@ class Lean_Stats_Admin_Controller {
             $rows ?: []
         );
 
-        return new WP_REST_Response(
-            [
-                'range' => $range,
-                'items' => $items,
-            ],
-            200
-        );
+        $payload = [
+            'range' => $range,
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
     }
 
     /**
@@ -510,5 +564,47 @@ class Lean_Stats_Admin_Controller {
             'start' => $start,
             'end' => $end,
         ];
+    }
+
+    /**
+     * Resolve cache TTL for admin analytics.
+     */
+    private function get_cache_ttl(): int {
+        $ttl = (int) apply_filters('lean_stats_admin_cache_ttl', 300);
+
+        return max(300, min(600, $ttl));
+    }
+
+    /**
+     * Build a cache key for admin analytics responses.
+     */
+    private function get_cache_key(string $endpoint, array $params): string {
+        $payload = [
+            'endpoint' => $endpoint,
+            'params' => $params,
+        ];
+
+        return lean_stats_get_admin_cache_key(md5(wp_json_encode($payload)));
+    }
+
+    /**
+     * Fetch cached response payload.
+     */
+    private function get_cached_payload(string $cache_key): ?array {
+        $cached = get_transient($cache_key);
+
+        return is_array($cached) ? $cached : null;
+    }
+
+    /**
+     * Store cached response payload.
+     */
+    private function set_cached_payload(string $cache_key, array $payload): void {
+        $ttl = $this->get_cache_ttl();
+        if ($ttl <= 0) {
+            return;
+        }
+
+        set_transient($cache_key, $payload, $ttl);
     }
 }
