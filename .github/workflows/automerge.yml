@@ -1,12 +1,13 @@
-name: Auto‑merge clean PRs
+name: Auto-merge clean PRs
 
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
 
-permissions:           # indispensable pour écrire dans la PR
+permissions:           # indispensable pour écrire dans la PR + déclencher un autre workflow
   contents: write
   pull-requests: write
+  actions: write
 
 concurrency:           # un seul job actif par PR
   group: "automerge-${{ github.event.pull_request.number }}"
@@ -14,23 +15,43 @@ concurrency:           # un seul job actif par PR
 
 jobs:
   automerge:
-    if: "!github.event.pull_request.draft"          # plus de filtre sur le label
+    if: "!github.event.pull_request.draft"
     runs-on: ubuntu-latest
+
     steps:
-      # 📥 Ré‑installe un repo Git minimal pour que `gh pr merge` trouve .git
+      # 📥 Ré-installe un repo Git minimal pour que `gh pr merge` trouve .git
       - name: Checkout minimal
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1          # suffit pour exécuter les commandes Git/CLI
+          fetch-depth: 1
 
-      - name: Tenter l’auto‑merge (ou mise en file d’attente)
+      - name: Tenter l’auto-merge (ou mise en file d’attente)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eo pipefail
           PR="${{ github.event.pull_request.number }}"
-          # --auto : active l’auto‑merge ou place la PR en merge‑queue
+
+          # --auto : active l’auto-merge ou place la PR en merge-queue
           if ! gh pr merge "$PR" --squash --delete-branch --auto; then
             gh pr comment "$PR" \
               --body ":warning: **Conflit détecté** – merci de le résoudre manuellement."
+            exit 0
+          fi
+
+      # 🔁 IMPORTANT : un merge effectué via GITHUB_TOKEN ne déclenche pas toujours les workflows "on: push"
+      # On déclenche donc explicitement le workflow "Build plugin zip" une fois la PR effectivement mergée.
+      - name: Déclencher Build plugin zip si PR mergée
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eo pipefail
+          PR="${{ github.event.pull_request.number }}"
+
+          MERGED=$(gh pr view "$PR" --json merged --jq .merged)
+          if [ "$MERGED" = "true" ]; then
+            echo "PR #$PR mergée -> déclenchement du workflow 'Build plugin zip' sur main"
+            gh workflow run "Build plugin zip" --ref main
+          else
+            echo "PR #$PR pas encore mergée (merge queue probable) -> pas de déclenchement du build"
           fi
