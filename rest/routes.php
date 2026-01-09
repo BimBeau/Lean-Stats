@@ -14,4 +14,6 @@ add_action('rest_api_init', static function (): void {
 
     $admin_controller = new Lean_Stats_Admin_Controller();
     $admin_controller->register_routes();
+
+    do_action('lean_stats_register_rest_sources', LEAN_STATS_REST_INTERNAL_NAMESPACE, LEAN_STATS_REST_NAMESPACE);
 });

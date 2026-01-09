@@ -69,6 +69,9 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
             'restNonce' => wp_create_nonce('wp_rest'),
             'restUrl' => esc_url_raw(rest_url()),
             'roles' => lean_stats_get_roles_for_admin(),
+            'panels' => lean_stats_get_admin_panels(),
+            'restSources' => lean_stats_get_rest_sources(),
+            'features' => lean_stats_features(),
             'settings' => [
                 'restNamespace' => LEAN_STATS_REST_NAMESPACE,
                 'restInternalNamespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
@@ -77,6 +80,131 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
             ],
         ]
     );
+}
+
+/**
+ * Get admin panels configuration.
+ */
+function lean_stats_get_admin_panels(): array
+{
+    $panels = [
+        [
+            'name' => 'dashboard',
+            'title' => __('Tableau de bord', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
+            'name' => 'settings',
+            'title' => __('Réglages', 'lean-stats'),
+            'type' => 'core',
+        ],
+    ];
+
+    $filtered = apply_filters('lean_stats_admin_panels', $panels);
+    if (!is_array($filtered)) {
+        $filtered = $panels;
+    }
+
+    $normalized = [];
+    foreach ($filtered as $panel) {
+        if (!is_array($panel)) {
+            continue;
+        }
+
+        $name = isset($panel['name']) ? sanitize_key($panel['name']) : '';
+        if ($name === '') {
+            continue;
+        }
+
+        $normalized[] = [
+            'name' => $name,
+            'title' => isset($panel['title']) ? wp_strip_all_tags((string) $panel['title']) : $name,
+            'type' => isset($panel['type']) ? sanitize_key($panel['type']) : 'custom',
+        ];
+    }
+
+    return $normalized;
+}
+
+/**
+ * Get REST data sources list for admin screens.
+ */
+function lean_stats_get_rest_sources(): array
+{
+    $sources = [
+        [
+            'key' => 'settings',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/settings',
+        ],
+        [
+            'key' => 'kpis',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/kpis',
+        ],
+        [
+            'key' => 'top-pages',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/top-pages',
+        ],
+        [
+            'key' => 'referrers',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/referrers',
+        ],
+        [
+            'key' => 'timeseries-day',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/timeseries/day',
+        ],
+        [
+            'key' => 'timeseries-hour',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/timeseries/hour',
+        ],
+        [
+            'key' => 'device-split',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/device-split',
+        ],
+    ];
+
+    $filtered = apply_filters('lean_stats_rest_sources', $sources);
+    if (!is_array($filtered)) {
+        $filtered = $sources;
+    }
+
+    $normalized = [];
+    foreach ($filtered as $source) {
+        if (!is_array($source)) {
+            continue;
+        }
+
+        $key = isset($source['key']) ? sanitize_key($source['key']) : '';
+        $method = isset($source['method']) ? strtoupper(sanitize_key($source['method'])) : 'GET';
+        $namespace = isset($source['namespace']) ? sanitize_text_field((string) $source['namespace']) : '';
+        $path = isset($source['path']) ? '/' . ltrim((string) $source['path'], '/') : '';
+
+        if ($key === '' || $namespace === '' || $path === '/') {
+            continue;
+        }
+
+        $normalized[] = [
+            'key' => $key,
+            'method' => $method,
+            'namespace' => $namespace,
+            'path' => $path,
+        ];
+    }
+
+    return $normalized;
 }
 
 /**

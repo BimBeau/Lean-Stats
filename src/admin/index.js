@@ -34,6 +34,10 @@ import {
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const CHART_COLORS = ['#2271b1', '#72aee6', '#1e8cbe', '#d63638', '#00a32a'];
+const DEFAULT_PANELS = [
+    { name: 'dashboard', title: __('Tableau de bord', 'lean-stats') },
+    { name: 'settings', title: __('Réglages', 'lean-stats') },
+];
 const DEFAULT_SETTINGS = {
     strict_mode: false,
     respect_dnt_gpc: true,
@@ -208,6 +212,35 @@ const normalizeSettings = (settings) => ({
     ...DEFAULT_SETTINGS,
     ...(settings || {}),
 });
+
+const normalizePanels = (panels) => {
+    if (!Array.isArray(panels)) {
+        return DEFAULT_PANELS;
+    }
+
+    const normalized = panels
+        .map((panel) => ({
+            name: panel?.name || '',
+            title: panel?.title || panel?.name || '',
+        }))
+        .filter((panel) => panel.name);
+
+    return normalized.length > 0 ? normalized : DEFAULT_PANELS;
+};
+
+const getPanelComponent = (name) => {
+    const corePanels = {
+        dashboard: DashboardPanel,
+        settings: SettingsPanel,
+    };
+
+    if (corePanels[name]) {
+        return corePanels[name];
+    }
+
+    const registry = window.LeanStatsAdminPanels || {};
+    return registry[name] || null;
+};
 
 const PeriodFilter = ({ value, onChange }) => (
     <Card>
@@ -642,13 +675,19 @@ const AdminApp = () => {
     return (
         <div style={{ display: 'grid', gap: '16px' }}>
             <h1>{__('Lean Stats', 'lean-stats')}</h1>
-            <TabPanel
-                tabs={[
-                    { name: 'dashboard', title: __('Tableau de bord', 'lean-stats') },
-                    { name: 'settings', title: __('Réglages', 'lean-stats') },
-                ]}
-            >
-                {(tab) => (tab.name === 'settings' ? <SettingsPanel /> : <DashboardPanel />)}
+            <TabPanel tabs={normalizePanels(ADMIN_CONFIG?.panels)}>
+                {(tab) => {
+                    const PanelComponent = getPanelComponent(tab.name);
+                    if (!PanelComponent) {
+                        return (
+                            <Notice status="warning" isDismissible={false}>
+                                {__('Aucun panneau disponible pour cet écran.', 'lean-stats')}
+                            </Notice>
+                        );
+                    }
+
+                    return <PanelComponent panel={tab} />;
+                }}
             </TabPanel>
         </div>
     );
