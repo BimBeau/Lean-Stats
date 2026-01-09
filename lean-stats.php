@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.11.1
+ * Version: 0.12.0
  * Author: BimBeau
  * Author: Lean Stats
  * Requires at least: 6.4
@@ -22,12 +22,12 @@ define('LEAN_STATS_PATH', plugin_dir_path(__FILE__));
 define('LEAN_STATS_URL', plugin_dir_url(__FILE__));
 
 require_once LEAN_STATS_PATH . 'includes/features.php';
+require_once LEAN_STATS_PATH . 'includes/settings.php';
 require_once LEAN_STATS_PATH . 'admin/admin.php';
 require_once LEAN_STATS_PATH . 'front/front.php';
 require_once LEAN_STATS_PATH . 'rest/routes.php';
 require_once LEAN_STATS_PATH . 'db/schema.php';
 require_once LEAN_STATS_PATH . 'includes/cache.php';
-require_once LEAN_STATS_PATH . 'includes/settings.php';
 require_once LEAN_STATS_PATH . 'includes/raw-logs.php';
 
 /**

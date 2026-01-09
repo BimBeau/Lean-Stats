@@ -11,6 +11,7 @@ defined('ABSPATH') || exit;
 function lean_stats_get_settings_defaults(): array
 {
     return [
+        'plugin_label' => '',
         'strict_mode' => false,
         'respect_dnt_gpc' => true,
         'url_strip_query' => true,
@@ -43,6 +44,7 @@ function lean_stats_sanitize_settings($settings): array
 
     $settings = wp_parse_args($settings, $defaults);
 
+    $settings['plugin_label'] = trim(sanitize_text_field($settings['plugin_label']));
     $settings['strict_mode'] = (bool) rest_sanitize_boolean($settings['strict_mode']);
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
@@ -81,6 +83,21 @@ function lean_stats_sanitize_settings($settings): array
     $settings['excluded_roles'] = $excluded_roles;
 
     return $settings;
+}
+
+/**
+ * Get plugin label used for admin menu and dashboard heading.
+ */
+function lean_stats_get_plugin_label(): string
+{
+    $settings = lean_stats_get_settings();
+    $label = isset($settings['plugin_label']) ? trim((string) $settings['plugin_label']) : '';
+
+    if ($label === '') {
+        return __('Lean Stats', 'lean-stats');
+    }
+
+    return $label;
 }
 
 /**

@@ -19,12 +19,13 @@ function lean_stats_register_admin_menu(): void
     }
 
     $menu_slug = LEAN_STATS_SLUG;
+    $menu_label = lean_stats_get_plugin_label();
 
     $top_panel = $panels[0];
 
     $menu_hook = add_menu_page(
-        __('Lean Stats', 'lean-stats'),
-        __('Lean Stats', 'lean-stats'),
+        $menu_label,
+        $menu_label,
         'manage_options',
         $menu_slug,
         'lean_stats_render_admin_page',
@@ -122,6 +123,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
                 'restInternalNamespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
                 'pluginVersion' => LEAN_STATS_VERSION,
                 'slug' => LEAN_STATS_SLUG,
+                'pluginLabel' => $menu_label,
             ],
         ]
     );
