@@ -70,6 +70,7 @@ class Lean_Stats_Hit_Controller {
         }
 
         $this->store_hit($hit);
+        lean_stats_flush_admin_cache();
 
         return new WP_REST_Response(['tracked' => true], 201);
     }

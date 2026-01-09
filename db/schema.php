@@ -26,6 +26,8 @@ function lean_stats_install_schema(): void
         hits BIGINT UNSIGNED NOT NULL DEFAULT 0,
         PRIMARY KEY  (date_bucket, page_path(255), referrer_domain, device_class),
         KEY date_bucket (date_bucket),
+        KEY date_bucket_page (date_bucket, page_path(255)),
+        KEY date_bucket_referrer (date_bucket, referrer_domain),
         KEY page_path (page_path(255)),
         KEY referrer_domain (referrer_domain)
     ) {$charset_collate};";
@@ -38,6 +40,8 @@ function lean_stats_install_schema(): void
         hits BIGINT UNSIGNED NOT NULL DEFAULT 0,
         PRIMARY KEY  (date_bucket, page_path(255), referrer_domain, device_class),
         KEY date_bucket (date_bucket),
+        KEY date_bucket_page (date_bucket, page_path(255)),
+        KEY date_bucket_referrer (date_bucket, referrer_domain),
         KEY page_path (page_path(255)),
         KEY referrer_domain (referrer_domain)
     ) {$charset_collate};";
