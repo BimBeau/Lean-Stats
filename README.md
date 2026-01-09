@@ -89,13 +89,19 @@ Lean Stats integrates directly inside WordPress Admin:
 
 - Expanded “Content” view (pages, 404, internal search)
 - Acquisition view (referrers, safe campaign tracking)
-- Improved export options *(available in Pro)*
-- Annotations & comparisons *(available in Pro)*
+- Improved export options
+- Annotations & comparisons
 
 ---
 
-## Lean Stats Pro
+## Documentation
 
-Lean Stats Pro is a premium add-on that unlocks advanced admin tools while keeping the same privacy-first philosophy.
+Lean Stats includes product documentation for implementation and extension:
 
-➡️ See **Lean Stats Pro** README for details.
+- Privacy configuration: `docs/PRIVACY.md`
+- Settings reference: `docs/SETTINGS.md`
+- Hooks & filters: `docs/HOOKS.md`
+- Extension API: `docs/EXTENSION_API.md`
+- REST API: `docs/REST_API.md`
+- Database schema: `docs/DB_SCHEMA.md`
+- Architecture: `docs/ARCHITECTURE.md`
