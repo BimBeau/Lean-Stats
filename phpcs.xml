@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="Lean Stats">
+    <description>Lean Stats coding standards.</description>
+    <rule ref="PSR12" />
+    <file>admin</file>
+    <file>assets</file>
+    <file>includes</file>
+    <file>front</file>
+    <file>rest</file>
+    <file>lean-stats.php</file>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+</ruleset>
