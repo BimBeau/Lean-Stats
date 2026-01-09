@@ -70,14 +70,33 @@ class Lean_Stats_Hit_Controller {
      * Respect DNT/GPC headers when present.
      */
     private function should_skip_tracking(WP_REST_Request $request): bool {
-        $dnt = $request->get_header('DNT');
-        if ($dnt !== null && (string) $dnt === '1') {
+        $settings = lean_stats_get_settings();
+
+        if (!empty($settings['strict_mode']) && is_user_logged_in()) {
             return true;
         }
 
-        $gpc = $request->get_header('Sec-GPC');
-        if ($gpc !== null && (string) $gpc === '1') {
-            return true;
+        if (!empty($settings['excluded_roles']) && is_user_logged_in()) {
+            $user = wp_get_current_user();
+            if (!empty($user->roles)) {
+                foreach ($user->roles as $role) {
+                    if (in_array($role, $settings['excluded_roles'], true)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (!empty($settings['respect_dnt_gpc'])) {
+            $dnt = $request->get_header('DNT');
+            if ($dnt !== null && (string) $dnt === '1') {
+                return true;
+            }
+
+            $gpc = $request->get_header('Sec-GPC');
+            if ($gpc !== null && (string) $gpc === '1') {
+                return true;
+            }
         }
 
         return false;
@@ -137,8 +156,52 @@ class Lean_Stats_Hit_Controller {
 
         $path = '/' . ltrim($path, '/');
         $path = untrailingslashit($path);
+        $path = $path === '' ? '/' : $path;
 
-        return $path === '' ? '/' : $path;
+        $query = $parsed['query'] ?? '';
+        if ($query === '') {
+            return $path;
+        }
+
+        $settings = lean_stats_get_settings();
+        $query_args = [];
+        wp_parse_str($query, $query_args);
+        if (!is_array($query_args)) {
+            return $path;
+        }
+
+        $sanitized_args = [];
+        foreach ($query_args as $key => $value) {
+            $key = sanitize_key($key);
+            if ($key === '') {
+                continue;
+            }
+
+            if (is_array($value)) {
+                $value = reset($value);
+            }
+
+            $sanitized_args[$key] = sanitize_text_field((string) $value);
+        }
+
+        $strip_query = !empty($settings['url_strip_query']);
+        if ($strip_query) {
+            $allowlist = $settings['url_query_allowlist'] ?? [];
+            if ($allowlist) {
+                $allowlist = array_fill_keys($allowlist, true);
+                $sanitized_args = array_intersect_key($sanitized_args, $allowlist);
+            } else {
+                $sanitized_args = [];
+            }
+        }
+
+        if ($sanitized_args === []) {
+            return $path;
+        }
+
+        $query_string = http_build_query($sanitized_args, '', '&', PHP_QUERY_RFC3986);
+
+        return $query_string !== '' ? $path . '?' . $query_string : $path;
     }
 
     /**
