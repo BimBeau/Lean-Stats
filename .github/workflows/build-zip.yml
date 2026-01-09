@@ -11,25 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Récupère le contenu du dépôt
+      # Clone le dépôt
       - name: Checkout repository
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
-      # Configure Node.js (version ≥ 18)
+      # Configure Node.js pour WordPress Scripts
       - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - uses: actions/setup-node@v4
+      - with:
+        - node-version: 20
 
-      # Installe les dépendances du projet (npm install sans package-lock.json)
+      # Installe les dépendances sans fichier package-lock.json
       - name: Install NPM dependencies
         run: npm install
 
-      # Construit les assets et prépare le ZIP via le script build-plugin-zip.sh
+      # Construit les bundles et crée l'archive via le script bash
       - name: Build plugin and create ZIP
         run: npm run build:zip
 
-      # Téléverse l’archive générée comme artefact de workflow
+      # Téléverse l’archive du plugin
       - name: Upload plugin archive
         uses: actions/upload-artifact@v4
         with:
