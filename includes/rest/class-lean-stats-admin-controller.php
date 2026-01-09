@@ -82,6 +82,17 @@ class Lean_Stats_Admin_Controller {
                 'args' => $this->get_datetime_range_args(),
             ]
         );
+
+        register_rest_route(
+            LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            '/admin/device-split',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_device_split'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => $this->get_date_range_args(),
+            ]
+        );
     }
 
     /**
@@ -295,6 +306,45 @@ class Lean_Stats_Admin_Controller {
             static function (array $row): array {
                 return [
                     'bucket' => $row['bucket'],
+                    'hits' => (int) $row['hits'],
+                ];
+            },
+            $rows ?: []
+        );
+
+        return new WP_REST_Response(
+            [
+                'range' => $range,
+                'items' => $items,
+            ],
+            200
+        );
+    }
+
+    /**
+     * Device class split aggregation.
+     */
+    public function get_device_split(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $range = $this->get_day_range($request);
+        $table = $wpdb->prefix . 'lean_stats_daily';
+
+        $query = $wpdb->prepare(
+            "SELECT device_class AS label, SUM(hits) AS hits
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY device_class
+            ORDER BY hits DESC",
+            $range['start'],
+            $range['end']
+        );
+
+        $rows = $wpdb->get_results($query, ARRAY_A);
+        $items = array_map(
+            static function (array $row): array {
+                return [
+                    'label' => $row['label'],
                     'hits' => (int) $row['hits'],
                 ];
             },

@@ -71,3 +71,12 @@ Paramètres :
 
 - `start` (YYYY-MM-DD HH:MM:SS, optionnel)
 - `end` (YYYY-MM-DD HH:MM:SS, optionnel)
+
+### GET `/admin/device-split`
+
+Retourne la répartition des hits par type de device.
+
+Paramètres :
+
+- `start` (YYYY-MM-DD, optionnel)
+- `end` (YYYY-MM-DD, optionnel)
