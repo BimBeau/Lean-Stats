@@ -84,6 +84,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         return;
     }
 
+    $menu_label = lean_stats_get_plugin_label();
     $current_page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : LEAN_STATS_SLUG;
     $panel_map = $GLOBALS['lean_stats_admin_panel_map'] ?? [];
     $current_panel = $panel_map[$current_page] ?? 'dashboard';
