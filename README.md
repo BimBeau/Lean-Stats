@@ -74,10 +74,10 @@ Lean Stats integrates directly inside WordPress Admin:
 
 ## 🗺 Roadmap
 
+- UI improvements & reporting enhancements
 - Expanded Content view (pages, 404, internal search)
 - Acquisition view (referrers, safe campaign tracking)
 - Improved export options
-- Annotations & comparisons
 
 ## 📚 Documentation
 
