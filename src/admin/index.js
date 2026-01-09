@@ -694,7 +694,7 @@ const AdminApp = () => {
     const PanelComponent = getPanelComponent(currentPanel);
     const panelTitle = getCurrentPanelTitle(currentPanel, panels);
     const pluginLabel = ADMIN_CONFIG?.settings?.pluginLabel || __('Lean Stats', 'lean-stats');
-    const heading = currentPanel === 'dashboard' ? pluginLabel : panelTitle;
+    const heading = pluginLabel;
 
     return (
         <div style={{ display: 'grid', gap: '16px' }}>
