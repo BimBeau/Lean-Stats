@@ -190,6 +190,10 @@ class Lean_Stats_Hit_Controller {
      * Store hit data.
      */
     private function store_hit(array $hit): void {
+        if (!lean_stats_raw_logs_enabled()) {
+            return;
+        }
+
         $hits = get_option('lean_stats_hits', []);
         if (!is_array($hits)) {
             $hits = [];

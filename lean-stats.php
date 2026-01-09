@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.1.4
+ * Version: 0.1.5
  * Author: Lean Stats
  * Requires at least: 6.4
  * Requires PHP: 8.0
@@ -24,5 +24,28 @@ require_once LEAN_STATS_PATH . 'admin/admin.php';
 require_once LEAN_STATS_PATH . 'front/front.php';
 require_once LEAN_STATS_PATH . 'rest/routes.php';
 require_once LEAN_STATS_PATH . 'db/schema.php';
+require_once LEAN_STATS_PATH . 'includes/raw-logs.php';
 
-register_activation_hook(__FILE__, 'lean_stats_install_schema');
+/**
+ * Plugin activation tasks.
+ */
+function lean_stats_activate(): void
+{
+    lean_stats_install_schema();
+    lean_stats_register_raw_logs_option();
+
+    if (!wp_next_scheduled(LEAN_STATS_RAW_LOGS_CRON_HOOK)) {
+        wp_schedule_event(time(), 'daily', LEAN_STATS_RAW_LOGS_CRON_HOOK);
+    }
+}
+
+/**
+ * Plugin deactivation tasks.
+ */
+function lean_stats_deactivate(): void
+{
+    wp_clear_scheduled_hook(LEAN_STATS_RAW_LOGS_CRON_HOOK);
+}
+
+register_activation_hook(__FILE__, 'lean_stats_activate');
+register_deactivation_hook(__FILE__, 'lean_stats_deactivate');
