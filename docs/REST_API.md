@@ -80,3 +80,29 @@ Paramètres :
 
 - `start` (YYYY-MM-DD, optionnel)
 - `end` (YYYY-MM-DD, optionnel)
+
+### GET `/admin/settings`
+
+Retourne les réglages Lean Stats.
+
+Champs renvoyés :
+
+- `strict_mode` (boolean)
+- `respect_dnt_gpc` (boolean)
+- `url_strip_query` (boolean)
+- `url_query_allowlist` (array)
+- `raw_logs_retention_days` (integer)
+- `excluded_roles` (array)
+
+### POST `/admin/settings`
+
+Met à jour les réglages Lean Stats.
+
+Payload JSON :
+
+- `strict_mode` (boolean, optionnel)
+- `respect_dnt_gpc` (boolean, optionnel)
+- `url_strip_query` (boolean, optionnel)
+- `url_query_allowlist` (array, optionnel)
+- `raw_logs_retention_days` (integer, optionnel)
+- `excluded_roles` (array, optionnel)

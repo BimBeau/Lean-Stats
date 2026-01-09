@@ -12,6 +12,23 @@ class Lean_Stats_Admin_Controller {
     public function register_routes(): void {
         register_rest_route(
             LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            '/admin/settings',
+            [
+                [
+                    'methods' => 'GET',
+                    'callback' => [$this, 'get_settings'],
+                    'permission_callback' => [$this, 'check_permissions'],
+                ],
+                [
+                    'methods' => 'POST',
+                    'callback' => [$this, 'update_settings'],
+                    'permission_callback' => [$this, 'check_permissions'],
+                ],
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_INTERNAL_NAMESPACE,
             '/admin/kpis',
             [
                 'methods' => 'GET',
@@ -154,6 +171,37 @@ class Lean_Stats_Admin_Controller {
             [
                 'range' => $range,
                 'kpis' => $data,
+            ],
+            200
+        );
+    }
+
+    /**
+     * Return current settings.
+     */
+    public function get_settings(WP_REST_Request $request): WP_REST_Response {
+        return new WP_REST_Response(
+            [
+                'settings' => lean_stats_get_settings(),
+            ],
+            200
+        );
+    }
+
+    /**
+     * Update settings.
+     */
+    public function update_settings(WP_REST_Request $request): WP_REST_Response {
+        $payload = $request->get_json_params();
+        if (!is_array($payload)) {
+            $payload = [];
+        }
+
+        $settings = lean_stats_update_settings($payload);
+
+        return new WP_REST_Response(
+            [
+                'settings' => $settings,
             ],
             200
         );

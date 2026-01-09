@@ -30,7 +30,14 @@ function lean_stats_register_raw_logs_option(): void
  */
 function lean_stats_get_raw_logs_retention_seconds(): int
 {
-    $retention = apply_filters('lean_stats_raw_logs_retention_seconds', DAY_IN_SECONDS);
+    $settings = lean_stats_get_settings();
+    $retention_days = isset($settings['raw_logs_retention_days']) ? absint($settings['raw_logs_retention_days']) : 1;
+    if ($retention_days < 1) {
+        $retention_days = 1;
+    }
+
+    $retention = $retention_days * DAY_IN_SECONDS;
+    $retention = apply_filters('lean_stats_raw_logs_retention_seconds', $retention);
     $retention = absint($retention);
 
     return $retention > 0 ? $retention : DAY_IN_SECONDS;

@@ -68,6 +68,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
             'rootId' => 'lean-stats-admin',
             'restNonce' => wp_create_nonce('wp_rest'),
             'restUrl' => esc_url_raw(rest_url()),
+            'roles' => lean_stats_get_roles_for_admin(),
             'settings' => [
                 'restNamespace' => LEAN_STATS_REST_NAMESPACE,
                 'restInternalNamespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
@@ -76,4 +77,25 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
             ],
         ]
     );
+}
+
+/**
+ * Prepare roles list for admin settings.
+ */
+function lean_stats_get_roles_for_admin(): array
+{
+    $roles = wp_roles();
+    if (!$roles) {
+        return [];
+    }
+
+    $formatted = [];
+    foreach ($roles->roles as $key => $role) {
+        $formatted[] = [
+            'key' => $key,
+            'label' => translate_user_role($role['name']),
+        ];
+    }
+
+    return $formatted;
 }
