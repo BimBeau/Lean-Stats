@@ -19,6 +19,7 @@ rsync -a --delete \
   --exclude ".github" \
   --exclude "dist" \
   --exclude "node_modules" \
+  --exclude "package-tmp" \
   "${repo_root}/" "${temp_dir}/${plugin_slug}/"
 
 (cd "${temp_dir}" && zip -r "${output_file}" "${plugin_slug}")
