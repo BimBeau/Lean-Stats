@@ -661,16 +661,22 @@ const DashboardPanel = () => {
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
-        <>
-            <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-            <KpiCards range={range} />
+        <div style={{ display: 'grid', gap: '16px' }}>
+            <Flex gap="16" wrap align="stretch">
+                <FlexItem style={{ minWidth: '240px', flex: '0 1 280px' }}>
+                    <PeriodFilter value={rangePreset} onChange={setRangePreset} />
+                </FlexItem>
+                <FlexItem style={{ minWidth: '280px', flex: '1 1 320px' }}>
+                    <KpiCards range={range} />
+                </FlexItem>
+            </Flex>
             <TimeseriesChart range={range} />
             <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
                 <TopPagesTable range={range} />
                 <ReferrersTable range={range} />
                 <DeviceSplit range={range} />
             </div>
-        </>
+        </div>
     );
 };
 
