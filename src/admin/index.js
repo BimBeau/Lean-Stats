@@ -3,6 +3,7 @@
  */
 
 import { render, useEffect, useMemo, useState } from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
 import {
     Button,
     Card,
@@ -41,6 +42,7 @@ const DEFAULT_SETTINGS = {
     raw_logs_retention_days: 1,
     excluded_roles: [],
 };
+const DEFAULT_SKELETON_ROWS = 4;
 
 const formatDate = (date) => {
     const year = date.getFullYear();
@@ -102,7 +104,7 @@ const useAdminEndpoint = (path, params) => {
 
         const fetchData = async () => {
             if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
-                setError('Configuration REST manquante.');
+                setError(__('Configuration REST manquante.', 'lean-stats'));
                 setIsLoading(false);
                 return;
             }
@@ -119,7 +121,9 @@ const useAdminEndpoint = (path, params) => {
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Erreur API (${response.status})`);
+                    throw new Error(
+                        sprintf(__('Erreur API (%s)', 'lean-stats'), response.status)
+                    );
                 }
 
                 const payload = await response.json();
@@ -128,7 +132,7 @@ const useAdminEndpoint = (path, params) => {
                 }
             } catch (fetchError) {
                 if (isMounted && fetchError.name !== 'AbortError') {
-                    setError(fetchError.message || 'Erreur de chargement.');
+                    setError(fetchError.message || __('Erreur de chargement.', 'lean-stats'));
                 }
             } finally {
                 if (isMounted) {
@@ -148,11 +152,39 @@ const useAdminEndpoint = (path, params) => {
     return { data, isLoading, error };
 };
 
-const DataState = ({ isLoading, error, isEmpty, emptyLabel }) => {
+const DataState = ({
+    isLoading,
+    error,
+    isEmpty,
+    emptyLabel,
+    loadingLabel = __('Chargement…', 'lean-stats'),
+    skeletonRows = DEFAULT_SKELETON_ROWS,
+}) => {
     if (isLoading) {
+        const rows = Array.from({ length: skeletonRows }, (_, index) => index);
         return (
-            <div style={{ padding: '16px' }}>
-                <Spinner />
+            <div
+                style={{ padding: '16px', display: 'grid', gap: '12px' }}
+                aria-live="polite"
+                aria-busy="true"
+            >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Spinner />
+                    <span>{loadingLabel}</span>
+                </div>
+                <div style={{ display: 'grid', gap: '8px' }}>
+                    {rows.map((row) => (
+                        <div
+                            key={row}
+                            style={{
+                                height: '12px',
+                                width: `${80 - row * 6}%`,
+                                backgroundColor: '#f0f0f1',
+                                borderRadius: '4px',
+                            }}
+                        />
+                    ))}
+                </div>
             </div>
         );
     }
@@ -166,7 +198,7 @@ const DataState = ({ isLoading, error, isEmpty, emptyLabel }) => {
     }
 
     if (isEmpty) {
-        return <p>{emptyLabel}</p>;
+        return <p role="status">{emptyLabel}</p>;
     }
 
     return null;
@@ -181,12 +213,12 @@ const PeriodFilter = ({ value, onChange }) => (
     <Card>
         <CardBody>
             <SelectControl
-                label="Période"
+                label={__('Période', 'lean-stats')}
                 value={value}
                 options={[
-                    { label: '7 jours', value: '7d' },
-                    { label: '30 jours', value: '30d' },
-                    { label: '90 jours', value: '90d' },
+                    { label: __('7 jours', 'lean-stats'), value: '7d' },
+                    { label: __('30 jours', 'lean-stats'), value: '30d' },
+                    { label: __('90 jours', 'lean-stats'), value: '90d' },
                 ]}
                 onChange={onChange}
             />
@@ -211,7 +243,7 @@ const SettingsPanel = () => {
 
     const onSave = async () => {
         if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
-            setSaveNotice({ status: 'error', message: 'Configuration REST manquante.' });
+            setSaveNotice({ status: 'error', message: __('Configuration REST manquante.', 'lean-stats') });
             return;
         }
 
@@ -229,7 +261,9 @@ const SettingsPanel = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Erreur API (${response.status})`);
+                throw new Error(
+                    sprintf(__('Erreur API (%s)', 'lean-stats'), response.status)
+                );
             }
 
             const payload = await response.json();
@@ -239,9 +273,12 @@ const SettingsPanel = () => {
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
             }
 
-            setSaveNotice({ status: 'success', message: 'Réglages enregistrés.' });
+            setSaveNotice({ status: 'success', message: __('Réglages enregistrés.', 'lean-stats') });
         } catch (saveError) {
-            setSaveNotice({ status: 'error', message: saveError.message || 'Erreur lors de la sauvegarde.' });
+            setSaveNotice({
+                status: 'error',
+                message: saveError.message || __('Erreur lors de la sauvegarde.', 'lean-stats'),
+            });
         } finally {
             setIsSaving(false);
         }
@@ -252,7 +289,7 @@ const SettingsPanel = () => {
     return (
         <Card>
             <CardHeader>
-                <strong>Réglages</strong>
+                <strong>{__('Réglages', 'lean-stats')}</strong>
             </CardHeader>
             <CardBody>
                 <DataState
@@ -260,6 +297,8 @@ const SettingsPanel = () => {
                     error={error}
                     isEmpty={false}
                     emptyLabel=""
+                    loadingLabel={__('Chargement des réglages…', 'lean-stats')}
+                    skeletonRows={6}
                 />
                 {!isLoading && !error && (
                     <div style={{ display: 'grid', gap: '16px' }}>
@@ -269,26 +308,26 @@ const SettingsPanel = () => {
                             </Notice>
                         )}
                         <ToggleControl
-                            label="Mode strict"
-                            help="Ignore le suivi pour les utilisateurs connectés."
+                            label={__('Mode strict', 'lean-stats')}
+                            help={__('Ignore le suivi pour les utilisateurs connectés.', 'lean-stats')}
                             checked={formState.strict_mode}
                             onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
                         />
                         <ToggleControl
-                            label="Respecter DNT / GPC"
-                            help="Ignore le suivi si le navigateur envoie DNT ou GPC."
+                            label={__('Respecter DNT / GPC', 'lean-stats')}
+                            help={__('Ignore le suivi si le navigateur envoie DNT ou GPC.', 'lean-stats')}
                             checked={formState.respect_dnt_gpc}
                             onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
                         />
                         <ToggleControl
-                            label="Nettoyage des URLs"
-                            help="Supprime les paramètres de requête."
+                            label={__('Nettoyage des URLs', 'lean-stats')}
+                            help={__('Supprime les paramètres de requête.', 'lean-stats')}
                             checked={formState.url_strip_query}
                             onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
                         />
                         <TextControl
-                            label="Allowlist des paramètres de requête"
-                            help="Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+                            label={__('Allowlist des paramètres de requête', 'lean-stats')}
+                            help={__('Liste séparée par des virgules (ex: utm_source, utm_campaign).', 'lean-stats')}
                             value={allowlistInput}
                             onChange={(value) => {
                                 setAllowlistInput(value);
@@ -300,7 +339,7 @@ const SettingsPanel = () => {
                             }}
                         />
                         <TextControl
-                            label="Rétention des logs bruts (jours)"
+                            label={__('Rétention des logs bruts (jours)', 'lean-stats')}
                             type="number"
                             min={1}
                             max={365}
@@ -314,9 +353,9 @@ const SettingsPanel = () => {
                             }}
                         />
                         <div>
-                            <p style={{ marginBottom: '8px' }}>Exclusions par rôle</p>
+                            <p style={{ marginBottom: '8px' }}>{__('Exclusions par rôle', 'lean-stats')}</p>
                             <div style={{ display: 'grid', gap: '8px' }}>
-                                {roles.length === 0 && <p>Aucun rôle disponible.</p>}
+                                {roles.length === 0 && <p>{__('Aucun rôle disponible.', 'lean-stats')}</p>}
                                 {roles.map((role) => (
                                     <CheckboxControl
                                         key={role.key}
@@ -337,8 +376,13 @@ const SettingsPanel = () => {
                                 ))}
                             </div>
                         </div>
-                        <Button variant="primary" isBusy={isSaving} onClick={onSave}>
-                            Enregistrer
+                        <Button
+                            variant="primary"
+                            isBusy={isSaving}
+                            onClick={onSave}
+                            aria-label={__('Enregistrer les réglages', 'lean-stats')}
+                        >
+                            {__('Enregistrer', 'lean-stats')}
                         </Button>
                     </div>
                 )}
@@ -354,21 +398,23 @@ const KpiCards = ({ range }) => {
     return (
         <Card>
             <CardHeader>
-                <strong>Indicateurs</strong>
+                <strong>{__('Indicateurs', 'lean-stats')}</strong>
             </CardHeader>
             <CardBody>
                 <DataState
                     isLoading={isLoading}
                     error={error}
                     isEmpty={!isLoading && !error && !kpis}
-                    emptyLabel="Aucun KPI disponible."
+                    emptyLabel={__('Aucun KPI disponible.', 'lean-stats')}
+                    loadingLabel={__('Chargement des indicateurs…', 'lean-stats')}
+                    skeletonRows={3}
                 />
                 {kpis && (
                     <Flex gap="16" wrap>
                         <FlexItem>
                             <Card>
                                 <CardBody>
-                                    <p>Hits</p>
+                                    <p>{__('Hits', 'lean-stats')}</p>
                                     <strong>{kpis.totalHits}</strong>
                                 </CardBody>
                             </Card>
@@ -376,7 +422,7 @@ const KpiCards = ({ range }) => {
                         <FlexItem>
                             <Card>
                                 <CardBody>
-                                    <p>Pages uniques</p>
+                                    <p>{__('Pages uniques', 'lean-stats')}</p>
                                     <strong>{kpis.uniquePages}</strong>
                                 </CardBody>
                             </Card>
@@ -384,7 +430,7 @@ const KpiCards = ({ range }) => {
                         <FlexItem>
                             <Card>
                                 <CardBody>
-                                    <p>Referrers uniques</p>
+                                    <p>{__('Referrers uniques', 'lean-stats')}</p>
                                     <strong>{kpis.uniqueReferrers}</strong>
                                 </CardBody>
                             </Card>
@@ -403,17 +449,22 @@ const TimeseriesChart = ({ range }) => {
     return (
         <Card>
             <CardHeader>
-                <strong>Trafic dans le temps</strong>
+                <strong>{__('Trafic dans le temps', 'lean-stats')}</strong>
             </CardHeader>
             <CardBody>
                 <DataState
                     isLoading={isLoading}
                     error={error}
                     isEmpty={!isLoading && !error && items.length === 0}
-                    emptyLabel="Aucune donnée disponible pour cette période."
+                    emptyLabel={__('Aucune donnée disponible pour cette période.', 'lean-stats')}
+                    loadingLabel={__('Chargement du graphique…', 'lean-stats')}
                 />
                 {!isLoading && !error && items.length > 0 && (
-                    <div style={{ width: '100%', height: 260 }}>
+                    <div
+                        style={{ width: '100%', height: 260 }}
+                        role="img"
+                        aria-label={__('Graphique du trafic', 'lean-stats')}
+                    >
                         <ResponsiveContainer>
                             <LineChart data={items} margin={{ top: 8, right: 24, left: 0, bottom: 8 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -441,9 +492,10 @@ const TableCard = ({ title, headers, rows, isLoading, error, emptyLabel }) => (
                 error={error}
                 isEmpty={!isLoading && !error && rows.length === 0}
                 emptyLabel={emptyLabel}
+                loadingLabel={sprintf(__('Chargement : %s', 'lean-stats'), title)}
             />
             {!isLoading && !error && rows.length > 0 && (
-                <table className="widefat striped">
+                <table className="widefat striped" aria-label={title}>
                     <thead>
                         <tr>
                             {headers.map((header) => (
@@ -476,12 +528,12 @@ const TopPagesTable = ({ range }) => {
 
     return (
         <TableCard
-            title="Top pages"
-            headers={['Page', 'Hits']}
+            title={__('Top pages', 'lean-stats')}
+            headers={[__('Page', 'lean-stats'), __('Hits', 'lean-stats')]}
             rows={rows}
             isLoading={isLoading}
             error={error}
-            emptyLabel="Aucune page populaire disponible."
+            emptyLabel={__('Aucune page populaire disponible.', 'lean-stats')}
         />
     );
 };
@@ -491,18 +543,18 @@ const ReferrersTable = ({ range }) => {
     const items = data?.items || [];
     const rows = items.map((item) => ({
         key: item.label || 'direct',
-        label: item.label || 'Direct',
+        label: item.label || __('Direct', 'lean-stats'),
         value: item.hits,
     }));
 
     return (
         <TableCard
-            title="Top referrers"
-            headers={['Referrer', 'Hits']}
+            title={__('Top referrers', 'lean-stats')}
+            headers={[__('Referrer', 'lean-stats'), __('Hits', 'lean-stats')]}
             rows={rows}
             isLoading={isLoading}
             error={error}
-            emptyLabel="Aucun referrer disponible."
+            emptyLabel={__('Aucun referrer disponible.', 'lean-stats')}
         />
     );
 };
@@ -512,23 +564,30 @@ const DeviceSplit = ({ range }) => {
     const items = data?.items || [];
     const labeledItems = items.map((item) => ({
         ...item,
-        label: item.label ? item.label.charAt(0).toUpperCase() + item.label.slice(1) : 'Inconnu',
+        label: item.label
+            ? item.label.charAt(0).toUpperCase() + item.label.slice(1)
+            : __('Inconnu', 'lean-stats'),
     }));
 
     return (
         <Card>
             <CardHeader>
-                <strong>Répartition par device</strong>
+                <strong>{__('Répartition par device', 'lean-stats')}</strong>
             </CardHeader>
             <CardBody>
                 <DataState
                     isLoading={isLoading}
                     error={error}
                     isEmpty={!isLoading && !error && labeledItems.length === 0}
-                    emptyLabel="Aucune donnée device disponible."
+                    emptyLabel={__('Aucune donnée device disponible.', 'lean-stats')}
+                    loadingLabel={__('Chargement de la répartition des devices…', 'lean-stats')}
                 />
                 {!isLoading && !error && labeledItems.length > 0 && (
-                    <div style={{ width: '100%', height: 240 }}>
+                    <div
+                        style={{ width: '100%', height: 240 }}
+                        role="img"
+                        aria-label={__('Graphique de répartition par device', 'lean-stats')}
+                    >
                         <ResponsiveContainer>
                             <PieChart>
                                 <Pie dataKey="hits" data={labeledItems} nameKey="label" innerRadius={40} outerRadius={80}>
@@ -539,10 +598,10 @@ const DeviceSplit = ({ range }) => {
                                 <Tooltip />
                             </PieChart>
                         </ResponsiveContainer>
-                        <ul>
+                        <ul aria-label={__('Détail de répartition par device', 'lean-stats')}>
                             {labeledItems.map((entry) => (
                                 <li key={entry.label}>
-                                    {entry.label}: {entry.hits}
+                                    {sprintf(__('%s : %s', 'lean-stats'), entry.label, entry.hits)}
                                 </li>
                             ))}
                         </ul>
@@ -573,16 +632,20 @@ const DashboardPanel = () => {
 
 const AdminApp = () => {
     if (!ADMIN_CONFIG) {
-        return <Notice status="error" isDismissible={false}>Configuration admin manquante.</Notice>;
+        return (
+            <Notice status="error" isDismissible={false}>
+                {__('Configuration admin manquante.', 'lean-stats')}
+            </Notice>
+        );
     }
 
     return (
         <div style={{ display: 'grid', gap: '16px' }}>
-            <h1>Lean Stats</h1>
+            <h1>{__('Lean Stats', 'lean-stats')}</h1>
             <TabPanel
                 tabs={[
-                    { name: 'dashboard', title: 'Tableau de bord' },
-                    { name: 'settings', title: 'Réglages' },
+                    { name: 'dashboard', title: __('Tableau de bord', 'lean-stats') },
+                    { name: 'settings', title: __('Réglages', 'lean-stats') },
                 ]}
             >
                 {(tab) => (tab.name === 'settings' ? <SettingsPanel /> : <DashboardPanel />)}
