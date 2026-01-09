@@ -38,6 +38,7 @@ const DEFAULT_PANELS = [
     { name: 'settings', title: __('Réglages', 'lean-stats') },
 ];
 const DEFAULT_SETTINGS = {
+    plugin_label: '',
     strict_mode: false,
     respect_dnt_gpc: true,
     url_strip_query: true,
@@ -344,6 +345,12 @@ const SettingsPanel = () => {
                                 {saveNotice.message}
                             </Notice>
                         )}
+                        <TextControl
+                            label={__('Nom du plugin (menu et tableau de bord)', 'lean-stats')}
+                            help={__('Laisser vide pour utiliser "Lean Stats".', 'lean-stats')}
+                            value={formState.plugin_label}
+                            onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
+                        />
                         <ToggleControl
                             label={__('Mode strict', 'lean-stats')}
                             help={__('Ignore le suivi pour les utilisateurs connectés.', 'lean-stats')}
@@ -680,10 +687,12 @@ const AdminApp = () => {
     const currentPanel = ADMIN_CONFIG?.currentPanel || 'dashboard';
     const PanelComponent = getPanelComponent(currentPanel);
     const panelTitle = getCurrentPanelTitle(currentPanel, panels);
+    const pluginLabel = ADMIN_CONFIG?.settings?.pluginLabel || __('Lean Stats', 'lean-stats');
+    const heading = currentPanel === 'dashboard' ? pluginLabel : panelTitle;
 
     return (
         <div style={{ display: 'grid', gap: '16px' }}>
-            <h1>{panelTitle}</h1>
+            <h1>{heading}</h1>
             {!PanelComponent ? (
                 <Notice status="warning" isDismissible={false}>
                     {__('Aucun panneau disponible pour cet écran.', 'lean-stats')}

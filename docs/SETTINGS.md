@@ -6,6 +6,7 @@ Lean Stats stores settings in the `lean_stats_settings` option and exposes them 
 
 | Key | Type | Default | Description |
 | --- | --- | --- | --- |
+| `plugin_label` | string | `""` | Overrides the plugin name used in the admin menu and dashboard heading when set. |
 | `strict_mode` | boolean | `false` | Skips tracking for all logged-in users. |
 | `respect_dnt_gpc` | boolean | `true` | Skips tracking when `DNT: 1` or `Sec-GPC: 1` headers are present. |
 | `url_strip_query` | boolean | `true` | Removes query strings from tracked page paths. |
