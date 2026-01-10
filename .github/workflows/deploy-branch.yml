@@ -1,0 +1,100 @@
+name: Build deploy branch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Get plugin version
+        id: meta
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create deployable plugin folder (clean)
+        run: |
+          set -euo pipefail
+
+          PLUGIN_SLUG="lean-stats"
+
+          rm -rf package-tmp
+          mkdir -p "package-tmp/${PLUGIN_SLUG}"
+
+          rsync -a --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude "node_modules" \
+            --exclude "dist" \
+            --exclude "src" \
+            --exclude "tests" \
+            --exclude "docs" \
+            --exclude "scripts" \
+            --exclude "assets/js/__tests__" \
+            --exclude ".eslintrc.json" \
+            --exclude "phpcs.xml" \
+            --exclude "phpunit.xml.dist" \
+            --exclude "webpack.config.js" \
+            --exclude "AGENTS.md" \
+            --exclude "package.json" \
+            --exclude "package-lock.json" \
+            ./ "package-tmp/${PLUGIN_SLUG}/"
+
+          test -f "package-tmp/${PLUGIN_SLUG}/build/admin.js"
+          test -f "package-tmp/${PLUGIN_SLUG}/build/admin.asset.php"
+
+      - name: Update deploy branch
+        env:
+          DEPLOY_VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          set -euo pipefail
+
+          DEPLOY_DIR="deploy-branch"
+
+          git fetch origin deploy || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/deploy; then
+            git worktree add "$DEPLOY_DIR" origin/deploy
+          else
+            git worktree add "$DEPLOY_DIR" --detach
+            (cd "$DEPLOY_DIR" && git checkout --orphan deploy)
+          fi
+
+          rsync -a --delete "package-tmp/lean-stats/" "$DEPLOY_DIR/"
+
+          cd "$DEPLOY_DIR"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to deploy."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "Deploy build v${DEPLOY_VERSION}"
+          git push origin HEAD:deploy
