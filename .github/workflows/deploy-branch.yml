@@ -76,18 +76,15 @@ jobs:
 
           DEPLOY_DIR="deploy-branch"
 
-          git fetch origin deploy || true
-
-          if git show-ref --verify --quiet refs/remotes/origin/deploy; then
-            git worktree add "$DEPLOY_DIR" origin/deploy
-          else
-            git worktree add "$DEPLOY_DIR" --detach
-            (cd "$DEPLOY_DIR" && git checkout --orphan deploy)
-          fi
-
-          rsync -a --delete "package-tmp/lean-stats/" "$DEPLOY_DIR/"
+          git worktree add "$DEPLOY_DIR" --detach
 
           cd "$DEPLOY_DIR"
+
+          git checkout --orphan deploy
+
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+
+          rsync -a "../package-tmp/lean-stats/" "./"
 
           git add -A
 
