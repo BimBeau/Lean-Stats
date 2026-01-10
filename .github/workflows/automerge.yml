@@ -27,7 +27,9 @@ jobs:
 
       - name: Tenter l’auto-merge (ou mise en file d’attente)
         env:
-          GH_TOKEN: ${{ github.token }}
+          # WORKFLOW_TOKEN (PAT) permet de déclencher d'autres workflows via gh workflow run.
+          # GITHUB_TOKEN peut être insuffisant selon la configuration GitHub.
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN || github.token }}
         run: |
           set -eo pipefail
           PR="${{ github.event.pull_request.number }}"
@@ -38,3 +40,36 @@ jobs:
               --body ":warning: **Conflit détecté** – merci de le résoudre manuellement."
             exit 0
           fi
+
+      - name: Attendre le merge effectif
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          PR="${{ github.event.pull_request.number }}"
+          MAX_ATTEMPTS=30
+          SLEEP_SECONDS=10
+          MERGED_AT=""
+
+          for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
+            MERGED_AT=$(gh pr view "$PR" --json mergedAt --jq '.mergedAt')
+            if [ -n "$MERGED_AT" ] && [ "$MERGED_AT" != "null" ]; then
+              echo "PR merged at $MERGED_AT."
+              break
+            fi
+            echo "PR not merged yet (attempt ${attempt}/${MAX_ATTEMPTS})."
+            sleep "$SLEEP_SECONDS"
+          done
+
+          if [ -z "$MERGED_AT" ] || [ "$MERGED_AT" = "null" ]; then
+            echo "PR not merged after waiting. Skipping release pipeline."
+            exit 0
+          fi
+
+      - name: Déclencher le pipeline release
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run "Build deploy branch" --ref main
+          gh workflow run "Build plugin zip" --ref main
