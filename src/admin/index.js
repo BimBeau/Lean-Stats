@@ -2,7 +2,7 @@
  * Admin entry point for Lean Stats.
  */
 
-import { render, useEffect, useMemo, useState } from '@wordpress/element';
+import { render, useEffect, useMemo, useRef, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import {
     Button,
@@ -47,6 +47,54 @@ const DEFAULT_SETTINGS = {
     excluded_roles: [],
 };
 const DEFAULT_SKELETON_ROWS = 4;
+
+const useSizedContainer = () => {
+    const ref = useRef(null);
+    const [hasSize, setHasSize] = useState(false);
+
+    useEffect(() => {
+        const node = ref.current;
+        if (!node) {
+            return undefined;
+        }
+
+        const updateSize = () => {
+            const rect = node.getBoundingClientRect();
+            const nextHasSize = rect.width > 0 && rect.height > 0;
+            setHasSize((prev) => (prev === nextHasSize ? prev : nextHasSize));
+        };
+
+        updateSize();
+
+        let observer;
+        if (window.ResizeObserver) {
+            observer = new ResizeObserver(() => updateSize());
+            observer.observe(node);
+        } else {
+            window.addEventListener('resize', updateSize);
+        }
+
+        return () => {
+            if (observer) {
+                observer.disconnect();
+            } else {
+                window.removeEventListener('resize', updateSize);
+            }
+        };
+    }, []);
+
+    return { ref, hasSize };
+};
+
+const ChartFrame = ({ height, ariaLabel, children }) => {
+    const { ref, hasSize } = useSizedContainer();
+
+    return (
+        <div ref={ref} style={{ width: '100%', height }} role="img" aria-label={ariaLabel}>
+            {hasSize ? children : null}
+        </div>
+    );
+};
 
 const formatDate = (date) => {
     const year = date.getFullYear();
@@ -504,11 +552,7 @@ const TimeseriesChart = ({ range }) => {
                     loadingLabel={__('Chargement du graphique…', 'lean-stats')}
                 />
                 {!isLoading && !error && items.length > 0 && (
-                    <div
-                        style={{ width: '100%', height: 260 }}
-                        role="img"
-                        aria-label={__('Graphique du trafic', 'lean-stats')}
-                    >
+                    <ChartFrame height={260} ariaLabel={__('Graphique du trafic', 'lean-stats')}>
                         <ResponsiveContainer>
                             <LineChart data={items} margin={{ top: 8, right: 24, left: 0, bottom: 8 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -518,7 +562,7 @@ const TimeseriesChart = ({ range }) => {
                                 <Line type="monotone" dataKey="hits" stroke="#2271b1" strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
-                    </div>
+                    </ChartFrame>
                 )}
             </CardBody>
         </Card>
@@ -627,11 +671,7 @@ const DeviceSplit = ({ range }) => {
                     loadingLabel={__('Chargement de la répartition des devices…', 'lean-stats')}
                 />
                 {!isLoading && !error && labeledItems.length > 0 && (
-                    <div
-                        style={{ width: '100%', height: 240 }}
-                        role="img"
-                        aria-label={__('Graphique de répartition par device', 'lean-stats')}
-                    >
+                    <ChartFrame height={240} ariaLabel={__('Graphique de répartition par device', 'lean-stats')}>
                         <ResponsiveContainer>
                             <PieChart>
                                 <Pie dataKey="hits" data={labeledItems} nameKey="label" innerRadius={40} outerRadius={80}>
@@ -649,7 +689,7 @@ const DeviceSplit = ({ range }) => {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </ChartFrame>
                 )}
             </CardBody>
         </Card>
