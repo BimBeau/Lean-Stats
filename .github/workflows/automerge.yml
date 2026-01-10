@@ -72,4 +72,3 @@ jobs:
         run: |
           set -euo pipefail
           gh workflow run "Build deploy branch" --ref main
-          gh workflow run "Build plugin zip" --ref main
