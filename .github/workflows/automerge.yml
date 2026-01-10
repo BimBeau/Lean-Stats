@@ -38,21 +38,3 @@ jobs:
               --body ":warning: **Conflit détecté** – merci de le résoudre manuellement."
             exit 0
           fi
-
-      # On déclenche donc explicitement le workflow "Build plugin zip" une fois la PR effectivement mergée.
-      - name: Déclencher Build plugin zip si PR mergée
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -eo pipefail
-          PR="${{ github.event.pull_request.number }}"
-
-          # mergedAt existe toujours (alors que "merged" n'existe pas selon la version de gh)
-          MERGED_AT=$(gh pr view "$PR" --json mergedAt --jq .mergedAt)
-
-          if [ "$MERGED_AT" != "null" ]; then
-            echo "PR #$PR mergée à $MERGED_AT -> déclenchement du workflow 'Build plugin zip' sur main"
-            gh workflow run "Build plugin zip" --ref main
-          else
-            echo "PR #$PR pas encore mergée (merge queue probable) -> pas de déclenchement du build"
-          fi

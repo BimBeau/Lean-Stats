@@ -6,14 +6,13 @@ on:
       - Build deploy branch
     types:
       - completed
-  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   build-zip:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -26,13 +25,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-
-      - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Build assets
-        run: npm run build
 
       # Récupère la version depuis package.json et la met dans GITHUB_OUTPUT
       - name: Get plugin version
@@ -40,36 +32,15 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "zip_name=lean-stats-$VERSION.zip" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
-      # Prépare un dossier "lean-stats/" propre (déployable) et génère le zip versionné dans dist/
-      - name: Create deployable plugin zip (clean)
-        run: |
-          set -euo pipefail
-
-          PLUGIN_SLUG="lean-stats"
-          ZIP_NAME="${{ steps.meta.outputs.zip_name }}"
-
-          rm -rf dist package-tmp
-          mkdir -p "dist" "package-tmp/${PLUGIN_SLUG}"
-
-          ./scripts/build-plugin-dist.sh "package-tmp"
-
-          # Vérification minimale: le bundle admin doit exister
-          test -f "package-tmp/${PLUGIN_SLUG}/build/admin.js"
-          test -f "package-tmp/${PLUGIN_SLUG}/build/admin.asset.php"
-
-          (cd package-tmp && zip -r "../dist/${ZIP_NAME}" "${PLUGIN_SLUG}")
-          echo "Created dist/${ZIP_NAME}"
-
-      # Artifact (debug) : GitHub l'encapsulera toujours dans un zip "artifact"
-      - name: Upload workflow artifact
-        uses: actions/upload-artifact@v4
+      - name: Download plugin zip artifact
+        uses: actions/download-artifact@v4
         with:
-          name: lean-stats-${{ steps.meta.outputs.version }}
-          path: dist/${{ steps.meta.outputs.zip_name }}
-          if-no-files-found: error
+          name: plugin-zip
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          path: dist
 
       # Release asset (download direct du zip plugin)
       - name: Create/Update GitHub Release and upload asset
@@ -83,7 +54,7 @@ jobs:
 
           TAG="${{ steps.meta.outputs.tag }}"
           VERSION="${{ steps.meta.outputs.version }}"
-          ZIP="dist/${{ steps.meta.outputs.zip_name }}"
+          ZIP="dist/lean-stats.zip"
 
           # Notes de release : on préfère le contenu de la PR, sinon fallback sur le titre, sinon générique
           if [ -z "${PR_TITLE:-}" ] || [ -z "${PR_BODY:-}" ]; then

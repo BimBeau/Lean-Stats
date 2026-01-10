@@ -49,6 +49,21 @@ jobs:
           test -f "package-tmp/${PLUGIN_SLUG}/build/admin.js"
           test -f "package-tmp/${PLUGIN_SLUG}/build/admin.asset.php"
 
+      - name: Create plugin zip from deployable folder
+        run: |
+          set -euo pipefail
+
+          rm -f lean-stats.zip
+          (cd package-tmp && zip -r "../lean-stats.zip" "lean-stats")
+          test -f lean-stats.zip
+
+      - name: Upload plugin zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-zip
+          path: lean-stats.zip
+          if-no-files-found: error
+
       - name: Update deploy branch
         env:
           DEPLOY_VERSION: ${{ steps.meta.outputs.version }}
