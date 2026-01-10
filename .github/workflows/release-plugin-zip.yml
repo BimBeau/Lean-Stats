@@ -6,6 +6,12 @@ on:
       - Build deploy branch
     types:
       - completed
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Run ID de 'Build deploy branch' (dans l'URL du run Actions)"
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -15,7 +21,8 @@ jobs:
   release-zip:
     if: >-
       ${{
-        github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+        github.event_name == 'workflow_dispatch'
       }}
     runs-on: ubuntu-latest
 
@@ -24,6 +31,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Resolve build run id
+        id: run
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "run_id=${{ github.event.workflow_run.id }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_id=${{ inputs.run_id }}" >> "$GITHUB_OUTPUT"
+          fi
 
       # Récupère la version depuis package.json et la met dans GITHUB_OUTPUT
       - name: Get plugin version
@@ -37,7 +53,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: plugin-zip
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ steps.run.outputs.run_id }}
           github-token: ${{ github.token }}
           path: dist
 
