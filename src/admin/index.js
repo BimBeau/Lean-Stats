@@ -31,6 +31,8 @@ import {
     YAxis,
 } from 'recharts';
 
+import './style.css';
+
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const CHART_COLORS = ['#2271b1', '#72aee6', '#1e8cbe', '#d63638', '#00a32a'];
 const DEFAULT_PANELS = [
@@ -47,6 +49,7 @@ const DEFAULT_SETTINGS = {
     excluded_roles: [],
 };
 const DEFAULT_SKELETON_ROWS = 4;
+const SKELETON_WIDTH_CLASSES = ['ls-skeleton__bar--w80', 'ls-skeleton__bar--w74', 'ls-skeleton__bar--w68', 'ls-skeleton__bar--w62', 'ls-skeleton__bar--w56', 'ls-skeleton__bar--w50'];
 
 const useSizedContainer = () => {
     const ref = useRef(null);
@@ -90,7 +93,7 @@ const ChartFrame = ({ height, ariaLabel, children }) => {
     const { ref, hasSize } = useSizedContainer();
 
     return (
-        <div ref={ref} style={{ width: '100%', height }} role="img" aria-label={ariaLabel}>
+        <div ref={ref} className="ls-chart-frame" data-height={height} role="img" aria-label={ariaLabel}>
             {hasSize ? children : null}
         </div>
     );
@@ -215,25 +218,16 @@ const DataState = ({
     if (isLoading) {
         const rows = Array.from({ length: skeletonRows }, (_, index) => index);
         return (
-            <div
-                style={{ padding: '16px', display: 'grid', gap: '12px' }}
-                aria-live="polite"
-                aria-busy="true"
-            >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="ls-data-state" aria-live="polite" aria-busy="true">
+                <div className="ls-data-state__header">
                     <Spinner />
                     <span>{loadingLabel}</span>
                 </div>
-                <div style={{ display: 'grid', gap: '8px' }}>
+                <div className="ls-skeleton">
                     {rows.map((row) => (
                         <div
                             key={row}
-                            style={{
-                                height: '12px',
-                                width: `${80 - row * 6}%`,
-                                backgroundColor: '#f0f0f1',
-                                borderRadius: '4px',
-                            }}
+                            className={`ls-skeleton__bar ${SKELETON_WIDTH_CLASSES[Math.min(row, SKELETON_WIDTH_CLASSES.length - 1)]}`}
                         />
                     ))}
                 </div>
@@ -387,7 +381,7 @@ const SettingsPanel = () => {
                     skeletonRows={6}
                 />
                 {!isLoading && !error && (
-                    <div style={{ display: 'grid', gap: '16px' }}>
+                    <div className="ls-settings-form">
                         {saveNotice && (
                             <Notice status={saveNotice.status} isDismissible={false}>
                                 {saveNotice.message}
@@ -445,8 +439,8 @@ const SettingsPanel = () => {
                             }}
                         />
                         <div>
-                            <p style={{ marginBottom: '8px' }}>{__('Exclusions par rôle', 'lean-stats')}</p>
-                            <div style={{ display: 'grid', gap: '8px' }}>
+                            <p className="ls-settings-roles__title">{__('Exclusions par rôle', 'lean-stats')}</p>
+                            <div className="ls-settings-roles__list">
                                 {roles.length === 0 && <p>{__('Aucun rôle disponible.', 'lean-stats')}</p>}
                                 {roles.map((role) => (
                                     <CheckboxControl
@@ -701,17 +695,17 @@ const DashboardPanel = () => {
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
-        <div style={{ display: 'grid', gap: '16px' }}>
+        <div className="ls-dashboard">
             <Flex gap="16" wrap align="stretch">
-                <FlexItem style={{ minWidth: '240px', flex: '0 1 280px' }}>
+                <FlexItem className="ls-dashboard__filter">
                     <PeriodFilter value={rangePreset} onChange={setRangePreset} />
                 </FlexItem>
-                <FlexItem style={{ minWidth: '280px', flex: '1 1 320px' }}>
+                <FlexItem className="ls-dashboard__kpis">
                     <KpiCards range={range} />
                 </FlexItem>
             </Flex>
             <TimeseriesChart range={range} />
-            <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            <div className="ls-dashboard__grid">
                 <TopPagesTable range={range} />
                 <ReferrersTable range={range} />
                 <DeviceSplit range={range} />
@@ -737,7 +731,7 @@ const AdminApp = () => {
     const heading = pluginLabel;
 
     return (
-        <div style={{ display: 'grid', gap: '16px' }}>
+        <div className="ls-admin-app">
             <h1>{heading}</h1>
             {!PanelComponent ? (
                 <Notice status="warning" isDismissible={false}>

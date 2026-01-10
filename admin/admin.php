@@ -107,6 +107,17 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         true
     );
 
+    $admin_css_path = LEAN_STATS_PATH . 'build/style-admin.css';
+    if (file_exists($admin_css_path)) {
+        wp_enqueue_style(
+            'lean-stats-admin',
+            LEAN_STATS_URL . 'build/style-admin.css',
+            [],
+            $asset_data['version']
+        );
+        wp_style_add_data('lean-stats-admin', 'rtl', 'replace');
+    }
+
     wp_localize_script(
         'lean-stats-admin',
         'LeanStatsAdmin',

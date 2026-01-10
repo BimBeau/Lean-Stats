@@ -1,0 +1,97 @@
+:root {
+    --lean-stats-gap-sm: 8px;
+    --lean-stats-gap-md: 12px;
+    --lean-stats-gap-lg: 16px;
+    --lean-stats-radius-sm: 4px;
+    --lean-stats-skeleton-bg: #f0f0f1;
+}
+
+.ls-admin-app,
+.ls-dashboard,
+.ls-dashboard__grid,
+.ls-settings-form {
+    display: grid;
+    gap: var(--lean-stats-gap-lg);
+}
+
+.ls-data-state {
+    padding: var(--lean-stats-gap-lg);
+    display: grid;
+    gap: var(--lean-stats-gap-md);
+}
+
+.ls-data-state__header {
+    display: flex;
+    align-items: center;
+    gap: var(--lean-stats-gap-sm);
+}
+
+.ls-skeleton {
+    display: grid;
+    gap: var(--lean-stats-gap-sm);
+}
+
+.ls-skeleton__bar {
+    height: 12px;
+    background-color: var(--lean-stats-skeleton-bg);
+    border-radius: var(--lean-stats-radius-sm);
+}
+
+.ls-skeleton__bar--w80 {
+    width: 80%;
+}
+
+.ls-skeleton__bar--w74 {
+    width: 74%;
+}
+
+.ls-skeleton__bar--w68 {
+    width: 68%;
+}
+
+.ls-skeleton__bar--w62 {
+    width: 62%;
+}
+
+.ls-skeleton__bar--w56 {
+    width: 56%;
+}
+
+.ls-skeleton__bar--w50 {
+    width: 50%;
+}
+
+.ls-settings-roles__title {
+    margin-bottom: var(--lean-stats-gap-sm);
+}
+
+.ls-settings-roles__list {
+    display: grid;
+    gap: var(--lean-stats-gap-sm);
+}
+
+.ls-chart-frame {
+    width: 100%;
+}
+
+.ls-chart-frame[data-height='240'] {
+    height: 240px;
+}
+
+.ls-chart-frame[data-height='260'] {
+    height: 260px;
+}
+
+.ls-dashboard__filter {
+    min-width: 240px;
+    flex: 0 1 280px;
+}
+
+.ls-dashboard__kpis {
+    min-width: 280px;
+    flex: 1 1 320px;
+}
+
+.ls-dashboard__grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
