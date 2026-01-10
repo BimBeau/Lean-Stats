@@ -98,4 +98,4 @@ jobs:
 
           git commit -m "Deploy build v${DEPLOY_VERSION}"
 
-          git push --force-with-lease origin HEAD:deploy
+          git push --force origin HEAD:deploy
