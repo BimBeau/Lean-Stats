@@ -38,7 +38,7 @@ export const getRuntimeDiagnostics = () => {
     return {
         userAgent: safeUserAgent(),
         hasChromeRuntime,
-        suggestion: 'Tester en navigation privée pour isoler les extensions.',
+        suggestion: 'Test in private browsing to isolate extensions.',
     };
 };
 
@@ -96,7 +96,7 @@ export const setupGlobalErrorHandlers = (logger) => {
     }
 
     window.addEventListener('error', (event) => {
-        logger.error('Erreur globale capturée', {
+        logger.error('Global error captured', {
             action: 'window.error',
             message: event.message,
             filename: event.filename,
@@ -107,7 +107,7 @@ export const setupGlobalErrorHandlers = (logger) => {
     });
 
     window.addEventListener('unhandledrejection', (event) => {
-        logger.error('Promesse non gérée', {
+        logger.error('Unhandled promise rejection', {
             action: 'window.unhandledrejection',
             reason: event.reason ? event.reason.toString() : undefined,
         });

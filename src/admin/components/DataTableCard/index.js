@@ -10,7 +10,7 @@ const DataTableCard = ({ title, headers, rows, isLoading, error, emptyLabel }) =
             error={error}
             isEmpty={!isLoading && !error && rows.length === 0}
             emptyLabel={emptyLabel}
-            loadingLabel={sprintf(__('Chargement : %s', 'lean-stats'), title)}
+            loadingLabel={sprintf(__('Loading: %s', 'lean-stats'), title)}
         />
         {!isLoading && !error && rows.length > 0 && (
             <table className="widefat striped" aria-label={title}>

@@ -1,91 +1,91 @@
 # REST API
 
-## Collecte des hits
+## Hit collection
 
-**Namespace** : `lean-stats/v1`
+**Namespace**: `lean-stats/v1`
 
 ### POST `/hits`
 
-Enregistre un hit de page.
+Records a page hit.
 
-Paramètres JSON :
+JSON parameters:
 
-- `page_path` (string, requis)
-- `post_id` (integer, optionnel)
-- `referrer_domain` (string, optionnel)
-- `device_class` (string, requis)
-- `timestamp_bucket` (integer, requis)
+- `page_path` (string, required)
+- `post_id` (integer, optional)
+- `referrer_domain` (string, optional)
+- `device_class` (string, required)
+- `timestamp_bucket` (integer, required)
 
-## API admin
+## Admin API
 
-**Namespace** : `lean-stats/internal/v1`
+**Namespace**: `lean-stats/internal/v1`
 
-Les routes admin requièrent :
+Admin routes require:
 
-- un utilisateur avec la capacité `manage_options`
-- un nonce REST (`X-WP-Nonce` ou `_wpnonce`)
+- a user with the `manage_options` capability
+- a REST nonce (`X-WP-Nonce` or `_wpnonce`)
 
 ### GET `/admin/kpis`
 
-Retourne les indicateurs agrégés (hits totaux, pages uniques, referrers uniques).
+Returns aggregated KPIs (total hits, unique pages, unique referrers).
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD, optionnel)
-- `end` (YYYY-MM-DD, optionnel)
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
 
 ### GET `/admin/top-pages`
 
-Retourne les pages les plus vues.
+Returns the most viewed pages.
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD, optionnel)
-- `end` (YYYY-MM-DD, optionnel)
-- `limit` (integer, optionnel, défaut 10, max 100)
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `limit` (integer, optional, default 10, max 100)
 
 ### GET `/admin/referrers`
 
-Retourne les domaines référents les plus fréquents.
+Returns the most frequent referrer domains.
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD, optionnel)
-- `end` (YYYY-MM-DD, optionnel)
-- `limit` (integer, optionnel, défaut 10, max 100)
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `limit` (integer, optional, default 10, max 100)
 
 ### GET `/admin/timeseries/day`
 
-Retourne une série temporelle par jour.
+Returns a daily time series.
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD, optionnel)
-- `end` (YYYY-MM-DD, optionnel)
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
 
 ### GET `/admin/timeseries/hour`
 
-Retourne une série temporelle par heure.
+Returns an hourly time series.
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD HH:MM:SS, optionnel)
-- `end` (YYYY-MM-DD HH:MM:SS, optionnel)
+- `start` (YYYY-MM-DD HH:MM:SS, optional)
+- `end` (YYYY-MM-DD HH:MM:SS, optional)
 
 ### GET `/admin/device-split`
 
-Retourne la répartition des hits par type de device.
+Returns the hit breakdown by device type.
 
-Paramètres :
+Parameters:
 
-- `start` (YYYY-MM-DD, optionnel)
-- `end` (YYYY-MM-DD, optionnel)
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
 
 ### GET `/admin/settings`
 
-Retourne les réglages Lean Stats.
+Returns Lean Stats settings.
 
-Champs renvoyés :
+Returned fields:
 
 - `plugin_label` (string)
 - `strict_mode` (boolean)
@@ -99,29 +99,29 @@ Champs renvoyés :
 
 ### POST `/admin/settings`
 
-Met à jour les réglages Lean Stats.
+Updates Lean Stats settings.
 
-Payload JSON :
+JSON payload:
 
-- `plugin_label` (string, optionnel)
-- `strict_mode` (boolean, optionnel)
-- `respect_dnt_gpc` (boolean, optionnel)
-- `url_strip_query` (boolean, optionnel)
-- `url_query_allowlist` (array, optionnel)
-- `raw_logs_enabled` (boolean, optionnel)
-- `raw_logs_retention_days` (integer, optionnel)
-- `excluded_roles` (array, optionnel)
-- `debug_enabled` (boolean, optionnel)
+- `plugin_label` (string, optional)
+- `strict_mode` (boolean, optional)
+- `respect_dnt_gpc` (boolean, optional)
+- `url_strip_query` (boolean, optional)
+- `url_query_allowlist` (array, optional)
+- `raw_logs_enabled` (boolean, optional)
+- `raw_logs_retention_days` (integer, optional)
+- `excluded_roles` (array, optional)
+- `debug_enabled` (boolean, optional)
 
 ### GET `/admin/raw-logs`
 
-Retourne les derniers logs bruts lorsque le mode debug est activé.
+Returns the most recent raw logs when debug mode is enabled.
 
-Paramètres :
+Parameters:
 
-- `limit` (integer, optionnel, défaut 50, max 100)
+- `limit` (integer, optional, default 50, max 100)
 
-Champs renvoyés :
+Returned fields:
 
 - `timestamp_bucket` (integer)
 - `page_path` (string)
