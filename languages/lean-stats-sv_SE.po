@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 dagar"
+
+msgid "7 jours"
+msgstr "7 dagar"
+
+msgid "90 jours"
+msgstr "90 dagar"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Tillåtelselista för frågeparametrar"
+
+msgid "Aucun KPI disponible."
+msgstr "Inga KPI:er tillgängliga."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "Ingen panel tillgänglig för den här skärmen."
+
+msgid "Aucun referrer disponible."
+msgstr "Ingen hänvisare tillgänglig."
+
+msgid "Aucun rôle disponible."
+msgstr "Ingen roll tillgänglig."
+
+msgid "Aucune donnée device disponible."
+msgstr "Ingen enhetsdata tillgänglig."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "Ingen data tillgänglig för den här perioden."
+
+msgid "Aucune page populaire disponible."
+msgstr "Ingen populär sida tillgänglig."
+
+msgid "Chargement : %s"
+msgstr "Laddar: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Laddar enhetsfördelning…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Laddar KPI:er…"
+
+msgid "Chargement des réglages…"
+msgstr "Laddar inställningar…"
+
+msgid "Chargement du graphique…"
+msgstr "Laddar diagram…"
+
+msgid "Chargement…"
+msgstr "Laddar…"
+
+msgid "Configuration REST manquante."
+msgstr "Saknar REST-konfiguration."
+
+msgid "Configuration admin manquante."
+msgstr "Saknar admin-konfiguration."
+
+msgid "Direct"
+msgstr "Direkt"
+
+msgid "Détail de répartition par device"
+msgstr "Detalj av enhetsfördelning"
+
+msgid "Enregistrer"
+msgstr "Spara"
+
+msgid "Enregistrer les réglages"
+msgstr "Spara inställningar"
+
+msgid "Erreur API (%s)"
+msgstr "API-fel (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Laddningsfel."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Fel vid sparning."
+
+msgid "Exclusions par rôle"
+msgstr "Rolluteslutningar"
+
+msgid "Graphique de répartition par device"
+msgstr "Diagram för enhetsfördelning"
+
+msgid "Graphique du trafic"
+msgstr "Trafikdiagram"
+
+msgid "Hits"
+msgstr "Träffar"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Ignorera spårning för inloggade användare."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Ignorera spårning om webbläsaren skickar DNT eller GPC."
+
+msgid "Inconnu"
+msgstr "Okänd"
+
+msgid "Indicateurs"
+msgstr "KPI:er"
+
+msgid "Invalid REST API nonce."
+msgstr "Ogiltig REST API-nonce."
+
+msgid "Invalid device class."
+msgstr "Ogiltig enhetsklass."
+
+msgid "Invalid page path."
+msgstr "Ogiltig sid-sökväg."
+
+msgid "Invalid timestamp bucket."
+msgstr "Ogiltig tidsstämpelgrupp."
+
+msgid "Laisser vide pour utiliser "Lean Stats"."
+msgstr "Lämna tomt för att använda "Lean Stats"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Kommaseparerad lista (t.ex. utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Strikt läge"
+
+msgid "Nettoyage des URLs"
+msgstr "URL-rensning"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Plugin-namn (meny och instrumentpanel)"
+
+msgid "Page"
+msgstr "Sida"
+
+msgid "Pages uniques"
+msgstr "Unika sidor"
+
+msgid "Période"
+msgstr "Period"
+
+msgid "Referrer"
+msgstr "Hänvisare"
+
+msgid "Referrers uniques"
+msgstr "Unika hänvisare"
+
+msgid "Respecter DNT / GPC"
+msgstr "Respektera DNT / GPC"
+
+msgid "Réglages"
+msgstr "Inställningar"
+
+msgid "Réglages enregistrés."
+msgstr "Inställningar sparade."
+
+msgid "Répartition par device"
+msgstr "Enhetsfördelning"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Lagring av råloggar (dagar)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Tar bort frågeparametrar."
+
+msgid "Tableau de bord"
+msgstr "Instrumentpanel"
+
+msgid "Top pages"
+msgstr "Topp-sidor"
+
+msgid "Top referrers"
+msgstr "Topp-hänvisare"
+
+msgid "Trafic dans le temps"
+msgstr "Trafik över tid"
+
+msgid "You are not allowed to access analytics data."
+msgstr "Du har inte behörighet att komma åt analysdata."
