@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr ""
+
+msgid "30 jours"
+msgstr ""
+
+msgid "7 jours"
+msgstr ""
+
+msgid "90 jours"
+msgstr ""
+
+msgid "Allowlist des paramètres de requête"
+msgstr ""
+
+msgid "Aucun KPI disponible."
+msgstr ""
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr ""
+
+msgid "Aucun referrer disponible."
+msgstr ""
+
+msgid "Aucun rôle disponible."
+msgstr ""
+
+msgid "Aucune donnée device disponible."
+msgstr ""
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr ""
+
+msgid "Aucune page populaire disponible."
+msgstr ""
+
+msgid "Chargement : %s"
+msgstr ""
+
+msgid "Chargement de la répartition des devices…"
+msgstr ""
+
+msgid "Chargement des indicateurs…"
+msgstr ""
+
+msgid "Chargement des réglages…"
+msgstr ""
+
+msgid "Chargement du graphique…"
+msgstr ""
+
+msgid "Chargement…"
+msgstr ""
+
+msgid "Configuration REST manquante."
+msgstr ""
+
+msgid "Configuration admin manquante."
+msgstr ""
+
+msgid "Direct"
+msgstr ""
+
+msgid "Détail de répartition par device"
+msgstr ""
+
+msgid "Enregistrer"
+msgstr ""
+
+msgid "Enregistrer les réglages"
+msgstr ""
+
+msgid "Erreur API (%s)"
+msgstr ""
+
+msgid "Erreur de chargement."
+msgstr ""
+
+msgid "Erreur lors de la sauvegarde."
+msgstr ""
+
+msgid "Exclusions par rôle"
+msgstr ""
+
+msgid "Graphique de répartition par device"
+msgstr ""
+
+msgid "Graphique du trafic"
+msgstr ""
+
+msgid "Hits"
+msgstr ""
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr ""
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr ""
+
+msgid "Inconnu"
+msgstr ""
+
+msgid "Indicateurs"
+msgstr ""
+
+msgid "Invalid REST API nonce."
+msgstr ""
+
+msgid "Invalid device class."
+msgstr ""
+
+msgid "Invalid page path."
+msgstr ""
+
+msgid "Invalid timestamp bucket."
+msgstr ""
+
+msgid "Laisser vide pour utiliser "Lean Stats"."
+msgstr ""
+
+msgid "Lean Stats"
+msgstr ""
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr ""
+
+msgid "Mode strict"
+msgstr ""
+
+msgid "Nettoyage des URLs"
+msgstr ""
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Pages uniques"
+msgstr ""
+
+msgid "Période"
+msgstr ""
+
+msgid "Referrer"
+msgstr ""
+
+msgid "Referrers uniques"
+msgstr ""
+
+msgid "Respecter DNT / GPC"
+msgstr ""
+
+msgid "Réglages"
+msgstr ""
+
+msgid "Réglages enregistrés."
+msgstr ""
+
+msgid "Répartition par device"
+msgstr ""
+
+msgid "Rétention des logs bruts (jours)"
+msgstr ""
+
+msgid "Supprime les paramètres de requête."
+msgstr ""
+
+msgid "Tableau de bord"
+msgstr ""
+
+msgid "Top pages"
+msgstr ""
+
+msgid "Top referrers"
+msgstr ""
+
+msgid "Trafic dans le temps"
+msgstr ""
+
+msgid "You are not allowed to access analytics data."
+msgstr ""
+

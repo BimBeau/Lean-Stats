@@ -1,6 +1,6 @@
 {
   "name": "lean-stats",
-  "version": "0.13.12",
+  "version": "0.14.0",
   "private": true,
   "description": "Lean Stats WordPress plugin assets.",
   "scripts": {

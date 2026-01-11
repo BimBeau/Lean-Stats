@@ -2,9 +2,11 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.13.12
+ * Version: 0.14.0
  * Author: BimBeau
  * Author: Lean Stats
+ * Text Domain: lean-stats
+ * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 8.0
  */
@@ -20,6 +22,16 @@ define('LEAN_STATS_REST_INTERNAL_NAMESPACE', $lean_stats_config['rest_namespace_
 
 define('LEAN_STATS_PATH', plugin_dir_path(__FILE__));
 define('LEAN_STATS_URL', plugin_dir_url(__FILE__));
+
+/**
+ * Load plugin translations.
+ */
+function lean_stats_load_textdomain(): void
+{
+    load_plugin_textdomain('lean-stats', false, dirname(plugin_basename(__FILE__)) . '/languages');
+}
+
+add_action('plugins_loaded', 'lean_stats_load_textdomain');
 
 require_once LEAN_STATS_PATH . 'includes/features.php';
 require_once LEAN_STATS_PATH . 'includes/settings.php';

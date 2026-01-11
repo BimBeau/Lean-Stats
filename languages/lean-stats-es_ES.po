@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 días"
+
+msgid "7 jours"
+msgstr "7 días"
+
+msgid "90 jours"
+msgstr "90 días"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Lista de permitidos de parámetros de consulta"
+
+msgid "Aucun KPI disponible."
+msgstr "No hay KPI disponible."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "No hay panel disponible para esta pantalla."
+
+msgid "Aucun referrer disponible."
+msgstr "No hay referente disponible."
+
+msgid "Aucun rôle disponible."
+msgstr "No hay rol disponible."
+
+msgid "Aucune donnée device disponible."
+msgstr "No hay datos de dispositivos disponibles."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "No hay datos disponibles para este período."
+
+msgid "Aucune page populaire disponible."
+msgstr "No hay páginas populares disponibles."
+
+msgid "Chargement : %s"
+msgstr "Cargando: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Cargando la distribución por dispositivo…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Cargando indicadores…"
+
+msgid "Chargement des réglages…"
+msgstr "Cargando ajustes…"
+
+msgid "Chargement du graphique…"
+msgstr "Cargando gráfico…"
+
+msgid "Chargement…"
+msgstr "Cargando…"
+
+msgid "Configuration REST manquante."
+msgstr "Falta la configuración REST."
+
+msgid "Configuration admin manquante."
+msgstr "Falta la configuración de administración."
+
+msgid "Direct"
+msgstr "Directo"
+
+msgid "Détail de répartition par device"
+msgstr "Detalle de distribución por dispositivo"
+
+msgid "Enregistrer"
+msgstr "Guardar"
+
+msgid "Enregistrer les réglages"
+msgstr "Guardar ajustes"
+
+msgid "Erreur API (%s)"
+msgstr "Error de API (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Error de carga."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Error al guardar."
+
+msgid "Exclusions par rôle"
+msgstr "Exclusiones por rol"
+
+msgid "Graphique de répartition par device"
+msgstr "Gráfico de distribución por dispositivo"
+
+msgid "Graphique du trafic"
+msgstr "Gráfico de tráfico"
+
+msgid "Hits"
+msgstr "Hits"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Ignora el seguimiento para usuarios conectados."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Ignora el seguimiento si el navegador envía DNT o GPC."
+
+msgid "Inconnu"
+msgstr "Desconocido"
+
+msgid "Indicateurs"
+msgstr "Indicadores"
+
+msgid "Invalid REST API nonce."
+msgstr "Nonce de API REST inválido."
+
+msgid "Invalid device class."
+msgstr "Clase de dispositivo inválida."
+
+msgid "Invalid page path."
+msgstr "Ruta de página inválida."
+
+msgid "Invalid timestamp bucket."
+msgstr "Intervalo de tiempo inválido."
+
+msgid "Laisser vide pour utiliser "Lean Stats"."
+msgstr "Dejar en blanco para usar "Lean Stats"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Lista separada por comas (p. ej., utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Modo estricto"
+
+msgid "Nettoyage des URLs"
+msgstr "Limpieza de URLs"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Nombre del plugin (menú y panel)"
+
+msgid "Page"
+msgstr "Página"
+
+msgid "Pages uniques"
+msgstr "Páginas únicas"
+
+msgid "Période"
+msgstr "Período"
+
+msgid "Referrer"
+msgstr "Referente"
+
+msgid "Referrers uniques"
+msgstr "Referentes únicos"
+
+msgid "Respecter DNT / GPC"
+msgstr "Respetar DNT / GPC"
+
+msgid "Réglages"
+msgstr "Ajustes"
+
+msgid "Réglages enregistrés."
+msgstr "Ajustes guardados."
+
+msgid "Répartition par device"
+msgstr "Distribución por dispositivo"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Retención de registros sin procesar (días)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Elimina los parámetros de consulta."
+
+msgid "Tableau de bord"
+msgstr "Panel de control"
+
+msgid "Top pages"
+msgstr "Top páginas"
+
+msgid "Top referrers"
+msgstr "Top referentes"
+
+msgid "Trafic dans le temps"
+msgstr "Tráfico en el tiempo"
+
+msgid "You are not allowed to access analytics data."
+msgstr "No tienes permiso para acceder a los datos de analítica."
+

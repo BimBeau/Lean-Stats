@@ -67,6 +67,10 @@ Lean Stats integrates directly inside WordPress Admin:
 - Minimal interactions: tooltips, skeleton loading, and clear empty states
 - Settings screen for strict mode, DNT / GPC compliance, URL allowlists, retention, and role exclusions
 
+## 🌍 Localization
+
+Lean Stats provides translation files for French, English, Spanish, German, Italian, and Portuguese.
+
 ## 🛠 Requirements
 
 - WordPress **6.4+**
