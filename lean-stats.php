@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.21.0
+ * Version: 0.22.0
  * Author: BimBeau
  * Author: Lean Stats
  * Text Domain: lean-stats
@@ -41,6 +41,7 @@ require_once LEAN_STATS_PATH . 'rest/routes.php';
 require_once LEAN_STATS_PATH . 'db/schema.php';
 require_once LEAN_STATS_PATH . 'includes/cache.php';
 require_once LEAN_STATS_PATH . 'includes/raw-logs.php';
+require_once LEAN_STATS_PATH . 'includes/aggregation.php';
 
 /**
  * Plugin activation tasks.
@@ -54,6 +55,10 @@ function lean_stats_activate(): void
     if (!wp_next_scheduled(LEAN_STATS_RAW_LOGS_CRON_HOOK)) {
         wp_schedule_event(time(), 'daily', LEAN_STATS_RAW_LOGS_CRON_HOOK);
     }
+
+    if (!wp_next_scheduled(LEAN_STATS_AGGREGATION_CRON_HOOK)) {
+        wp_schedule_event(time(), 'hourly', LEAN_STATS_AGGREGATION_CRON_HOOK);
+    }
 }
 
 /**
@@ -62,6 +67,7 @@ function lean_stats_activate(): void
 function lean_stats_deactivate(): void
 {
     wp_clear_scheduled_hook(LEAN_STATS_RAW_LOGS_CRON_HOOK);
+    wp_clear_scheduled_hook(LEAN_STATS_AGGREGATION_CRON_HOOK);
 }
 
 register_activation_hook(__FILE__, 'lean_stats_activate');
