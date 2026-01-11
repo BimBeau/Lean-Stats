@@ -112,6 +112,52 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
 }
 
 /**
+ * Store a single hit directly into aggregation tables.
+ */
+function lean_stats_store_aggregate_hit(array $hit): void
+{
+    $timestamp = isset($hit['timestamp_bucket']) ? absint($hit['timestamp_bucket']) : 0;
+    $page_path = isset($hit['page_path']) ? (string) $hit['page_path'] : '';
+    $device_class = isset($hit['device_class']) ? (string) $hit['device_class'] : '';
+    $referrer_domain = isset($hit['referrer_domain']) && $hit['referrer_domain'] !== null
+        ? (string) $hit['referrer_domain']
+        : '';
+
+    if ($timestamp === 0 || $page_path === '' || $device_class === '') {
+        return;
+    }
+
+    $date_bucket = wp_date('Y-m-d', $timestamp);
+    $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
+
+    lean_stats_upsert_aggregate_rows(
+        'daily',
+        [
+            [
+                'date_bucket' => $date_bucket,
+                'page_path' => $page_path,
+                'referrer_domain' => $referrer_domain,
+                'device_class' => $device_class,
+                'hits' => 1,
+            ],
+        ]
+    );
+
+    lean_stats_upsert_aggregate_rows(
+        'hourly',
+        [
+            [
+                'date_bucket' => $hour_bucket,
+                'page_path' => $page_path,
+                'referrer_domain' => $referrer_domain,
+                'device_class' => $device_class,
+                'hits' => 1,
+            ],
+        ]
+    );
+}
+
+/**
  * Upsert aggregate rows into the daily or hourly table.
  */
 function lean_stats_upsert_aggregate_rows(string $bucket, array $rows): void
