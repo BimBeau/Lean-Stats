@@ -158,12 +158,12 @@ function lean_stats_get_admin_panels(): array
     $panels = [
         [
             'name' => 'dashboard',
-            'title' => __('Tableau de bord', 'lean-stats'),
+            'title' => __('Dashboard', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'settings',
-            'title' => __('Réglages', 'lean-stats'),
+            'title' => __('Settings', 'lean-stats'),
             'type' => 'core',
         ],
     ];
