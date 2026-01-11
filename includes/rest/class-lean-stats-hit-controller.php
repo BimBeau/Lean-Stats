@@ -346,6 +346,7 @@ class Lean_Stats_Hit_Controller {
      */
     private function store_hit(array $hit): void {
         if (!lean_stats_raw_logs_enabled()) {
+            lean_stats_store_aggregate_hit($hit);
             return;
         }
 
