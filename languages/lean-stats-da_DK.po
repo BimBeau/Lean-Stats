@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: da_DK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 dage"
+
+msgid "7 jours"
+msgstr "7 dage"
+
+msgid "90 jours"
+msgstr "90 dage"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Tilladelsesliste over forespørgselsparametre"
+
+msgid "Aucun KPI disponible."
+msgstr "Ingen KPI'er tilgængelige."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "Ingen panel tilgængelig for denne skærm."
+
+msgid "Aucun referrer disponible."
+msgstr "Ingen henviser tilgængelig."
+
+msgid "Aucun rôle disponible."
+msgstr "Ingen rolle tilgængelig."
+
+msgid "Aucune donnée device disponible."
+msgstr "Ingen enhedsdata tilgængelig."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "Ingen data tilgængelig for denne periode."
+
+msgid "Aucune page populaire disponible."
+msgstr "Ingen populære sider tilgængelig."
+
+msgid "Chargement : %s"
+msgstr "Indlæser: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Indlæser enhedsfordeling…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Indlæser KPI'er…"
+
+msgid "Chargement des réglages…"
+msgstr "Indlæser indstillinger…"
+
+msgid "Chargement du graphique…"
+msgstr "Indlæser graf…"
+
+msgid "Chargement…"
+msgstr "Indlæser…"
+
+msgid "Configuration REST manquante."
+msgstr "Manglende REST-konfiguration."
+
+msgid "Configuration admin manquante."
+msgstr "Manglende admin-konfiguration."
+
+msgid "Direct"
+msgstr "Direkte"
+
+msgid "Détail de répartition par device"
+msgstr "Detaljeret enhedsfordeling"
+
+msgid "Enregistrer"
+msgstr "Gem"
+
+msgid "Enregistrer les réglages"
+msgstr "Gem indstillinger"
+
+msgid "Erreur API (%s)"
+msgstr "API-fejl (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Indlæsningsfejl."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Fejl under lagring."
+
+msgid "Exclusions par rôle"
+msgstr "Udelukkelser pr. rolle"
+
+msgid "Graphique de répartition par device"
+msgstr "Graf over enhedsfordeling"
+
+msgid "Graphique du trafic"
+msgstr "Trafikgraf"
+
+msgid "Hits"
+msgstr "Hits"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Ignorer sporing for indloggede brugere."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Ignorer sporing, hvis browseren sender DNT eller GPC."
+
+msgid "Inconnu"
+msgstr "Ukendt"
+
+msgid "Indicateurs"
+msgstr "KPI'er"
+
+msgid "Invalid REST API nonce."
+msgstr "Ugyldig REST API-nonce."
+
+msgid "Invalid device class."
+msgstr "Ugyldig enhedsklasse."
+
+msgid "Invalid page path."
+msgstr "Ugyldig sidesti."
+
+msgid "Invalid timestamp bucket."
+msgstr "Ugyldig tidsstempel-bucket."
+
+msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgstr "Lad stå tomt for at bruge \"Lean Stats\"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Kommasepareret liste (f.eks. utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Streng tilstand"
+
+msgid "Nettoyage des URLs"
+msgstr "URL-rensning"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Plugin-navn (menu og kontrolpanel)"
+
+msgid "Page"
+msgstr "Side"
+
+msgid "Pages uniques"
+msgstr "Unikke sider"
+
+msgid "Période"
+msgstr "Periode"
+
+msgid "Referrer"
+msgstr "Henviser"
+
+msgid "Referrers uniques"
+msgstr "Unikke henvisere"
+
+msgid "Respecter DNT / GPC"
+msgstr "Respektér DNT / GPC"
+
+msgid "Réglages"
+msgstr "Indstillinger"
+
+msgid "Réglages enregistrés."
+msgstr "Indstillinger gemt."
+
+msgid "Répartition par device"
+msgstr "Enhedsfordeling"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Opbevaring af rå logs (dage)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Fjerner forespørgselsparametre."
+
+msgid "Tableau de bord"
+msgstr "Kontrolpanel"
+
+msgid "Top pages"
+msgstr "Top sider"
+
+msgid "Top referrers"
+msgstr "Top henvisere"
+
+msgid "Trafic dans le temps"
+msgstr "Trafik over tid"
+
+msgid "You are not allowed to access analytics data."
+msgstr "Du har ikke tilladelse til at få adgang til analysedata."
