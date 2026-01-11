@@ -447,28 +447,48 @@ const KpiCards = ({ range }) => {
                     skeletonRows={3}
                 />
                 {kpis && (
-                    <Flex gap="16" wrap>
-                        <FlexItem>
+                    <Flex gap="16" wrap className="ls-kpi-cards">
+                        <FlexItem className="ls-kpi-cards__item">
                             <Card>
-                                <CardBody>
-                                    <p>{__('Hits', 'lean-stats')}</p>
-                                    <strong>{kpis.totalHits}</strong>
+                                <CardBody className="ls-kpi-card__body">
+                                    <span
+                                        className="dashicons dashicons-chart-bar ls-kpi-card__icon"
+                                        aria-hidden="true"
+                                    />
+                                    <div className="ls-kpi-card__content">
+                                        <p className="ls-kpi-card__label">{__('Hits', 'lean-stats')}</p>
+                                        <strong className="ls-kpi-card__value">{kpis.totalHits}</strong>
+                                    </div>
                                 </CardBody>
                             </Card>
                         </FlexItem>
-                        <FlexItem>
+                        <FlexItem className="ls-kpi-cards__item">
                             <Card>
-                                <CardBody>
-                                    <p>{__('Pages uniques', 'lean-stats')}</p>
-                                    <strong>{kpis.uniquePages}</strong>
+                                <CardBody className="ls-kpi-card__body">
+                                    <span
+                                        className="dashicons dashicons-admin-page ls-kpi-card__icon"
+                                        aria-hidden="true"
+                                    />
+                                    <div className="ls-kpi-card__content">
+                                        <p className="ls-kpi-card__label">{__('Pages uniques', 'lean-stats')}</p>
+                                        <strong className="ls-kpi-card__value">{kpis.uniquePages}</strong>
+                                    </div>
                                 </CardBody>
                             </Card>
                         </FlexItem>
-                        <FlexItem>
+                        <FlexItem className="ls-kpi-cards__item">
                             <Card>
-                                <CardBody>
-                                    <p>{__('Referrers uniques', 'lean-stats')}</p>
-                                    <strong>{kpis.uniqueReferrers}</strong>
+                                <CardBody className="ls-kpi-card__body">
+                                    <span
+                                        className="dashicons dashicons-admin-links ls-kpi-card__icon"
+                                        aria-hidden="true"
+                                    />
+                                    <div className="ls-kpi-card__content">
+                                        <p className="ls-kpi-card__label">
+                                            {__('Referrers uniques', 'lean-stats')}
+                                        </p>
+                                        <strong className="ls-kpi-card__value">{kpis.uniqueReferrers}</strong>
+                                    </div>
                                 </CardBody>
                             </Card>
                         </FlexItem>
