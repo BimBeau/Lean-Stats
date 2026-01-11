@@ -26,4 +26,21 @@ describe('Lean Stats tracker helpers', () => {
             timestamp_bucket: 1_699_999_800,
         });
     });
+
+    test('buildPayload omits optional fields when empty', () => {
+        const payload = helpers.buildPayload({
+            currentUrl: 'https://example.com/',
+            postId: null,
+            referrer: '',
+            userAgent: 'Mozilla/5.0',
+            width: 1200,
+            now: 1_700_000_000_000,
+        });
+
+        expect(payload).toEqual({
+            page_path: '/',
+            device_class: 'desktop',
+            timestamp_bucket: 1_699_999_800,
+        });
+    });
 });
