@@ -69,7 +69,7 @@ Lean Stats integrates directly inside WordPress Admin:
 
 ## 🌍 Localization
 
-Lean Stats provides translation files for French, English, Spanish, German, Italian, Portuguese, and Swedish.
+Lean Stats provides translation files for French, English, Spanish, German, Italian, Portuguese, Swedish, and Danish.
 
 ## 🛠 Requirements
 
