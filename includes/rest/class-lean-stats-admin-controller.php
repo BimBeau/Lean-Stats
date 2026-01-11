@@ -187,9 +187,12 @@ class Lean_Stats_Admin_Controller {
      * Return current settings.
      */
     public function get_settings(WP_REST_Request $request): WP_REST_Response {
+        $settings = lean_stats_get_settings();
+        $settings['raw_logs_enabled'] = lean_stats_raw_logs_enabled();
+
         return new WP_REST_Response(
             [
-                'settings' => lean_stats_get_settings(),
+                'settings' => $settings,
             ],
             200
         );

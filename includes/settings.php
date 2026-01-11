@@ -16,6 +16,7 @@ function lean_stats_get_settings_defaults(): array
         'respect_dnt_gpc' => true,
         'url_strip_query' => true,
         'url_query_allowlist' => [],
+        'raw_logs_enabled' => false,
         'raw_logs_retention_days' => 1,
         'excluded_roles' => [],
         'debug_enabled' => false,
@@ -49,6 +50,7 @@ function lean_stats_sanitize_settings($settings): array
     $settings['strict_mode'] = (bool) rest_sanitize_boolean($settings['strict_mode']);
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
+    $settings['raw_logs_enabled'] = (bool) rest_sanitize_boolean($settings['raw_logs_enabled']);
     $settings['debug_enabled'] = (bool) rest_sanitize_boolean($settings['debug_enabled']);
 
     $allowlist = $settings['url_query_allowlist'];
@@ -109,7 +111,13 @@ function lean_stats_get_settings(): array
 {
     $settings = get_option('lean_stats_settings', []);
 
-    return lean_stats_sanitize_settings($settings);
+    $settings = lean_stats_sanitize_settings($settings);
+    $raw_logs_enabled = get_option('lean_stats_raw_logs_enabled', null);
+    if ($raw_logs_enabled !== null) {
+        $settings['raw_logs_enabled'] = (bool) $raw_logs_enabled;
+    }
+
+    return $settings;
 }
 
 /**
@@ -119,6 +127,7 @@ function lean_stats_update_settings($settings): array
 {
     $sanitized = lean_stats_sanitize_settings($settings);
     update_option('lean_stats_settings', $sanitized, false);
+    update_option('lean_stats_raw_logs_enabled', (bool) $sanitized['raw_logs_enabled'], false);
 
     return $sanitized;
 }

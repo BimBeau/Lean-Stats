@@ -48,6 +48,7 @@ const DEFAULT_SETTINGS = {
     respect_dnt_gpc: true,
     url_strip_query: true,
     url_query_allowlist: [],
+    raw_logs_enabled: false,
     raw_logs_retention_days: 1,
     excluded_roles: [],
     debug_enabled: false,
@@ -362,6 +363,12 @@ const SettingsPanel = () => {
                             onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
                         />
                         <ToggleControl
+                            label={__('Activer les logs bruts', 'lean-stats')}
+                            help={__('Autorise le stockage des hits bruts pour le diagnostic.', 'lean-stats')}
+                            checked={formState.raw_logs_enabled}
+                            onChange={(value) => setFormState((prev) => ({ ...prev, raw_logs_enabled: value }))}
+                        />
+                        <ToggleControl
                             label={__('Mode debug', 'lean-stats')}
                             help={__('Active des logs détaillés dans la console pour faciliter le debug.', 'lean-stats')}
                             checked={formState.debug_enabled}
@@ -386,6 +393,7 @@ const SettingsPanel = () => {
                             min={1}
                             max={365}
                             value={String(formState.raw_logs_retention_days)}
+                            help={__('La purge quotidienne supprime les logs plus anciens.', 'lean-stats')}
                             onChange={(value) => {
                                 const next = Number.parseInt(value, 10);
                                 setFormState((prev) => ({
