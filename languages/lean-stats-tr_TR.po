@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 gün"
+
+msgid "7 jours"
+msgstr "7 gün"
+
+msgid "90 jours"
+msgstr "90 gün"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Sorgu parametreleri izin listesi"
+
+msgid "Aucun KPI disponible."
+msgstr "KPI mevcut değil."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "Bu ekran için panel mevcut değil."
+
+msgid "Aucun referrer disponible."
+msgstr "Yönlendiren mevcut değil."
+
+msgid "Aucun rôle disponible."
+msgstr "Rol mevcut değil."
+
+msgid "Aucune donnée device disponible."
+msgstr "Cihaz verisi mevcut değil."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "Bu dönem için veri mevcut değil."
+
+msgid "Aucune page populaire disponible."
+msgstr "Popüler sayfa mevcut değil."
+
+msgid "Chargement : %s"
+msgstr "Yükleniyor: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Cihaz dağılımı yükleniyor…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Göstergeler yükleniyor…"
+
+msgid "Chargement des réglages…"
+msgstr "Ayarlar yükleniyor…"
+
+msgid "Chargement du graphique…"
+msgstr "Grafik yükleniyor…"
+
+msgid "Chargement…"
+msgstr "Yükleniyor…"
+
+msgid "Configuration REST manquante."
+msgstr "REST yapılandırması eksik."
+
+msgid "Configuration admin manquante."
+msgstr "Yönetici yapılandırması eksik."
+
+msgid "Direct"
+msgstr "Doğrudan"
+
+msgid "Détail de répartition par device"
+msgstr "Cihaz dağılımı ayrıntısı"
+
+msgid "Enregistrer"
+msgstr "Kaydet"
+
+msgid "Enregistrer les réglages"
+msgstr "Ayarları kaydet"
+
+msgid "Erreur API (%s)"
+msgstr "API hatası (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Yükleme hatası."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Kaydetme sırasında hata."
+
+msgid "Exclusions par rôle"
+msgstr "Role göre hariç tutmalar"
+
+msgid "Graphique de répartition par device"
+msgstr "Cihaz dağılım grafiği"
+
+msgid "Graphique du trafic"
+msgstr "Trafik grafiği"
+
+msgid "Hits"
+msgstr "İstek"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Oturum açmış kullanıcılar için izlemeyi yok sayar."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Tarayıcı DNT veya GPC gönderirse izlemeyi yok sayar."
+
+msgid "Inconnu"
+msgstr "Bilinmiyor"
+
+msgid "Indicateurs"
+msgstr "Göstergeler"
+
+msgid "Invalid REST API nonce."
+msgstr "Geçersiz REST API nonce."
+
+msgid "Invalid device class."
+msgstr "Geçersiz cihaz sınıfı."
+
+msgid "Invalid page path."
+msgstr "Geçersiz sayfa yolu."
+
+msgid "Invalid timestamp bucket."
+msgstr "Geçersiz zaman damgası aralığı."
+
+msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgstr "\"Lean Stats\" kullanmak için boş bırakın."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Virgülle ayrılmış liste (örn: utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Katı mod"
+
+msgid "Nettoyage des URLs"
+msgstr "URL temizliği"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Eklenti adı (menü ve gösterge paneli)"
+
+msgid "Page"
+msgstr "Sayfa"
+
+msgid "Pages uniques"
+msgstr "Benzersiz sayfalar"
+
+msgid "Période"
+msgstr "Dönem"
+
+msgid "Referrer"
+msgstr "Yönlendiren"
+
+msgid "Referrers uniques"
+msgstr "Benzersiz yönlendirenler"
+
+msgid "Respecter DNT / GPC"
+msgstr "DNT / GPC’ye uy"
+
+msgid "Réglages"
+msgstr "Ayarlar"
+
+msgid "Réglages enregistrés."
+msgstr "Ayarlar kaydedildi."
+
+msgid "Répartition par device"
+msgstr "Cihazlara göre dağılım"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Ham günlüklerin saklama süresi (gün)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Sorgu parametrelerini kaldırır."
+
+msgid "Tableau de bord"
+msgstr "Gösterge paneli"
+
+msgid "Top pages"
+msgstr "En çok ziyaret edilen sayfalar"
+
+msgid "Top referrers"
+msgstr "En çok yönlendirenler"
+
+msgid "Trafic dans le temps"
+msgstr "Zamana göre trafik"
+
+msgid "You are not allowed to access analytics data."
+msgstr "Analiz verilerine erişim izniniz yok."
