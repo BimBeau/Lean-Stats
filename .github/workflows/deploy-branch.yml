@@ -76,11 +76,15 @@ jobs:
 
           DEPLOY_DIR="deploy-branch"
 
-          git worktree add "$DEPLOY_DIR" --detach
+          git fetch origin deploy || true
+
+          if git show-ref --quiet refs/remotes/origin/deploy; then
+            git worktree add -b deploy "$DEPLOY_DIR" origin/deploy
+          else
+            git worktree add -b deploy "$DEPLOY_DIR"
+          fi
 
           cd "$DEPLOY_DIR"
-
-          git checkout --orphan deploy
 
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 
@@ -98,4 +102,4 @@ jobs:
 
           git commit -m "Deploy build v${DEPLOY_VERSION}"
 
-          git push --force origin HEAD:deploy
+          git push origin deploy
