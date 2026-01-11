@@ -94,13 +94,22 @@
 
         const now = Object.prototype.hasOwnProperty.call(opts, 'now') ? opts.now : undefined;
 
-        return {
+        const payload = {
             page_path: normalizePath(currentUrl.pathname),
-            post_id: postId || null,
-            referrer_domain: extractReferrerDomain(referrer),
             device_class: getDeviceClass(userAgent, width),
             timestamp_bucket: getTimestampBucket(now),
         };
+
+        if (Number.isFinite(postId) && postId > 0) {
+            payload.post_id = postId;
+        }
+
+        const referrerDomain = extractReferrerDomain(referrer);
+        if (referrerDomain) {
+            payload.referrer_domain = referrerDomain;
+        }
+
+        return payload;
     }
 
     function getEndpointUrl(settings) {
