@@ -18,6 +18,7 @@ function lean_stats_get_settings_defaults(): array
         'url_query_allowlist' => [],
         'raw_logs_retention_days' => 1,
         'excluded_roles' => [],
+        'debug_enabled' => false,
     ];
 }
 
@@ -48,6 +49,7 @@ function lean_stats_sanitize_settings($settings): array
     $settings['strict_mode'] = (bool) rest_sanitize_boolean($settings['strict_mode']);
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
+    $settings['debug_enabled'] = (bool) rest_sanitize_boolean($settings['debug_enabled']);
 
     $allowlist = $settings['url_query_allowlist'];
     if (is_string($allowlist)) {

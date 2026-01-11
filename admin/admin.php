@@ -88,6 +88,8 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
     $current_page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : LEAN_STATS_SLUG;
     $panel_map = $GLOBALS['lean_stats_admin_panel_map'] ?? [];
     $current_panel = $panel_map[$current_page] ?? 'dashboard';
+    $settings = lean_stats_get_settings();
+    $debug_enabled = !empty($settings['debug_enabled']);
 
     $asset_file = LEAN_STATS_PATH . 'build/admin.asset.php';
     $asset_data = [
@@ -136,8 +138,15 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
                 'pluginVersion' => LEAN_STATS_VERSION,
                 'slug' => LEAN_STATS_SLUG,
                 'pluginLabel' => $menu_label,
+                'debugEnabled' => $debug_enabled,
             ],
         ]
+    );
+
+    wp_add_inline_script(
+        'lean-stats-admin',
+        'window.LEAN_STATS_DEBUG = ' . ($debug_enabled ? 'true' : 'false') . ';',
+        'before'
     );
 }
 
