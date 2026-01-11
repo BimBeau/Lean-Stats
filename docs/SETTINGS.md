@@ -20,3 +20,7 @@ Lean Stats stores settings in the `lean_stats_settings` option and exposes them 
 
 Configuration: set `raw_logs_enabled` to `true` in `lean_stats_settings` or via `POST /admin/settings` to store raw hits in `lean_stats_hits`.
 Behavior: the daily purge hook (`LEAN_STATS_RAW_LOGS_CRON_HOOK`) deletes raw hits older than `raw_logs_retention_days`, regardless of the current storage state.
+
+## Admin raw logs tab
+
+The settings screen exposes a "Logs bruts" tab when debug mode is enabled. The tab lists the most recent raw hits stored in `lean_stats_hits` (timestamp, page path, referrer, device). Raw logs display depends on raw log storage being enabled.

@@ -17,6 +17,7 @@ When debug mode is enabled:
 - Logs include timing (`performance.now`), page context, action names, and a short trace id.
 - Global guards capture `window.error` and `unhandledrejection` events.
 - Runtime hints show user agent, presence of `chrome.runtime`, and a suggestion to reproduce in private browsing.
+- The settings screen exposes a "Logs bruts" tab that lists recent raw hits.
 
 When debug mode is disabled:
 

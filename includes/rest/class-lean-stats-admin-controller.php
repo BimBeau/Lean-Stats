@@ -29,6 +29,23 @@ class Lean_Stats_Admin_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            '/admin/raw-logs',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_raw_logs'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => [
+                    'limit' => [
+                        'required' => false,
+                        'type' => 'integer',
+                        'default' => 50,
+                    ],
+                ],
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_INTERNAL_NAMESPACE,
             '/admin/kpis',
             [
                 'methods' => 'GET',
@@ -212,6 +229,65 @@ class Lean_Stats_Admin_Controller {
         return new WP_REST_Response(
             [
                 'settings' => $settings,
+            ],
+            200
+        );
+    }
+
+    /**
+     * Return latest raw logs when debug mode is enabled.
+     */
+    public function get_raw_logs(WP_REST_Request $request): WP_REST_Response {
+        $settings = lean_stats_get_settings();
+        if (empty($settings['debug_enabled'])) {
+            return new WP_REST_Response(
+                [
+                    'message' => __('Debug mode is disabled.', 'lean-stats'),
+                ],
+                403
+            );
+        }
+
+        $limit = $this->normalize_limit($request->get_param('limit'));
+        $hits = get_option('lean_stats_hits', []);
+        if (!is_array($hits)) {
+            $hits = [];
+        }
+
+        $hits = array_values(
+            array_filter(
+                $hits,
+                static function ($hit): bool {
+                    return is_array($hit);
+                }
+            )
+        );
+        $hits = array_reverse($hits);
+        $hits = array_slice($hits, 0, $limit);
+
+        $items = array_map(
+            static function (array $hit): array {
+                $timestamp = isset($hit['timestamp_bucket']) ? absint($hit['timestamp_bucket']) : 0;
+                $post_id = isset($hit['post_id']) ? absint($hit['post_id']) : 0;
+
+                return [
+                    'timestamp_bucket' => $timestamp,
+                    'page_path' => isset($hit['page_path']) ? sanitize_text_field((string) $hit['page_path']) : '',
+                    'referrer_domain' => isset($hit['referrer_domain'])
+                        ? sanitize_text_field((string) $hit['referrer_domain'])
+                        : '',
+                    'device_class' => isset($hit['device_class'])
+                        ? sanitize_key((string) $hit['device_class'])
+                        : '',
+                    'post_id' => $post_id > 0 ? $post_id : null,
+                ];
+            },
+            $hits
+        );
+
+        return new WP_REST_Response(
+            [
+                'items' => $items,
             ],
             200
         );

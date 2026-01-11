@@ -13,6 +13,7 @@ import {
     FlexItem,
     Notice,
     SelectControl,
+    TabPanel,
     TextControl,
     ToggleControl,
 } from '@wordpress/components';
@@ -60,6 +61,15 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
+const formatLogTimestamp = (timestamp) => {
+    if (!timestamp) {
+        return '';
+    }
+
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleString();
+};
+
 const getRangeFromPreset = (preset) => {
     const now = new Date();
     const end = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -101,14 +111,22 @@ const buildAdminUrl = (path, params) => {
     return url.toString();
 };
 
-const useAdminEndpoint = (path, params) => {
+const useAdminEndpoint = (path, params, options = {}) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const paramsKey = useMemo(() => JSON.stringify(params ?? {}), [params]);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
+    const { enabled = true } = options;
 
     useEffect(() => {
+        if (!enabled || !path) {
+            setIsLoading(false);
+            setError(null);
+            setData(null);
+            return undefined;
+        }
+
         let isMounted = true;
         const controller = new AbortController();
         const traceId = createTraceId();
@@ -181,7 +199,7 @@ const useAdminEndpoint = (path, params) => {
             isMounted = false;
             controller.abort();
         };
-    }, [path, paramsKey]);
+    }, [path, paramsKey, enabled]);
 
     return { data, isLoading, error };
 };
@@ -225,6 +243,66 @@ const getPanelComponent = (name) => {
     return registry[name] || null;
 };
 
+const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
+    const { data, isLoading, error } = useAdminEndpoint(
+        '/admin/raw-logs',
+        { limit: 50 },
+        { enabled: debugEnabled }
+    );
+    const logs = data?.items || [];
+
+    if (!debugEnabled) {
+        return (
+            <Notice status="warning" isDismissible={false}>
+                {__('Activez le mode debug pour afficher les logs bruts.', 'lean-stats')}
+            </Notice>
+        );
+    }
+
+    return (
+        <div className="ls-settings-logs">
+            {!rawLogsEnabled && (
+                <Notice status="info" isDismissible={false}>
+                    {__(
+                        'Les logs bruts sont désactivés. Activez "Activer les logs bruts" pour collecter des entrées.',
+                        'lean-stats'
+                    )}
+                </Notice>
+            )}
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && logs.length === 0}
+                emptyLabel={__('Aucun log brut disponible.', 'lean-stats')}
+                loadingLabel={__('Chargement des logs bruts…', 'lean-stats')}
+                skeletonRows={4}
+            />
+            {!isLoading && !error && logs.length > 0 && (
+                <table className="widefat striped ls-settings-logs__table">
+                    <thead>
+                        <tr>
+                            <th>{__('Date', 'lean-stats')}</th>
+                            <th>{__('Page', 'lean-stats')}</th>
+                            <th>{__('Referrer', 'lean-stats')}</th>
+                            <th>{__('Device', 'lean-stats')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logs.map((log, index) => (
+                            <tr key={`${log.timestamp_bucket}-${index}`}>
+                                <td>{formatLogTimestamp(log.timestamp_bucket)}</td>
+                                <td>{log.page_path}</td>
+                                <td>{log.referrer_domain || __('Direct', 'lean-stats')}</td>
+                                <td>{log.device_class || '-'}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
+};
+
 const PeriodFilter = ({ value, onChange }) => (
     <Card>
         <CardBody>
@@ -251,6 +329,8 @@ const SettingsPanel = () => {
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
+    const debugEnabled = Boolean(formState.debug_enabled);
+    const rawLogsEnabled = Boolean(formState.raw_logs_enabled);
 
     useEffect(() => {
         if (data?.settings) {
@@ -320,6 +400,10 @@ const SettingsPanel = () => {
     };
 
     const roles = ADMIN_CONFIG?.roles || [];
+    const settingsTabs = [
+        { name: 'general', title: __('Général', 'lean-stats') },
+        { name: 'logs', title: __('Logs bruts', 'lean-stats') },
+    ];
 
     return (
         <LsCard title={__('Réglages', 'lean-stats')}>
@@ -328,114 +412,129 @@ const SettingsPanel = () => {
                 error={error}
                 isEmpty={false}
                 emptyLabel=""
-                    loadingLabel={__('Chargement des réglages…', 'lean-stats')}
-                    skeletonRows={6}
-                />
-                {!isLoading && !error && (
-                    <div className="ls-settings-form">
-                        {saveNotice && (
-                            <Notice status={saveNotice.status} isDismissible={false}>
-                                {saveNotice.message}
-                            </Notice>
-                        )}
-                        <TextControl
-                            label={__('Nom du plugin (menu et tableau de bord)', 'lean-stats')}
-                            help={__('Laisser vide pour utiliser "Lean Stats".', 'lean-stats')}
-                            value={formState.plugin_label}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
-                        />
-                        <ToggleControl
-                            label={__('Mode strict', 'lean-stats')}
-                            help={__('Ignore le suivi pour les utilisateurs connectés.', 'lean-stats')}
-                            checked={formState.strict_mode}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
-                        />
-                        <ToggleControl
-                            label={__('Respecter DNT / GPC', 'lean-stats')}
-                            help={__('Ignore le suivi si le navigateur envoie DNT ou GPC.', 'lean-stats')}
-                            checked={formState.respect_dnt_gpc}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
-                        />
-                        <ToggleControl
-                            label={__('Nettoyage des URLs', 'lean-stats')}
-                            help={__('Supprime les paramètres de requête.', 'lean-stats')}
-                            checked={formState.url_strip_query}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
-                        />
-                        <ToggleControl
-                            label={__('Activer les logs bruts', 'lean-stats')}
-                            help={__('Autorise le stockage des hits bruts pour le diagnostic.', 'lean-stats')}
-                            checked={formState.raw_logs_enabled}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, raw_logs_enabled: value }))}
-                        />
-                        <ToggleControl
-                            label={__('Mode debug', 'lean-stats')}
-                            help={__('Active des logs détaillés dans la console pour faciliter le debug.', 'lean-stats')}
-                            checked={formState.debug_enabled}
-                            onChange={(value) => setFormState((prev) => ({ ...prev, debug_enabled: value }))}
-                        />
-                        <TextControl
-                            label={__('Allowlist des paramètres de requête', 'lean-stats')}
-                            help={__('Liste séparée par des virgules (ex: utm_source, utm_campaign).', 'lean-stats')}
-                            value={allowlistInput}
-                            onChange={(value) => {
-                                setAllowlistInput(value);
-                                const parsed = value
-                                    .split(',')
-                                    .map((item) => item.trim())
-                                    .filter(Boolean);
-                                setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
-                            }}
-                        />
-                        <TextControl
-                            label={__('Rétention des logs bruts (jours)', 'lean-stats')}
-                            type="number"
-                            min={1}
-                            max={365}
-                            value={String(formState.raw_logs_retention_days)}
-                            help={__('La purge quotidienne supprime les logs plus anciens.', 'lean-stats')}
-                            onChange={(value) => {
-                                const next = Number.parseInt(value, 10);
-                                setFormState((prev) => ({
-                                    ...prev,
-                                    raw_logs_retention_days: Number.isNaN(next) ? prev.raw_logs_retention_days : next,
-                                }));
-                            }}
-                        />
-                        <div>
-                            <p className="ls-settings-roles__title">{__('Exclusions par rôle', 'lean-stats')}</p>
-                            <div className="ls-settings-roles__list">
-                                {roles.length === 0 && <p>{__('Aucun rôle disponible.', 'lean-stats')}</p>}
-                                {roles.map((role) => (
-                                    <CheckboxControl
-                                        key={role.key}
-                                        label={role.label}
-                                        checked={formState.excluded_roles.includes(role.key)}
-                                        onChange={(isChecked) => {
-                                            setFormState((prev) => {
-                                                const nextRoles = new Set(prev.excluded_roles);
-                                                if (isChecked) {
-                                                    nextRoles.add(role.key);
-                                                } else {
-                                                    nextRoles.delete(role.key);
-                                                }
-                                                return { ...prev, excluded_roles: Array.from(nextRoles) };
-                                            });
-                                        }}
-                                    />
-                                ))}
+                loadingLabel={__('Chargement des réglages…', 'lean-stats')}
+                skeletonRows={6}
+            />
+            {!isLoading && !error && (
+                <TabPanel tabs={settingsTabs}>
+                    {(tab) => {
+                        if (tab.name === 'logs') {
+                            return (
+                                <SettingsLogsTab
+                                    debugEnabled={debugEnabled}
+                                    rawLogsEnabled={rawLogsEnabled}
+                                />
+                            );
+                        }
+
+                        return (
+                            <div className="ls-settings-form">
+                                {saveNotice && (
+                                    <Notice status={saveNotice.status} isDismissible={false}>
+                                        {saveNotice.message}
+                                    </Notice>
+                                )}
+                                <TextControl
+                                    label={__('Nom du plugin (menu et tableau de bord)', 'lean-stats')}
+                                    help={__('Laisser vide pour utiliser "Lean Stats".', 'lean-stats')}
+                                    value={formState.plugin_label}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
+                                />
+                                <ToggleControl
+                                    label={__('Mode strict', 'lean-stats')}
+                                    help={__('Ignore le suivi pour les utilisateurs connectés.', 'lean-stats')}
+                                    checked={formState.strict_mode}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
+                                />
+                                <ToggleControl
+                                    label={__('Respecter DNT / GPC', 'lean-stats')}
+                                    help={__('Ignore le suivi si le navigateur envoie DNT ou GPC.', 'lean-stats')}
+                                    checked={formState.respect_dnt_gpc}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
+                                />
+                                <ToggleControl
+                                    label={__('Nettoyage des URLs', 'lean-stats')}
+                                    help={__('Supprime les paramètres de requête.', 'lean-stats')}
+                                    checked={formState.url_strip_query}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
+                                />
+                                <ToggleControl
+                                    label={__('Activer les logs bruts', 'lean-stats')}
+                                    help={__('Autorise le stockage des hits bruts pour le diagnostic.', 'lean-stats')}
+                                    checked={formState.raw_logs_enabled}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, raw_logs_enabled: value }))}
+                                />
+                                <ToggleControl
+                                    label={__('Mode debug', 'lean-stats')}
+                                    help={__('Active des logs détaillés dans la console pour faciliter le debug.', 'lean-stats')}
+                                    checked={formState.debug_enabled}
+                                    onChange={(value) => setFormState((prev) => ({ ...prev, debug_enabled: value }))}
+                                />
+                                <TextControl
+                                    label={__('Allowlist des paramètres de requête', 'lean-stats')}
+                                    help={__('Liste séparée par des virgules (ex: utm_source, utm_campaign).', 'lean-stats')}
+                                    value={allowlistInput}
+                                    onChange={(value) => {
+                                        setAllowlistInput(value);
+                                        const parsed = value
+                                            .split(',')
+                                            .map((item) => item.trim())
+                                            .filter(Boolean);
+                                        setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
+                                    }}
+                                />
+                                <TextControl
+                                    label={__('Rétention des logs bruts (jours)', 'lean-stats')}
+                                    type="number"
+                                    min={1}
+                                    max={365}
+                                    value={String(formState.raw_logs_retention_days)}
+                                    help={__('La purge quotidienne supprime les logs plus anciens.', 'lean-stats')}
+                                    onChange={(value) => {
+                                        const next = Number.parseInt(value, 10);
+                                        setFormState((prev) => ({
+                                            ...prev,
+                                            raw_logs_retention_days: Number.isNaN(next) ? prev.raw_logs_retention_days : next,
+                                        }));
+                                    }}
+                                />
+                                <div>
+                                    <p className="ls-settings-roles__title">{__('Exclusions par rôle', 'lean-stats')}</p>
+                                    <div className="ls-settings-roles__list">
+                                        {roles.length === 0 && <p>{__('Aucun rôle disponible.', 'lean-stats')}</p>}
+                                        {roles.map((role) => (
+                                            <CheckboxControl
+                                                key={role.key}
+                                                label={role.label}
+                                                checked={formState.excluded_roles.includes(role.key)}
+                                                onChange={(isChecked) => {
+                                                    setFormState((prev) => {
+                                                        const nextRoles = new Set(prev.excluded_roles);
+                                                        if (isChecked) {
+                                                            nextRoles.add(role.key);
+                                                        } else {
+                                                            nextRoles.delete(role.key);
+                                                        }
+                                                        return { ...prev, excluded_roles: Array.from(nextRoles) };
+                                                    });
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                                <Button
+                                    variant="primary"
+                                    isBusy={isSaving}
+                                    onClick={onSave}
+                                    aria-label={__('Enregistrer les réglages', 'lean-stats')}
+                                >
+                                    {__('Enregistrer', 'lean-stats')}
+                                </Button>
                             </div>
-                        </div>
-                        <Button
-                            variant="primary"
-                            isBusy={isSaving}
-                            onClick={onSave}
-                            aria-label={__('Enregistrer les réglages', 'lean-stats')}
-                        >
-                            {__('Enregistrer', 'lean-stats')}
-                        </Button>
-                    </div>
-                )}
+                        );
+                    }}
+                </TabPanel>
+            )}
         </LsCard>
     );
 };
