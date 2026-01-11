@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 dias"
+
+msgid "7 jours"
+msgstr "7 dias"
+
+msgid "90 jours"
+msgstr "90 dias"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Lista de permissões de parâmetros de consulta"
+
+msgid "Aucun KPI disponible."
+msgstr "Nenhum KPI disponível."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "Nenhum painel disponível para este ecrã."
+
+msgid "Aucun referrer disponible."
+msgstr "Nenhum referenciador disponível."
+
+msgid "Aucun rôle disponible."
+msgstr "Nenhum papel disponível."
+
+msgid "Aucune donnée device disponible."
+msgstr "Nenhum dado de dispositivo disponível."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "Nenhum dado disponível para este período."
+
+msgid "Aucune page populaire disponible."
+msgstr "Nenhuma página popular disponível."
+
+msgid "Chargement : %s"
+msgstr "A carregar: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "A carregar a distribuição por dispositivo…"
+
+msgid "Chargement des indicateurs…"
+msgstr "A carregar indicadores…"
+
+msgid "Chargement des réglages…"
+msgstr "A carregar definições…"
+
+msgid "Chargement du graphique…"
+msgstr "A carregar gráfico…"
+
+msgid "Chargement…"
+msgstr "A carregar…"
+
+msgid "Configuration REST manquante."
+msgstr "Configuração REST em falta."
+
+msgid "Configuration admin manquante."
+msgstr "Configuração de administração em falta."
+
+msgid "Direct"
+msgstr "Direto"
+
+msgid "Détail de répartition par device"
+msgstr "Detalhe da distribuição por dispositivo"
+
+msgid "Enregistrer"
+msgstr "Guardar"
+
+msgid "Enregistrer les réglages"
+msgstr "Guardar definições"
+
+msgid "Erreur API (%s)"
+msgstr "Erro de API (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Erro de carregamento."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Erro ao guardar."
+
+msgid "Exclusions par rôle"
+msgstr "Exclusões por papel"
+
+msgid "Graphique de répartition par device"
+msgstr "Gráfico de distribuição por dispositivo"
+
+msgid "Graphique du trafic"
+msgstr "Gráfico de tráfego"
+
+msgid "Hits"
+msgstr "Hits"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Ignorar o rastreio para utilizadores com sessão iniciada."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Ignorar o rastreio se o navegador enviar DNT ou GPC."
+
+msgid "Inconnu"
+msgstr "Desconhecido"
+
+msgid "Indicateurs"
+msgstr "Indicadores"
+
+msgid "Invalid REST API nonce."
+msgstr "Nonce da API REST inválido."
+
+msgid "Invalid device class."
+msgstr "Classe de dispositivo inválida."
+
+msgid "Invalid page path."
+msgstr "Caminho de página inválido."
+
+msgid "Invalid timestamp bucket."
+msgstr "Intervalo de tempo inválido."
+
+msgid "Laisser vide pour utiliser "Lean Stats"."
+msgstr "Deixar vazio para usar "Lean Stats"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Lista separada por vírgulas (ex.: utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Modo estrito"
+
+msgid "Nettoyage des URLs"
+msgstr "Limpeza de URLs"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Nome do plugin (menu e painel)"
+
+msgid "Page"
+msgstr "Página"
+
+msgid "Pages uniques"
+msgstr "Páginas únicas"
+
+msgid "Période"
+msgstr "Período"
+
+msgid "Referrer"
+msgstr "Referenciador"
+
+msgid "Referrers uniques"
+msgstr "Referenciadores únicos"
+
+msgid "Respecter DNT / GPC"
+msgstr "Respeitar DNT / GPC"
+
+msgid "Réglages"
+msgstr "Definições"
+
+msgid "Réglages enregistrés."
+msgstr "Definições guardadas."
+
+msgid "Répartition par device"
+msgstr "Distribuição por dispositivo"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Retenção de registos brutos (dias)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Remove os parâmetros de consulta."
+
+msgid "Tableau de bord"
+msgstr "Painel"
+
+msgid "Top pages"
+msgstr "Top páginas"
+
+msgid "Top referrers"
+msgstr "Top referenciadores"
+
+msgid "Trafic dans le temps"
+msgstr "Tráfego ao longo do tempo"
+
+msgid "You are not allowed to access analytics data."
+msgstr "Não tem permissão para aceder aos dados de analítica."
+

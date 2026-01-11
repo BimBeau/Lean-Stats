@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 days"
+
+msgid "7 jours"
+msgstr "7 days"
+
+msgid "90 jours"
+msgstr "90 days"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Allowlist of query parameters"
+
+msgid "Aucun KPI disponible."
+msgstr "No KPI available."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "No panel available for this screen."
+
+msgid "Aucun referrer disponible."
+msgstr "No referrer available."
+
+msgid "Aucun rôle disponible."
+msgstr "No role available."
+
+msgid "Aucune donnée device disponible."
+msgstr "No device data available."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "No data available for this period."
+
+msgid "Aucune page populaire disponible."
+msgstr "No popular page available."
+
+msgid "Chargement : %s"
+msgstr "Loading: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Loading device breakdown…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Loading KPIs…"
+
+msgid "Chargement des réglages…"
+msgstr "Loading settings…"
+
+msgid "Chargement du graphique…"
+msgstr "Loading chart…"
+
+msgid "Chargement…"
+msgstr "Loading…"
+
+msgid "Configuration REST manquante."
+msgstr "Missing REST configuration."
+
+msgid "Configuration admin manquante."
+msgstr "Missing admin configuration."
+
+msgid "Direct"
+msgstr "Direct"
+
+msgid "Détail de répartition par device"
+msgstr "Device breakdown detail"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Enregistrer les réglages"
+msgstr "Save settings"
+
+msgid "Erreur API (%s)"
+msgstr "API error (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Loading error."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Error while saving."
+
+msgid "Exclusions par rôle"
+msgstr "Role exclusions"
+
+msgid "Graphique de répartition par device"
+msgstr "Device breakdown chart"
+
+msgid "Graphique du trafic"
+msgstr "Traffic chart"
+
+msgid "Hits"
+msgstr "Hits"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Ignore tracking for logged-in users."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Ignore tracking if the browser sends DNT or GPC."
+
+msgid "Inconnu"
+msgstr "Unknown"
+
+msgid "Indicateurs"
+msgstr "KPIs"
+
+msgid "Invalid REST API nonce."
+msgstr "Invalid REST API nonce."
+
+msgid "Invalid device class."
+msgstr "Invalid device class."
+
+msgid "Invalid page path."
+msgstr "Invalid page path."
+
+msgid "Invalid timestamp bucket."
+msgstr "Invalid timestamp bucket."
+
+msgid "Laisser vide pour utiliser "Lean Stats"."
+msgstr "Leave blank to use "Lean Stats"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Comma-separated list (e.g. utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Strict mode"
+
+msgid "Nettoyage des URLs"
+msgstr "URL cleaning"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Plugin name (menu and dashboard)"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Pages uniques"
+msgstr "Unique pages"
+
+msgid "Période"
+msgstr "Period"
+
+msgid "Referrer"
+msgstr "Referrer"
+
+msgid "Referrers uniques"
+msgstr "Unique referrers"
+
+msgid "Respecter DNT / GPC"
+msgstr "Respect DNT / GPC"
+
+msgid "Réglages"
+msgstr "Settings"
+
+msgid "Réglages enregistrés."
+msgstr "Settings saved."
+
+msgid "Répartition par device"
+msgstr "Device breakdown"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Raw log retention (days)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Removes query parameters."
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Top pages"
+msgstr "Top pages"
+
+msgid "Top referrers"
+msgstr "Top referrers"
+
+msgid "Trafic dans le temps"
+msgstr "Traffic over time"
+
+msgid "You are not allowed to access analytics data."
+msgstr "You are not allowed to access analytics data."
+
