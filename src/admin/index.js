@@ -32,8 +32,10 @@ import {
 } from 'recharts';
 
 import './style.css';
+import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHandlers } from './logger';
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
+const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
 const CHART_COLORS = ['#2271b1', '#72aee6', '#1e8cbe', '#d63638', '#00a32a'];
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Tableau de bord', 'lean-stats') },
@@ -47,6 +49,7 @@ const DEFAULT_SETTINGS = {
     url_query_allowlist: [],
     raw_logs_retention_days: 1,
     excluded_roles: [],
+    debug_enabled: false,
 };
 const DEFAULT_SKELETON_ROWS = 4;
 const SKELETON_WIDTH_CLASSES = ['ls-skeleton__bar--w80', 'ls-skeleton__bar--w74', 'ls-skeleton__bar--w68', 'ls-skeleton__bar--w62', 'ls-skeleton__bar--w56', 'ls-skeleton__bar--w50'];
@@ -152,10 +155,12 @@ const useAdminEndpoint = (path, params) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const paramsKey = useMemo(() => JSON.stringify(params ?? {}), [params]);
+    const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
 
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController();
+        const traceId = createTraceId();
 
         const fetchData = async () => {
             if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
@@ -166,6 +171,12 @@ const useAdminEndpoint = (path, params) => {
 
             setIsLoading(true);
             setError(null);
+            logger.debug('Chargement des données admin', {
+                action: 'admin.fetch',
+                traceId,
+                path,
+                params,
+            });
 
             try {
                 const response = await fetch(buildAdminUrl(path, params), {
@@ -185,9 +196,26 @@ const useAdminEndpoint = (path, params) => {
                 if (isMounted) {
                     setData(payload);
                 }
+                logger.debug('Données admin reçues', {
+                    action: 'admin.fetch.success',
+                    traceId,
+                    path,
+                });
             } catch (fetchError) {
                 if (isMounted && fetchError.name !== 'AbortError') {
                     setError(fetchError.message || __('Erreur de chargement.', 'lean-stats'));
+                    logger.error('Erreur de chargement admin', {
+                        action: 'admin.fetch.error',
+                        traceId,
+                        path,
+                        error: fetchError?.message,
+                    });
+                } else if (fetchError.name === 'AbortError') {
+                    logger.debug('Chargement admin annulé', {
+                        action: 'admin.fetch.abort',
+                        traceId,
+                        path,
+                    });
                 }
             } finally {
                 if (isMounted) {
@@ -301,6 +329,8 @@ const PeriodFilter = ({ value, onChange }) => (
                     { label: __('90 jours', 'lean-stats'), value: '90d' },
                 ]}
                 onChange={onChange}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
             />
         </CardBody>
     </Card>
@@ -312,12 +342,14 @@ const SettingsPanel = () => {
     const [allowlistInput, setAllowlistInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
+    const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
 
     useEffect(() => {
         if (data?.settings) {
             const normalized = normalizeSettings(data.settings);
             setFormState(normalized);
             setAllowlistInput(normalized.url_query_allowlist.join(', '));
+            window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
         }
     }, [data]);
 
@@ -329,6 +361,11 @@ const SettingsPanel = () => {
 
         setIsSaving(true);
         setSaveNotice(null);
+        const traceId = createTraceId();
+        logger.info('Sauvegarde des réglages', {
+            action: 'settings.save',
+            traceId,
+        });
 
         try {
             const response = await fetch(buildAdminUrl('/admin/settings'), {
@@ -351,13 +388,23 @@ const SettingsPanel = () => {
                 const normalized = normalizeSettings(payload.settings);
                 setFormState(normalized);
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
+                window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
             }
 
             setSaveNotice({ status: 'success', message: __('Réglages enregistrés.', 'lean-stats') });
+            logger.info('Réglages enregistrés', {
+                action: 'settings.save.success',
+                traceId,
+            });
         } catch (saveError) {
             setSaveNotice({
                 status: 'error',
                 message: saveError.message || __('Erreur lors de la sauvegarde.', 'lean-stats'),
+            });
+            logger.error('Erreur de sauvegarde des réglages', {
+                action: 'settings.save.error',
+                traceId,
+                error: saveError?.message,
             });
         } finally {
             setIsSaving(false);
@@ -410,6 +457,12 @@ const SettingsPanel = () => {
                             help={__('Supprime les paramètres de requête.', 'lean-stats')}
                             checked={formState.url_strip_query}
                             onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
+                        />
+                        <ToggleControl
+                            label={__('Mode debug', 'lean-stats')}
+                            help={__('Active des logs détaillés dans la console pour faciliter le debug.', 'lean-stats')}
+                            checked={formState.debug_enabled}
+                            onChange={(value) => setFormState((prev) => ({ ...prev, debug_enabled: value }))}
                         />
                         <TextControl
                             label={__('Allowlist des paramètres de requête', 'lean-stats')}
@@ -729,6 +782,17 @@ const AdminApp = () => {
     const panelTitle = getCurrentPanelTitle(currentPanel, panels);
     const pluginLabel = ADMIN_CONFIG?.settings?.pluginLabel || __('Lean Stats', 'lean-stats');
     const heading = pluginLabel;
+    const debugEnabled = Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
+    const logger = useMemo(() => createLogger({ debugEnabled }), [debugEnabled]);
+
+    useEffect(() => {
+        setupGlobalErrorHandlers(logger);
+        logger.info('Chargement de l’interface admin', {
+            action: 'admin.init',
+            traceId: createTraceId(),
+            context: getRuntimeDiagnostics(),
+        });
+    }, [logger]);
 
     return (
         <div className="ls-admin-app">
