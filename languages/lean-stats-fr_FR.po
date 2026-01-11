@@ -74,7 +74,7 @@ msgid "Missing admin configuration."
 msgstr "Configuration admin manquante."
 
 msgid "Direct"
-msgstr "Direct"
+msgstr "Accès direct"
 
 msgid "Device breakdown details"
 msgstr "Détail de répartition par device"
@@ -104,7 +104,7 @@ msgid "Traffic chart"
 msgstr "Graphique du trafic"
 
 msgid "Hits"
-msgstr "Hits"
+msgstr "Visites"
 
 msgid "Ignore tracking for logged-in users."
 msgstr "Ignore le suivi pour les utilisateurs connectés."
@@ -185,7 +185,7 @@ msgid "Dashboard"
 msgstr "Tableau de bord"
 
 msgid "Top pages"
-msgstr "Top pages"
+msgstr "Pages principales"
 
 msgid "Top referrers"
 msgstr "Top référents"
@@ -195,4 +195,3 @@ msgstr "Trafic dans le temps"
 
 msgid "You are not allowed to access analytics data."
 msgstr "Vous n’êtes pas autorisé à accéder aux données d’analytics."
-
