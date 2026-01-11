@@ -102,5 +102,3 @@ Lean Stats includes product documentation for implementation and extension:
 - REST API: `docs/REST_API.md`
 - Database schema: `docs/DB_SCHEMA.md`
 - Architecture: `docs/ARCHITECTURE.md`
-
-##Thanks you
