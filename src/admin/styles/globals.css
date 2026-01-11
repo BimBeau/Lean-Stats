@@ -1,0 +1,34 @@
+.ls-admin-app {
+    display: grid;
+    gap: var(--lean-stats-gap-lg);
+}
+
+.ls-admin-app .ls-dashboard,
+.ls-admin-app .ls-dashboard__grid,
+.ls-admin-app .ls-settings-form {
+    display: grid;
+    gap: var(--lean-stats-gap-lg);
+}
+
+.ls-admin-app .ls-settings-roles__title {
+    margin-bottom: var(--lean-stats-gap-sm);
+}
+
+.ls-admin-app .ls-settings-roles__list {
+    display: grid;
+    gap: var(--lean-stats-gap-sm);
+}
+
+.ls-admin-app .ls-dashboard__filter {
+    min-width: 240px;
+    flex: 0 1 280px;
+}
+
+.ls-admin-app .ls-dashboard__kpis {
+    min-width: 280px;
+    flex: 1 1 320px;
+}
+
+.ls-admin-app .ls-dashboard__grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}

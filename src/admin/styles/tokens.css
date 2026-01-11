@@ -1,0 +1,7 @@
+.ls-admin-app {
+    --lean-stats-gap-sm: 8px;
+    --lean-stats-gap-md: 12px;
+    --lean-stats-gap-lg: 16px;
+    --lean-stats-radius-sm: 4px;
+    --lean-stats-skeleton-bg: #f0f0f1;
+}

@@ -2,19 +2,17 @@
  * Admin entry point for Lean Stats.
  */
 
-import { render, useEffect, useMemo, useRef, useState } from '@wordpress/element';
+import { render, useEffect, useMemo, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import {
     Button,
     Card,
     CardBody,
-    CardHeader,
     CheckboxControl,
     Flex,
     FlexItem,
     Notice,
     SelectControl,
-    Spinner,
     TextControl,
     ToggleControl,
 } from '@wordpress/components';
@@ -31,8 +29,11 @@ import {
     YAxis,
 } from 'recharts';
 
-import './style.css';
 import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHandlers } from './logger';
+import ChartFrame from './components/ChartFrame';
+import DataState from './components/DataState';
+import DataTableCard from './components/DataTableCard';
+import LsCard from './components/LsCard';
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
@@ -51,57 +52,6 @@ const DEFAULT_SETTINGS = {
     excluded_roles: [],
     debug_enabled: false,
 };
-const DEFAULT_SKELETON_ROWS = 4;
-const SKELETON_WIDTH_CLASSES = ['ls-skeleton__bar--w80', 'ls-skeleton__bar--w74', 'ls-skeleton__bar--w68', 'ls-skeleton__bar--w62', 'ls-skeleton__bar--w56', 'ls-skeleton__bar--w50'];
-
-const useSizedContainer = () => {
-    const ref = useRef(null);
-    const [hasSize, setHasSize] = useState(false);
-
-    useEffect(() => {
-        const node = ref.current;
-        if (!node) {
-            return undefined;
-        }
-
-        const updateSize = () => {
-            const rect = node.getBoundingClientRect();
-            const nextHasSize = rect.width > 0 && rect.height > 0;
-            setHasSize((prev) => (prev === nextHasSize ? prev : nextHasSize));
-        };
-
-        updateSize();
-
-        let observer;
-        if (window.ResizeObserver) {
-            observer = new ResizeObserver(() => updateSize());
-            observer.observe(node);
-        } else {
-            window.addEventListener('resize', updateSize);
-        }
-
-        return () => {
-            if (observer) {
-                observer.disconnect();
-            } else {
-                window.removeEventListener('resize', updateSize);
-            }
-        };
-    }, []);
-
-    return { ref, hasSize };
-};
-
-const ChartFrame = ({ height, ariaLabel, children }) => {
-    const { ref, hasSize } = useSizedContainer();
-
-    return (
-        <div ref={ref} className="ls-chart-frame" data-height={height} role="img" aria-label={ariaLabel}>
-            {hasSize ? children : null}
-        </div>
-    );
-};
-
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -233,49 +183,6 @@ const useAdminEndpoint = (path, params) => {
     }, [path, paramsKey]);
 
     return { data, isLoading, error };
-};
-
-const DataState = ({
-    isLoading,
-    error,
-    isEmpty,
-    emptyLabel,
-    loadingLabel = __('Chargement…', 'lean-stats'),
-    skeletonRows = DEFAULT_SKELETON_ROWS,
-}) => {
-    if (isLoading) {
-        const rows = Array.from({ length: skeletonRows }, (_, index) => index);
-        return (
-            <div className="ls-data-state" aria-live="polite" aria-busy="true">
-                <div className="ls-data-state__header">
-                    <Spinner />
-                    <span>{loadingLabel}</span>
-                </div>
-                <div className="ls-skeleton">
-                    {rows.map((row) => (
-                        <div
-                            key={row}
-                            className={`ls-skeleton__bar ${SKELETON_WIDTH_CLASSES[Math.min(row, SKELETON_WIDTH_CLASSES.length - 1)]}`}
-                        />
-                    ))}
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <Notice status="error" isDismissible={false}>
-                {error}
-            </Notice>
-        );
-    }
-
-    if (isEmpty) {
-        return <p role="status">{emptyLabel}</p>;
-    }
-
-    return null;
 };
 
 const normalizeSettings = (settings) => ({
@@ -414,16 +321,12 @@ const SettingsPanel = () => {
     const roles = ADMIN_CONFIG?.roles || [];
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>{__('Réglages', 'lean-stats')}</strong>
-            </CardHeader>
-            <CardBody>
-                <DataState
-                    isLoading={isLoading}
-                    error={error}
-                    isEmpty={false}
-                    emptyLabel=""
+        <LsCard title={__('Réglages', 'lean-stats')}>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={false}
+                emptyLabel=""
                     loadingLabel={__('Chargement des réglages…', 'lean-stats')}
                     skeletonRows={6}
                 />
@@ -525,8 +428,7 @@ const SettingsPanel = () => {
                         </Button>
                     </div>
                 )}
-            </CardBody>
-        </Card>
+        </LsCard>
     );
 };
 
@@ -535,16 +437,12 @@ const KpiCards = ({ range }) => {
     const kpis = data?.kpis || null;
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>{__('Indicateurs', 'lean-stats')}</strong>
-            </CardHeader>
-            <CardBody>
-                <DataState
-                    isLoading={isLoading}
-                    error={error}
-                    isEmpty={!isLoading && !error && !kpis}
-                    emptyLabel={__('Aucun KPI disponible.', 'lean-stats')}
+        <LsCard title={__('Indicateurs', 'lean-stats')}>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && !kpis}
+                emptyLabel={__('Aucun KPI disponible.', 'lean-stats')}
                     loadingLabel={__('Chargement des indicateurs…', 'lean-stats')}
                     skeletonRows={3}
                 />
@@ -576,8 +474,7 @@ const KpiCards = ({ range }) => {
                         </FlexItem>
                     </Flex>
                 )}
-            </CardBody>
-        </Card>
+        </LsCard>
     );
 };
 
@@ -586,16 +483,12 @@ const TimeseriesChart = ({ range }) => {
     const items = data?.items || [];
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>{__('Trafic dans le temps', 'lean-stats')}</strong>
-            </CardHeader>
-            <CardBody>
-                <DataState
-                    isLoading={isLoading}
-                    error={error}
-                    isEmpty={!isLoading && !error && items.length === 0}
-                    emptyLabel={__('Aucune donnée disponible pour cette période.', 'lean-stats')}
+        <LsCard title={__('Trafic dans le temps', 'lean-stats')}>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && items.length === 0}
+                emptyLabel={__('Aucune donnée disponible pour cette période.', 'lean-stats')}
                     loadingLabel={__('Chargement du graphique…', 'lean-stats')}
                 />
                 {!isLoading && !error && items.length > 0 && (
@@ -611,46 +504,9 @@ const TimeseriesChart = ({ range }) => {
                         </ResponsiveContainer>
                     </ChartFrame>
                 )}
-            </CardBody>
-        </Card>
+        </LsCard>
     );
 };
-
-const TableCard = ({ title, headers, rows, isLoading, error, emptyLabel }) => (
-    <Card>
-        <CardHeader>
-            <strong>{title}</strong>
-        </CardHeader>
-        <CardBody>
-            <DataState
-                isLoading={isLoading}
-                error={error}
-                isEmpty={!isLoading && !error && rows.length === 0}
-                emptyLabel={emptyLabel}
-                loadingLabel={sprintf(__('Chargement : %s', 'lean-stats'), title)}
-            />
-            {!isLoading && !error && rows.length > 0 && (
-                <table className="widefat striped" aria-label={title}>
-                    <thead>
-                        <tr>
-                            {headers.map((header) => (
-                                <th key={header}>{header}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows.map((row) => (
-                            <tr key={row.key}>
-                                <td>{row.label}</td>
-                                <td>{row.value}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-        </CardBody>
-    </Card>
-);
 
 const TopPagesTable = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/top-pages', { ...range, limit: 10 });
@@ -662,7 +518,7 @@ const TopPagesTable = ({ range }) => {
     }));
 
     return (
-        <TableCard
+        <DataTableCard
             title={__('Top pages', 'lean-stats')}
             headers={[__('Page', 'lean-stats'), __('Hits', 'lean-stats')]}
             rows={rows}
@@ -683,7 +539,7 @@ const ReferrersTable = ({ range }) => {
     }));
 
     return (
-        <TableCard
+        <DataTableCard
             title={__('Top referrers', 'lean-stats')}
             headers={[__('Referrer', 'lean-stats'), __('Hits', 'lean-stats')]}
             rows={rows}
@@ -705,16 +561,12 @@ const DeviceSplit = ({ range }) => {
     }));
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>{__('Répartition par device', 'lean-stats')}</strong>
-            </CardHeader>
-            <CardBody>
-                <DataState
-                    isLoading={isLoading}
-                    error={error}
-                    isEmpty={!isLoading && !error && labeledItems.length === 0}
-                    emptyLabel={__('Aucune donnée device disponible.', 'lean-stats')}
+        <LsCard title={__('Répartition par device', 'lean-stats')}>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && labeledItems.length === 0}
+                emptyLabel={__('Aucune donnée device disponible.', 'lean-stats')}
                     loadingLabel={__('Chargement de la répartition des devices…', 'lean-stats')}
                 />
                 {!isLoading && !error && labeledItems.length > 0 && (
@@ -738,8 +590,7 @@ const DeviceSplit = ({ range }) => {
                         </ul>
                     </ChartFrame>
                 )}
-            </CardBody>
-        </Card>
+        </LsCard>
     );
 };
 
