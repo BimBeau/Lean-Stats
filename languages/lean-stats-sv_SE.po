@@ -16,106 +16,106 @@ msgstr ""
 msgid "%s : %s"
 msgstr "%s : %s"
 
-msgid "30 jours"
+msgid "30 days"
 msgstr "30 dagar"
 
-msgid "7 jours"
+msgid "7 days"
 msgstr "7 dagar"
 
-msgid "90 jours"
+msgid "90 days"
 msgstr "90 dagar"
 
-msgid "Allowlist des paramètres de requête"
+msgid "Query parameter allowlist"
 msgstr "Tillåtelselista för frågeparametrar"
 
-msgid "Aucun KPI disponible."
+msgid "No KPIs available."
 msgstr "Inga KPI:er tillgängliga."
 
-msgid "Aucun panneau disponible pour cet écran."
+msgid "No panel available for this screen."
 msgstr "Ingen panel tillgänglig för den här skärmen."
 
-msgid "Aucun referrer disponible."
+msgid "No referrers available."
 msgstr "Ingen hänvisare tillgänglig."
 
-msgid "Aucun rôle disponible."
+msgid "No roles available."
 msgstr "Ingen roll tillgänglig."
 
-msgid "Aucune donnée device disponible."
+msgid "No device data available."
 msgstr "Ingen enhetsdata tillgänglig."
 
-msgid "Aucune donnée disponible pour cette période."
+msgid "No data available for this period."
 msgstr "Ingen data tillgänglig för den här perioden."
 
-msgid "Aucune page populaire disponible."
+msgid "No popular pages available."
 msgstr "Ingen populär sida tillgänglig."
 
-msgid "Chargement : %s"
+msgid "Loading: %s"
 msgstr "Laddar: %s"
 
-msgid "Chargement de la répartition des devices…"
+msgid "Loading device breakdown…"
 msgstr "Laddar enhetsfördelning…"
 
-msgid "Chargement des indicateurs…"
+msgid "Loading KPIs…"
 msgstr "Laddar KPI:er…"
 
-msgid "Chargement des réglages…"
+msgid "Loading settings…"
 msgstr "Laddar inställningar…"
 
-msgid "Chargement du graphique…"
+msgid "Loading chart…"
 msgstr "Laddar diagram…"
 
-msgid "Chargement…"
+msgid "Loading…"
 msgstr "Laddar…"
 
-msgid "Configuration REST manquante."
+msgid "Missing REST configuration."
 msgstr "Saknar REST-konfiguration."
 
-msgid "Configuration admin manquante."
+msgid "Missing admin configuration."
 msgstr "Saknar admin-konfiguration."
 
 msgid "Direct"
 msgstr "Direkt"
 
-msgid "Détail de répartition par device"
+msgid "Device breakdown details"
 msgstr "Detalj av enhetsfördelning"
 
-msgid "Enregistrer"
+msgid "Save"
 msgstr "Spara"
 
-msgid "Enregistrer les réglages"
+msgid "Save settings"
 msgstr "Spara inställningar"
 
-msgid "Erreur API (%s)"
+msgid "API error (%s)"
 msgstr "API-fel (%s)"
 
-msgid "Erreur de chargement."
+msgid "Loading error."
 msgstr "Laddningsfel."
 
-msgid "Erreur lors de la sauvegarde."
+msgid "Error while saving."
 msgstr "Fel vid sparning."
 
-msgid "Exclusions par rôle"
+msgid "Role exclusions"
 msgstr "Rolluteslutningar"
 
-msgid "Graphique de répartition par device"
+msgid "Device breakdown chart"
 msgstr "Diagram för enhetsfördelning"
 
-msgid "Graphique du trafic"
+msgid "Traffic chart"
 msgstr "Trafikdiagram"
 
 msgid "Hits"
 msgstr "Träffar"
 
-msgid "Ignore le suivi pour les utilisateurs connectés."
+msgid "Ignore tracking for logged-in users."
 msgstr "Ignorera spårning för inloggade användare."
 
-msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Ignorera spårning om webbläsaren skickar DNT eller GPC."
 
-msgid "Inconnu"
+msgid "Unknown"
 msgstr "Okänd"
 
-msgid "Indicateurs"
+msgid "KPIs"
 msgstr "KPI:er"
 
 msgid "Invalid REST API nonce."
@@ -130,58 +130,58 @@ msgstr "Ogiltig sid-sökväg."
 msgid "Invalid timestamp bucket."
 msgstr "Ogiltig tidsstämpelgrupp."
 
-msgid "Laisser vide pour utiliser "Lean Stats"."
-msgstr "Lämna tomt för att använda "Lean Stats"."
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Lämna tomt för att använda \"Lean Stats\"."
 
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
-msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Kommaseparerad lista (t.ex. utm_source, utm_campaign)."
 
-msgid "Mode strict"
+msgid "Strict mode"
 msgstr "Strikt läge"
 
-msgid "Nettoyage des URLs"
+msgid "URL cleanup"
 msgstr "URL-rensning"
 
-msgid "Nom du plugin (menu et tableau de bord)"
+msgid "Plugin name (menu and dashboard)"
 msgstr "Plugin-namn (meny och instrumentpanel)"
 
 msgid "Page"
 msgstr "Sida"
 
-msgid "Pages uniques"
+msgid "Unique pages"
 msgstr "Unika sidor"
 
-msgid "Période"
+msgid "Period"
 msgstr "Period"
 
 msgid "Referrer"
 msgstr "Hänvisare"
 
-msgid "Referrers uniques"
+msgid "Unique referrers"
 msgstr "Unika hänvisare"
 
-msgid "Respecter DNT / GPC"
+msgid "Respect DNT / GPC"
 msgstr "Respektera DNT / GPC"
 
-msgid "Réglages"
+msgid "Settings"
 msgstr "Inställningar"
 
-msgid "Réglages enregistrés."
+msgid "Settings saved."
 msgstr "Inställningar sparade."
 
-msgid "Répartition par device"
+msgid "Device breakdown"
 msgstr "Enhetsfördelning"
 
-msgid "Rétention des logs bruts (jours)"
+msgid "Raw log retention (days)"
 msgstr "Lagring av råloggar (dagar)"
 
-msgid "Supprime les paramètres de requête."
+msgid "Remove query parameters."
 msgstr "Tar bort frågeparametrar."
 
-msgid "Tableau de bord"
+msgid "Dashboard"
 msgstr "Instrumentpanel"
 
 msgid "Top pages"
@@ -190,7 +190,7 @@ msgstr "Topp-sidor"
 msgid "Top referrers"
 msgstr "Topp-hänvisare"
 
-msgid "Trafic dans le temps"
+msgid "Traffic over time"
 msgstr "Trafik över tid"
 
 msgid "You are not allowed to access analytics data."

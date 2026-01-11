@@ -16,7 +16,7 @@ const DataState = ({
     error,
     isEmpty,
     emptyLabel,
-    loadingLabel = __('Chargement…', 'lean-stats'),
+    loadingLabel = __('Loading…', 'lean-stats'),
     skeletonRows = DEFAULT_SKELETON_ROWS,
 }) => {
     if (isLoading) {

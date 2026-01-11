@@ -16,106 +16,106 @@ msgstr ""
 msgid "%s : %s"
 msgstr ""
 
-msgid "30 jours"
+msgid "30 days"
 msgstr ""
 
-msgid "7 jours"
+msgid "7 days"
 msgstr ""
 
-msgid "90 jours"
+msgid "90 days"
 msgstr ""
 
-msgid "Allowlist des paramètres de requête"
+msgid "Query parameter allowlist"
 msgstr ""
 
-msgid "Aucun KPI disponible."
+msgid "No KPIs available."
 msgstr ""
 
-msgid "Aucun panneau disponible pour cet écran."
+msgid "No panel available for this screen."
 msgstr ""
 
-msgid "Aucun referrer disponible."
+msgid "No referrers available."
 msgstr ""
 
-msgid "Aucun rôle disponible."
+msgid "No roles available."
 msgstr ""
 
-msgid "Aucune donnée device disponible."
+msgid "No device data available."
 msgstr ""
 
-msgid "Aucune donnée disponible pour cette période."
+msgid "No data available for this period."
 msgstr ""
 
-msgid "Aucune page populaire disponible."
+msgid "No popular pages available."
 msgstr ""
 
-msgid "Chargement : %s"
+msgid "Loading: %s"
 msgstr ""
 
-msgid "Chargement de la répartition des devices…"
+msgid "Loading device breakdown…"
 msgstr ""
 
-msgid "Chargement des indicateurs…"
+msgid "Loading KPIs…"
 msgstr ""
 
-msgid "Chargement des réglages…"
+msgid "Loading settings…"
 msgstr ""
 
-msgid "Chargement du graphique…"
+msgid "Loading chart…"
 msgstr ""
 
-msgid "Chargement…"
+msgid "Loading…"
 msgstr ""
 
-msgid "Configuration REST manquante."
+msgid "Missing REST configuration."
 msgstr ""
 
-msgid "Configuration admin manquante."
+msgid "Missing admin configuration."
 msgstr ""
 
 msgid "Direct"
 msgstr ""
 
-msgid "Détail de répartition par device"
+msgid "Device breakdown details"
 msgstr ""
 
-msgid "Enregistrer"
+msgid "Save"
 msgstr ""
 
-msgid "Enregistrer les réglages"
+msgid "Save settings"
 msgstr ""
 
-msgid "Erreur API (%s)"
+msgid "API error (%s)"
 msgstr ""
 
-msgid "Erreur de chargement."
+msgid "Loading error."
 msgstr ""
 
-msgid "Erreur lors de la sauvegarde."
+msgid "Error while saving."
 msgstr ""
 
-msgid "Exclusions par rôle"
+msgid "Role exclusions"
 msgstr ""
 
-msgid "Graphique de répartition par device"
+msgid "Device breakdown chart"
 msgstr ""
 
-msgid "Graphique du trafic"
+msgid "Traffic chart"
 msgstr ""
 
 msgid "Hits"
 msgstr ""
 
-msgid "Ignore le suivi pour les utilisateurs connectés."
+msgid "Ignore tracking for logged-in users."
 msgstr ""
 
-msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr ""
 
-msgid "Inconnu"
+msgid "Unknown"
 msgstr ""
 
-msgid "Indicateurs"
+msgid "KPIs"
 msgstr ""
 
 msgid "Invalid REST API nonce."
@@ -130,58 +130,58 @@ msgstr ""
 msgid "Invalid timestamp bucket."
 msgstr ""
 
-msgid "Laisser vide pour utiliser "Lean Stats"."
+msgid "Leave blank to use \"Lean Stats\"."
 msgstr ""
 
 msgid "Lean Stats"
 msgstr ""
 
-msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr ""
 
-msgid "Mode strict"
+msgid "Strict mode"
 msgstr ""
 
-msgid "Nettoyage des URLs"
+msgid "URL cleanup"
 msgstr ""
 
-msgid "Nom du plugin (menu et tableau de bord)"
+msgid "Plugin name (menu and dashboard)"
 msgstr ""
 
 msgid "Page"
 msgstr ""
 
-msgid "Pages uniques"
+msgid "Unique pages"
 msgstr ""
 
-msgid "Période"
+msgid "Period"
 msgstr ""
 
 msgid "Referrer"
 msgstr ""
 
-msgid "Referrers uniques"
+msgid "Unique referrers"
 msgstr ""
 
-msgid "Respecter DNT / GPC"
+msgid "Respect DNT / GPC"
 msgstr ""
 
-msgid "Réglages"
+msgid "Settings"
 msgstr ""
 
-msgid "Réglages enregistrés."
+msgid "Settings saved."
 msgstr ""
 
-msgid "Répartition par device"
+msgid "Device breakdown"
 msgstr ""
 
-msgid "Rétention des logs bruts (jours)"
+msgid "Raw log retention (days)"
 msgstr ""
 
-msgid "Supprime les paramètres de requête."
+msgid "Remove query parameters."
 msgstr ""
 
-msgid "Tableau de bord"
+msgid "Dashboard"
 msgstr ""
 
 msgid "Top pages"
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Top referrers"
 msgstr ""
 
-msgid "Trafic dans le temps"
+msgid "Traffic over time"
 msgstr ""
 
 msgid "You are not allowed to access analytics data."

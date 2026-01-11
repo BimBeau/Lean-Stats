@@ -16,106 +16,106 @@ msgstr ""
 msgid "%s : %s"
 msgstr "%s : %s"
 
-msgid "30 jours"
+msgid "30 days"
 msgstr "30 días"
 
-msgid "7 jours"
+msgid "7 days"
 msgstr "7 días"
 
-msgid "90 jours"
+msgid "90 days"
 msgstr "90 días"
 
-msgid "Allowlist des paramètres de requête"
+msgid "Query parameter allowlist"
 msgstr "Lista de permitidos de parámetros de consulta"
 
-msgid "Aucun KPI disponible."
+msgid "No KPIs available."
 msgstr "No hay KPI disponible."
 
-msgid "Aucun panneau disponible pour cet écran."
+msgid "No panel available for this screen."
 msgstr "No hay panel disponible para esta pantalla."
 
-msgid "Aucun referrer disponible."
+msgid "No referrers available."
 msgstr "No hay referente disponible."
 
-msgid "Aucun rôle disponible."
+msgid "No roles available."
 msgstr "No hay rol disponible."
 
-msgid "Aucune donnée device disponible."
+msgid "No device data available."
 msgstr "No hay datos de dispositivos disponibles."
 
-msgid "Aucune donnée disponible pour cette période."
+msgid "No data available for this period."
 msgstr "No hay datos disponibles para este período."
 
-msgid "Aucune page populaire disponible."
+msgid "No popular pages available."
 msgstr "No hay páginas populares disponibles."
 
-msgid "Chargement : %s"
+msgid "Loading: %s"
 msgstr "Cargando: %s"
 
-msgid "Chargement de la répartition des devices…"
+msgid "Loading device breakdown…"
 msgstr "Cargando la distribución por dispositivo…"
 
-msgid "Chargement des indicateurs…"
+msgid "Loading KPIs…"
 msgstr "Cargando indicadores…"
 
-msgid "Chargement des réglages…"
+msgid "Loading settings…"
 msgstr "Cargando ajustes…"
 
-msgid "Chargement du graphique…"
+msgid "Loading chart…"
 msgstr "Cargando gráfico…"
 
-msgid "Chargement…"
+msgid "Loading…"
 msgstr "Cargando…"
 
-msgid "Configuration REST manquante."
+msgid "Missing REST configuration."
 msgstr "Falta la configuración REST."
 
-msgid "Configuration admin manquante."
+msgid "Missing admin configuration."
 msgstr "Falta la configuración de administración."
 
 msgid "Direct"
 msgstr "Directo"
 
-msgid "Détail de répartition par device"
+msgid "Device breakdown details"
 msgstr "Detalle de distribución por dispositivo"
 
-msgid "Enregistrer"
+msgid "Save"
 msgstr "Guardar"
 
-msgid "Enregistrer les réglages"
+msgid "Save settings"
 msgstr "Guardar ajustes"
 
-msgid "Erreur API (%s)"
+msgid "API error (%s)"
 msgstr "Error de API (%s)"
 
-msgid "Erreur de chargement."
+msgid "Loading error."
 msgstr "Error de carga."
 
-msgid "Erreur lors de la sauvegarde."
+msgid "Error while saving."
 msgstr "Error al guardar."
 
-msgid "Exclusions par rôle"
+msgid "Role exclusions"
 msgstr "Exclusiones por rol"
 
-msgid "Graphique de répartition par device"
+msgid "Device breakdown chart"
 msgstr "Gráfico de distribución por dispositivo"
 
-msgid "Graphique du trafic"
+msgid "Traffic chart"
 msgstr "Gráfico de tráfico"
 
 msgid "Hits"
 msgstr "Hits"
 
-msgid "Ignore le suivi pour les utilisateurs connectés."
+msgid "Ignore tracking for logged-in users."
 msgstr "Ignora el seguimiento para usuarios conectados."
 
-msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Ignora el seguimiento si el navegador envía DNT o GPC."
 
-msgid "Inconnu"
+msgid "Unknown"
 msgstr "Desconocido"
 
-msgid "Indicateurs"
+msgid "KPIs"
 msgstr "Indicadores"
 
 msgid "Invalid REST API nonce."
@@ -130,58 +130,58 @@ msgstr "Ruta de página inválida."
 msgid "Invalid timestamp bucket."
 msgstr "Intervalo de tiempo inválido."
 
-msgid "Laisser vide pour utiliser "Lean Stats"."
-msgstr "Dejar en blanco para usar "Lean Stats"."
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Dejar en blanco para usar \"Lean Stats\"."
 
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
-msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Lista separada por comas (p. ej., utm_source, utm_campaign)."
 
-msgid "Mode strict"
+msgid "Strict mode"
 msgstr "Modo estricto"
 
-msgid "Nettoyage des URLs"
+msgid "URL cleanup"
 msgstr "Limpieza de URLs"
 
-msgid "Nom du plugin (menu et tableau de bord)"
+msgid "Plugin name (menu and dashboard)"
 msgstr "Nombre del plugin (menú y panel)"
 
 msgid "Page"
 msgstr "Página"
 
-msgid "Pages uniques"
+msgid "Unique pages"
 msgstr "Páginas únicas"
 
-msgid "Période"
+msgid "Period"
 msgstr "Período"
 
 msgid "Referrer"
 msgstr "Referente"
 
-msgid "Referrers uniques"
+msgid "Unique referrers"
 msgstr "Referentes únicos"
 
-msgid "Respecter DNT / GPC"
+msgid "Respect DNT / GPC"
 msgstr "Respetar DNT / GPC"
 
-msgid "Réglages"
+msgid "Settings"
 msgstr "Ajustes"
 
-msgid "Réglages enregistrés."
+msgid "Settings saved."
 msgstr "Ajustes guardados."
 
-msgid "Répartition par device"
+msgid "Device breakdown"
 msgstr "Distribución por dispositivo"
 
-msgid "Rétention des logs bruts (jours)"
+msgid "Raw log retention (days)"
 msgstr "Retención de registros sin procesar (días)"
 
-msgid "Supprime les paramètres de requête."
+msgid "Remove query parameters."
 msgstr "Elimina los parámetros de consulta."
 
-msgid "Tableau de bord"
+msgid "Dashboard"
 msgstr "Panel de control"
 
 msgid "Top pages"
@@ -190,7 +190,7 @@ msgstr "Top páginas"
 msgid "Top referrers"
 msgstr "Top referentes"
 
-msgid "Trafic dans le temps"
+msgid "Traffic over time"
 msgstr "Tráfico en el tiempo"
 
 msgid "You are not allowed to access analytics data."

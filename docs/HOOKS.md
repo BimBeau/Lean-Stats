@@ -29,7 +29,7 @@ Custom panels use a React component registered on `window.LeanStatsAdminPanels` 
 add_filter('lean_stats_admin_panels', function (array $panels): array {
     $panels[] = [
         'name' => 'custom-report',
-        'title' => __('Rapport personnalisé', 'lean-stats'),
+        'title' => __('Custom report', 'lean-stats'),
         'type' => 'custom',
     ];
 

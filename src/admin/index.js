@@ -40,8 +40,8 @@ const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
 const CHART_COLORS = ['#2271b1', '#72aee6', '#1e8cbe', '#d63638', '#00a32a'];
 const DEFAULT_PANELS = [
-    { name: 'dashboard', title: __('Tableau de bord', 'lean-stats') },
-    { name: 'settings', title: __('Réglages', 'lean-stats') },
+    { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
+    { name: 'settings', title: __('Settings', 'lean-stats') },
 ];
 const DEFAULT_SETTINGS = {
     plugin_label: '',
@@ -133,14 +133,14 @@ const useAdminEndpoint = (path, params, options = {}) => {
 
         const fetchData = async () => {
             if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
-                setError(__('Configuration REST manquante.', 'lean-stats'));
+                setError(__('Missing REST configuration.', 'lean-stats'));
                 setIsLoading(false);
                 return;
             }
 
             setIsLoading(true);
             setError(null);
-            logger.debug('Chargement des données admin', {
+            logger.debug('Loading admin data', {
                 action: 'admin.fetch',
                 traceId,
                 path,
@@ -157,7 +157,7 @@ const useAdminEndpoint = (path, params, options = {}) => {
 
                 if (!response.ok) {
                     throw new Error(
-                        sprintf(__('Erreur API (%s)', 'lean-stats'), response.status)
+                        sprintf(__('API error (%s)', 'lean-stats'), response.status)
                     );
                 }
 
@@ -165,22 +165,22 @@ const useAdminEndpoint = (path, params, options = {}) => {
                 if (isMounted) {
                     setData(payload);
                 }
-                logger.debug('Données admin reçues', {
+                logger.debug('Admin data received', {
                     action: 'admin.fetch.success',
                     traceId,
                     path,
                 });
             } catch (fetchError) {
                 if (isMounted && fetchError.name !== 'AbortError') {
-                    setError(fetchError.message || __('Erreur de chargement.', 'lean-stats'));
-                    logger.error('Erreur de chargement admin', {
+                    setError(fetchError.message || __('Loading error.', 'lean-stats'));
+                    logger.error('Admin load error', {
                         action: 'admin.fetch.error',
                         traceId,
                         path,
                         error: fetchError?.message,
                     });
                 } else if (fetchError.name === 'AbortError') {
-                    logger.debug('Chargement admin annulé', {
+                    logger.debug('Admin load cancelled', {
                         action: 'admin.fetch.abort',
                         traceId,
                         path,
@@ -254,7 +254,7 @@ const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
     if (!debugEnabled) {
         return (
             <Notice status="warning" isDismissible={false}>
-                {__('Activez le mode debug pour afficher les logs bruts.', 'lean-stats')}
+                {__('Enable debug mode to display raw logs.', 'lean-stats')}
             </Notice>
         );
     }
@@ -264,7 +264,7 @@ const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
             {!rawLogsEnabled && (
                 <Notice status="info" isDismissible={false}>
                     {__(
-                        'Les logs bruts sont désactivés. Activez "Activer les logs bruts" pour collecter des entrées.',
+                        'Raw logs are disabled. Enable "Enable raw logs" to collect entries.',
                         'lean-stats'
                     )}
                 </Notice>
@@ -273,8 +273,8 @@ const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && logs.length === 0}
-                emptyLabel={__('Aucun log brut disponible.', 'lean-stats')}
-                loadingLabel={__('Chargement des logs bruts…', 'lean-stats')}
+                emptyLabel={__('No raw logs available.', 'lean-stats')}
+                loadingLabel={__('Loading raw logs…', 'lean-stats')}
                 skeletonRows={4}
             />
             {!isLoading && !error && logs.length > 0 && (
@@ -307,12 +307,12 @@ const PeriodFilter = ({ value, onChange }) => (
     <Card>
         <CardBody>
             <SelectControl
-                label={__('Période', 'lean-stats')}
+                label={__('Period', 'lean-stats')}
                 value={value}
                 options={[
-                    { label: __('7 jours', 'lean-stats'), value: '7d' },
-                    { label: __('30 jours', 'lean-stats'), value: '30d' },
-                    { label: __('90 jours', 'lean-stats'), value: '90d' },
+                    { label: __('7 days', 'lean-stats'), value: '7d' },
+                    { label: __('30 days', 'lean-stats'), value: '30d' },
+                    { label: __('90 days', 'lean-stats'), value: '90d' },
                 ]}
                 onChange={onChange}
                 __next40pxDefaultSize
@@ -343,14 +343,14 @@ const SettingsPanel = () => {
 
     const onSave = async () => {
         if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
-            setSaveNotice({ status: 'error', message: __('Configuration REST manquante.', 'lean-stats') });
+            setSaveNotice({ status: 'error', message: __('Missing REST configuration.', 'lean-stats') });
             return;
         }
 
         setIsSaving(true);
         setSaveNotice(null);
         const traceId = createTraceId();
-        logger.info('Sauvegarde des réglages', {
+        logger.info('Saving settings', {
             action: 'settings.save',
             traceId,
         });
@@ -367,7 +367,7 @@ const SettingsPanel = () => {
 
             if (!response.ok) {
                 throw new Error(
-                    sprintf(__('Erreur API (%s)', 'lean-stats'), response.status)
+                    sprintf(__('API error (%s)', 'lean-stats'), response.status)
                 );
             }
 
@@ -379,17 +379,17 @@ const SettingsPanel = () => {
                 window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
             }
 
-            setSaveNotice({ status: 'success', message: __('Réglages enregistrés.', 'lean-stats') });
-            logger.info('Réglages enregistrés', {
+            setSaveNotice({ status: 'success', message: __('Settings saved.', 'lean-stats') });
+            logger.info('Settings saved', {
                 action: 'settings.save.success',
                 traceId,
             });
         } catch (saveError) {
             setSaveNotice({
                 status: 'error',
-                message: saveError.message || __('Erreur lors de la sauvegarde.', 'lean-stats'),
+                message: saveError.message || __('Error while saving.', 'lean-stats'),
             });
-            logger.error('Erreur de sauvegarde des réglages', {
+            logger.error('Settings save error', {
                 action: 'settings.save.error',
                 traceId,
                 error: saveError?.message,
@@ -401,18 +401,18 @@ const SettingsPanel = () => {
 
     const roles = ADMIN_CONFIG?.roles || [];
     const settingsTabs = [
-        { name: 'general', title: __('Général', 'lean-stats') },
-        { name: 'logs', title: __('Logs bruts', 'lean-stats') },
+        { name: 'general', title: __('General', 'lean-stats') },
+        { name: 'logs', title: __('Raw logs', 'lean-stats') },
     ];
 
     return (
-        <LsCard title={__('Réglages', 'lean-stats')}>
+        <LsCard title={__('Settings', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={false}
                 emptyLabel=""
-                loadingLabel={__('Chargement des réglages…', 'lean-stats')}
+                loadingLabel={__('Loading settings…', 'lean-stats')}
                 skeletonRows={6}
             />
             {!isLoading && !error && (
@@ -435,44 +435,44 @@ const SettingsPanel = () => {
                                     </Notice>
                                 )}
                                 <TextControl
-                                    label={__('Nom du plugin (menu et tableau de bord)', 'lean-stats')}
-                                    help={__('Laisser vide pour utiliser "Lean Stats".', 'lean-stats')}
+                                    label={__('Plugin name (menu and dashboard)', 'lean-stats')}
+                                    help={__('Leave blank to use "Lean Stats".', 'lean-stats')}
                                     value={formState.plugin_label}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Mode strict', 'lean-stats')}
-                                    help={__('Ignore le suivi pour les utilisateurs connectés.', 'lean-stats')}
+                                    label={__('Strict mode', 'lean-stats')}
+                                    help={__('Ignore tracking for logged-in users.', 'lean-stats')}
                                     checked={formState.strict_mode}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Respecter DNT / GPC', 'lean-stats')}
-                                    help={__('Ignore le suivi si le navigateur envoie DNT ou GPC.', 'lean-stats')}
+                                    label={__('Respect DNT / GPC', 'lean-stats')}
+                                    help={__('Ignore tracking if the browser sends DNT or GPC.', 'lean-stats')}
                                     checked={formState.respect_dnt_gpc}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Nettoyage des URLs', 'lean-stats')}
-                                    help={__('Supprime les paramètres de requête.', 'lean-stats')}
+                                    label={__('URL cleanup', 'lean-stats')}
+                                    help={__('Remove query parameters.', 'lean-stats')}
                                     checked={formState.url_strip_query}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Activer les logs bruts', 'lean-stats')}
-                                    help={__('Autorise le stockage des hits bruts pour le diagnostic.', 'lean-stats')}
+                                    label={__('Enable raw logs', 'lean-stats')}
+                                    help={__('Allows storing raw hits for diagnostics.', 'lean-stats')}
                                     checked={formState.raw_logs_enabled}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, raw_logs_enabled: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Mode debug', 'lean-stats')}
-                                    help={__('Active des logs détaillés dans la console pour faciliter le debug.', 'lean-stats')}
+                                    label={__('Debug mode', 'lean-stats')}
+                                    help={__('Enables detailed console logs to aid debugging.', 'lean-stats')}
                                     checked={formState.debug_enabled}
                                     onChange={(value) => setFormState((prev) => ({ ...prev, debug_enabled: value }))}
                                 />
                                 <TextControl
-                                    label={__('Allowlist des paramètres de requête', 'lean-stats')}
-                                    help={__('Liste séparée par des virgules (ex: utm_source, utm_campaign).', 'lean-stats')}
+                                    label={__('Query parameter allowlist', 'lean-stats')}
+                                    help={__('Comma-separated list (e.g., utm_source, utm_campaign).', 'lean-stats')}
                                     value={allowlistInput}
                                     onChange={(value) => {
                                         setAllowlistInput(value);
@@ -484,12 +484,12 @@ const SettingsPanel = () => {
                                     }}
                                 />
                                 <TextControl
-                                    label={__('Rétention des logs bruts (jours)', 'lean-stats')}
+                                    label={__('Raw log retention (days)', 'lean-stats')}
                                     type="number"
                                     min={1}
                                     max={365}
                                     value={String(formState.raw_logs_retention_days)}
-                                    help={__('La purge quotidienne supprime les logs plus anciens.', 'lean-stats')}
+                                    help={__('Daily cleanup removes older logs.', 'lean-stats')}
                                     onChange={(value) => {
                                         const next = Number.parseInt(value, 10);
                                         setFormState((prev) => ({
@@ -499,9 +499,9 @@ const SettingsPanel = () => {
                                     }}
                                 />
                                 <div>
-                                    <p className="ls-settings-roles__title">{__('Exclusions par rôle', 'lean-stats')}</p>
+                                    <p className="ls-settings-roles__title">{__('Role exclusions', 'lean-stats')}</p>
                                     <div className="ls-settings-roles__list">
-                                        {roles.length === 0 && <p>{__('Aucun rôle disponible.', 'lean-stats')}</p>}
+                                        {roles.length === 0 && <p>{__('No roles available.', 'lean-stats')}</p>}
                                         {roles.map((role) => (
                                             <CheckboxControl
                                                 key={role.key}
@@ -526,9 +526,9 @@ const SettingsPanel = () => {
                                     variant="primary"
                                     isBusy={isSaving}
                                     onClick={onSave}
-                                    aria-label={__('Enregistrer les réglages', 'lean-stats')}
+                                    aria-label={__('Save settings', 'lean-stats')}
                                 >
-                                    {__('Enregistrer', 'lean-stats')}
+                                    {__('Save', 'lean-stats')}
                                 </Button>
                             </div>
                         );
@@ -544,13 +544,13 @@ const KpiCards = ({ range }) => {
     const kpis = data?.kpis || null;
 
     return (
-        <LsCard title={__('Indicateurs', 'lean-stats')}>
+        <LsCard title={__('KPIs', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && !kpis}
-                emptyLabel={__('Aucun KPI disponible.', 'lean-stats')}
-                    loadingLabel={__('Chargement des indicateurs…', 'lean-stats')}
+                emptyLabel={__('No KPIs available.', 'lean-stats')}
+                    loadingLabel={__('Loading KPIs…', 'lean-stats')}
                     skeletonRows={3}
                 />
                 {kpis && (
@@ -577,7 +577,7 @@ const KpiCards = ({ range }) => {
                                         aria-hidden="true"
                                     />
                                     <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">{__('Pages uniques', 'lean-stats')}</p>
+                                        <p className="ls-kpi-card__label">{__('Unique pages', 'lean-stats')}</p>
                                         <strong className="ls-kpi-card__value">{kpis.uniquePages}</strong>
                                     </div>
                                 </CardBody>
@@ -592,7 +592,7 @@ const KpiCards = ({ range }) => {
                                     />
                                     <div className="ls-kpi-card__content">
                                         <p className="ls-kpi-card__label">
-                                            {__('Referrers uniques', 'lean-stats')}
+                                            {__('Unique referrers', 'lean-stats')}
                                         </p>
                                         <strong className="ls-kpi-card__value">{kpis.uniqueReferrers}</strong>
                                     </div>
@@ -610,16 +610,16 @@ const TimeseriesChart = ({ range }) => {
     const items = data?.items || [];
 
     return (
-        <LsCard title={__('Trafic dans le temps', 'lean-stats')}>
+        <LsCard title={__('Traffic over time', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && items.length === 0}
-                emptyLabel={__('Aucune donnée disponible pour cette période.', 'lean-stats')}
-                    loadingLabel={__('Chargement du graphique…', 'lean-stats')}
+                emptyLabel={__('No data available for this period.', 'lean-stats')}
+                    loadingLabel={__('Loading chart…', 'lean-stats')}
                 />
                 {!isLoading && !error && items.length > 0 && (
-                    <ChartFrame height={260} ariaLabel={__('Graphique du trafic', 'lean-stats')}>
+                    <ChartFrame height={260} ariaLabel={__('Traffic chart', 'lean-stats')}>
                         <ResponsiveContainer>
                             <LineChart data={items} margin={{ top: 8, right: 24, left: 0, bottom: 8 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -651,7 +651,7 @@ const TopPagesTable = ({ range }) => {
             rows={rows}
             isLoading={isLoading}
             error={error}
-            emptyLabel={__('Aucune page populaire disponible.', 'lean-stats')}
+            emptyLabel={__('No popular pages available.', 'lean-stats')}
         />
     );
 };
@@ -672,7 +672,7 @@ const ReferrersTable = ({ range }) => {
             rows={rows}
             isLoading={isLoading}
             error={error}
-            emptyLabel={__('Aucun referrer disponible.', 'lean-stats')}
+            emptyLabel={__('No referrers available.', 'lean-stats')}
         />
     );
 };
@@ -684,20 +684,20 @@ const DeviceSplit = ({ range }) => {
         ...item,
         label: item.label
             ? item.label.charAt(0).toUpperCase() + item.label.slice(1)
-            : __('Inconnu', 'lean-stats'),
+            : __('Unknown', 'lean-stats'),
     }));
 
     return (
-        <LsCard title={__('Répartition par device', 'lean-stats')}>
+        <LsCard title={__('Device breakdown', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && labeledItems.length === 0}
-                emptyLabel={__('Aucune donnée device disponible.', 'lean-stats')}
-                    loadingLabel={__('Chargement de la répartition des devices…', 'lean-stats')}
+                emptyLabel={__('No device data available.', 'lean-stats')}
+                    loadingLabel={__('Loading device breakdown…', 'lean-stats')}
                 />
                 {!isLoading && !error && labeledItems.length > 0 && (
-                    <ChartFrame height={240} ariaLabel={__('Graphique de répartition par device', 'lean-stats')}>
+                    <ChartFrame height={240} ariaLabel={__('Device breakdown chart', 'lean-stats')}>
                         <ResponsiveContainer>
                             <PieChart>
                                 <Pie dataKey="hits" data={labeledItems} nameKey="label" innerRadius={40} outerRadius={80}>
@@ -708,7 +708,7 @@ const DeviceSplit = ({ range }) => {
                                 <Tooltip />
                             </PieChart>
                         </ResponsiveContainer>
-                        <ul aria-label={__('Détail de répartition par device', 'lean-stats')}>
+                        <ul aria-label={__('Device breakdown details', 'lean-stats')}>
                             {labeledItems.map((entry) => (
                                 <li key={entry.label}>
                                     {sprintf(__('%s : %s', 'lean-stats'), entry.label, entry.hits)}
@@ -749,7 +749,7 @@ const AdminApp = () => {
     if (!ADMIN_CONFIG) {
         return (
             <Notice status="error" isDismissible={false}>
-                {__('Configuration admin manquante.', 'lean-stats')}
+                {__('Missing admin configuration.', 'lean-stats')}
             </Notice>
         );
     }
@@ -765,7 +765,7 @@ const AdminApp = () => {
 
     useEffect(() => {
         setupGlobalErrorHandlers(logger);
-        logger.info('Chargement de l’interface admin', {
+        logger.info('Loading admin interface', {
             action: 'admin.init',
             traceId: createTraceId(),
             context: getRuntimeDiagnostics(),
@@ -777,7 +777,7 @@ const AdminApp = () => {
             <h1>{heading}</h1>
             {!PanelComponent ? (
                 <Notice status="warning" isDismissible={false}>
-                    {__('Aucun panneau disponible pour cet écran.', 'lean-stats')}
+                    {__('No panel available for this screen.', 'lean-stats')}
                 </Notice>
             ) : (
                 <PanelComponent panel={{ name: currentPanel, title: panelTitle }} />
