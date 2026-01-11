@@ -22,14 +22,15 @@ jobs:
       - name: Vérifier la présence de WORKFLOW_TOKEN
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          # On utilise GITHUB_TOKEN uniquement pour commenter la PR en cas d'erreur de config
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           if [ -z "${WORKFLOW_TOKEN:-}" ]; then
             PR="${{ github.event.pull_request.number }}"
-            MESSAGE="WORKFLOW_TOKEN is missing. Automerge requires a Personal Access Token to trigger post-merge workflows."
+            MESSAGE=":x: **WORKFLOW_TOKEN manquant**. L’automerge requiert un Personal Access Token (PAT) pour déclencher les workflows post-merge (Build deploy branch → Release plugin zip). Ajoute le secret `WORKFLOW_TOKEN` dans Settings → Secrets and variables → Actions."
             echo "$MESSAGE"
-            gh pr comment "$PR" --body "$MESSAGE"
+            gh pr comment "$PR" --body "$MESSAGE" || true
             exit 1
           fi
 
@@ -40,20 +41,22 @@ jobs:
           fetch-depth: 1
 
       - name: Tenter l’auto-merge (ou mise en file d’attente)
-        env: GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
-          set -eo pipefail
+          set -euo pipefail
           PR="${{ github.event.pull_request.number }}"
 
           # --auto : active l’auto-merge ou place la PR en merge-queue
           if ! gh pr merge "$PR" --squash --delete-branch --auto; then
             gh pr comment "$PR" \
-              --body ":warning: **Conflit détecté** – merci de le résoudre manuellement."
+              --body ":warning: **Conflit détecté** – merci de le résoudre manuellement." || true
             exit 0
           fi
 
       - name: Attendre le merge effectif
-        env: GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
           set -euo pipefail
           PR="${{ github.event.pull_request.number }}"
@@ -72,7 +75,7 @@ jobs:
           done
 
           if [ -z "$MERGED_AT" ] || [ "$MERGED_AT" = "null" ]; then
-            echo "PR not merged after waiting. Skipping release pipeline."
+            echo "PR not merged after waiting. Skipping."
             exit 0
           fi
 
