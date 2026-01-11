@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Stats\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lean Stats\n"
+
+msgid "%s : %s"
+msgstr "%s : %s"
+
+msgid "30 jours"
+msgstr "30 ημέρες"
+
+msgid "7 jours"
+msgstr "7 ημέρες"
+
+msgid "90 jours"
+msgstr "90 ημέρες"
+
+msgid "Allowlist des paramètres de requête"
+msgstr "Λίστα επιτρεπόμενων παραμέτρων αιτήματος"
+
+msgid "Aucun KPI disponible."
+msgstr "Δεν υπάρχουν διαθέσιμα KPI."
+
+msgid "Aucun panneau disponible pour cet écran."
+msgstr "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν την οθόνη."
+
+msgid "Aucun referrer disponible."
+msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
+
+msgid "Aucun rôle disponible."
+msgstr "Δεν υπάρχει διαθέσιμος ρόλος."
+
+msgid "Aucune donnée device disponible."
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
+
+msgid "Aucune donnée disponible pour cette période."
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα για αυτήν την περίοδο."
+
+msgid "Aucune page populaire disponible."
+msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
+
+msgid "Chargement : %s"
+msgstr "Φόρτωση: %s"
+
+msgid "Chargement de la répartition des devices…"
+msgstr "Φόρτωση κατανομής συσκευών…"
+
+msgid "Chargement des indicateurs…"
+msgstr "Φόρτωση KPI…"
+
+msgid "Chargement des réglages…"
+msgstr "Φόρτωση ρυθμίσεων…"
+
+msgid "Chargement du graphique…"
+msgstr "Φόρτωση γραφήματος…"
+
+msgid "Chargement…"
+msgstr "Φόρτωση…"
+
+msgid "Configuration REST manquante."
+msgstr "Λείπει ρύθμιση REST."
+
+msgid "Configuration admin manquante."
+msgstr "Λείπει ρύθμιση διαχειριστή."
+
+msgid "Direct"
+msgstr "Άμεσο"
+
+msgid "Détail de répartition par device"
+msgstr "Λεπτομέρειες κατανομής ανά συσκευή"
+
+msgid "Enregistrer"
+msgstr "Αποθήκευση"
+
+msgid "Enregistrer les réglages"
+msgstr "Αποθήκευση ρυθμίσεων"
+
+msgid "Erreur API (%s)"
+msgstr "Σφάλμα API (%s)"
+
+msgid "Erreur de chargement."
+msgstr "Σφάλμα φόρτωσης."
+
+msgid "Erreur lors de la sauvegarde."
+msgstr "Σφάλμα κατά την αποθήκευση."
+
+msgid "Exclusions par rôle"
+msgstr "Εξαιρέσεις ανά ρόλο"
+
+msgid "Graphique de répartition par device"
+msgstr "Γράφημα κατανομής ανά συσκευή"
+
+msgid "Graphique du trafic"
+msgstr "Γράφημα επισκεψιμότητας"
+
+msgid "Hits"
+msgstr "Χτυπήματα"
+
+msgid "Ignore le suivi pour les utilisateurs connectés."
+msgstr "Παράβλεψη παρακολούθησης για συνδεδεμένους χρήστες."
+
+msgid "Ignore le suivi si le navigateur envoie DNT ou GPC."
+msgstr "Παράβλεψη παρακολούθησης αν ο περιηγητής στέλνει DNT ή GPC."
+
+msgid "Inconnu"
+msgstr "Άγνωστο"
+
+msgid "Indicateurs"
+msgstr "KPI"
+
+msgid "Invalid REST API nonce."
+msgstr "Μη έγκυρο nonce REST API."
+
+msgid "Invalid device class."
+msgstr "Μη έγκυρη κατηγορία συσκευής."
+
+msgid "Invalid page path."
+msgstr "Μη έγκυρη διαδρομή σελίδας."
+
+msgid "Invalid timestamp bucket."
+msgstr "Μη έγκυρο εύρος χρονικής σήμανσης."
+
+msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgstr "Αφήστε κενό για χρήση του \"Lean Stats\"."
+
+msgid "Lean Stats"
+msgstr "Lean Stats"
+
+msgid "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+msgstr "Λίστα χωρισμένη με κόμματα (π.χ. utm_source, utm_campaign)."
+
+msgid "Mode strict"
+msgstr "Αυστηρή λειτουργία"
+
+msgid "Nettoyage des URLs"
+msgstr "Καθαρισμός URL"
+
+msgid "Nom du plugin (menu et tableau de bord)"
+msgstr "Όνομα πρόσθετου (μενού και πίνακας ελέγχου)"
+
+msgid "Page"
+msgstr "Σελίδα"
+
+msgid "Pages uniques"
+msgstr "Μοναδικές σελίδες"
+
+msgid "Période"
+msgstr "Περίοδος"
+
+msgid "Referrer"
+msgstr "Παραπέμπτης"
+
+msgid "Referrers uniques"
+msgstr "Μοναδικοί παραπέμπτες"
+
+msgid "Respecter DNT / GPC"
+msgstr "Σεβασμός DNT / GPC"
+
+msgid "Réglages"
+msgstr "Ρυθμίσεις"
+
+msgid "Réglages enregistrés."
+msgstr "Οι ρυθμίσεις αποθηκεύτηκαν."
+
+msgid "Répartition par device"
+msgstr "Κατανομή ανά συσκευή"
+
+msgid "Rétention des logs bruts (jours)"
+msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
+
+msgid "Supprime les paramètres de requête."
+msgstr "Αφαιρεί τις παραμέτρους αιτήματος."
+
+msgid "Tableau de bord"
+msgstr "Πίνακας ελέγχου"
+
+msgid "Top pages"
+msgstr "Κορυφαίες σελίδες"
+
+msgid "Top referrers"
+msgstr "Κορυφαίοι παραπέμπτες"
+
+msgid "Trafic dans le temps"
+msgstr "Επισκεψιμότητα με την πάροδο του χρόνου"
+
+msgid "You are not allowed to access analytics data."
+msgstr "Δεν επιτρέπεται η πρόσβαση στα δεδομένα αναλυτικών."
