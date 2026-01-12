@@ -1,6 +1,6 @@
 # Debug mode
 
-Lean Stats exposes a debug mode for the admin screen (`/wp-admin/admin.php?page=lean-stats`). The mode is disabled by default and stored in the `lean_stats_settings` option under the `debug_enabled` key.
+Lean Stats exposes a debug mode for the admin screen (`/wp-admin/admin.php?page=lean-stats`). The mode is disabled by default and stored in the `lean_stats_settings` option under the `debug_enabled` key. Debug mode controls raw log storage.
 
 ## Activation
 
@@ -17,7 +17,8 @@ When debug mode is enabled:
 - Logs include timing (`performance.now`), page context, action names, and a short trace id.
 - Global guards capture `window.error` and `unhandledrejection` events.
 - Runtime hints show user agent, presence of `chrome.runtime`, and a suggestion to reproduce in private browsing.
-- The settings screen exposes a "Raw logs" tab that lists recent raw hits.
+- Raw hits are stored in `lean_stats_hits`.
+- The settings screen exposes a "Logs" tab that lists recent raw hits.
 
 When debug mode is disabled:
 

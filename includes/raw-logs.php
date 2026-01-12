@@ -12,7 +12,9 @@ const LEAN_STATS_RAW_LOGS_CRON_HOOK = 'lean_stats_purge_raw_logs';
  */
 function lean_stats_raw_logs_enabled(): bool
 {
-    return (bool) get_option('lean_stats_raw_logs_enabled', false);
+    $settings = lean_stats_get_settings();
+
+    return !empty($settings['debug_enabled']);
 }
 
 /**

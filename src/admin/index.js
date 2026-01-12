@@ -204,10 +204,19 @@ const useAdminEndpoint = (path, params, options = {}) => {
     return { data, isLoading, error };
 };
 
-const normalizeSettings = (settings) => ({
-    ...DEFAULT_SETTINGS,
-    ...(settings || {}),
-});
+const normalizeSettings = (settings) => {
+    const normalized = {
+        ...DEFAULT_SETTINGS,
+        ...(settings || {}),
+    };
+    const debugEnabled = Boolean(normalized.debug_enabled || normalized.raw_logs_enabled);
+
+    return {
+        ...normalized,
+        debug_enabled: debugEnabled,
+        raw_logs_enabled: debugEnabled,
+    };
+};
 
 const normalizePanels = (panels) => {
     if (!Array.isArray(panels)) {
@@ -243,7 +252,7 @@ const getPanelComponent = (name) => {
     return registry[name] || null;
 };
 
-const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
+const SettingsLogsTab = ({ debugEnabled }) => {
     const { data, isLoading, error } = useAdminEndpoint(
         '/admin/raw-logs',
         { limit: 50 },
@@ -261,14 +270,6 @@ const SettingsLogsTab = ({ debugEnabled, rawLogsEnabled }) => {
 
     return (
         <div className="ls-settings-logs">
-            {!rawLogsEnabled && (
-                <Notice status="info" isDismissible={false}>
-                    {__(
-                        'Raw logs are disabled. Enable "Enable raw logs" to collect entries.',
-                        'lean-stats'
-                    )}
-                </Notice>
-            )}
             <DataState
                 isLoading={isLoading}
                 error={error}
@@ -330,7 +331,6 @@ const SettingsPanel = () => {
     const [saveNotice, setSaveNotice] = useState(null);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
     const debugEnabled = Boolean(formState.debug_enabled);
-    const rawLogsEnabled = Boolean(formState.raw_logs_enabled);
 
     useEffect(() => {
         if (data?.settings) {
@@ -402,7 +402,7 @@ const SettingsPanel = () => {
     const roles = ADMIN_CONFIG?.roles || [];
     const settingsTabs = [
         { name: 'general', title: __('General', 'lean-stats') },
-        { name: 'logs', title: __('Raw logs', 'lean-stats') },
+        ...(debugEnabled ? [{ name: 'logs', title: __('Logs', 'lean-stats') }] : []),
     ];
 
     return (
@@ -422,7 +422,6 @@ const SettingsPanel = () => {
                             return (
                                 <SettingsLogsTab
                                     debugEnabled={debugEnabled}
-                                    rawLogsEnabled={rawLogsEnabled}
                                 />
                             );
                         }
@@ -459,16 +458,16 @@ const SettingsPanel = () => {
                                     onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
                                 />
                                 <ToggleControl
-                                    label={__('Enable raw logs', 'lean-stats')}
-                                    help={__('Allows storing raw hits for diagnostics.', 'lean-stats')}
-                                    checked={formState.raw_logs_enabled}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, raw_logs_enabled: value }))}
-                                />
-                                <ToggleControl
                                     label={__('Debug mode', 'lean-stats')}
-                                    help={__('Enables detailed console logs to aid debugging.', 'lean-stats')}
+                                    help={__('Enables detailed console logs and raw log capture.', 'lean-stats')}
                                     checked={formState.debug_enabled}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, debug_enabled: value }))}
+                                    onChange={(value) =>
+                                        setFormState((prev) => ({
+                                            ...prev,
+                                            debug_enabled: value,
+                                            raw_logs_enabled: value,
+                                        }))
+                                    }
                                 />
                                 <TextControl
                                     label={__('Query parameter allowlist', 'lean-stats')}
