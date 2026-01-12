@@ -97,6 +97,8 @@ Returned fields:
 - `excluded_roles` (array)
 - `debug_enabled` (boolean)
 
+`raw_logs_enabled` mirrors `debug_enabled` and reflects whether raw log storage is active.
+
 ### POST `/admin/settings`
 
 Updates Lean Stats settings.

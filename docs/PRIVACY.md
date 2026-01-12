@@ -15,7 +15,7 @@ Lean Stats focuses on aggregated analytics and minimizes personal data by design
 
 ## Raw logs
 
-- **Raw logs storage**: disabled by default and controlled by the `lean_stats_raw_logs_enabled` option.
+- **Raw logs storage**: disabled by default and controlled by debug mode (`lean_stats_settings.debug_enabled`).
 - **Retention**: raw logs expire after the configured retention window and are purged automatically.
 
 ## Rate limiting and deduplication
