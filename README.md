@@ -79,6 +79,7 @@ Lean Stats provides translation files for French, English, Spanish, German, Ital
 ## 📦 Build plugin zip
 
 Use the script to generate a distributable plugin archive in `dist/`.
+The build process generates `.mo` files and JavaScript translation JSON files in `languages/` when WP-CLI is available.
 
 ```bash
 npm run build:zip

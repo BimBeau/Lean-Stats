@@ -109,6 +109,14 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         true
     );
 
+    if (function_exists('wp_set_script_translations')) {
+        wp_set_script_translations(
+            'lean-stats-admin',
+            'lean-stats',
+            LEAN_STATS_PATH . 'languages'
+        );
+    }
+
     $admin_css_path = LEAN_STATS_PATH . 'build/style-admin.css';
     if (file_exists($admin_css_path)) {
         wp_enqueue_style(
