@@ -69,7 +69,7 @@ Lean Stats integrates directly inside WordPress Admin:
 
 ## 🌍 Localization
 
-Lean Stats provides translation files for French, English, Spanish, German, Italian, Portuguese, Swedish, Danish, Dutch and Turkish.
+Lean Stats uses the `lean-stats` text domain for PHP and JavaScript strings, and the admin UI follows the effective WordPress locale (user profile locale overrides the site locale). The `languages/` directory stores translation sources for French, English, Spanish, German, Italian, Portuguese, Swedish, Danish, Dutch, and Turkish.
 
 ## 🛠 Requirements
 
@@ -84,6 +84,12 @@ The build process generates `.mo` files and JavaScript translation JSON files in
 ```bash
 npm run build:zip
 ```
+
+## ✅ Localization testing
+
+- Site locale `fr_FR`, user locale `en_US`: the Lean Stats admin UI displays English strings.
+- Site locale `en_US`, user locale `fr_FR`: the Lean Stats admin UI displays French strings.
+- Site locale `fr_FR`, user locale not overridden: the Lean Stats admin UI displays French strings.
 
 ## 🗺 Roadmap
 

@@ -1,10 +1,11 @@
 {
   "name": "lean-stats",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "private": true,
   "description": "Lean Stats WordPress plugin assets.",
   "scripts": {
-    "build": "wp-scripts build",
+    "build": "wp-scripts build && npm run build:i18n",
+    "build:i18n": "bash scripts/build-i18n.sh",
     "build:zip": "bash scripts/build-plugin-zip.sh",
     "start": "wp-scripts start",
     "lint:js": "wp-scripts lint-js",
