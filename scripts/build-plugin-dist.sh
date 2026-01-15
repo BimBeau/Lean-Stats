@@ -12,12 +12,7 @@ fi
 
 mkdir -p "${dest_root}/${plugin_slug}"
 
-if command -v wp >/dev/null 2>&1; then
-  (cd "${repo_root}" && wp i18n make-mo languages)
-  (cd "${repo_root}" && wp i18n make-json languages --no-purge)
-else
-  echo "Warning: wp-cli not found; skipping .mo and JS translation JSON generation." >&2
-fi
+"${repo_root}/scripts/build-i18n.sh"
 
 rsync -a --delete \
   --exclude ".git" \

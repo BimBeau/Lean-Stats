@@ -93,7 +93,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
 
     $asset_file = LEAN_STATS_PATH . 'build/admin.asset.php';
     $asset_data = [
-        'dependencies' => ['wp-element', 'wp-components'],
+        'dependencies' => ['wp-element', 'wp-components', 'wp-i18n'],
         'version' => LEAN_STATS_VERSION,
     ];
 
