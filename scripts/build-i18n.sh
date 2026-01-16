@@ -5,11 +5,8 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 if command -v wp >/dev/null 2>&1; then
   (cd "${repo_root}" && wp i18n make-mo languages)
-  if wp i18n make-json --help | grep -q -- '--output-dir'; then
-    (cd "${repo_root}" && wp i18n make-json build --output-dir=languages --no-purge)
-  else
-    (cd "${repo_root}" && wp i18n make-json build --dest=languages --no-purge)
-  fi
+  (cd "${repo_root}" && wp i18n make-json build --no-purge)
+  (cd "${repo_root}" && find build -maxdepth 2 -type f -name '*.json' -exec mv -f {} languages/ \;)
 else
   echo "Warning: wp-cli not found; skipping .mo and JS translation JSON generation." >&2
 fi

@@ -87,17 +87,19 @@ jobs:
       - name: Verify translation outputs
         run: |
           set -euo pipefail
-          ls -la package-tmp/lean-stats/languages || true
           if [ ! -f package-tmp/lean-stats/languages/lean-stats-fr_FR.mo ]; then
             echo 'Missing package-tmp/lean-stats/languages/lean-stats-fr_FR.mo.' >&2
+            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.mo' | grep -q .; then
             echo 'No .mo files generated in deployable package.' >&2
+            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.json' | grep -q .; then
             echo 'No JS translation JSON files generated in deployable package.' >&2
+            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
 

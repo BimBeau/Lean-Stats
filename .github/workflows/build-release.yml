@@ -70,17 +70,19 @@ jobs:
       - name: Verify translation outputs
         run: |
           set -euo pipefail
-          ls -la languages || true
           if [ ! -f languages/lean-stats-fr_FR.mo ]; then
             echo 'Missing languages/lean-stats-fr_FR.mo.' >&2
+            ls -la languages || true
             exit 1
           fi
           if ! find languages -type f -name '*.mo' | grep -q .; then
             echo 'No .mo files generated.' >&2
+            ls -la languages || true
             exit 1
           fi
           if ! find languages -type f -name '*.json' | grep -q .; then
             echo 'No JS translation JSON files generated.' >&2
+            ls -la languages || true
             exit 1
           fi
 
