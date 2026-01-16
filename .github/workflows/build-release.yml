@@ -47,6 +47,12 @@ jobs:
             exit 1
           fi
 
+      - name: Install WP-CLI i18n-command (stable)
+        run: |
+          set -euo pipefail
+          wp package install wp-cli/i18n-command:@stable --force
+          wp i18n make-json --help
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
