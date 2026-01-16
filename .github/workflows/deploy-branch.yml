@@ -28,18 +28,26 @@ jobs:
           php-version: '8.1'
 
       # Install WP-CLI so build-i18n.sh can generate .mo and JS JSON files.
-      - name: Install WP-CLI
+      - name: Install WP-CLI (robust)
         run: |
           set -euo pipefail
-          curl -fL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/latest/download/wp-cli.phar
+
+          # Use stable builds URL (avoid GitHub releases/latest 404)
+          curl -fL -o wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+          # Sanity check: ensure this is a valid PHAR (not HTML/text)
           php wp-cli.phar --info >/dev/null
+
           chmod +x wp-cli.phar
           sudo mv wp-cli.phar /usr/local/bin/wp
+
           wp --info
+
           wp_path="$(command -v wp)"
-          if head -n 1 "$wp_path" | grep -qiE 'Not|<!DOCTYPE'; then
+          wp_head="$(head -n 2 "$wp_path" | sed -n '1,2p')"
+          echo "$wp_head"
+          if echo "$wp_head" | grep -qiE 'Not Found|<!DOCTYPE'; then
             echo "WP-CLI install failed: $wp_path does not look like a PHAR." >&2
-            head -n 5 "$wp_path" >&2 || true
             exit 1
           fi
 
@@ -79,19 +87,17 @@ jobs:
       - name: Verify translation outputs
         run: |
           set -euo pipefail
+          ls -la package-tmp/lean-stats/languages || true
           if [ ! -f package-tmp/lean-stats/languages/lean-stats-fr_FR.mo ]; then
             echo 'Missing package-tmp/lean-stats/languages/lean-stats-fr_FR.mo.' >&2
-            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.mo' | grep -q .; then
             echo 'No .mo files generated in deployable package.' >&2
-            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.json' | grep -q .; then
             echo 'No JS translation JSON files generated in deployable package.' >&2
-            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
 
