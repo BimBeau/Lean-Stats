@@ -77,6 +77,7 @@ jobs:
         run: |
           set -euo pipefail
           command -v wp >/dev/null 2>&1
+          # build-i18n.sh scans src/ for JS strings to avoid missing i18n metadata in build artifacts.
           bash scripts/build-i18n.sh
 
       - name: Get plugin version
