@@ -21,6 +21,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Provide PHP runtime for WP-CLI translation generation.
+      - name: Set up PHP for WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      # Install WP-CLI so build-i18n.sh can generate .mo and JS JSON files.
+      - name: Install WP-CLI
+        run: |
+          set -euo pipefail
+          curl -sSLo wp-cli.phar https://github.com/wp-cli/wp-cli/releases/latest/download/wp-cli.phar
+          php wp-cli.phar --info
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -52,6 +67,19 @@ jobs:
 
           test -f "package-tmp/${PLUGIN_SLUG}/build/admin.js"
           test -f "package-tmp/${PLUGIN_SLUG}/build/admin.asset.php"
+
+      # Fail fast if translation files are missing from the deployable build.
+      - name: Verify translation outputs
+        run: |
+          set -euo pipefail
+          if ! find package-tmp/lean-stats/languages -type f -name '*.mo' | grep -q .; then
+            echo 'No .mo files generated in deployable package.' >&2
+            exit 1
+          fi
+          if ! find package-tmp/lean-stats/languages -type f -name '*.json' | grep -q .; then
+            echo 'No JS translation JSON files generated in deployable package.' >&2
+            exit 1
+          fi
 
       - name: Create plugin zip from deployable folder
         run: |

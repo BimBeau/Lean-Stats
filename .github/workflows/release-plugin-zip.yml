@@ -57,6 +57,20 @@ jobs:
           github-token: ${{ github.token }}
           path: dist
 
+      # Fail fast if the release zip does not contain compiled translations.
+      - name: Verify translation files in release zip
+        run: |
+          set -euo pipefail
+          ZIP="dist/lean-stats.zip"
+          if ! zipinfo -1 "$ZIP" | grep -qE '\.mo$'; then
+            echo 'No .mo files found in release zip.' >&2
+            exit 1
+          fi
+          if ! zipinfo -1 "$ZIP" | grep -qE '\.json$'; then
+            echo 'No JS translation JSON files found in release zip.' >&2
+            exit 1
+          fi
+
       # Release asset (download direct du zip plugin)
       - name: Create/Update GitHub Release and upload asset
         env:
