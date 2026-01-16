@@ -31,10 +31,17 @@ jobs:
       - name: Install WP-CLI
         run: |
           set -euo pipefail
-          curl -sSLo wp-cli.phar https://github.com/wp-cli/wp-cli/releases/latest/download/wp-cli.phar
-          php wp-cli.phar --info
+          curl -fL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/latest/download/wp-cli.phar
+          php wp-cli.phar --info >/dev/null
           chmod +x wp-cli.phar
           sudo mv wp-cli.phar /usr/local/bin/wp
+          wp --info
+          wp_path="$(command -v wp)"
+          if head -n 1 "$wp_path" | grep -qiE 'Not|<!DOCTYPE'; then
+            echo "WP-CLI install failed: $wp_path does not look like a PHAR." >&2
+            head -n 5 "$wp_path" >&2 || true
+            exit 1
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -72,12 +79,19 @@ jobs:
       - name: Verify translation outputs
         run: |
           set -euo pipefail
+          if [ ! -f package-tmp/lean-stats/languages/lean-stats-fr_FR.mo ]; then
+            echo 'Missing package-tmp/lean-stats/languages/lean-stats-fr_FR.mo.' >&2
+            ls -la package-tmp/lean-stats/languages || true
+            exit 1
+          fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.mo' | grep -q .; then
             echo 'No .mo files generated in deployable package.' >&2
+            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
           if ! find package-tmp/lean-stats/languages -type f -name '*.json' | grep -q .; then
             echo 'No JS translation JSON files generated in deployable package.' >&2
+            ls -la package-tmp/lean-stats/languages || true
             exit 1
           fi
 
