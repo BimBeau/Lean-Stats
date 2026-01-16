@@ -1,0 +1,80 @@
+name: Build Plugin Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pull the tagged source so the release matches the Git tag.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Provide PHP runtime for WP-CLI.
+      - name: Set up PHP for WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      # Install WP-CLI to generate .mo and JS JSON translations.
+      - name: Install WP-CLI
+        run: |
+          set -euo pipefail
+          curl -sSLo wp-cli.phar https://github.com/wp-cli/wp-cli/releases/latest/download/wp-cli.phar
+          php wp-cli.phar --info
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+
+      # Build translation assets for release packaging.
+      - name: Build translation files
+        run: |
+          set -euo pipefail
+          command -v wp >/dev/null 2>&1
+          bash scripts/build-i18n.sh
+
+      # Fail fast if translations were not produced.
+      - name: Verify translation outputs
+        run: |
+          set -euo pipefail
+          if ! find languages -type f -name '*.mo' | grep -q .; then
+            echo 'No .mo files generated.' >&2
+            exit 1
+          fi
+          if ! find languages -type f -name '*.json' | grep -q .; then
+            echo 'No JS translation JSON files generated.' >&2
+            exit 1
+          fi
+
+      # Package a clean plugin zip without dev-only files.
+      - name: Build installable plugin zip
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist/lean-stats
+          rsync -a --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='scripts' \
+            --exclude='tests' \
+            --exclude='docs' \
+            --exclude='phpcs.xml' \
+            --exclude='phpunit.xml.dist' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='webpack.config.js' \
+            ./ dist/lean-stats/
+          (cd dist && zip -r lean-stats.zip lean-stats)
+
+      # Upload the zip to the GitHub Release for this tag.
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/lean-stats.zip
