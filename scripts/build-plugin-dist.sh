@@ -12,8 +12,6 @@ fi
 
 mkdir -p "${dest_root}/${plugin_slug}"
 
-"${repo_root}/scripts/build-i18n.sh"
-
 rsync -a --delete \
   --exclude ".git" \
   --exclude ".github" \

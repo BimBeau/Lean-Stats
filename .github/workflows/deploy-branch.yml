@@ -54,7 +54,11 @@ jobs:
       - name: Install WP-CLI i18n-command (stable)
         run: |
           set -euo pipefail
-          wp package install wp-cli/i18n-command:@stable --force
+          if wp package list | grep -q wp-cli/i18n-command; then
+            wp package uninstall wp-cli/i18n-command || true
+          fi
+          wp package install wp-cli/i18n-command:@stable
+          wp package list
           wp i18n make-json --help
 
       - name: Set up Node.js
@@ -68,6 +72,12 @@ jobs:
 
       - name: Build assets
         run: npm run build
+
+      - name: Build translation files
+        run: |
+          set -euo pipefail
+          command -v wp >/dev/null 2>&1
+          bash scripts/build-i18n.sh
 
       - name: Get plugin version
         id: meta
