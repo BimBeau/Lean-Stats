@@ -27,6 +27,12 @@ jobs:
         with:
           php-version: '8.1'
 
+      - name: Install gettext
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gettext
+
       # Install WP-CLI so build-i18n.sh can generate .mo and JS JSON files.
       - name: Install WP-CLI (robust)
         run: |
