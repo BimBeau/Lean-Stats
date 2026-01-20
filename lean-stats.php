@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.24.15
+ * Version: 0.24.16
  * Author: BimBeau
  * Author: Lean Stats
  * Text Domain: lean-stats
@@ -28,10 +28,14 @@ define('LEAN_STATS_URL', plugin_dir_url(__FILE__));
  */
 function lean_stats_load_textdomain(): void
 {
-    load_plugin_textdomain('lean-stats', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    load_plugin_textdomain(
+        'lean-stats',
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages/'
+    );
 }
 
-add_action('init', 'lean_stats_load_textdomain');
+add_action('plugins_loaded', 'lean_stats_load_textdomain');
 
 require_once LEAN_STATS_PATH . 'includes/features.php';
 require_once LEAN_STATS_PATH . 'includes/settings.php';
