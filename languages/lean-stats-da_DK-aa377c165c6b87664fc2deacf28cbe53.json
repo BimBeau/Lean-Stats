@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "da_DK",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 dage"
+      ],
+      "7 days": [
+        "7 dage"
+      ],
+      "90 days": [
+        "90 dage"
+      ],
+      "Query parameter allowlist": [
+        "Tilladelsesliste over forespørgselsparametre"
+      ],
+      "No KPIs available.": [
+        "Ingen KPI'er tilgængelige."
+      ],
+      "No panel available for this screen.": [
+        "Ingen panel tilgængelig for denne skærm."
+      ],
+      "No referrers available.": [
+        "Ingen henviser tilgængelig."
+      ],
+      "No roles available.": [
+        "Ingen rolle tilgængelig."
+      ],
+      "No device data available.": [
+        "Ingen enhedsdata tilgængelig."
+      ],
+      "No data available for this period.": [
+        "Ingen data tilgængelig for denne periode."
+      ],
+      "No popular pages available.": [
+        "Ingen populære sider tilgængelig."
+      ],
+      "Loading: %s": [
+        "Indlæser: %s"
+      ],
+      "Loading device breakdown…": [
+        "Indlæser enhedsfordeling…"
+      ],
+      "Loading KPIs…": [
+        "Indlæser KPI'er…"
+      ],
+      "Loading settings…": [
+        "Indlæser indstillinger…"
+      ],
+      "Loading chart…": [
+        "Indlæser graf…"
+      ],
+      "Loading…": [
+        "Indlæser…"
+      ],
+      "Missing REST configuration.": [
+        "Manglende REST-konfiguration."
+      ],
+      "Missing admin configuration.": [
+        "Manglende admin-konfiguration."
+      ],
+      "Direct": [
+        "Direkte"
+      ],
+      "Device breakdown details": [
+        "Detaljeret enhedsfordeling"
+      ],
+      "Save": [
+        "Gem"
+      ],
+      "Save settings": [
+        "Gem indstillinger"
+      ],
+      "API error (%s)": [
+        "API-fejl (%s)"
+      ],
+      "Loading error.": [
+        "Indlæsningsfejl."
+      ],
+      "Error while saving.": [
+        "Fejl under lagring."
+      ],
+      "Role exclusions": [
+        "Udelukkelser pr. rolle"
+      ],
+      "Device breakdown chart": [
+        "Graf over enhedsfordeling"
+      ],
+      "Traffic chart": [
+        "Trafikgraf"
+      ],
+      "Hits": [
+        "Hits"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Ignorer sporing for indloggede brugere."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Ignorer sporing, hvis browseren sender DNT eller GPC."
+      ],
+      "Unknown": [
+        "Ukendt"
+      ],
+      "KPIs": [
+        "KPI'er"
+      ],
+      "Invalid REST API nonce.": [
+        "Ugyldig REST API-nonce."
+      ],
+      "Invalid device class.": [
+        "Ugyldig enhedsklasse."
+      ],
+      "Invalid page path.": [
+        "Ugyldig sidesti."
+      ],
+      "Invalid timestamp bucket.": [
+        "Ugyldig tidsstempel-bucket."
+      ],
+      "Laisser vide pour utiliser \\\"Lean Stats\\\".": [
+        "Lad stå tomt for at bruge \\\"Lean Stats\\\"."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Kommasepareret liste (f.eks. utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Streng tilstand"
+      ],
+      "URL cleanup": [
+        "URL-rensning"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Plugin-navn (menu og kontrolpanel)"
+      ],
+      "Page": [
+        "Side"
+      ],
+      "Unique pages": [
+        "Unikke sider"
+      ],
+      "Period": [
+        "Periode"
+      ],
+      "Referrer": [
+        "Henviser"
+      ],
+      "Unique referrers": [
+        "Unikke henvisere"
+      ],
+      "Respect DNT / GPC": [
+        "Respektér DNT / GPC"
+      ],
+      "Settings": [
+        "Indstillinger"
+      ],
+      "Settings saved.": [
+        "Indstillinger gemt."
+      ],
+      "Device breakdown": [
+        "Enhedsfordeling"
+      ],
+      "Raw log retention (days)": [
+        "Opbevaring af rå logs (dage)"
+      ],
+      "Remove query parameters.": [
+        "Fjerner forespørgselsparametre."
+      ],
+      "Dashboard": [
+        "Kontrolpanel"
+      ],
+      "Top pages": [
+        "Top sider"
+      ],
+      "Top referrers": [
+        "Top henvisere"
+      ],
+      "Traffic over time": [
+        "Trafik over tid"
+      ],
+      "You are not allowed to access analytics data.": [
+        "Du har ikke tilladelse til at få adgang til analysedata."
+      ]
+    }
+  }
+}

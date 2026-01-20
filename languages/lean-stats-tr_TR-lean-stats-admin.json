@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "tr_TR",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 gün"
+      ],
+      "7 days": [
+        "7 gün"
+      ],
+      "90 days": [
+        "90 gün"
+      ],
+      "Query parameter allowlist": [
+        "Sorgu parametreleri izin listesi"
+      ],
+      "No KPIs available.": [
+        "KPI mevcut değil."
+      ],
+      "No panel available for this screen.": [
+        "Bu ekran için panel mevcut değil."
+      ],
+      "No referrers available.": [
+        "Yönlendiren mevcut değil."
+      ],
+      "No roles available.": [
+        "Rol mevcut değil."
+      ],
+      "No device data available.": [
+        "Cihaz verisi mevcut değil."
+      ],
+      "No data available for this period.": [
+        "Bu dönem için veri mevcut değil."
+      ],
+      "No popular pages available.": [
+        "Popüler sayfa mevcut değil."
+      ],
+      "Loading: %s": [
+        "Yükleniyor: %s"
+      ],
+      "Loading device breakdown…": [
+        "Cihaz dağılımı yükleniyor…"
+      ],
+      "Loading KPIs…": [
+        "Göstergeler yükleniyor…"
+      ],
+      "Loading settings…": [
+        "Ayarlar yükleniyor…"
+      ],
+      "Loading chart…": [
+        "Grafik yükleniyor…"
+      ],
+      "Loading…": [
+        "Yükleniyor…"
+      ],
+      "Missing REST configuration.": [
+        "REST yapılandırması eksik."
+      ],
+      "Missing admin configuration.": [
+        "Yönetici yapılandırması eksik."
+      ],
+      "Direct": [
+        "Doğrudan"
+      ],
+      "Device breakdown details": [
+        "Cihaz dağılımı ayrıntısı"
+      ],
+      "Save": [
+        "Kaydet"
+      ],
+      "Save settings": [
+        "Ayarları kaydet"
+      ],
+      "API error (%s)": [
+        "API hatası (%s)"
+      ],
+      "Loading error.": [
+        "Yükleme hatası."
+      ],
+      "Error while saving.": [
+        "Kaydetme sırasında hata."
+      ],
+      "Role exclusions": [
+        "Role göre hariç tutmalar"
+      ],
+      "Device breakdown chart": [
+        "Cihaz dağılım grafiği"
+      ],
+      "Traffic chart": [
+        "Trafik grafiği"
+      ],
+      "Hits": [
+        "İstek"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Oturum açmış kullanıcılar için izlemeyi yok sayar."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Tarayıcı DNT veya GPC gönderirse izlemeyi yok sayar."
+      ],
+      "Unknown": [
+        "Bilinmiyor"
+      ],
+      "KPIs": [
+        "Göstergeler"
+      ],
+      "Invalid REST API nonce.": [
+        "Geçersiz REST API nonce."
+      ],
+      "Invalid device class.": [
+        "Geçersiz cihaz sınıfı."
+      ],
+      "Invalid page path.": [
+        "Geçersiz sayfa yolu."
+      ],
+      "Invalid timestamp bucket.": [
+        "Geçersiz zaman damgası aralığı."
+      ],
+      "Laisser vide pour utiliser \\\"Lean Stats\\\".": [
+        "\\\"Lean Stats\\\" kullanmak için boş bırakın."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Virgülle ayrılmış liste (örn: utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Katı mod"
+      ],
+      "URL cleanup": [
+        "URL temizliği"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Eklenti adı (menü ve gösterge paneli)"
+      ],
+      "Page": [
+        "Sayfa"
+      ],
+      "Unique pages": [
+        "Benzersiz sayfalar"
+      ],
+      "Period": [
+        "Dönem"
+      ],
+      "Referrer": [
+        "Yönlendiren"
+      ],
+      "Unique referrers": [
+        "Benzersiz yönlendirenler"
+      ],
+      "Respect DNT / GPC": [
+        "DNT / GPC’ye uy"
+      ],
+      "Settings": [
+        "Ayarlar"
+      ],
+      "Settings saved.": [
+        "Ayarlar kaydedildi."
+      ],
+      "Device breakdown": [
+        "Cihazlara göre dağılım"
+      ],
+      "Raw log retention (days)": [
+        "Ham günlüklerin saklama süresi (gün)"
+      ],
+      "Remove query parameters.": [
+        "Sorgu parametrelerini kaldırır."
+      ],
+      "Dashboard": [
+        "Gösterge paneli"
+      ],
+      "Top pages": [
+        "En çok ziyaret edilen sayfalar"
+      ],
+      "Top referrers": [
+        "En çok yönlendirenler"
+      ],
+      "Traffic over time": [
+        "Zamana göre trafik"
+      ],
+      "You are not allowed to access analytics data.": [
+        "Analiz verilerine erişim izniniz yok."
+      ]
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "fr_FR",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 jours"
+      ],
+      "7 days": [
+        "7 jours"
+      ],
+      "90 days": [
+        "90 jours"
+      ],
+      "Query parameter allowlist": [
+        "Allowlist des paramètres de requête"
+      ],
+      "No KPIs available.": [
+        "Aucun KPI disponible."
+      ],
+      "No panel available for this screen.": [
+        "Aucun panneau disponible pour cet écran."
+      ],
+      "No referrers available.": [
+        "Aucun referrer disponible."
+      ],
+      "No roles available.": [
+        "Aucun rôle disponible."
+      ],
+      "No device data available.": [
+        "Aucune donnée device disponible."
+      ],
+      "No data available for this period.": [
+        "Aucune donnée disponible pour cette période."
+      ],
+      "No popular pages available.": [
+        "Aucune page populaire disponible."
+      ],
+      "Loading: %s": [
+        "Chargement : %s"
+      ],
+      "Loading device breakdown…": [
+        "Chargement de la répartition des devices…"
+      ],
+      "Loading KPIs…": [
+        "Chargement des indicateurs…"
+      ],
+      "Loading settings…": [
+        "Chargement des réglages…"
+      ],
+      "Loading chart…": [
+        "Chargement du graphique…"
+      ],
+      "Loading…": [
+        "Chargement…"
+      ],
+      "Missing REST configuration.": [
+        "Configuration REST manquante."
+      ],
+      "Missing admin configuration.": [
+        "Configuration admin manquante."
+      ],
+      "Direct": [
+        "Accès direct"
+      ],
+      "Device breakdown details": [
+        "Détail de répartition par device"
+      ],
+      "Save": [
+        "Enregistrer"
+      ],
+      "Save settings": [
+        "Enregistrer les réglages"
+      ],
+      "API error (%s)": [
+        "Erreur API (%s)"
+      ],
+      "Loading error.": [
+        "Erreur de chargement."
+      ],
+      "Error while saving.": [
+        "Erreur lors de la sauvegarde."
+      ],
+      "Role exclusions": [
+        "Exclusions par rôle"
+      ],
+      "Device breakdown chart": [
+        "Graphique de répartition par device"
+      ],
+      "Traffic chart": [
+        "Graphique du trafic"
+      ],
+      "Hits": [
+        "Visites"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Ignore le suivi pour les utilisateurs connectés."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Ignore le suivi si le navigateur envoie DNT ou GPC."
+      ],
+      "Unknown": [
+        "Inconnu"
+      ],
+      "KPIs": [
+        "Indicateurs"
+      ],
+      "Invalid REST API nonce.": [
+        "Nonce d’API REST invalide."
+      ],
+      "Invalid device class.": [
+        "Classe d’appareil invalide."
+      ],
+      "Invalid page path.": [
+        "Chemin de page invalide."
+      ],
+      "Invalid timestamp bucket.": [
+        "Intervalle de temps invalide."
+      ],
+      "Leave blank to use \\\"Lean Stats\\\".": [
+        "Laisser vide pour utiliser \\\"Lean Stats\\\"."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Liste séparée par des virgules (ex: utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Mode strict"
+      ],
+      "URL cleanup": [
+        "Nettoyage des URLs"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Nom du plugin (menu et tableau de bord)"
+      ],
+      "Page": [
+        "Page"
+      ],
+      "Unique pages": [
+        "Pages uniques"
+      ],
+      "Period": [
+        "Période"
+      ],
+      "Referrer": [
+        "Référent"
+      ],
+      "Unique referrers": [
+        "Référents uniques"
+      ],
+      "Respect DNT / GPC": [
+        "Respecter DNT / GPC"
+      ],
+      "Settings": [
+        "Réglages"
+      ],
+      "Settings saved.": [
+        "Réglages enregistrés."
+      ],
+      "Device breakdown": [
+        "Répartition par device"
+      ],
+      "Raw log retention (days)": [
+        "Rétention des logs bruts (jours)"
+      ],
+      "Remove query parameters.": [
+        "Supprime les paramètres de requête."
+      ],
+      "Dashboard": [
+        "Tableau de bord"
+      ],
+      "Top pages": [
+        "Pages principales"
+      ],
+      "Top referrers": [
+        "Top référents"
+      ],
+      "Traffic over time": [
+        "Trafic dans le temps"
+      ],
+      "You are not allowed to access analytics data.": [
+        "Vous n’êtes pas autorisé à accéder aux données d’analytics."
+      ]
+    }
+  }
+}

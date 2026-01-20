@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "nl_NL",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 dagen"
+      ],
+      "7 days": [
+        "7 dagen"
+      ],
+      "90 days": [
+        "90 dagen"
+      ],
+      "Query parameter allowlist": [
+        "Toegestane lijst van queryparameters"
+      ],
+      "No KPIs available.": [
+        "Geen KPI beschikbaar."
+      ],
+      "No panel available for this screen.": [
+        "Geen paneel beschikbaar voor dit scherm."
+      ],
+      "No referrers available.": [
+        "Geen verwijzer beschikbaar."
+      ],
+      "No roles available.": [
+        "Geen rol beschikbaar."
+      ],
+      "No device data available.": [
+        "Geen apparaatgegevens beschikbaar."
+      ],
+      "No data available for this period.": [
+        "Geen gegevens beschikbaar voor deze periode."
+      ],
+      "No popular pages available.": [
+        "Geen populaire pagina beschikbaar."
+      ],
+      "Loading: %s": [
+        "Laden: %s"
+      ],
+      "Loading device breakdown…": [
+        "Laden van de apparaatverdeling…"
+      ],
+      "Loading KPIs…": [
+        "Laden van KPI's…"
+      ],
+      "Loading settings…": [
+        "Instellingen laden…"
+      ],
+      "Loading chart…": [
+        "Grafiek laden…"
+      ],
+      "Loading…": [
+        "Laden…"
+      ],
+      "Missing REST configuration.": [
+        "Ontbrekende REST-configuratie."
+      ],
+      "Missing admin configuration.": [
+        "Ontbrekende beheerconfiguratie."
+      ],
+      "Direct": [
+        "Direct"
+      ],
+      "Device breakdown details": [
+        "Detail van apparaatverdeling"
+      ],
+      "Save": [
+        "Opslaan"
+      ],
+      "Save settings": [
+        "Instellingen opslaan"
+      ],
+      "API error (%s)": [
+        "API-fout (%s)"
+      ],
+      "Loading error.": [
+        "Fout bij laden."
+      ],
+      "Error while saving.": [
+        "Fout bij opslaan."
+      ],
+      "Role exclusions": [
+        "Uitsluitingen per rol"
+      ],
+      "Device breakdown chart": [
+        "Grafiek van apparaatverdeling"
+      ],
+      "Traffic chart": [
+        "Grafiek van verkeer"
+      ],
+      "Hits": [
+        "Hits"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Negeert tracking voor ingelogde gebruikers."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Negeert tracking als de browser DNT of GPC verzendt."
+      ],
+      "Unknown": [
+        "Onbekend"
+      ],
+      "KPIs": [
+        "KPI's"
+      ],
+      "Invalid REST API nonce.": [
+        "Ongeldige REST API-nonce."
+      ],
+      "Invalid device class.": [
+        "Ongeldige apparaatklasse."
+      ],
+      "Invalid page path.": [
+        "Ongeldig paginapad."
+      ],
+      "Invalid timestamp bucket.": [
+        "Ongeldige tijdstempel-bucket."
+      ],
+      "Leave blank to use \\\"Lean Stats\\\".": [
+        "Leeg laten om \\\"Lean Stats\\\" te gebruiken."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Komma-gescheiden lijst (bijv. utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Strikte modus"
+      ],
+      "URL cleanup": [
+        "URL-opschoning"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Plug-innaam (menu en dashboard)"
+      ],
+      "Page": [
+        "Pagina"
+      ],
+      "Unique pages": [
+        "Unieke pagina's"
+      ],
+      "Period": [
+        "Periode"
+      ],
+      "Referrer": [
+        "Verwijzer"
+      ],
+      "Unique referrers": [
+        "Unieke verwijzers"
+      ],
+      "Respect DNT / GPC": [
+        "DNT / GPC respecteren"
+      ],
+      "Settings": [
+        "Instellingen"
+      ],
+      "Settings saved.": [
+        "Instellingen opgeslagen."
+      ],
+      "Device breakdown": [
+        "Apparaatverdeling"
+      ],
+      "Raw log retention (days)": [
+        "Bewaring van ruwe logs (dagen)"
+      ],
+      "Remove query parameters.": [
+        "Verwijdert queryparameters."
+      ],
+      "Dashboard": [
+        "Dashboard"
+      ],
+      "Top pages": [
+        "Top pagina's"
+      ],
+      "Top referrers": [
+        "Top verwijzers"
+      ],
+      "Traffic over time": [
+        "Verkeer in de tijd"
+      ],
+      "You are not allowed to access analytics data.": [
+        "U hebt geen toegang tot analyticsgegevens."
+      ]
+    }
+  }
+}
