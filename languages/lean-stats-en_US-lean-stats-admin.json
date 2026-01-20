@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en_US",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 days"
+      ],
+      "7 days": [
+        "7 days"
+      ],
+      "90 days": [
+        "90 days"
+      ],
+      "Query parameter allowlist": [
+        "Query parameter allowlist"
+      ],
+      "No KPIs available.": [
+        "No KPIs available."
+      ],
+      "No panel available for this screen.": [
+        "No panel available for this screen."
+      ],
+      "No referrers available.": [
+        "No referrers available."
+      ],
+      "No roles available.": [
+        "No roles available."
+      ],
+      "No device data available.": [
+        "No device data available."
+      ],
+      "No data available for this period.": [
+        "No data available for this period."
+      ],
+      "No popular pages available.": [
+        "No popular pages available."
+      ],
+      "Loading: %s": [
+        "Loading: %s"
+      ],
+      "Loading device breakdown…": [
+        "Loading device breakdown…"
+      ],
+      "Loading KPIs…": [
+        "Loading KPIs…"
+      ],
+      "Loading settings…": [
+        "Loading settings…"
+      ],
+      "Loading chart…": [
+        "Loading chart…"
+      ],
+      "Loading…": [
+        "Loading…"
+      ],
+      "Missing REST configuration.": [
+        "Missing REST configuration."
+      ],
+      "Missing admin configuration.": [
+        "Missing admin configuration."
+      ],
+      "Direct": [
+        "Direct"
+      ],
+      "Device breakdown details": [
+        "Device breakdown details"
+      ],
+      "Save": [
+        "Save"
+      ],
+      "Save settings": [
+        "Save settings"
+      ],
+      "API error (%s)": [
+        "API error (%s)"
+      ],
+      "Loading error.": [
+        "Loading error."
+      ],
+      "Error while saving.": [
+        "Error while saving."
+      ],
+      "Role exclusions": [
+        "Role exclusions"
+      ],
+      "Device breakdown chart": [
+        "Device breakdown chart"
+      ],
+      "Traffic chart": [
+        "Traffic chart"
+      ],
+      "Hits": [
+        "Hits"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Ignore tracking for logged-in users."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Ignore tracking if the browser sends DNT or GPC."
+      ],
+      "Unknown": [
+        "Unknown"
+      ],
+      "KPIs": [
+        "KPIs"
+      ],
+      "Invalid REST API nonce.": [
+        "Invalid REST API nonce."
+      ],
+      "Invalid device class.": [
+        "Invalid device class."
+      ],
+      "Invalid page path.": [
+        "Invalid page path."
+      ],
+      "Invalid timestamp bucket.": [
+        "Invalid timestamp bucket."
+      ],
+      "Leave blank to use \\\"Lean Stats\\\".": [
+        "Leave blank to use \\\"Lean Stats\\\"."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Comma-separated list (e.g., utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Strict mode"
+      ],
+      "URL cleanup": [
+        "URL cleanup"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Plugin name (menu and dashboard)"
+      ],
+      "Page": [
+        "Page"
+      ],
+      "Unique pages": [
+        "Unique pages"
+      ],
+      "Period": [
+        "Period"
+      ],
+      "Referrer": [
+        "Referrer"
+      ],
+      "Unique referrers": [
+        "Unique referrers"
+      ],
+      "Respect DNT / GPC": [
+        "Respect DNT / GPC"
+      ],
+      "Settings": [
+        "Settings"
+      ],
+      "Settings saved.": [
+        "Settings saved."
+      ],
+      "Device breakdown": [
+        "Device breakdown"
+      ],
+      "Raw log retention (days)": [
+        "Raw log retention (days)"
+      ],
+      "Remove query parameters.": [
+        "Remove query parameters."
+      ],
+      "Dashboard": [
+        "Dashboard"
+      ],
+      "Top pages": [
+        "Top pages"
+      ],
+      "Top referrers": [
+        "Top referrers"
+      ],
+      "Traffic over time": [
+        "Traffic over time"
+      ],
+      "You are not allowed to access analytics data.": [
+        "You are not allowed to access analytics data."
+      ]
+    }
+  }
+}

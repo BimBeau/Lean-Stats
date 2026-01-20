@@ -1,0 +1,197 @@
+{
+  "translation-revision-date": "",
+  "generator": "",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "el_GR",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "%s : %s": [
+        "%s : %s"
+      ],
+      "30 days": [
+        "30 ημέρες"
+      ],
+      "7 days": [
+        "7 ημέρες"
+      ],
+      "90 days": [
+        "90 ημέρες"
+      ],
+      "Query parameter allowlist": [
+        "Λίστα επιτρεπόμενων παραμέτρων αιτήματος"
+      ],
+      "No KPIs available.": [
+        "Δεν υπάρχουν διαθέσιμα KPI."
+      ],
+      "No panel available for this screen.": [
+        "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν την οθόνη."
+      ],
+      "No referrers available.": [
+        "Δεν υπάρχει διαθέσιμος παραπέμπτης."
+      ],
+      "No roles available.": [
+        "Δεν υπάρχει διαθέσιμος ρόλος."
+      ],
+      "No device data available.": [
+        "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
+      ],
+      "No data available for this period.": [
+        "Δεν υπάρχουν διαθέσιμα δεδομένα για αυτήν την περίοδο."
+      ],
+      "No popular pages available.": [
+        "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
+      ],
+      "Loading: %s": [
+        "Φόρτωση: %s"
+      ],
+      "Loading device breakdown…": [
+        "Φόρτωση κατανομής συσκευών…"
+      ],
+      "Loading KPIs…": [
+        "Φόρτωση KPI…"
+      ],
+      "Loading settings…": [
+        "Φόρτωση ρυθμίσεων…"
+      ],
+      "Loading chart…": [
+        "Φόρτωση γραφήματος…"
+      ],
+      "Loading…": [
+        "Φόρτωση…"
+      ],
+      "Missing REST configuration.": [
+        "Λείπει ρύθμιση REST."
+      ],
+      "Missing admin configuration.": [
+        "Λείπει ρύθμιση διαχειριστή."
+      ],
+      "Direct": [
+        "Άμεσο"
+      ],
+      "Device breakdown details": [
+        "Λεπτομέρειες κατανομής ανά συσκευή"
+      ],
+      "Save": [
+        "Αποθήκευση"
+      ],
+      "Save settings": [
+        "Αποθήκευση ρυθμίσεων"
+      ],
+      "API error (%s)": [
+        "Σφάλμα API (%s)"
+      ],
+      "Loading error.": [
+        "Σφάλμα φόρτωσης."
+      ],
+      "Error while saving.": [
+        "Σφάλμα κατά την αποθήκευση."
+      ],
+      "Role exclusions": [
+        "Εξαιρέσεις ανά ρόλο"
+      ],
+      "Device breakdown chart": [
+        "Γράφημα κατανομής ανά συσκευή"
+      ],
+      "Traffic chart": [
+        "Γράφημα επισκεψιμότητας"
+      ],
+      "Hits": [
+        "Χτυπήματα"
+      ],
+      "Ignore tracking for logged-in users.": [
+        "Παράβλεψη παρακολούθησης για συνδεδεμένους χρήστες."
+      ],
+      "Ignore tracking if the browser sends DNT or GPC.": [
+        "Παράβλεψη παρακολούθησης αν ο περιηγητής στέλνει DNT ή GPC."
+      ],
+      "Unknown": [
+        "Άγνωστο"
+      ],
+      "KPIs": [
+        "KPI"
+      ],
+      "Invalid REST API nonce.": [
+        "Μη έγκυρο nonce REST API."
+      ],
+      "Invalid device class.": [
+        "Μη έγκυρη κατηγορία συσκευής."
+      ],
+      "Invalid page path.": [
+        "Μη έγκυρη διαδρομή σελίδας."
+      ],
+      "Invalid timestamp bucket.": [
+        "Μη έγκυρο εύρος χρονικής σήμανσης."
+      ],
+      "Laisser vide pour utiliser \\\"Lean Stats\\\".": [
+        "Αφήστε κενό για χρήση του \\\"Lean Stats\\\"."
+      ],
+      "Lean Stats": [
+        "Lean Stats"
+      ],
+      "Comma-separated list (e.g., utm_source, utm_campaign).": [
+        "Λίστα χωρισμένη με κόμματα (π.χ. utm_source, utm_campaign)."
+      ],
+      "Strict mode": [
+        "Αυστηρή λειτουργία"
+      ],
+      "URL cleanup": [
+        "Καθαρισμός URL"
+      ],
+      "Plugin name (menu and dashboard)": [
+        "Όνομα πρόσθετου (μενού και πίνακας ελέγχου)"
+      ],
+      "Page": [
+        "Σελίδα"
+      ],
+      "Unique pages": [
+        "Μοναδικές σελίδες"
+      ],
+      "Period": [
+        "Περίοδος"
+      ],
+      "Referrer": [
+        "Παραπέμπτης"
+      ],
+      "Unique referrers": [
+        "Μοναδικοί παραπέμπτες"
+      ],
+      "Respect DNT / GPC": [
+        "Σεβασμός DNT / GPC"
+      ],
+      "Settings": [
+        "Ρυθμίσεις"
+      ],
+      "Settings saved.": [
+        "Οι ρυθμίσεις αποθηκεύτηκαν."
+      ],
+      "Device breakdown": [
+        "Κατανομή ανά συσκευή"
+      ],
+      "Raw log retention (days)": [
+        "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
+      ],
+      "Remove query parameters.": [
+        "Αφαιρεί τις παραμέτρους αιτήματος."
+      ],
+      "Dashboard": [
+        "Πίνακας ελέγχου"
+      ],
+      "Top pages": [
+        "Κορυφαίες σελίδες"
+      ],
+      "Top referrers": [
+        "Κορυφαίοι παραπέμπτες"
+      ],
+      "Traffic over time": [
+        "Επισκεψιμότητα με την πάροδο του χρόνου"
+      ],
+      "You are not allowed to access analytics data.": [
+        "Δεν επιτρέπεται η πρόσβαση στα δεδομένα αναλυτικών."
+      ]
+    }
+  }
+}
