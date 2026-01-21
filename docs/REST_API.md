@@ -57,6 +57,12 @@ Returns paginated hit totals by referrer domain.
 
 Parameters: same as `/top-pages`.
 
+#### GET `/referrer-sources`
+
+Returns paginated hit totals by referrer domain and source category.
+
+Parameters: same as `/top-pages`, with `orderby` values `hits`, `referrer`, or `category`.
+
 #### GET `/404s`
 
 Returns paginated hit totals for 404 paths.
@@ -149,6 +155,7 @@ Returned fields:
 - `respect_dnt_gpc` (boolean)
 - `url_strip_query` (boolean)
 - `url_query_allowlist` (array)
+- `utm_allowlist` (array)
 - `raw_logs_enabled` (boolean)
 - `raw_logs_retention_days` (integer)
 - `excluded_roles` (array)
@@ -168,6 +175,7 @@ JSON payload:
 - `respect_dnt_gpc` (boolean, optional)
 - `url_strip_query` (boolean, optional)
 - `url_query_allowlist` (array, optional)
+- `utm_allowlist` (array, optional)
 - `raw_logs_enabled` (boolean, optional)
 - `raw_logs_retention_days` (integer, optional)
 - `excluded_roles` (array, optional)

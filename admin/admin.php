@@ -175,6 +175,11 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
+            'name' => 'referrers',
+            'title' => __('Referrers', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
             'name' => 'not-found',
             'title' => __('404s', 'lean-stats'),
             'type' => 'core',

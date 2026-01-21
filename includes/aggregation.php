@@ -114,7 +114,7 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
 /**
  * Store a single hit directly into aggregation tables.
  */
-function lean_stats_store_aggregate_hit(array $hit): void
+function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): void
 {
     $timestamp = isset($hit['timestamp_bucket']) ? absint($hit['timestamp_bucket']) : 0;
     $page_path = isset($hit['page_path']) ? (string) $hit['page_path'] : '';
@@ -129,6 +129,13 @@ function lean_stats_store_aggregate_hit(array $hit): void
 
     $date_bucket = wp_date('Y-m-d', $timestamp);
     $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
+
+    $source_category = lean_stats_get_source_category_from_referrer($referrer_domain);
+    lean_stats_increment_hits_daily($date_bucket, $page_path, $referrer_domain, $source_category);
+
+    if ($utm_params !== []) {
+        lean_stats_store_utm_daily($date_bucket, $utm_params);
+    }
 
     lean_stats_upsert_aggregate_rows(
         'daily',

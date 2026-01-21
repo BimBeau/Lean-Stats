@@ -57,6 +57,24 @@ Indexes:
 - Index: `date_bucket`
 - Index: `search_term(191)`
 
+### `wp_lean_stats_utm_daily`
+
+Stores aggregated UTM parameters per day.
+
+Columns:
+
+- `date_bucket` (date)
+- `utm_key` (string)
+- `utm_value` (string)
+- `hits` (bigint)
+
+Indexes:
+
+- Primary key: `(date_bucket, utm_key, utm_value(191))`
+- Index: `date_bucket`
+- Index: `utm_key`
+- Index: `utm_value(191)`
+
 ### `wp_lean_stats_daily`
 
 Stores aggregated hits per day, page, referrer, and device type.

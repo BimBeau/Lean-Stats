@@ -50,6 +50,17 @@ class Lean_Stats_Report_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_NAMESPACE,
+            '/referrer-sources',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_referrer_sources'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => $list_args,
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_NAMESPACE,
             '/404s',
             [
                 'methods' => 'GET',
@@ -202,6 +213,17 @@ class Lean_Stats_Report_Controller {
         $table = $wpdb->prefix . 'lean_stats_daily';
 
         return $this->build_list_response($request, $table, 'referrer_domain', 'referrers');
+    }
+
+    /**
+     * Referrer sources aggregation.
+     */
+    public function get_referrer_sources(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'lean_stats_hits_daily';
+
+        return $this->build_referrer_sources_response($request, $table);
     }
 
     /**
@@ -420,6 +442,93 @@ class Lean_Stats_Report_Controller {
             static function (array $row): array {
                 return [
                     'label' => isset($row['label']) ? sanitize_text_field((string) $row['label']) : '',
+                    'hits' => isset($row['hits']) ? (int) $row['hits'] : 0,
+                ];
+            },
+            $rows ?: []
+        );
+
+        $payload = [
+            'range' => $range,
+            'pagination' => [
+                'page' => $pagination['page'],
+                'perPage' => $pagination['per_page'],
+                'totalItems' => $total_items,
+                'totalPages' => $pagination['per_page'] > 0
+                    ? (int) ceil($total_items / $pagination['per_page'])
+                    : 0,
+            ],
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
+    }
+
+    /**
+     * Build paginated list response for referrer source categories.
+     */
+    private function build_referrer_sources_response(WP_REST_Request $request, string $table): WP_REST_Response {
+        global $wpdb;
+
+        $range = $this->get_day_range($request);
+        $pagination = $this->normalize_pagination($request);
+        $sorting = $this->normalize_sorting(
+            $request,
+            [
+                'hits' => 'hits',
+                'referrer' => 'referrer_domain',
+                'category' => 'source_category',
+            ],
+            'hits'
+        );
+        $cache_key = $this->get_cache_key(
+            'referrer-sources',
+            [
+                'range' => $range,
+                'pagination' => $pagination,
+                'sorting' => $sorting,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
+        $count_query = $wpdb->prepare(
+            "SELECT COUNT(*) FROM (SELECT 1
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY referrer_domain, source_category) AS totals",
+            $range['start'],
+            $range['end']
+        );
+        $total_items = (int) $wpdb->get_var($count_query);
+
+        $list_query = $wpdb->prepare(
+            "SELECT referrer_domain, source_category, SUM(hits) AS hits
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY referrer_domain, source_category
+            ORDER BY {$sorting['orderby']} {$sorting['order']}
+            LIMIT %d OFFSET %d",
+            $range['start'],
+            $range['end'],
+            $pagination['per_page'],
+            $pagination['offset']
+        );
+
+        $rows = $wpdb->get_results($list_query, ARRAY_A);
+        $items = array_map(
+            static function (array $row): array {
+                return [
+                    'referrer_domain' => isset($row['referrer_domain'])
+                        ? sanitize_text_field((string) $row['referrer_domain'])
+                        : '',
+                    'source_category' => isset($row['source_category'])
+                        ? sanitize_text_field((string) $row['source_category'])
+                        : '',
                     'hits' => isset($row['hits']) ? (int) $row['hits'] : 0,
                 ];
             },
