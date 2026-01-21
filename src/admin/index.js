@@ -36,6 +36,7 @@ const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settin
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
     { name: 'top-pages', title: __('Top Pages', 'lean-stats') },
+    { name: 'referrers', title: __('Referrers', 'lean-stats') },
     { name: 'not-found', title: __('404s', 'lean-stats') },
     { name: 'search-terms', title: __('Search Terms', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
@@ -46,6 +47,7 @@ const DEFAULT_SETTINGS = {
     respect_dnt_gpc: true,
     url_strip_query: true,
     url_query_allowlist: [],
+    utm_allowlist: [],
     raw_logs_enabled: false,
     raw_logs_retention_days: 1,
     excluded_roles: [],
@@ -243,6 +245,7 @@ const getPanelComponent = (name) => {
     const corePanels = {
         dashboard: OverviewPanel,
         'top-pages': TopPagesPanel,
+        referrers: ReferrerSourcesPanel,
         'not-found': NotFoundPanel,
         'search-terms': SearchTermsPanel,
         settings: SettingsPanel,
@@ -331,6 +334,7 @@ const SettingsPanel = () => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/settings');
     const [formState, setFormState] = useState(DEFAULT_SETTINGS);
     const [allowlistInput, setAllowlistInput] = useState('');
+    const [utmAllowlistInput, setUtmAllowlistInput] = useState('');
     const [excludedPathsInput, setExcludedPathsInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
@@ -347,6 +351,7 @@ const SettingsPanel = () => {
             __('Aggregated device class totals.', 'lean-stats'),
             __('Aggregated 404 paths.', 'lean-stats'),
             __('Aggregated on-site search terms.', 'lean-stats'),
+            __('Aggregated UTM campaign parameters (when allowlisted).', 'lean-stats'),
             __('Raw log snapshots (timestamp, page path, referrer, device) when debug mode is enabled.', 'lean-stats'),
         ],
         []
@@ -366,6 +371,9 @@ const SettingsPanel = () => {
         if (formState.raw_logs_retention_days > 30) {
             warnings.push(__('Raw log retention exceeds 30 days.', 'lean-stats'));
         }
+        if (formState.utm_allowlist?.length) {
+            warnings.push(__('Allowlisted UTM parameters are stored in aggregated reports.', 'lean-stats'));
+        }
         return warnings;
     }, [formState]);
 
@@ -374,6 +382,7 @@ const SettingsPanel = () => {
             const normalized = normalizeSettings(data.settings);
             setFormState(normalized);
             setAllowlistInput(normalized.url_query_allowlist.join(', '));
+            setUtmAllowlistInput(normalized.utm_allowlist.join(', '));
             setExcludedPathsInput(normalized.excluded_paths.join('\n'));
             window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
         }
@@ -414,6 +423,7 @@ const SettingsPanel = () => {
                 const normalized = normalizeSettings(payload.settings);
                 setFormState(normalized);
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
+                setUtmAllowlistInput(normalized.utm_allowlist.join(', '));
                 setExcludedPathsInput(normalized.excluded_paths.join('\n'));
                 window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
             }
@@ -605,6 +615,19 @@ const SettingsPanel = () => {
                                                     .map((item) => item.trim())
                                                     .filter(Boolean);
                                                 setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
+                                            }}
+                                        />
+                                        <TextControl
+                                            label={__('UTM allowlist', 'lean-stats')}
+                                            help={__('Comma-separated list of UTM parameters to aggregate (e.g., utm_source, utm_medium).', 'lean-stats')}
+                                            value={utmAllowlistInput}
+                                            onChange={(value) => {
+                                                setUtmAllowlistInput(value);
+                                                const parsed = value
+                                                    .split(',')
+                                                    .map((item) => item.trim())
+                                                    .filter(Boolean);
+                                                setFormState((prev) => ({ ...prev, utm_allowlist: parsed }));
                                             }}
                                         />
                                     </CardBody>
@@ -1083,6 +1106,173 @@ const ReportTableCard = ({
     );
 };
 
+const ReferrerSourcesTableCard = ({ range }) => {
+    const [page, setPage] = useState(1);
+    const [perPage, setPerPage] = useState(10);
+    const [orderBy, setOrderBy] = useState('hits');
+    const [order, setOrder] = useState('desc');
+
+    useEffect(() => {
+        setPage(1);
+    }, [range.start, range.end]);
+
+    const { data, isLoading, error } = useAdminEndpoint(
+        '/referrer-sources',
+        {
+            ...range,
+            page,
+            per_page: perPage,
+            orderby: orderBy,
+            order,
+        },
+        {
+            namespace: ADMIN_CONFIG?.settings?.restNamespace,
+        }
+    );
+
+    const items = data?.items || [];
+    const pagination = data?.pagination || {};
+    const totalPages = pagination.totalPages || 1;
+    const totalItems = pagination.totalItems || items.length;
+
+    useEffect(() => {
+        if (!isLoading && !error && totalPages && page > totalPages) {
+            setPage(totalPages);
+        }
+    }, [totalPages, page, isLoading, error]);
+
+    const canPrevious = page > 1;
+    const canNext = page < totalPages;
+
+    const orderLabel = order === 'asc' ? __('Ascending', 'lean-stats') : __('Descending', 'lean-stats');
+    const orderToggleLabel = sprintf(
+        __('Toggle sort order: %s', 'lean-stats'),
+        orderLabel
+    );
+    const tableLabel = __('Table: Referrer sources', 'lean-stats');
+
+    const rows = items.map((item, index) => {
+        const referrerDomain = item.referrer_domain || __('Direct', 'lean-stats');
+        const categoryFallback = item.referrer_domain ? __('Referrer', 'lean-stats') : __('Direct', 'lean-stats');
+
+        return {
+            key: `${referrerDomain}-${item.source_category || categoryFallback}-${index}`,
+            referrer: referrerDomain,
+            category: item.source_category || categoryFallback,
+            hits: item.hits,
+        };
+    });
+
+    return (
+        <LsCard title={__('Referrer sources', 'lean-stats')}>
+            <div className="ls-table-controls">
+                <SelectControl
+                    label={__('Sort by', 'lean-stats')}
+                    value={orderBy}
+                    options={[
+                        { label: __('Pageviews (hits)', 'lean-stats'), value: 'hits' },
+                        { label: __('Referrer', 'lean-stats'), value: 'referrer' },
+                        { label: __('Source category', 'lean-stats'), value: 'category' },
+                    ]}
+                    onChange={(value) => {
+                        setOrderBy(value);
+                        setPage(1);
+                    }}
+                    __nextHasNoMarginBottom
+                />
+                <Button
+                    variant="secondary"
+                    icon={order === 'asc' ? 'arrow-up-alt2' : 'arrow-down-alt2'}
+                    onClick={() => {
+                        setOrder(order === 'asc' ? 'desc' : 'asc');
+                        setPage(1);
+                    }}
+                    aria-label={orderToggleLabel}
+                >
+                    {orderLabel}
+                </Button>
+                <SelectControl
+                    label={__('Rows', 'lean-stats')}
+                    value={String(perPage)}
+                    options={[
+                        { label: '5', value: '5' },
+                        { label: '10', value: '10' },
+                        { label: '20', value: '20' },
+                    ]}
+                    onChange={(value) => {
+                        setPerPage(Number(value));
+                        setPage(1);
+                    }}
+                    __nextHasNoMarginBottom
+                />
+            </div>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && rows.length === 0}
+                emptyLabel={__('No referrer data available.', 'lean-stats')}
+                loadingLabel={__('Loading referrer sources…', 'lean-stats')}
+            />
+            {!isLoading && !error && rows.length > 0 && (
+                <>
+                    <Table className="ls-report-table" aria-label={tableLabel}>
+                        <TableHeader>
+                            <TableRow>
+                                <TableCell as="th" scope="col">
+                                    {__('Referrer', 'lean-stats')}
+                                </TableCell>
+                                <TableCell as="th" scope="col">
+                                    {__('Source category', 'lean-stats')}
+                                </TableCell>
+                                <TableCell as="th" scope="col">
+                                    {__('Pageviews (hits)', 'lean-stats')}
+                                </TableCell>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow key={row.key}>
+                                    <TableCell>{row.referrer}</TableCell>
+                                    <TableCell>{row.category}</TableCell>
+                                    <TableCell>{row.hits}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Flex className="ls-table-pagination" justify="space-between" align="center">
+                        <FlexItem>
+                            <ButtonGroup>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                                    disabled={!canPrevious}
+                                    aria-label={__('Previous page', 'lean-stats')}
+                                >
+                                    {__('Previous', 'lean-stats')}
+                                </Button>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                                    disabled={!canNext}
+                                    aria-label={__('Next page', 'lean-stats')}
+                                >
+                                    {__('Next', 'lean-stats')}
+                                </Button>
+                            </ButtonGroup>
+                        </FlexItem>
+                        <FlexItem className="ls-table-pagination__meta">
+                            {sprintf(__('Page %1$d of %2$d', 'lean-stats'), page, totalPages)}
+                        </FlexItem>
+                        <FlexItem className="ls-table-pagination__meta">
+                            {sprintf(__('%s items', 'lean-stats'), totalItems)}
+                        </FlexItem>
+                    </Flex>
+                </>
+            )}
+        </LsCard>
+    );
+};
+
 const AggregatedDataNotice = () => (
     <Notice status="info" isDismissible={false}>
         {__('All data is aggregated and contains no per-visitor details.', 'lean-stats')}
@@ -1146,6 +1336,21 @@ const SearchTermsPanel = () => (
         labelFallback={__('Unknown', 'lean-stats')}
     />
 );
+
+const ReferrerSourcesPanel = () => {
+    const [rangePreset, setRangePreset] = useState('30d');
+    const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
+
+    return (
+        <div className="ls-report-panel">
+            <div className="ls-report-panel__header">
+                <PeriodFilter value={rangePreset} onChange={setRangePreset} />
+                <AggregatedDataNotice />
+            </div>
+            <ReferrerSourcesTableCard range={range} />
+        </div>
+    );
+};
 
 const DeviceSplit = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/device-split', range);

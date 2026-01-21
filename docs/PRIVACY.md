@@ -46,6 +46,9 @@ These options help align Lean Stats with privacy-conscious site configurations.
   Keeps only explicitly allowlisted query keys  
   (for example: `utm_source`, `utm_medium`, `utm_campaign`).
 
+- **UTM allowlist**  
+  Stores aggregated UTM values for the allowlisted campaign parameters.
+
 This prevents accidental storage of personal or sensitive data in URLs.
 
 ---

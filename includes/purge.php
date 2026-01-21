@@ -18,6 +18,7 @@ function lean_stats_purge_analytics_data(): array
         'lean_stats_hits_daily',
         'lean_stats_404s_daily',
         'lean_stats_search_terms_daily',
+        'lean_stats_utm_daily',
     ];
 
     $results = [];

@@ -11,6 +11,7 @@ Lean Stats stores settings in the `lean_stats_settings` option and exposes them 
 | `respect_dnt_gpc` | boolean | `true` | Skips tracking when `DNT: 1` or `Sec-GPC: 1` headers are present. |
 | `url_strip_query` | boolean | `true` | Removes query strings from tracked page paths. |
 | `url_query_allowlist` | array | `[]` | Keeps only listed query keys when query stripping is enabled. |
+| `utm_allowlist` | array | `[]` | Stores aggregated UTM values for the listed UTM parameters. |
 | `raw_logs_enabled` | boolean | `false` | Mirrors the debug mode state to control raw log storage. |
 | `raw_logs_retention_days` | integer | `1` | Retention window (1–365 days) for raw logs when debug mode is enabled. |
 | `excluded_roles` | array | `[]` | Skips tracking for logged-in users in the listed WordPress roles. |
