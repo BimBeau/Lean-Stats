@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T10:57:25+00:00\n"
+"POT-Creation-Date: 2026-01-21T11:43:52+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,15 +37,17 @@ msgstr "Instrumentpanel"
 msgid "Settings"
 msgstr "Inställningar"
 
-#: includes/rest/class-lean-stats-admin-controller.php:139
+#: includes/rest/class-lean-stats-admin-controller.php:140
+#: includes/rest/class-lean-stats-report-controller.php:91
 msgid "You are not allowed to access analytics data."
 msgstr "Du har inte behörighet att komma åt analysdata."
 
-#: includes/rest/class-lean-stats-admin-controller.php:152
+#: includes/rest/class-lean-stats-admin-controller.php:153
+#: includes/rest/class-lean-stats-report-controller.php:104
 msgid "Invalid REST API nonce."
 msgstr "Ogiltig REST API-nonce."
 
-#: includes/rest/class-lean-stats-admin-controller.php:244
+#: includes/rest/class-lean-stats-admin-controller.php:245
 msgid "Debug mode is disabled."
 msgstr ""
 
