@@ -6,7 +6,7 @@
 defined('ABSPATH') || exit;
 
 return [
-    'version' => '0.35.1',
+    'version' => '0.35.2',
     'slug' => 'lean-stats',
     'rest_namespace' => 'lean-stats/v1',
     'rest_namespace_internal' => 'lean-stats/internal/v1',
