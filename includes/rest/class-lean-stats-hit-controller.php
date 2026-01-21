@@ -261,7 +261,10 @@ class Lean_Stats_Hit_Controller {
         $ttl = (int) apply_filters('lean_stats_dedupe_ttl', 20);
         $ttl = max(10, min(30, $ttl));
 
+        $timestamp = isset($hit['timestamp_bucket']) ? absint($hit['timestamp_bucket']) : 0;
+        $date_bucket = $timestamp > 0 ? wp_date('Y-m-d', $timestamp) : '';
         $key_parts = [
+            $date_bucket,
             $hit['page_path'],
             $hit['referrer_domain'] ?? '',
             $hit['device_class'],
