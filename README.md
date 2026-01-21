@@ -52,6 +52,28 @@ Lean Stats focuses on **aggregated metrics**, not user journeys.
   - allowlist only (e.g. `utm_source`, `utm_medium`, `utm_campaign`)
   - normalization to prevent storing arbitrary PII in URLs
 
+## ✅ Collected data (aggregated only)
+
+Lean Stats stores **aggregated counts**, never person-level records.
+
+- Page paths (cleaned by default)
+- Daily or hourly hit totals per page
+- Referrer domains (domain only)
+- Device class (mobile / desktop / tablet)
+- 404 paths with counts
+- Internal search terms with counts
+- Allowlisted UTM campaign values (aggregated)
+- Time buckets (day or hour)
+
+## ❌ Data never collected
+
+- Full IP addresses or precise location data
+- Cookies, localStorage, sessionStorage, or persistent identifiers
+- User IDs, emails, usernames, or names
+- Full referrer URLs or arbitrary query strings
+- Fingerprints or probabilistic identifiers
+- Session replay, heatmaps, or behavioral profiling
+
 ## 🚫 What Lean Stats deliberately does NOT do
 
 To keep Lean Stats lean and avoid consent-driven tracking patterns, the plugin does **not** provide:
@@ -77,6 +99,14 @@ Lean Stats is designed to minimize data collection:
 - Optional support for GPC / DNT signals (configurable)
 
 > Note: Legal requirements vary by jurisdiction and by how a site is configured. Lean Stats is engineered to minimize risk by avoiding common consent-triggering tracking patterns.
+
+## ⚙️ Settings overview
+
+- **URL cleaning**: strips query strings by default; allowlists keep only specified parameters.
+- **Exclusions**: skips tracking for specified roles and URL paths.
+- **DNT/GPC**: respects `DNT: 1` and `Sec-GPC: 1` when enabled.
+- **Retention**: raw logs keep a short, configurable retention window when debug mode is enabled.
+- **Purge**: a purge action deletes aggregated analytics tables and raw logs while keeping settings.
 
 ## 🧩 Admin UI
 
