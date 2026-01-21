@@ -133,7 +133,8 @@ class Lean_Stats_Admin_Controller {
      * Permission check for admin analytics endpoints.
      */
     public function check_permissions(WP_REST_Request $request) {
-        if (!current_user_can('manage_options')) {
+        $capability = $this->get_required_capability();
+        if (!current_user_can($capability)) {
             return new WP_Error(
                 'lean_stats_forbidden',
                 __('You are not allowed to access analytics data.', 'lean-stats'),
@@ -684,5 +685,14 @@ class Lean_Stats_Admin_Controller {
         }
 
         set_transient($cache_key, $payload, $ttl);
+    }
+
+    /**
+     * Resolve required capability.
+     */
+    private function get_required_capability(): string {
+        $capability = apply_filters('lean_stats_admin_capability', 'manage_options');
+
+        return is_string($capability) && $capability !== '' ? $capability : 'manage_options';
     }
 }

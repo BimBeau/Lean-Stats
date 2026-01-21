@@ -16,13 +16,70 @@ JSON parameters:
 - `device_class` (string, required)
 - `timestamp_bucket` (integer, required)
 
+### Protected report endpoints
+
+These endpoints require an authenticated user with the required capability (filterable via `lean_stats_admin_capability`) and a REST nonce (`X-WP-Nonce` or `_wpnonce`).
+
+#### GET `/overview`
+
+Returns aggregated overview metrics.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+
+Returned fields:
+
+- `overview.pageViews` (integer)
+- `overview.uniquePages` (integer)
+- `overview.uniqueReferrers` (integer)
+- `overview.notFoundHits` (integer)
+- `overview.searchHits` (integer)
+- `overview.uniqueSearchTerms` (integer)
+
+#### GET `/top-pages`
+
+Returns paginated page view totals by page path.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits` or `label`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
+
+#### GET `/referrers`
+
+Returns paginated hit totals by referrer domain.
+
+Parameters: same as `/top-pages`.
+
+#### GET `/404s`
+
+Returns paginated hit totals for 404 paths.
+
+Parameters: same as `/top-pages`.
+
+#### GET `/search-terms`
+
+Returns paginated hit totals for search terms.
+
+Parameters: same as `/top-pages`.
+
+#### POST `/purge`
+
+Purges cached analytics responses.
+
 ## Admin API
 
 **Namespace**: `lean-stats/internal/v1`
 
 Admin routes require:
 
-- a user with the `manage_options` capability
+- a user with the required capability (filterable via `lean_stats_admin_capability`)
 - a REST nonce (`X-WP-Nonce` or `_wpnonce`)
 
 ### GET `/admin/kpis`

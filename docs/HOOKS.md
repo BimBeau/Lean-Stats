@@ -72,6 +72,16 @@ add_filter('lean_stats_admin_cache_ttl', function (int $ttl): int {
 });
 ```
 
+### `lean_stats_admin_capability`
+
+Filter the capability required to access protected analytics REST endpoints.
+
+```php
+add_filter('lean_stats_admin_capability', function (): string {
+    return 'manage_options';
+});
+```
+
 ### `lean_stats_dedupe_ttl`
 
 Filter the hit deduplication window (seconds). Default is `20`, min `10`, max `30`.

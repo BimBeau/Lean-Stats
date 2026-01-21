@@ -250,6 +250,42 @@ function lean_stats_get_rest_sources(): array
             'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
             'path' => '/admin/device-split',
         ],
+        [
+            'key' => 'overview',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/overview',
+        ],
+        [
+            'key' => 'report-top-pages',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/top-pages',
+        ],
+        [
+            'key' => 'report-referrers',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/referrers',
+        ],
+        [
+            'key' => 'report-404s',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/404s',
+        ],
+        [
+            'key' => 'report-search-terms',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/search-terms',
+        ],
+        [
+            'key' => 'report-purge',
+            'method' => 'POST',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/purge',
+        ],
     ];
 
     $filtered = apply_filters('lean_stats_rest_sources', $sources);
