@@ -128,6 +128,17 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         wp_style_add_data('lean-stats-admin', 'rtl', 'replace');
     }
 
+    $admin_extra_css_path = LEAN_STATS_PATH . 'build/style-style-admin.css';
+    if (file_exists($admin_extra_css_path)) {
+        wp_enqueue_style(
+            'lean-stats-admin-extras',
+            LEAN_STATS_URL . 'build/style-style-admin.css',
+            [],
+            $asset_data['version']
+        );
+        wp_style_add_data('lean-stats-admin-extras', 'rtl', 'replace');
+    }
+
     wp_localize_script(
         'lean-stats-admin',
         'LeanStatsAdmin',
