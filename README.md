@@ -13,22 +13,42 @@ Lean Stats is built to provide **useful site insights** while staying **minimal,
 - Admin-first UX with a native Gutenberg-style UI
 - Aggregate-first data model (focus on trends, not people)
 
+## 📊 Metric definitions (important)
+
+Lean Stats uses **clear, privacy-safe metrics** to avoid ambiguity.
+
+### Visits
+- A **visit** represents an anonymous **session** (not a unique person).
+- Sessions are identified in a **RGPD-compatible** way:
+  - using an **irreversible hash** derived from the IP address
+  - combined with a **secret salt**
+  - the salt can be **rotated daily**
+- No IP addresses are stored in clear.
+- No cookies or persistent identifiers are used.
+
+Visits cannot be used to identify individuals.
+
+### Page views
+- **Page views** represent the **total number of pages displayed**.
+- Each page load increments the counter.
+- Page views are counted across all visits (not unique).
+
 ## 📊 What Lean Stats tracks (Free)
 
 Lean Stats focuses on **aggregated metrics**, not user journeys.
 
 ### Core metrics
-- Page views (aggregated)
-- Visits (sessions anonymized per day)
+- Page views (total pages displayed)
+- Visits (anonymous sessions)
 - Time series (per day, optionally per hour)
-- Top pages (by pageviews)
+- Top pages (by page views)
 - Referrers by domain (e.g. `google.com`, `instagram.com`)
 - Device class (mobile / desktop / tablet)
 
 ### Optional modules (privacy-safe)
 - 404 tracking (top missing URLs + counts)
 - Internal WordPress search terms (counts only, no user info)
-- UTM “safe mode” (basic) *(optional / can be enabled later)*
+- UTM “safe mode” (basic)
   - allowlist only (e.g. `utm_source`, `utm_medium`, `utm_campaign`)
   - normalization to prevent storing arbitrary PII in URLs
 
@@ -79,12 +99,9 @@ Lean Stats uses the `lean-stats` text domain for PHP and JavaScript strings, and
 
 ## 📦 Build plugin zip
 
-Use the script to generate a distributable plugin archive in `dist/`.
+Use the script to generate a distributable plugin archive in `dist/`.  
+Build command: npm run build:zip  
 The build process generates `.mo` files and JavaScript translation JSON files in `languages/` when WP-CLI is available.
-
-```bash
-npm run build:zip
-```
 
 ## ✅ Localization testing
 
