@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-const LEAN_STATS_SCHEMA_VERSION = '5';
+const LEAN_STATS_SCHEMA_VERSION = '6';
 
 /**
  * Create or update the analytics tables.
@@ -24,6 +24,7 @@ function lean_stats_install_schema(): void
     $not_found_table = $wpdb->prefix . 'lean_stats_404s_daily';
     $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
     $utm_table = $wpdb->prefix . 'lean_stats_utm_daily';
+    $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
 
     $daily_schema = "CREATE TABLE {$daily_table} (
         date_bucket DATE NOT NULL,
@@ -100,12 +101,23 @@ function lean_stats_install_schema(): void
         KEY utm_value (utm_value(191))
     ) {$charset_collate};";
 
+    $entry_exit_schema = "CREATE TABLE {$entry_exit_table} (
+        date_bucket DATE NOT NULL,
+        page_path VARCHAR(2048) NOT NULL,
+        entries BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        exits BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        PRIMARY KEY  (date_bucket, page_path(255)),
+        KEY date_bucket (date_bucket),
+        KEY page_path (page_path(255))
+    ) {$charset_collate};";
+
     dbDelta($daily_schema);
     dbDelta($hourly_schema);
     dbDelta($hits_daily_schema);
     dbDelta($not_found_schema);
     dbDelta($search_terms_schema);
     dbDelta($utm_schema);
+    dbDelta($entry_exit_schema);
 
     $wpdb->query("DROP TABLE IF EXISTS {$sessions_table}");
 

@@ -190,6 +190,16 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
+            'name' => 'entry-pages',
+            'title' => __('Entry Pages', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
+            'name' => 'exit-pages',
+            'title' => __('Exit Pages', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
             'name' => 'settings',
             'title' => __('Settings', 'lean-stats'),
             'type' => 'core',
@@ -305,6 +315,18 @@ function lean_stats_get_rest_sources(): array
             'method' => 'GET',
             'namespace' => LEAN_STATS_REST_NAMESPACE,
             'path' => '/search-terms',
+        ],
+        [
+            'key' => 'report-entry-pages',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/entry-pages',
+        ],
+        [
+            'key' => 'report-exit-pages',
+            'method' => 'GET',
+            'namespace' => LEAN_STATS_REST_NAMESPACE,
+            'path' => '/exit-pages',
         ],
         [
             'key' => 'report-purge',

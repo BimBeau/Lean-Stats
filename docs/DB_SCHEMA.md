@@ -57,6 +57,23 @@ Indexes:
 - Index: `date_bucket`
 - Index: `search_term(191)`
 
+### `wp_lean_stats_entry_exit_daily`
+
+Stores aggregated entry and exit counts per day and page path.
+
+Columns:
+
+- `date_bucket` (date)
+- `page_path` (string, partially indexed)
+- `entries` (bigint)
+- `exits` (bigint)
+
+Indexes:
+
+- Primary key: `(date_bucket, page_path(255))`
+- Index: `date_bucket`
+- Index: `page_path(255)`
+
 ### `wp_lean_stats_utm_daily`
 
 Stores aggregated UTM parameters per day.

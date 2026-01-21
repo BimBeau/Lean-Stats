@@ -41,6 +41,12 @@ function lean_stats_track_request(): void
         $referrer['domain'],
         $referrer['category']
     );
+    lean_stats_increment_entry_exit_daily(
+        $date_bucket,
+        $path,
+        lean_stats_is_entry_hit($path, $referrer['domain']) ? 1 : 0,
+        lean_stats_is_exit_hit($path, $referrer['domain']) ? 1 : 0
+    );
 
     $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '';
     $utm_params = lean_stats_extract_utm_params($request_uri, $settings['utm_allowlist'] ?? []);
@@ -234,11 +240,134 @@ function lean_stats_get_referrer_info(): array
 }
 
 /**
+ * Resolve the primary site domain for referrer checks.
+ */
+function lean_stats_get_site_domain(): string
+{
+    $home_url = home_url();
+    $parsed = wp_parse_url($home_url);
+
+    return isset($parsed['host']) ? lean_stats_lowercase($parsed['host']) : '';
+}
+
+/**
+ * Resolve internal referrer domains.
+ */
+function lean_stats_get_internal_referrer_domains(): array
+{
+    $domain = lean_stats_get_site_domain();
+    $domains = $domain !== '' ? [$domain] : [];
+
+    $filtered = apply_filters('lean_stats_internal_referrer_domains', $domains);
+    if (!is_array($filtered)) {
+        $filtered = $domains;
+    }
+
+    $normalized = [];
+    foreach ($filtered as $candidate) {
+        if (!is_string($candidate)) {
+            continue;
+        }
+
+        $candidate = trim($candidate);
+        if ($candidate === '') {
+            continue;
+        }
+
+        $normalized[] = lean_stats_lowercase($candidate);
+    }
+
+    $normalized = array_values(array_unique($normalized));
+
+    return $normalized;
+}
+
+/**
+ * Determine whether a referrer domain belongs to the site.
+ */
+function lean_stats_is_internal_referrer_domain(?string $referrer_domain): bool
+{
+    if (!$referrer_domain) {
+        return false;
+    }
+
+    $referrer_domain = lean_stats_lowercase($referrer_domain);
+    if ($referrer_domain === '') {
+        return false;
+    }
+
+    foreach (lean_stats_get_internal_referrer_domains() as $domain) {
+        if ($referrer_domain === $domain || str_ends_with($referrer_domain, '.' . $domain)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Determine whether a hit qualifies as an entry.
+ */
+function lean_stats_is_entry_hit(string $page_path, ?string $referrer_domain): bool
+{
+    $is_entry = !lean_stats_is_internal_referrer_domain($referrer_domain);
+
+    return (bool) apply_filters('lean_stats_is_entry_hit', $is_entry, $page_path, $referrer_domain);
+}
+
+/**
+ * Determine whether a hit qualifies as an exit.
+ */
+function lean_stats_is_exit_hit(string $page_path, ?string $referrer_domain): bool
+{
+    $is_exit = !lean_stats_is_internal_referrer_domain($referrer_domain);
+
+    return (bool) apply_filters('lean_stats_is_exit_hit', $is_exit, $page_path, $referrer_domain);
+}
+
+/**
  * Derive a source category for a referrer domain.
  */
 function lean_stats_get_source_category_from_referrer(?string $referrer_domain): string
 {
     return $referrer_domain ? 'Referrer' : 'Direct';
+}
+
+/**
+ * Increment entry/exit daily counters.
+ */
+function lean_stats_increment_entry_exit_daily(
+    string $date_bucket,
+    string $page_path,
+    int $entries,
+    int $exits
+): void {
+    $entries = max(0, $entries);
+    $exits = max(0, $exits);
+
+    if ($entries === 0 && $exits === 0) {
+        return;
+    }
+
+    global $wpdb;
+
+    $table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+
+    $sql = "INSERT INTO {$table} (date_bucket, page_path, entries, exits)
+        VALUES (%s, %s, %d, %d)
+        ON DUPLICATE KEY UPDATE
+            entries = entries + VALUES(entries),
+            exits = exits + VALUES(exits)";
+
+    $wpdb->query(
+        $wpdb->prepare(
+            $sql,
+            $date_bucket,
+            $page_path,
+            $entries,
+            $exits
+        )
+    );
 }
 
 /**
