@@ -63,6 +63,7 @@ Lean Stats is designed to minimize data collection:
 Lean Stats integrates directly inside WordPress Admin:
 
 - Gutenberg-style UI using `@wordpress/components`
+- Admin UI uses the Gutenberg design system exclusively with official `@wordpress/components` UI elements.
 - Fast dashboard: KPIs, time series charts, and top lists
 - Minimal interactions: tooltips, skeleton loading, and clear empty states
 - Settings screen for strict mode, DNT / GPC compliance, URL allowlists, retention, and role exclusions

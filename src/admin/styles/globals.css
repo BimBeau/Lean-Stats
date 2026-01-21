@@ -10,6 +10,23 @@
     gap: var(--lean-stats-gap-lg);
 }
 
+.ls-admin-app .ls-dashboard__summary {
+    display: grid;
+    gap: var(--lean-stats-gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    align-items: stretch;
+}
+
+.ls-admin-app .ls-dashboard__summary-card {
+    height: 100%;
+}
+
+.ls-admin-app .ls-dashboard__summary-card--status .components-card__body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .ls-admin-app .ls-settings-roles__title {
     margin-bottom: var(--lean-stats-gap-sm);
 }
@@ -28,16 +45,6 @@
 .ls-admin-app .ls-settings-logs__table th {
     vertical-align: top;
     word-break: break-word;
-}
-
-.ls-admin-app .ls-dashboard__filter {
-    min-width: 240px;
-    flex: 0 1 280px;
-}
-
-.ls-admin-app .ls-dashboard__kpis {
-    min-width: 280px;
-    flex: 1 1 320px;
 }
 
 .ls-admin-app .ls-dashboard__grid {
