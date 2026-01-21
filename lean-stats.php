@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
- * Version: 0.35.3
+ * Version: 0.36.0
  * Author: BimBeau
  * Author: Lean Stats
  * Text Domain: lean-stats
@@ -49,6 +49,7 @@ require_once LEAN_STATS_PATH . 'includes/purge.php';
 require_once LEAN_STATS_PATH . 'includes/raw-logs.php';
 require_once LEAN_STATS_PATH . 'includes/aggregation.php';
 require_once LEAN_STATS_PATH . 'includes/tracking.php';
+require_once LEAN_STATS_PATH . 'includes/geolocation.php';
 
 /**
  * Plugin activation tasks.

@@ -24,6 +24,7 @@ function lean_stats_get_settings_defaults(): array
         'excluded_roles' => [],
         'excluded_paths' => [],
         'debug_enabled' => false,
+        'maxmind_api_key' => '',
     ];
 }
 
@@ -54,6 +55,7 @@ function lean_stats_sanitize_settings($settings): array
     $settings['strict_mode'] = (bool) rest_sanitize_boolean($settings['strict_mode']);
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
+    $settings['maxmind_api_key'] = trim(sanitize_text_field($settings['maxmind_api_key']));
     $raw_logs_enabled = (bool) rest_sanitize_boolean($settings['raw_logs_enabled']);
     $debug_enabled = (bool) rest_sanitize_boolean($settings['debug_enabled']);
     $settings['debug_enabled'] = $debug_enabled || $raw_logs_enabled;

@@ -125,6 +125,24 @@ Admin routes require:
 - a user with the required capability (filterable via `lean_stats_admin_capability`)
 - a REST nonce (`X-WP-Nonce` or `_wpnonce`)
 
+### GET `/admin/geolocation`
+
+Returns geolocation data for the current request IP using MaxMind (API or local GeoLite2).
+
+Response (200):
+
+```json
+{
+  "location": {
+    "ip": "203.0.113.10",
+    "country": "France",
+    "region": "Île-de-France",
+    "city": "Paris",
+    "source": "maxmind-api"
+  }
+}
+```
+
 ### GET `/admin/kpis`
 
 Returns aggregated KPIs (visits, page views, unique referrers).

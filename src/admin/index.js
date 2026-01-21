@@ -36,6 +36,7 @@ const DEFAULT_PANELS = [
     { name: 'search-terms', title: __('Search Terms', 'lean-stats') },
     { name: 'entry-pages', title: __('Entry Pages', 'lean-stats') },
     { name: 'exit-pages', title: __('Exit Pages', 'lean-stats') },
+    { name: 'geolocation', title: __('Geolocation', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
 ];
 const DEFAULT_SETTINGS = {
@@ -50,6 +51,7 @@ const DEFAULT_SETTINGS = {
     excluded_roles: [],
     excluded_paths: [],
     debug_enabled: false,
+    maxmind_api_key: '',
 };
 const formatDate = (date) => {
     const year = date.getFullYear();
@@ -247,6 +249,7 @@ const getPanelComponent = (name) => {
         'search-terms': SearchTermsPanel,
         'entry-pages': EntryPagesPanel,
         'exit-pages': ExitPagesPanel,
+        geolocation: GeolocationPanel,
         settings: SettingsPanel,
     };
 
@@ -307,6 +310,63 @@ const SettingsLogsTab = ({ debugEnabled }) => {
                 </table>
             )}
         </div>
+    );
+};
+
+const GeolocationPanel = () => {
+    const { data, isLoading, error } = useAdminEndpoint('/admin/geolocation');
+    const location = data?.location || null;
+    const hasLocation = location && !location.error;
+    const sourceLabel =
+        location?.source === 'maxmind-api'
+            ? __('MaxMind API', 'lean-stats')
+            : __('GeoLite2 (local)', 'lean-stats');
+
+    return (
+        <LsCard title={__('Geolocation', 'lean-stats')}>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && !hasLocation}
+                emptyLabel={__('No geolocation data available.', 'lean-stats')}
+                loadingLabel={__('Looking up location…', 'lean-stats')}
+                skeletonRows={4}
+            />
+            {!isLoading && !error && location?.error && (
+                <Notice status="warning" isDismissible={false}>
+                    {location.error}
+                </Notice>
+            )}
+            {!isLoading && !error && hasLocation && (
+                <>
+                    <p>{__('Location is derived from the current request IP and is not stored.', 'lean-stats')}</p>
+                    <table className="widefat striped">
+                        <tbody>
+                            <tr>
+                                <th>{__('IP address', 'lean-stats')}</th>
+                                <td>{location.ip}</td>
+                            </tr>
+                            <tr>
+                                <th>{__('Country', 'lean-stats')}</th>
+                                <td>{location.country || __('Unavailable', 'lean-stats')}</td>
+                            </tr>
+                            <tr>
+                                <th>{__('Region', 'lean-stats')}</th>
+                                <td>{location.region || __('Unavailable', 'lean-stats')}</td>
+                            </tr>
+                            <tr>
+                                <th>{__('City', 'lean-stats')}</th>
+                                <td>{location.city || __('Unavailable', 'lean-stats')}</td>
+                            </tr>
+                            <tr>
+                                <th>{__('Source', 'lean-stats')}</th>
+                                <td>{sourceLabel}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </>
+            )}
+        </LsCard>
     );
 };
 
@@ -551,6 +611,21 @@ const SettingsPanel = () => {
                                             help={__('Ignore tracking for logged-in users.', 'lean-stats')}
                                             checked={formState.strict_mode}
                                             onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
+                                        />
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">{__('Geolocation', 'lean-stats')}</h3>
+                                        <TextControl
+                                            label={__('MaxMind API key', 'lean-stats')}
+                                            type="password"
+                                            help={__(
+                                                'Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database.',
+                                                'lean-stats'
+                                            )}
+                                            value={formState.maxmind_api_key}
+                                            onChange={(value) => setFormState((prev) => ({ ...prev, maxmind_api_key: value }))}
                                         />
                                     </CardBody>
                                 </Card>
