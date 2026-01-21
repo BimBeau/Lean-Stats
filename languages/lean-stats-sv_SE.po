@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T16:37:25+00:00\n"
+"POT-Creation-Date: 2026-01-21T17:00:23+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:169 src/admin/index.js:37
+#: admin/admin.php:180 src/admin/index.js:37
 msgid "Dashboard"
 msgstr "Instrumentpanel"
 
-#: admin/admin.php:174 src/admin/index.js:38
+#: admin/admin.php:185 src/admin/index.js:38
 #, fuzzy
 msgid "Top Pages"
 msgstr "Topp-sidor"
 
-#: admin/admin.php:179 src/admin/index.js:39
+#: admin/admin.php:190 src/admin/index.js:39
 #, fuzzy
 msgid "Referrers"
 msgstr "Hänvisare"
 
-#: admin/admin.php:184 src/admin/index.js:40
+#: admin/admin.php:195 src/admin/index.js:40
 msgid "404s"
 msgstr ""
 
-#: admin/admin.php:189 src/admin/index.js:41
+#: admin/admin.php:200 src/admin/index.js:41
 msgid "Search Terms"
 msgstr ""
 
-#: admin/admin.php:194 src/admin/index.js:42
+#: admin/admin.php:205 src/admin/index.js:42
 msgid "Entry Pages"
 msgstr ""
 
-#: admin/admin.php:199 src/admin/index.js:43
+#: admin/admin.php:210 src/admin/index.js:43
 msgid "Exit Pages"
 msgstr ""
 
-#: admin/admin.php:204 src/admin/index.js:44 src/admin/index.js:513
+#: admin/admin.php:215 src/admin/index.js:44 src/admin/index.js:513
 msgid "Settings"
 msgstr "Inställningar"
 

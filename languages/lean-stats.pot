@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lean Stats plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 0.35.1\n"
+"Project-Id-Version: Lean Stats 0.35.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-21T16:37:26+00:00\n"
+"POT-Creation-Date: 2026-01-21T17:00:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -32,42 +32,42 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:169
+#: admin/admin.php:180
 #: src/admin/index.js:37
 msgid "Dashboard"
 msgstr ""
 
-#: admin/admin.php:174
+#: admin/admin.php:185
 #: src/admin/index.js:38
 msgid "Top Pages"
 msgstr ""
 
-#: admin/admin.php:179
+#: admin/admin.php:190
 #: src/admin/index.js:39
 msgid "Referrers"
 msgstr ""
 
-#: admin/admin.php:184
+#: admin/admin.php:195
 #: src/admin/index.js:40
 msgid "404s"
 msgstr ""
 
-#: admin/admin.php:189
+#: admin/admin.php:200
 #: src/admin/index.js:41
 msgid "Search Terms"
 msgstr ""
 
-#: admin/admin.php:194
+#: admin/admin.php:205
 #: src/admin/index.js:42
 msgid "Entry Pages"
 msgstr ""
 
-#: admin/admin.php:199
+#: admin/admin.php:210
 #: src/admin/index.js:43
 msgid "Exit Pages"
 msgstr ""
 
-#: admin/admin.php:204
+#: admin/admin.php:215
 #: src/admin/index.js:44
 #: src/admin/index.js:513
 msgid "Settings"
