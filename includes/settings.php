@@ -18,6 +18,7 @@ function lean_stats_get_settings_defaults(): array
         'respect_dnt_gpc' => true,
         'url_strip_query' => true,
         'url_query_allowlist' => [],
+        'utm_allowlist' => [],
         'raw_logs_enabled' => false,
         'raw_logs_retention_days' => 1,
         'excluded_roles' => [],
@@ -67,6 +68,16 @@ function lean_stats_sanitize_settings($settings): array
     }
     $allowlist = array_filter(array_map('sanitize_key', $allowlist));
     $settings['url_query_allowlist'] = array_values(array_unique($allowlist));
+
+    $utm_allowlist = $settings['utm_allowlist'];
+    if (is_string($utm_allowlist)) {
+        $utm_allowlist = preg_split('/[\s,]+/', $utm_allowlist);
+    }
+    if (!is_array($utm_allowlist)) {
+        $utm_allowlist = [];
+    }
+    $utm_allowlist = array_filter(array_map('sanitize_key', $utm_allowlist));
+    $settings['utm_allowlist'] = array_values(array_unique($utm_allowlist));
 
     $retention_days = absint($settings['raw_logs_retention_days']);
     if ($retention_days < 1) {

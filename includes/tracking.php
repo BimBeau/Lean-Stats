@@ -42,6 +42,12 @@ function lean_stats_track_request(): void
         $referrer['category']
     );
 
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '';
+    $utm_params = lean_stats_extract_utm_params($request_uri, $settings['utm_allowlist'] ?? []);
+    if ($utm_params !== []) {
+        lean_stats_store_utm_daily($date_bucket, $utm_params);
+    }
+
     if (is_404()) {
         lean_stats_increment_404s_daily($date_bucket, $path);
     }
@@ -225,6 +231,14 @@ function lean_stats_get_referrer_info(): array
         'domain' => $domain,
         'category' => 'Referrer',
     ];
+}
+
+/**
+ * Derive a source category for a referrer domain.
+ */
+function lean_stats_get_source_category_from_referrer(?string $referrer_domain): string
+{
+    return $referrer_domain ? 'Referrer' : 'Direct';
 }
 
 /**

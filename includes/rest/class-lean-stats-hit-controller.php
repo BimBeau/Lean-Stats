@@ -65,7 +65,8 @@ class Lean_Stats_Hit_Controller {
             return new WP_REST_Response(['tracked' => false], 204);
         }
 
-        $this->store_hit($hit);
+        $utm_params = $this->extract_utm_params($request->get_param('page_path'));
+        $this->store_hit($hit, $utm_params);
         lean_stats_flush_admin_cache();
 
         return new WP_REST_Response(['tracked' => true], 201);
@@ -289,8 +290,8 @@ class Lean_Stats_Hit_Controller {
     /**
      * Store hit data.
      */
-    private function store_hit(array $hit): void {
-        lean_stats_store_aggregate_hit($hit);
+    private function store_hit(array $hit, array $utm_params = []): void {
+        lean_stats_store_aggregate_hit($hit, $utm_params);
 
         if (!lean_stats_raw_logs_enabled()) {
             return;
@@ -311,5 +312,14 @@ class Lean_Stats_Hit_Controller {
         }
 
         update_option('lean_stats_hits', $hits, false);
+    }
+
+    /**
+     * Extract allowlisted UTM params from raw page path input.
+     */
+    private function extract_utm_params($page_path): array {
+        $settings = lean_stats_get_settings();
+
+        return lean_stats_extract_utm_params($page_path, $settings['utm_allowlist'] ?? []);
     }
 }
