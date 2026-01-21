@@ -46,6 +46,16 @@ class Lean_Stats_Admin_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            '/admin/purge-data',
+            [
+                'methods' => 'POST',
+                'callback' => [$this, 'purge_data'],
+                'permission_callback' => [$this, 'check_permissions'],
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_INTERNAL_NAMESPACE,
             '/admin/kpis',
             [
                 'methods' => 'GET',
@@ -288,6 +298,21 @@ class Lean_Stats_Admin_Controller {
         return new WP_REST_Response(
             [
                 'items' => $items,
+            ],
+            200
+        );
+    }
+
+    /**
+     * Purge analytics data.
+     */
+    public function purge_data(WP_REST_Request $request): WP_REST_Response {
+        $results = lean_stats_purge_analytics_data();
+
+        return new WP_REST_Response(
+            [
+                'purged' => true,
+                'details' => $results,
             ],
             200
         );

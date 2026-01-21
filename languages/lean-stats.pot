@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lean Stats plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 0.28.0\n"
+"Project-Id-Version: Lean Stats 0.29.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-21T11:43:53+00:00\n"
+"POT-Creation-Date: 2026-01-21T11:56:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -17,8 +17,8 @@ msgstr ""
 #. Plugin Name of the plugin
 #: lean-stats.php
 #: includes/settings.php:126
-#: src/admin/index.js:238
-#: src/admin/index.js:761
+#: src/admin/index.js:239
+#: src/admin/index.js:933
 msgid "Lean Stats"
 msgstr ""
 
@@ -33,27 +33,31 @@ msgid "BimBeau"
 msgstr ""
 
 #: admin/admin.php:169
-#: src/admin/index.js:42
+#: src/admin/index.js:43
 msgid "Dashboard"
 msgstr ""
 
 #: admin/admin.php:174
-#: src/admin/index.js:43
-#: src/admin/index.js:412
+#: src/admin/index.js:44
+#: src/admin/index.js:496
 msgid "Settings"
 msgstr ""
 
-#: includes/rest/class-lean-stats-admin-controller.php:140
+#: includes/raw-logs.php:73
+msgid "Lean Stats raw log cleanup"
+msgstr ""
+
+#: includes/rest/class-lean-stats-admin-controller.php:150
 #: includes/rest/class-lean-stats-report-controller.php:91
 msgid "You are not allowed to access analytics data."
 msgstr ""
 
-#: includes/rest/class-lean-stats-admin-controller.php:153
+#: includes/rest/class-lean-stats-admin-controller.php:163
 #: includes/rest/class-lean-stats-report-controller.php:104
 msgid "Invalid REST API nonce."
 msgstr ""
 
-#: includes/rest/class-lean-stats-admin-controller.php:245
+#: includes/rest/class-lean-stats-admin-controller.php:255
 msgid "Debug mode is disabled."
 msgstr ""
 
@@ -78,259 +82,358 @@ msgstr ""
 msgid "Loading: %s"
 msgstr ""
 
-#: src/admin/index.js:136
-#: src/admin/index.js:348
+#: src/admin/index.js:137
+#: src/admin/index.js:381
+#: src/admin/index.js:440
 msgid "Missing REST configuration."
 msgstr ""
 
-#: src/admin/index.js:160
-#: src/admin/index.js:372
+#: src/admin/index.js:161
+#: src/admin/index.js:405
+#: src/admin/index.js:463
 #, js-format
 msgid "API error (%s)"
 msgstr ""
 
-#: src/admin/index.js:175
+#: src/admin/index.js:176
 msgid "Loading error."
 msgstr ""
 
-#: src/admin/index.js:266
+#: src/admin/index.js:267
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:277
+#: src/admin/index.js:278
 msgid "No raw logs available."
 msgstr ""
 
-#: src/admin/index.js:278
+#: src/admin/index.js:279
 msgid "Loading raw logs…"
 msgstr ""
 
-#: src/admin/index.js:285
+#: src/admin/index.js:286
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:286
-#: src/admin/index.js:654
+#: src/admin/index.js:287
+#: src/admin/index.js:826
 msgid "Page"
 msgstr ""
 
-#: src/admin/index.js:287
-#: src/admin/index.js:675
+#: src/admin/index.js:288
+#: src/admin/index.js:847
 msgid "Referrer"
 msgstr ""
 
-#: src/admin/index.js:288
+#: src/admin/index.js:289
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:296
-#: src/admin/index.js:668
+#: src/admin/index.js:297
+#: src/admin/index.js:840
 msgid "Direct"
 msgstr ""
 
-#: src/admin/index.js:311
+#: src/admin/index.js:312
 msgid "Period"
 msgstr ""
 
-#: src/admin/index.js:314
+#: src/admin/index.js:315
 msgid "7 days"
 msgstr ""
 
-#: src/admin/index.js:315
+#: src/admin/index.js:316
 msgid "30 days"
 msgstr ""
 
-#: src/admin/index.js:316
+#: src/admin/index.js:317
 msgid "90 days"
 msgstr ""
 
-#: src/admin/index.js:385
-msgid "Settings saved."
+#: src/admin/index.js:342
+msgid "Aggregated page views by URL path."
 msgstr ""
 
-#: src/admin/index.js:393
-msgid "Error while saving."
+#: src/admin/index.js:343
+msgid "Aggregated referrer domains."
 msgstr ""
 
-#: src/admin/index.js:407
-msgid "General"
+#: src/admin/index.js:344
+msgid "Aggregated device class totals."
 msgstr ""
 
-#: src/admin/index.js:408
-msgid "Logs"
+#: src/admin/index.js:345
+msgid "Aggregated 404 paths."
+msgstr ""
+
+#: src/admin/index.js:346
+msgid "Aggregated on-site search terms."
+msgstr ""
+
+#: src/admin/index.js:347
+msgid "Raw log snapshots (timestamp, page path, referrer, device) when debug mode is enabled."
+msgstr ""
+
+#: src/admin/index.js:355
+msgid "Tracking continues even when browsers send DNT or GPC."
+msgstr ""
+
+#: src/admin/index.js:358
+msgid "Full query strings remain in stored page paths."
+msgstr ""
+
+#: src/admin/index.js:361
+msgid "Raw logs store granular hit details while debug mode is enabled."
+msgstr ""
+
+#: src/admin/index.js:364
+msgid "Raw log retention exceeds 30 days."
 msgstr ""
 
 #: src/admin/index.js:418
-msgid "Loading settings…"
+msgid "Settings saved."
 msgstr ""
 
-#: src/admin/index.js:440
-msgid "Plugin name (menu and dashboard)"
+#: src/admin/index.js:426
+msgid "Error while saving."
 msgstr ""
 
-#: src/admin/index.js:441
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr ""
-
-#: src/admin/index.js:446
-msgid "Strict mode"
-msgstr ""
-
-#: src/admin/index.js:447
-msgid "Ignore tracking for logged-in users."
-msgstr ""
-
-#: src/admin/index.js:452
-msgid "Respect DNT / GPC"
-msgstr ""
-
-#: src/admin/index.js:453
-msgid "Ignore tracking if the browser sends DNT or GPC."
-msgstr ""
-
-#: src/admin/index.js:458
-msgid "URL cleanup"
-msgstr ""
-
-#: src/admin/index.js:459
-msgid "Remove query parameters."
-msgstr ""
-
-#: src/admin/index.js:464
-msgid "Debug mode"
-msgstr ""
-
-#: src/admin/index.js:465
-msgid "Enables detailed console logs and raw log capture."
+#: src/admin/index.js:468
+msgid "Analytics data purged."
 msgstr ""
 
 #: src/admin/index.js:476
-msgid "Query parameter allowlist"
+msgid "Error while purging."
 msgstr ""
 
-#: src/admin/index.js:477
-msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
+#: src/admin/index.js:491
+#: src/admin/index.js:530
+msgid "General"
 msgstr ""
 
-#: src/admin/index.js:489
-msgid "Excluded paths"
-msgstr ""
-
-#: src/admin/index.js:490
-msgid "One per line or comma-separated (e.g., /privacy, /account)."
+#: src/admin/index.js:492
+msgid "Logs"
 msgstr ""
 
 #: src/admin/index.js:502
-msgid "Raw log retention (days)"
+msgid "Loading settings…"
 msgstr ""
 
-#: src/admin/index.js:507
-msgid "Daily cleanup removes older logs."
+#: src/admin/index.js:532
+msgid "Plugin name (menu and dashboard)"
 msgstr ""
 
-#: src/admin/index.js:517
-msgid "Role exclusions"
+#: src/admin/index.js:533
+msgid "Leave blank to use \"Lean Stats\"."
 msgstr ""
 
-#: src/admin/index.js:519
-msgid "No roles available."
+#: src/admin/index.js:538
+msgid "Strict mode"
 msgstr ""
 
-#: src/admin/index.js:544
-msgid "Save settings"
+#: src/admin/index.js:539
+msgid "Ignore tracking for logged-in users."
 msgstr ""
 
-#: src/admin/index.js:546
-msgid "Save"
+#: src/admin/index.js:548
+msgid "Privacy & consent"
 msgstr ""
 
-#: src/admin/index.js:570
-msgid "No KPIs available."
+#: src/admin/index.js:551
+msgid "Respect DNT / GPC"
 msgstr ""
 
-#: src/admin/index.js:571
-msgid "Loading KPIs…"
+#: src/admin/index.js:552
+msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr ""
 
-#: src/admin/index.js:585
-msgid "Visits"
+#: src/admin/index.js:557
+msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:594
-#: src/admin/index.js:654
-#: src/admin/index.js:675
-msgid "Page views"
+#: src/admin/index.js:558
+msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:603
-msgid "Unique referrers"
+#: src/admin/index.js:569
+msgid "Retention window (days)"
 msgstr ""
 
-#: src/admin/index.js:617
-msgid "Traffic over time"
+#: src/admin/index.js:574
+msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/index.js:622
-msgid "No data available for this period."
+#: src/admin/index.js:587
+msgid "URL cleaning"
 msgstr ""
 
-#: src/admin/index.js:623
-msgid "Loading chart…"
+#: src/admin/index.js:589
+msgid "Strip query parameters"
+msgstr ""
+
+#: src/admin/index.js:590
+msgid "Remove query parameters from tracked URLs."
+msgstr ""
+
+#: src/admin/index.js:595
+msgid "Query parameter allowlist"
+msgstr ""
+
+#: src/admin/index.js:596
+msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
+msgstr ""
+
+#: src/admin/index.js:611
+msgid "Exclusions"
+msgstr ""
+
+#: src/admin/index.js:613
+msgid "Excluded paths"
+msgstr ""
+
+#: src/admin/index.js:614
+msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
 #: src/admin/index.js:626
-msgid "Traffic chart"
+msgid "Role exclusions"
 msgstr ""
 
-#: src/admin/index.js:653
-msgid "Top pages"
+#: src/admin/index.js:628
+msgid "No roles available."
 msgstr ""
 
-#: src/admin/index.js:658
-msgid "No popular pages available."
+#: src/admin/index.js:654
+msgid "Privacy checklist"
 msgstr ""
 
-#: src/admin/index.js:674
-msgid "Top referrers"
+#: src/admin/index.js:663
+msgid "Review these privacy risks:"
 msgstr ""
 
-#: src/admin/index.js:679
-msgid "No referrers available."
+#: src/admin/index.js:675
+msgid "Data management"
 msgstr ""
 
-#: src/admin/index.js:691
-msgid "Unknown"
+#: src/admin/index.js:676
+msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/index.js:695
-msgid "Device breakdown"
+#: src/admin/index.js:682
+msgid "Purge analytics data"
+msgstr ""
+
+#: src/admin/index.js:690
+msgid "Save settings"
+msgstr ""
+
+#: src/admin/index.js:692
+msgid "Save"
+msgstr ""
+
+#: src/admin/index.js:696
+msgid "Confirm data purge"
 msgstr ""
 
 #: src/admin/index.js:700
-msgid "No device data available."
+msgid "This action permanently removes all stored analytics and raw logs. Settings remain unchanged."
 msgstr ""
 
-#: src/admin/index.js:701
-msgid "Loading device breakdown…"
-msgstr ""
-
-#: src/admin/index.js:704
-msgid "Device breakdown chart"
+#: src/admin/index.js:707
+msgid "Cancel"
 msgstr ""
 
 #: src/admin/index.js:715
+msgid "Purge now"
+msgstr ""
+
+#: src/admin/index.js:742
+msgid "No KPIs available."
+msgstr ""
+
+#: src/admin/index.js:743
+msgid "Loading KPIs…"
+msgstr ""
+
+#: src/admin/index.js:757
+msgid "Visits"
+msgstr ""
+
+#: src/admin/index.js:766
+#: src/admin/index.js:826
+#: src/admin/index.js:847
+msgid "Page views"
+msgstr ""
+
+#: src/admin/index.js:775
+msgid "Unique referrers"
+msgstr ""
+
+#: src/admin/index.js:789
+msgid "Traffic over time"
+msgstr ""
+
+#: src/admin/index.js:794
+msgid "No data available for this period."
+msgstr ""
+
+#: src/admin/index.js:795
+msgid "Loading chart…"
+msgstr ""
+
+#: src/admin/index.js:798
+msgid "Traffic chart"
+msgstr ""
+
+#: src/admin/index.js:825
+msgid "Top pages"
+msgstr ""
+
+#: src/admin/index.js:830
+msgid "No popular pages available."
+msgstr ""
+
+#: src/admin/index.js:846
+msgid "Top referrers"
+msgstr ""
+
+#: src/admin/index.js:851
+msgid "No referrers available."
+msgstr ""
+
+#: src/admin/index.js:863
+msgid "Unknown"
+msgstr ""
+
+#: src/admin/index.js:867
+msgid "Device breakdown"
+msgstr ""
+
+#: src/admin/index.js:872
+msgid "No device data available."
+msgstr ""
+
+#: src/admin/index.js:873
+msgid "Loading device breakdown…"
+msgstr ""
+
+#: src/admin/index.js:876
+msgid "Device breakdown chart"
+msgstr ""
+
+#: src/admin/index.js:887
 msgid "Device breakdown details"
 msgstr ""
 
-#: src/admin/index.js:718
+#: src/admin/index.js:890
 #, js-format
 msgid "%s : %s"
 msgstr ""
 
-#: src/admin/index.js:752
+#: src/admin/index.js:924
 msgid "Missing admin configuration."
 msgstr ""
 
-#: src/admin/index.js:780
+#: src/admin/index.js:952
 msgid "No panel available for this screen."
 msgstr ""
