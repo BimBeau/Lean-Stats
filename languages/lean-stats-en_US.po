@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T09:48:26+00:00\n"
+"POT-Creation-Date: 2026-01-21T09:59:32+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:103 src/admin/index.js:238
-#: src/admin/index.js:760
+#: lean-stats.php includes/settings.php:103 src/admin/index.js:236
+#: src/admin/index.js:743
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:169 src/admin/index.js:43
+#: admin/admin.php:169 src/admin/index.js:41
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: admin/admin.php:174 src/admin/index.js:44 src/admin/index.js:409
+#: admin/admin.php:174 src/admin/index.js:42 src/admin/index.js:407
 msgid "Settings"
 msgstr "Settings"
 
@@ -69,254 +69,253 @@ msgstr "Loading…"
 msgid "Loading: %s"
 msgstr "Loading: %s"
 
-#: src/admin/index.js:136 src/admin/index.js:346
+#: src/admin/index.js:134 src/admin/index.js:344
 msgid "Missing REST configuration."
 msgstr "Missing REST configuration."
 
-#: src/admin/index.js:160 src/admin/index.js:370
+#: src/admin/index.js:158 src/admin/index.js:368
 msgid "API error (%s)"
 msgstr "API error (%s)"
 
-#: src/admin/index.js:175
+#: src/admin/index.js:173
 msgid "Loading error."
 msgstr "Loading error."
 
-#: src/admin/index.js:266
+#: src/admin/index.js:264
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:277
+#: src/admin/index.js:275
 #, fuzzy
 msgid "No raw logs available."
 msgstr "No roles available."
 
-#: src/admin/index.js:278
+#: src/admin/index.js:276
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Loading KPIs…"
 
-#: src/admin/index.js:285
+#: src/admin/index.js:283
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:286 src/admin/index.js:649
+#: src/admin/index.js:284 src/admin/index.js:636
 msgid "Page"
 msgstr "Page"
 
-#: src/admin/index.js:287 src/admin/index.js:670
+#: src/admin/index.js:285 src/admin/index.js:657
 msgid "Referrer"
 msgstr "Referrer"
 
-#: src/admin/index.js:288
+#: src/admin/index.js:286
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:296 src/admin/index.js:663
+#: src/admin/index.js:294 src/admin/index.js:650
 msgid "Direct"
 msgstr "Direct"
 
-#: src/admin/index.js:311
+#: src/admin/index.js:309
 msgid "Period"
 msgstr "Period"
 
-#: src/admin/index.js:314
+#: src/admin/index.js:312
 msgid "7 days"
 msgstr "7 days"
 
-#: src/admin/index.js:315
+#: src/admin/index.js:313
 msgid "30 days"
 msgstr "30 days"
 
-#: src/admin/index.js:316
+#: src/admin/index.js:314
 msgid "90 days"
 msgstr "90 days"
 
-#: src/admin/index.js:382
+#: src/admin/index.js:380
 msgid "Settings saved."
 msgstr "Settings saved."
 
-#: src/admin/index.js:390
+#: src/admin/index.js:388
 msgid "Error while saving."
 msgstr "Error while saving."
 
-#: src/admin/index.js:404
+#: src/admin/index.js:402
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:405
+#: src/admin/index.js:403
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:415
+#: src/admin/index.js:413
 msgid "Loading settings…"
 msgstr "Loading settings…"
 
-#: src/admin/index.js:437
+#: src/admin/index.js:435
 msgid "Plugin name (menu and dashboard)"
 msgstr "Plugin name (menu and dashboard)"
 
-#: src/admin/index.js:438
+#: src/admin/index.js:436
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Leave blank to use \"Lean Stats\"."
 
-#: src/admin/index.js:443
+#: src/admin/index.js:441
 msgid "Strict mode"
 msgstr "Strict mode"
 
-#: src/admin/index.js:444
+#: src/admin/index.js:442
 msgid "Ignore tracking for logged-in users."
 msgstr "Ignore tracking for logged-in users."
 
-#: src/admin/index.js:449
+#: src/admin/index.js:447
 msgid "Respect DNT / GPC"
 msgstr "Respect DNT / GPC"
 
-#: src/admin/index.js:450
+#: src/admin/index.js:448
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Ignore tracking if the browser sends DNT or GPC."
 
-#: src/admin/index.js:455
+#: src/admin/index.js:453
 msgid "URL cleanup"
 msgstr "URL cleanup"
 
-#: src/admin/index.js:456
+#: src/admin/index.js:454
 msgid "Remove query parameters."
 msgstr "Remove query parameters."
 
-#: src/admin/index.js:461
+#: src/admin/index.js:459
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:462
+#: src/admin/index.js:460
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:473
+#: src/admin/index.js:471
 msgid "Query parameter allowlist"
 msgstr "Query parameter allowlist"
 
-#: src/admin/index.js:474
+#: src/admin/index.js:472
 msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Comma-separated list (e.g., utm_source, utm_campaign)."
 
-#: src/admin/index.js:486
+#: src/admin/index.js:484
 msgid "Raw log retention (days)"
 msgstr "Raw log retention (days)"
 
-#: src/admin/index.js:491
+#: src/admin/index.js:489
 msgid "Daily cleanup removes older logs."
 msgstr ""
 
-#: src/admin/index.js:501
+#: src/admin/index.js:499
 msgid "Role exclusions"
 msgstr "Role exclusions"
 
-#: src/admin/index.js:503
+#: src/admin/index.js:501
 msgid "No roles available."
 msgstr "No roles available."
 
-#: src/admin/index.js:528
+#: src/admin/index.js:526
 msgid "Save settings"
 msgstr "Save settings"
 
-#: src/admin/index.js:530
+#: src/admin/index.js:528
 msgid "Save"
 msgstr "Save"
 
-#: src/admin/index.js:546
-msgid "KPIs"
-msgstr "KPIs"
-
-#: src/admin/index.js:551
+#: src/admin/index.js:552
 msgid "No KPIs available."
 msgstr "No KPIs available."
 
-#: src/admin/index.js:552
+#: src/admin/index.js:553
 msgid "Loading KPIs…"
 msgstr "Loading KPIs…"
 
-#: src/admin/index.js:565
+#: src/admin/index.js:567
 msgid "Visits"
 msgstr ""
 
-#: src/admin/index.js:579 src/admin/index.js:649 src/admin/index.js:670
+#: src/admin/index.js:576 src/admin/index.js:636 src/admin/index.js:657
 msgid "Page views"
 msgstr ""
 
-#: src/admin/index.js:594
+#: src/admin/index.js:585
 msgid "Unique referrers"
 msgstr "Unique referrers"
 
-#: src/admin/index.js:612
+#: src/admin/index.js:599
 msgid "Traffic over time"
 msgstr "Traffic over time"
 
-#: src/admin/index.js:617
+#: src/admin/index.js:604
 msgid "No data available for this period."
 msgstr "No data available for this period."
 
-#: src/admin/index.js:618
+#: src/admin/index.js:605
 msgid "Loading chart…"
 msgstr "Loading chart…"
 
-#: src/admin/index.js:621
+#: src/admin/index.js:608
 msgid "Traffic chart"
 msgstr "Traffic chart"
 
-#: src/admin/index.js:648
+#: src/admin/index.js:635
 msgid "Top pages"
 msgstr "Top pages"
 
-#: src/admin/index.js:653
+#: src/admin/index.js:640
 msgid "No popular pages available."
 msgstr "No popular pages available."
 
-#: src/admin/index.js:669
+#: src/admin/index.js:656
 msgid "Top referrers"
 msgstr "Top referrers"
 
-#: src/admin/index.js:674
+#: src/admin/index.js:661
 msgid "No referrers available."
 msgstr "No referrers available."
 
-#: src/admin/index.js:686
+#: src/admin/index.js:673
 msgid "Unknown"
 msgstr "Unknown"
 
-#: src/admin/index.js:690
+#: src/admin/index.js:677
 msgid "Device breakdown"
 msgstr "Device breakdown"
 
-#: src/admin/index.js:695
+#: src/admin/index.js:682
 msgid "No device data available."
 msgstr "No device data available."
 
-#: src/admin/index.js:696
+#: src/admin/index.js:683
 msgid "Loading device breakdown…"
 msgstr "Loading device breakdown…"
 
-#: src/admin/index.js:699
+#: src/admin/index.js:686
 msgid "Device breakdown chart"
 msgstr "Device breakdown chart"
 
-#: src/admin/index.js:710
+#: src/admin/index.js:697
 msgid "Device breakdown details"
 msgstr "Device breakdown details"
 
-#: src/admin/index.js:713
+#: src/admin/index.js:700
 msgid "%s : %s"
 msgstr "%s : %s"
 
-#: src/admin/index.js:751
+#: src/admin/index.js:734
 msgid "Missing admin configuration."
 msgstr "Missing admin configuration."
 
-#: src/admin/index.js:779
+#: src/admin/index.js:762
 msgid "No panel available for this screen."
 msgstr "No panel available for this screen."
 
 #~ msgid "Hits"
 #~ msgstr "Hits"
+
+#~ msgid "KPIs"
+#~ msgstr "KPIs"
 
 #~ msgid "Unique pages"
 #~ msgstr "Unique pages"
