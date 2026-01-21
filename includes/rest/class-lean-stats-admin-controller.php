@@ -29,6 +29,16 @@ class Lean_Stats_Admin_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            '/admin/geolocation',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_geolocation'],
+                'permission_callback' => [$this, 'check_permissions'],
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_INTERNAL_NAMESPACE,
             '/admin/raw-logs',
             [
                 'methods' => 'GET',
@@ -239,6 +249,20 @@ class Lean_Stats_Admin_Controller {
         return new WP_REST_Response(
             [
                 'settings' => $settings,
+            ],
+            200
+        );
+    }
+
+    /**
+     * Return server-side geolocation for the current visitor IP.
+     */
+    public function get_geolocation(WP_REST_Request $request): WP_REST_Response {
+        $payload = lean_stats_get_geolocation_payload();
+
+        return new WP_REST_Response(
+            [
+                'location' => $payload,
             ],
             200
         );

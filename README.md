@@ -67,7 +67,7 @@ Lean Stats stores **aggregated counts**, never person-level records.
 
 ## ❌ Data never collected
 
-- Full IP addresses or precise location data
+- Stored full IP addresses or stored precise location data
 - Cookies, localStorage, sessionStorage, or persistent identifiers
 - User IDs, emails, usernames, or names
 - Full referrer URLs or arbitrary query strings
@@ -106,6 +106,7 @@ Lean Stats is designed to minimize data collection:
 - **Exclusions**: skips tracking for specified roles and URL paths.
 - **DNT/GPC**: respects `DNT: 1` and `Sec-GPC: 1` when enabled.
 - **Retention**: raw logs keep a short, configurable retention window when debug mode is enabled.
+- **Geolocation**: MaxMind API credentials enable hosted lookups; otherwise the local GeoLite2 database is used.
 - **Purge**: a purge action deletes aggregated analytics tables and raw logs while keeping settings.
 
 ## 🧩 Admin UI
@@ -117,6 +118,7 @@ Lean Stats integrates directly inside WordPress Admin:
 - Fast dashboard: KPIs, time series charts, and top lists
 - Minimal interactions: tooltips, skeleton loading, and clear empty states
 - Settings screen for strict mode, DNT / GPC compliance, URL allowlists, retention, and role exclusions
+- Geolocation screen that shows the current request country, region, and city without storing IP addresses
 
 ## 🌍 Localization
 
