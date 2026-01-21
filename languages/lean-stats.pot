@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lean Stats plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 0.24.18\n"
+"Project-Id-Version: Lean Stats 0.25.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-21T09:16:55+00:00\n"
+"POT-Creation-Date: 2026-01-21T09:48:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -51,19 +51,19 @@ msgstr ""
 msgid "Invalid REST API nonce."
 msgstr ""
 
-#: includes/rest/class-lean-stats-admin-controller.php:244
+#: includes/rest/class-lean-stats-admin-controller.php:251
 msgid "Debug mode is disabled."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:120
+#: includes/rest/class-lean-stats-hit-controller.php:125
 msgid "Invalid page path."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:130
+#: includes/rest/class-lean-stats-hit-controller.php:135
 msgid "Invalid device class."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:135
+#: includes/rest/class-lean-stats-hit-controller.php:140
 msgid "Invalid timestamp bucket."
 msgstr ""
 
@@ -247,13 +247,13 @@ msgid "Loading KPIs…"
 msgstr ""
 
 #: src/admin/index.js:565
-#: src/admin/index.js:649
-#: src/admin/index.js:670
-msgid "Hits"
+msgid "Visits"
 msgstr ""
 
 #: src/admin/index.js:579
-msgid "Unique pages"
+#: src/admin/index.js:649
+#: src/admin/index.js:670
+msgid "Page views"
 msgstr ""
 
 #: src/admin/index.js:594

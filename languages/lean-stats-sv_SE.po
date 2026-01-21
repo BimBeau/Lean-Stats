@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T09:16:53+00:00\n"
+"POT-Creation-Date: 2026-01-21T09:48:26+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,19 +45,19 @@ msgstr "Du har inte behörighet att komma åt analysdata."
 msgid "Invalid REST API nonce."
 msgstr "Ogiltig REST API-nonce."
 
-#: includes/rest/class-lean-stats-admin-controller.php:244
+#: includes/rest/class-lean-stats-admin-controller.php:251
 msgid "Debug mode is disabled."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:120
+#: includes/rest/class-lean-stats-hit-controller.php:125
 msgid "Invalid page path."
 msgstr "Ogiltig sid-sökväg."
 
-#: includes/rest/class-lean-stats-hit-controller.php:130
+#: includes/rest/class-lean-stats-hit-controller.php:135
 msgid "Invalid device class."
 msgstr "Ogiltig enhetsklass."
 
-#: includes/rest/class-lean-stats-hit-controller.php:135
+#: includes/rest/class-lean-stats-hit-controller.php:140
 msgid "Invalid timestamp bucket."
 msgstr "Ogiltig tidsstämpelgrupp."
 
@@ -235,13 +235,13 @@ msgstr "Inga KPI:er tillgängliga."
 msgid "Loading KPIs…"
 msgstr "Laddar KPI:er…"
 
-#: src/admin/index.js:565 src/admin/index.js:649 src/admin/index.js:670
-msgid "Hits"
-msgstr "Träffar"
+#: src/admin/index.js:565
+msgid "Visits"
+msgstr ""
 
-#: src/admin/index.js:579
-msgid "Unique pages"
-msgstr "Unika sidor"
+#: src/admin/index.js:579 src/admin/index.js:649 src/admin/index.js:670
+msgid "Page views"
+msgstr ""
 
 #: src/admin/index.js:594
 msgid "Unique referrers"
@@ -314,3 +314,9 @@ msgstr "Saknar admin-konfiguration."
 #: src/admin/index.js:779
 msgid "No panel available for this screen."
 msgstr "Ingen panel tillgänglig för den här skärmen."
+
+#~ msgid "Hits"
+#~ msgstr "Träffar"
+
+#~ msgid "Unique pages"
+#~ msgstr "Unika sidor"

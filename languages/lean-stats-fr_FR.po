@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T09:16:53+00:00\n"
+"POT-Creation-Date: 2026-01-21T09:48:26+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,19 +45,19 @@ msgstr "Vous n’êtes pas autorisé à accéder aux données d’analytics."
 msgid "Invalid REST API nonce."
 msgstr "Nonce d’API REST invalide."
 
-#: includes/rest/class-lean-stats-admin-controller.php:244
+#: includes/rest/class-lean-stats-admin-controller.php:251
 msgid "Debug mode is disabled."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:120
+#: includes/rest/class-lean-stats-hit-controller.php:125
 msgid "Invalid page path."
 msgstr "Chemin de page invalide."
 
-#: includes/rest/class-lean-stats-hit-controller.php:130
+#: includes/rest/class-lean-stats-hit-controller.php:135
 msgid "Invalid device class."
 msgstr "Classe d’appareil invalide."
 
-#: includes/rest/class-lean-stats-hit-controller.php:135
+#: includes/rest/class-lean-stats-hit-controller.php:140
 msgid "Invalid timestamp bucket."
 msgstr "Intervalle de temps invalide."
 
@@ -235,13 +235,13 @@ msgstr "Aucun KPI disponible."
 msgid "Loading KPIs…"
 msgstr "Chargement des indicateurs…"
 
-#: src/admin/index.js:565 src/admin/index.js:649 src/admin/index.js:670
-msgid "Hits"
+#: src/admin/index.js:565
+msgid "Visits"
 msgstr "Visites"
 
-#: src/admin/index.js:579
-msgid "Unique pages"
-msgstr "Pages uniques"
+#: src/admin/index.js:579 src/admin/index.js:649 src/admin/index.js:670
+msgid "Page views"
+msgstr "Pages vues"
 
 #: src/admin/index.js:594
 msgid "Unique referrers"
@@ -314,3 +314,9 @@ msgstr "Configuration admin manquante."
 #: src/admin/index.js:779
 msgid "No panel available for this screen."
 msgstr "Aucun panneau disponible pour cet écran."
+
+#~ msgid "Hits"
+#~ msgstr "Pages vues"
+
+#~ msgid "Unique pages"
+#~ msgstr "Pages uniques"

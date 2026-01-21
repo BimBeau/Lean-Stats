@@ -158,6 +158,33 @@ function lean_stats_store_aggregate_hit(array $hit): void
 }
 
 /**
+ * Store a visit session for the given timestamp.
+ */
+function lean_stats_store_session(int $timestamp, string $session_hash): void
+{
+    if ($timestamp === 0 || $session_hash === '') {
+        return;
+    }
+
+    $date_bucket = wp_date('Y-m-d', $timestamp);
+
+    lean_stats_upsert_session_row($date_bucket, $session_hash);
+}
+
+/**
+ * Insert session row if it does not exist.
+ */
+function lean_stats_upsert_session_row(string $date_bucket, string $session_hash): void
+{
+    global $wpdb;
+
+    $table = $wpdb->prefix . 'lean_stats_sessions';
+
+    $sql = "INSERT IGNORE INTO {$table} (date_bucket, session_hash) VALUES (%s, %s)";
+    $wpdb->query($wpdb->prepare($sql, $date_bucket, $session_hash));
+}
+
+/**
  * Upsert aggregate rows into the daily or hourly table.
  */
 function lean_stats_upsert_aggregate_rows(string $bucket, array $rows): void

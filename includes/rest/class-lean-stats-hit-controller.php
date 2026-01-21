@@ -69,6 +69,11 @@ class Lean_Stats_Hit_Controller {
             return new WP_REST_Response(['tracked' => false], 204);
         }
 
+        $session_hash = $this->build_session_hash($request, $hit['timestamp_bucket']);
+        if ($session_hash !== null) {
+            lean_stats_store_session($hit['timestamp_bucket'], $session_hash);
+        }
+
         $this->store_hit($hit);
         lean_stats_flush_admin_cache();
 
@@ -256,6 +261,21 @@ class Lean_Stats_Hit_Controller {
         ];
 
         return in_array($device_class, $allowed, true) ? $device_class : '';
+    }
+
+    /**
+     * Build a daily salted session hash from the request IP.
+     */
+    private function build_session_hash(WP_REST_Request $request, int $timestamp): ?string {
+        $ip_address = $this->get_request_ip($request);
+        if ($ip_address === null) {
+            return null;
+        }
+
+        $date_bucket = wp_date('Y-m-d', $timestamp);
+        $daily_salt = hash_hmac('sha256', $date_bucket, wp_salt('lean_stats_session'));
+
+        return hash_hmac('sha256', $ip_address, $daily_salt);
     }
 
     /**
