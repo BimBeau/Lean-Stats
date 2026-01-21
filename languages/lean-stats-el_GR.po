@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T11:56:24+00:00\n"
+"POT-Creation-Date: 2026-01-21T12:08:47+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:126 src/admin/index.js:239
-#: src/admin/index.js:933
+#: lean-stats.php includes/settings.php:126 src/admin/index.js:231
+#: src/admin/index.js:1155
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:169 src/admin/index.js:43
+#: admin/admin.php:169 src/admin/index.js:32
 msgid "Dashboard"
 msgstr "Πίνακας ελέγχου"
 
-#: admin/admin.php:174 src/admin/index.js:44 src/admin/index.js:496
+#: admin/admin.php:174 src/admin/index.js:33 src/admin/index.js:488
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -71,369 +71,432 @@ msgstr "Μη έγκυρο εύρος χρονικής σήμανσης."
 msgid "Loading…"
 msgstr "Φόρτωση…"
 
-#: src/admin/components/DataTableCard/index.js:13
+#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1011
 msgid "Loading: %s"
 msgstr "Φόρτωση: %s"
 
-#: src/admin/index.js:137 src/admin/index.js:381 src/admin/index.js:440
+#: src/admin/index.js:129 src/admin/index.js:373 src/admin/index.js:432
 msgid "Missing REST configuration."
 msgstr "Λείπει ρύθμιση REST."
 
-#: src/admin/index.js:161 src/admin/index.js:405 src/admin/index.js:463
+#: src/admin/index.js:153 src/admin/index.js:397 src/admin/index.js:455
 msgid "API error (%s)"
 msgstr "Σφάλμα API (%s)"
 
-#: src/admin/index.js:176
+#: src/admin/index.js:168
 msgid "Loading error."
 msgstr "Σφάλμα φόρτωσης."
 
-#: src/admin/index.js:267
+#: src/admin/index.js:259
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:278
+#: src/admin/index.js:270
 #, fuzzy
 msgid "No raw logs available."
 msgstr "Δεν υπάρχει διαθέσιμος ρόλος."
 
-#: src/admin/index.js:279
+#: src/admin/index.js:271
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Φόρτωση KPI…"
 
-#: src/admin/index.js:286
+#: src/admin/index.js:278 src/admin/index.js:892
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:287 src/admin/index.js:826
+#: src/admin/index.js:279 src/admin/index.js:1122
 msgid "Page"
 msgstr "Σελίδα"
 
-#: src/admin/index.js:288 src/admin/index.js:847
+#: src/admin/index.js:280 src/admin/index.js:1130
 msgid "Referrer"
 msgstr "Παραπέμπτης"
 
-#: src/admin/index.js:289
+#: src/admin/index.js:281
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:297 src/admin/index.js:840
+#: src/admin/index.js:289 src/admin/index.js:1134
 msgid "Direct"
 msgstr "Άμεσο"
 
-#: src/admin/index.js:312
+#: src/admin/index.js:304
 msgid "Period"
 msgstr "Περίοδος"
 
-#: src/admin/index.js:315
+#: src/admin/index.js:307
 msgid "7 days"
 msgstr "7 ημέρες"
 
-#: src/admin/index.js:316
+#: src/admin/index.js:308
 msgid "30 days"
 msgstr "30 ημέρες"
 
-#: src/admin/index.js:317
+#: src/admin/index.js:309
 msgid "90 days"
 msgstr "90 ημέρες"
 
-#: src/admin/index.js:342
+#: src/admin/index.js:334
 msgid "Aggregated page views by URL path."
 msgstr ""
 
-#: src/admin/index.js:343
+#: src/admin/index.js:335
 msgid "Aggregated referrer domains."
 msgstr ""
 
-#: src/admin/index.js:344
+#: src/admin/index.js:336
 #, fuzzy
 msgid "Aggregated device class totals."
 msgstr "Μη έγκυρη κατηγορία συσκευής."
 
-#: src/admin/index.js:345
+#: src/admin/index.js:337
 msgid "Aggregated 404 paths."
 msgstr ""
 
-#: src/admin/index.js:346
+#: src/admin/index.js:338
 msgid "Aggregated on-site search terms."
 msgstr ""
 
-#: src/admin/index.js:347
+#: src/admin/index.js:339
 msgid ""
 "Raw log snapshots (timestamp, page path, referrer, device) when debug mode "
 "is enabled."
 msgstr ""
 
-#: src/admin/index.js:355
+#: src/admin/index.js:347
 #, fuzzy
 msgid "Tracking continues even when browsers send DNT or GPC."
 msgstr "Παράβλεψη παρακολούθησης αν ο περιηγητής στέλνει DNT ή GPC."
 
-#: src/admin/index.js:358
+#: src/admin/index.js:350
 msgid "Full query strings remain in stored page paths."
 msgstr ""
 
-#: src/admin/index.js:361
+#: src/admin/index.js:353
 msgid "Raw logs store granular hit details while debug mode is enabled."
 msgstr ""
 
-#: src/admin/index.js:364
+#: src/admin/index.js:356
 #, fuzzy
 msgid "Raw log retention exceeds 30 days."
 msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
 
-#: src/admin/index.js:418
+#: src/admin/index.js:410
 msgid "Settings saved."
 msgstr "Οι ρυθμίσεις αποθηκεύτηκαν."
 
-#: src/admin/index.js:426
+#: src/admin/index.js:418
 msgid "Error while saving."
 msgstr "Σφάλμα κατά την αποθήκευση."
 
-#: src/admin/index.js:468
+#: src/admin/index.js:460
 msgid "Analytics data purged."
 msgstr ""
 
-#: src/admin/index.js:476
+#: src/admin/index.js:468
 #, fuzzy
 msgid "Error while purging."
 msgstr "Σφάλμα κατά την αποθήκευση."
 
-#: src/admin/index.js:491 src/admin/index.js:530
+#: src/admin/index.js:483 src/admin/index.js:522
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:492
+#: src/admin/index.js:484
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:502
+#: src/admin/index.js:494
 msgid "Loading settings…"
 msgstr "Φόρτωση ρυθμίσεων…"
 
-#: src/admin/index.js:532
+#: src/admin/index.js:524
 msgid "Plugin name (menu and dashboard)"
 msgstr "Όνομα πρόσθετου (μενού και πίνακας ελέγχου)"
 
-#: src/admin/index.js:533
+#: src/admin/index.js:525
 #, fuzzy
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Αφήστε κενό για χρήση του \"Lean Stats\"."
 
-#: src/admin/index.js:538
+#: src/admin/index.js:530
 msgid "Strict mode"
 msgstr "Αυστηρή λειτουργία"
 
-#: src/admin/index.js:539
+#: src/admin/index.js:531
 msgid "Ignore tracking for logged-in users."
 msgstr "Παράβλεψη παρακολούθησης για συνδεδεμένους χρήστες."
 
-#: src/admin/index.js:548
+#: src/admin/index.js:540
 msgid "Privacy & consent"
 msgstr ""
 
-#: src/admin/index.js:551
+#: src/admin/index.js:543
 msgid "Respect DNT / GPC"
 msgstr "Σεβασμός DNT / GPC"
 
-#: src/admin/index.js:552
+#: src/admin/index.js:544
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Παράβλεψη παρακολούθησης αν ο περιηγητής στέλνει DNT ή GPC."
 
-#: src/admin/index.js:557
+#: src/admin/index.js:549
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:558
+#: src/admin/index.js:550
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:569
+#: src/admin/index.js:561
 #, fuzzy
 msgid "Retention window (days)"
 msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
 
-#: src/admin/index.js:574
+#: src/admin/index.js:566
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/index.js:587
+#: src/admin/index.js:579
 #, fuzzy
 msgid "URL cleaning"
 msgstr "Καθαρισμός URL"
 
-#: src/admin/index.js:589
+#: src/admin/index.js:581
 #, fuzzy
 msgid "Strip query parameters"
 msgstr "Αφαιρεί τις παραμέτρους αιτήματος."
 
-#: src/admin/index.js:590
+#: src/admin/index.js:582
 #, fuzzy
 msgid "Remove query parameters from tracked URLs."
 msgstr "Αφαιρεί τις παραμέτρους αιτήματος."
 
-#: src/admin/index.js:595
+#: src/admin/index.js:587
 msgid "Query parameter allowlist"
 msgstr "Λίστα επιτρεπόμενων παραμέτρων αιτήματος"
 
-#: src/admin/index.js:596
+#: src/admin/index.js:588
 msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Λίστα χωρισμένη με κόμματα (π.χ. utm_source, utm_campaign)."
 
-#: src/admin/index.js:611
+#: src/admin/index.js:603
 #, fuzzy
 msgid "Exclusions"
 msgstr "Εξαιρέσεις ανά ρόλο"
 
-#: src/admin/index.js:613
+#: src/admin/index.js:605
 msgid "Excluded paths"
 msgstr ""
 
-#: src/admin/index.js:614
+#: src/admin/index.js:606
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
-#: src/admin/index.js:626
+#: src/admin/index.js:618
 msgid "Role exclusions"
 msgstr "Εξαιρέσεις ανά ρόλο"
 
-#: src/admin/index.js:628
+#: src/admin/index.js:620
 msgid "No roles available."
 msgstr "Δεν υπάρχει διαθέσιμος ρόλος."
 
-#: src/admin/index.js:654
+#: src/admin/index.js:646
 msgid "Privacy checklist"
 msgstr ""
 
-#: src/admin/index.js:663
+#: src/admin/index.js:655
 msgid "Review these privacy risks:"
 msgstr ""
 
-#: src/admin/index.js:675
+#: src/admin/index.js:667
 msgid "Data management"
 msgstr ""
 
-#: src/admin/index.js:676
+#: src/admin/index.js:668
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/index.js:682
+#: src/admin/index.js:674
 msgid "Purge analytics data"
 msgstr ""
 
-#: src/admin/index.js:690
+#: src/admin/index.js:682
 msgid "Save settings"
 msgstr "Αποθήκευση ρυθμίσεων"
 
-#: src/admin/index.js:692
+#: src/admin/index.js:684
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: src/admin/index.js:696
+#: src/admin/index.js:688
 msgid "Confirm data purge"
 msgstr ""
 
-#: src/admin/index.js:700
+#: src/admin/index.js:692
 msgid ""
 "This action permanently removes all stored analytics and raw logs. Settings "
 "remain unchanged."
 msgstr ""
 
-#: src/admin/index.js:707
+#: src/admin/index.js:699
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/index.js:715
+#: src/admin/index.js:707
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/index.js:742
-msgid "No KPIs available."
-msgstr "Δεν υπάρχουν διαθέσιμα KPI."
-
-#: src/admin/index.js:743
-msgid "Loading KPIs…"
-msgstr "Φόρτωση KPI…"
-
-#: src/admin/index.js:757
-msgid "Visits"
-msgstr ""
-
-#: src/admin/index.js:766 src/admin/index.js:826 src/admin/index.js:847
-msgid "Page views"
-msgstr ""
+#: src/admin/index.js:774
+#, fuzzy
+msgid "No overview data available."
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
 #: src/admin/index.js:775
+#, fuzzy
+msgid "Loading overview…"
+msgstr "Φόρτωση κατανομής συσκευών…"
+
+#: src/admin/index.js:785 src/admin/index.js:893 src/admin/index.js:972
+#: src/admin/index.js:1019
+msgid "Pageviews (hits)"
+msgstr ""
+
+#: src/admin/index.js:790
+msgid "Unique pages"
+msgstr "Μοναδικές σελίδες"
+
+#: src/admin/index.js:795
 msgid "Unique referrers"
 msgstr "Μοναδικοί παραπέμπτες"
 
-#: src/admin/index.js:789
-msgid "Traffic over time"
-msgstr "Επισκεψιμότητα με την πάροδο του χρόνου"
+#: src/admin/index.js:800
+msgid "404 hits"
+msgstr ""
 
-#: src/admin/index.js:794
+#: src/admin/index.js:805
+msgid "Search hits"
+msgstr ""
+
+#: src/admin/index.js:810
+#, fuzzy
+msgid "Unique search terms"
+msgstr "Μοναδικοί παραπέμπτες"
+
+#: src/admin/index.js:839
+msgid "Daily pageviews (hits)"
+msgstr ""
+
+#: src/admin/index.js:844
 msgid "No data available for this period."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα για αυτήν την περίοδο."
 
-#: src/admin/index.js:795
+#: src/admin/index.js:845
 msgid "Loading chart…"
 msgstr "Φόρτωση γραφήματος…"
 
-#: src/admin/index.js:798
-msgid "Traffic chart"
-msgstr "Γράφημα επισκεψιμότητας"
+#: src/admin/index.js:849 src/admin/index.js:854
+msgid "Daily pageviews line chart"
+msgstr ""
 
-#: src/admin/index.js:825
-msgid "Top pages"
-msgstr "Κορυφαίες σελίδες"
+#: src/admin/index.js:889
+msgid "Daily series table"
+msgstr ""
 
-#: src/admin/index.js:830
-msgid "No popular pages available."
-msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
+#: src/admin/index.js:956
+msgid "Ascending"
+msgstr ""
 
-#: src/admin/index.js:846
-msgid "Top referrers"
-msgstr "Κορυφαίοι παραπέμπτες"
+#: src/admin/index.js:956
+msgid "Descending"
+msgstr ""
 
-#: src/admin/index.js:851
-msgid "No referrers available."
-msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
+#: src/admin/index.js:957
+msgid "%s label"
+msgstr ""
 
-#: src/admin/index.js:863
+#: src/admin/index.js:969
+msgid "Sort by"
+msgstr ""
+
+#: src/admin/index.js:992
+msgid "Rows"
+msgstr ""
+
+#: src/admin/index.js:1039
+msgid "Previous"
+msgstr ""
+
+#: src/admin/index.js:1046
+msgid "Next"
+msgstr ""
+
+#: src/admin/index.js:1051
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: src/admin/index.js:1054
+msgid "%s items"
+msgstr ""
+
+#: src/admin/index.js:1070
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/admin/index.js:867
-msgid "Device breakdown"
-msgstr "Κατανομή ανά συσκευή"
+#: src/admin/index.js:1075
+msgid "Device hits (pageviews)"
+msgstr ""
 
-#: src/admin/index.js:872
+#: src/admin/index.js:1080
 msgid "No device data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/index.js:873
+#: src/admin/index.js:1081
 msgid "Loading device breakdown…"
 msgstr "Φόρτωση κατανομής συσκευών…"
 
-#: src/admin/index.js:876
-msgid "Device breakdown chart"
-msgstr "Γράφημα κατανομής ανά συσκευή"
+#: src/admin/index.js:1097
+msgid "%s hits"
+msgstr ""
 
-#: src/admin/index.js:887
-msgid "Device breakdown details"
-msgstr "Λεπτομέρειες κατανομής ανά συσκευή"
+#: src/admin/index.js:1121
+msgid "Top pages"
+msgstr "Κορυφαίες σελίδες"
 
-#: src/admin/index.js:890
-msgid "%s : %s"
-msgstr "%s : %s"
+#: src/admin/index.js:1125
+msgid "No popular pages available."
+msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
 
-#: src/admin/index.js:924
+#: src/admin/index.js:1129
+msgid "Top referrers"
+msgstr "Κορυφαίοι παραπέμπτες"
+
+#: src/admin/index.js:1133
+msgid "No referrers available."
+msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
+
+#: src/admin/index.js:1146
 msgid "Missing admin configuration."
 msgstr "Λείπει ρύθμιση διαχειριστή."
 
-#: src/admin/index.js:952
+#: src/admin/index.js:1174
 msgid "No panel available for this screen."
 msgstr "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν την οθόνη."
+
+#~ msgid "%s : %s"
+#~ msgstr "%s : %s"
+
+#~ msgid "No KPIs available."
+#~ msgstr "Δεν υπάρχουν διαθέσιμα KPI."
+
+#~ msgid "Device breakdown details"
+#~ msgstr "Λεπτομέρειες κατανομής ανά συσκευή"
+
+#~ msgid "Device breakdown chart"
+#~ msgstr "Γράφημα κατανομής ανά συσκευή"
+
+#~ msgid "Traffic chart"
+#~ msgstr "Γράφημα επισκεψιμότητας"
 
 #~ msgid "Hits"
 #~ msgstr "Χτυπήματα"
@@ -441,5 +504,8 @@ msgstr "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν τ
 #~ msgid "KPIs"
 #~ msgstr "KPI"
 
-#~ msgid "Unique pages"
-#~ msgstr "Μοναδικές σελίδες"
+#~ msgid "Device breakdown"
+#~ msgstr "Κατανομή ανά συσκευή"
+
+#~ msgid "Traffic over time"
+#~ msgstr "Επισκεψιμότητα με την πάροδο του χρόνου"
