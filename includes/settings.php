@@ -5,6 +5,8 @@
 
 defined('ABSPATH') || exit;
 
+const LEAN_STATS_MAX_PATH_LENGTH = 2048;
+
 /**
  * Default settings values.
  */
@@ -19,6 +21,7 @@ function lean_stats_get_settings_defaults(): array
         'raw_logs_enabled' => false,
         'raw_logs_retention_days' => 1,
         'excluded_roles' => [],
+        'excluded_paths' => [],
         'debug_enabled' => false,
     ];
 }
@@ -88,6 +91,26 @@ function lean_stats_sanitize_settings($settings): array
     }
     $settings['excluded_roles'] = $excluded_roles;
 
+    $excluded_paths = $settings['excluded_paths'];
+    if (is_string($excluded_paths)) {
+        $excluded_paths = preg_split('/[\r\n,]+/', $excluded_paths);
+    }
+    if (!is_array($excluded_paths)) {
+        $excluded_paths = [];
+    }
+
+    $normalized_paths = [];
+    foreach ($excluded_paths as $path) {
+        if (!is_string($path)) {
+            continue;
+        }
+        $normalized = lean_stats_normalize_path_value($path);
+        if ($normalized !== '') {
+            $normalized_paths[] = $normalized;
+        }
+    }
+    $settings['excluded_paths'] = array_values(array_unique($normalized_paths));
+
     return $settings;
 }
 
@@ -131,4 +154,50 @@ function lean_stats_update_settings($settings): array
     update_option('lean_stats_raw_logs_enabled', (bool) $sanitized['raw_logs_enabled'], false);
 
     return $sanitized;
+}
+
+/**
+ * Normalize a path for settings storage.
+ */
+function lean_stats_normalize_path_value(string $path): string
+{
+    $path = trim($path);
+    if ($path === '') {
+        return '';
+    }
+
+    $path = lean_stats_lowercase($path);
+    $path = '/' . ltrim($path, '/');
+    $path = untrailingslashit($path);
+    $path = $path === '' ? '/' : $path;
+
+    return lean_stats_trim_value($path, LEAN_STATS_MAX_PATH_LENGTH);
+}
+
+/**
+ * Lowercase helper with multibyte support.
+ */
+function lean_stats_lowercase(string $value): string
+{
+    if (function_exists('mb_strtolower')) {
+        return mb_strtolower($value);
+    }
+
+    return strtolower($value);
+}
+
+/**
+ * Trim a string to a maximum length.
+ */
+function lean_stats_trim_value(string $value, int $max): string
+{
+    if ($max <= 0) {
+        return $value;
+    }
+
+    if (function_exists('mb_substr')) {
+        return mb_substr($value, 0, $max);
+    }
+
+    return substr($value, 0, $max);
 }

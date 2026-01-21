@@ -13,6 +13,7 @@ import {
     SelectControl,
     TabPanel,
     TextControl,
+    TextareaControl,
     ToggleControl,
 } from '@wordpress/components';
 import {
@@ -50,6 +51,7 @@ const DEFAULT_SETTINGS = {
     raw_logs_enabled: false,
     raw_logs_retention_days: 1,
     excluded_roles: [],
+    excluded_paths: [],
     debug_enabled: false,
 };
 const formatDate = (date) => {
@@ -325,6 +327,7 @@ const SettingsPanel = () => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/settings');
     const [formState, setFormState] = useState(DEFAULT_SETTINGS);
     const [allowlistInput, setAllowlistInput] = useState('');
+    const [excludedPathsInput, setExcludedPathsInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
@@ -335,6 +338,7 @@ const SettingsPanel = () => {
             const normalized = normalizeSettings(data.settings);
             setFormState(normalized);
             setAllowlistInput(normalized.url_query_allowlist.join(', '));
+            setExcludedPathsInput(normalized.excluded_paths.join('\n'));
             window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
         }
     }, [data]);
@@ -374,6 +378,7 @@ const SettingsPanel = () => {
                 const normalized = normalizeSettings(payload.settings);
                 setFormState(normalized);
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
+                setExcludedPathsInput(normalized.excluded_paths.join('\n'));
                 window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
             }
 
@@ -478,6 +483,19 @@ const SettingsPanel = () => {
                                             .map((item) => item.trim())
                                             .filter(Boolean);
                                         setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
+                                    }}
+                                />
+                                <TextareaControl
+                                    label={__('Excluded paths', 'lean-stats')}
+                                    help={__('One per line or comma-separated (e.g., /privacy, /account).', 'lean-stats')}
+                                    value={excludedPathsInput}
+                                    onChange={(value) => {
+                                        setExcludedPathsInput(value);
+                                        const parsed = value
+                                            .split(/[\n,]+/)
+                                            .map((item) => item.trim())
+                                            .filter(Boolean);
+                                        setFormState((prev) => ({ ...prev, excluded_paths: parsed }));
                                     }}
                                 />
                                 <TextControl
