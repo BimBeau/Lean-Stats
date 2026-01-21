@@ -9,6 +9,7 @@ import {
     Card,
     CardBody,
     CheckboxControl,
+    Modal,
     Notice,
     SelectControl,
     TabPanel,
@@ -330,8 +331,40 @@ const SettingsPanel = () => {
     const [excludedPathsInput, setExcludedPathsInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
+    const [isPurgeOpen, setIsPurgeOpen] = useState(false);
+    const [isPurging, setIsPurging] = useState(false);
+    const [purgeNotice, setPurgeNotice] = useState(null);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
     const debugEnabled = Boolean(formState.debug_enabled);
+
+    const privacyChecklistItems = useMemo(
+        () => [
+            __('Aggregated page views by URL path.', 'lean-stats'),
+            __('Aggregated referrer domains.', 'lean-stats'),
+            __('Aggregated device class totals.', 'lean-stats'),
+            __('Aggregated 404 paths.', 'lean-stats'),
+            __('Aggregated on-site search terms.', 'lean-stats'),
+            __('Raw log snapshots (timestamp, page path, referrer, device) when debug mode is enabled.', 'lean-stats'),
+        ],
+        []
+    );
+
+    const privacyWarnings = useMemo(() => {
+        const warnings = [];
+        if (!formState.respect_dnt_gpc) {
+            warnings.push(__('Tracking continues even when browsers send DNT or GPC.', 'lean-stats'));
+        }
+        if (!formState.url_strip_query) {
+            warnings.push(__('Full query strings remain in stored page paths.', 'lean-stats'));
+        }
+        if (formState.raw_logs_enabled) {
+            warnings.push(__('Raw logs store granular hit details while debug mode is enabled.', 'lean-stats'));
+        }
+        if (formState.raw_logs_retention_days > 30) {
+            warnings.push(__('Raw log retention exceeds 30 days.', 'lean-stats'));
+        }
+        return warnings;
+    }, [formState]);
 
     useEffect(() => {
         if (data?.settings) {
@@ -402,6 +435,57 @@ const SettingsPanel = () => {
         }
     };
 
+    const onPurge = async () => {
+        if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
+            setPurgeNotice({ status: 'error', message: __('Missing REST configuration.', 'lean-stats') });
+            return;
+        }
+
+        setIsPurging(true);
+        setPurgeNotice(null);
+        const traceId = createTraceId();
+        logger.info('Purging analytics data', {
+            action: 'settings.purge',
+            traceId,
+        });
+
+        try {
+            const response = await fetch(buildAdminUrl('/admin/purge-data'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce': ADMIN_CONFIG.restNonce,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    sprintf(__('API error (%s)', 'lean-stats'), response.status)
+                );
+            }
+
+            await response.json();
+            setPurgeNotice({ status: 'success', message: __('Analytics data purged.', 'lean-stats') });
+            logger.info('Analytics data purged', {
+                action: 'settings.purge.success',
+                traceId,
+            });
+        } catch (purgeError) {
+            setPurgeNotice({
+                status: 'error',
+                message: purgeError.message || __('Error while purging.', 'lean-stats'),
+            });
+            logger.error('Purge error', {
+                action: 'settings.purge.error',
+                traceId,
+                error: purgeError?.message,
+            });
+        } finally {
+            setIsPurging(false);
+            setIsPurgeOpen(false);
+        }
+    };
+
     const roles = ADMIN_CONFIG?.roles || [];
     const settingsTabs = [
         { name: 'general', title: __('General', 'lean-stats') },
@@ -436,107 +520,169 @@ const SettingsPanel = () => {
                                         {saveNotice.message}
                                     </Notice>
                                 )}
-                                <TextControl
-                                    label={__('Plugin name (menu and dashboard)', 'lean-stats')}
-                                    help={__('Leave blank to use "Lean Stats".', 'lean-stats')}
-                                    value={formState.plugin_label}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
-                                />
-                                <ToggleControl
-                                    label={__('Strict mode', 'lean-stats')}
-                                    help={__('Ignore tracking for logged-in users.', 'lean-stats')}
-                                    checked={formState.strict_mode}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
-                                />
-                                <ToggleControl
-                                    label={__('Respect DNT / GPC', 'lean-stats')}
-                                    help={__('Ignore tracking if the browser sends DNT or GPC.', 'lean-stats')}
-                                    checked={formState.respect_dnt_gpc}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
-                                />
-                                <ToggleControl
-                                    label={__('URL cleanup', 'lean-stats')}
-                                    help={__('Remove query parameters.', 'lean-stats')}
-                                    checked={formState.url_strip_query}
-                                    onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
-                                />
-                                <ToggleControl
-                                    label={__('Debug mode', 'lean-stats')}
-                                    help={__('Enables detailed console logs and raw log capture.', 'lean-stats')}
-                                    checked={formState.debug_enabled}
-                                    onChange={(value) =>
-                                        setFormState((prev) => ({
-                                            ...prev,
-                                            debug_enabled: value,
-                                            raw_logs_enabled: value,
-                                        }))
-                                    }
-                                />
-                                <TextControl
-                                    label={__('Query parameter allowlist', 'lean-stats')}
-                                    help={__('Comma-separated list (e.g., utm_source, utm_campaign).', 'lean-stats')}
-                                    value={allowlistInput}
-                                    onChange={(value) => {
-                                        setAllowlistInput(value);
-                                        const parsed = value
-                                            .split(',')
-                                            .map((item) => item.trim())
-                                            .filter(Boolean);
-                                        setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
-                                    }}
-                                />
-                                <TextareaControl
-                                    label={__('Excluded paths', 'lean-stats')}
-                                    help={__('One per line or comma-separated (e.g., /privacy, /account).', 'lean-stats')}
-                                    value={excludedPathsInput}
-                                    onChange={(value) => {
-                                        setExcludedPathsInput(value);
-                                        const parsed = value
-                                            .split(/[\n,]+/)
-                                            .map((item) => item.trim())
-                                            .filter(Boolean);
-                                        setFormState((prev) => ({ ...prev, excluded_paths: parsed }));
-                                    }}
-                                />
-                                <TextControl
-                                    label={__('Raw log retention (days)', 'lean-stats')}
-                                    type="number"
-                                    min={1}
-                                    max={365}
-                                    value={String(formState.raw_logs_retention_days)}
-                                    help={__('Daily cleanup removes older logs.', 'lean-stats')}
-                                    onChange={(value) => {
-                                        const next = Number.parseInt(value, 10);
-                                        setFormState((prev) => ({
-                                            ...prev,
-                                            raw_logs_retention_days: Number.isNaN(next) ? prev.raw_logs_retention_days : next,
-                                        }));
-                                    }}
-                                />
-                                <div>
-                                    <p className="ls-settings-roles__title">{__('Role exclusions', 'lean-stats')}</p>
-                                    <div className="ls-settings-roles__list">
-                                        {roles.length === 0 && <p>{__('No roles available.', 'lean-stats')}</p>}
-                                        {roles.map((role) => (
-                                            <CheckboxControl
-                                                key={role.key}
-                                                label={role.label}
-                                                checked={formState.excluded_roles.includes(role.key)}
-                                                onChange={(isChecked) => {
-                                                    setFormState((prev) => {
-                                                        const nextRoles = new Set(prev.excluded_roles);
-                                                        if (isChecked) {
-                                                            nextRoles.add(role.key);
-                                                        } else {
-                                                            nextRoles.delete(role.key);
-                                                        }
-                                                        return { ...prev, excluded_roles: Array.from(nextRoles) };
-                                                    });
-                                                }}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
+                                {purgeNotice && (
+                                    <Notice status={purgeNotice.status} isDismissible={false}>
+                                        {purgeNotice.message}
+                                    </Notice>
+                                )}
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">{__('General', 'lean-stats')}</h3>
+                                        <TextControl
+                                            label={__('Plugin name (menu and dashboard)', 'lean-stats')}
+                                            help={__('Leave blank to use "Lean Stats".', 'lean-stats')}
+                                            value={formState.plugin_label}
+                                            onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
+                                        />
+                                        <ToggleControl
+                                            label={__('Strict mode', 'lean-stats')}
+                                            help={__('Ignore tracking for logged-in users.', 'lean-stats')}
+                                            checked={formState.strict_mode}
+                                            onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
+                                        />
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">
+                                            {__('Privacy & consent', 'lean-stats')}
+                                        </h3>
+                                        <ToggleControl
+                                            label={__('Respect DNT / GPC', 'lean-stats')}
+                                            help={__('Ignore tracking if the browser sends DNT or GPC.', 'lean-stats')}
+                                            checked={formState.respect_dnt_gpc}
+                                            onChange={(value) => setFormState((prev) => ({ ...prev, respect_dnt_gpc: value }))}
+                                        />
+                                        <ToggleControl
+                                            label={__('Debug mode', 'lean-stats')}
+                                            help={__('Enables detailed console logs and raw log capture.', 'lean-stats')}
+                                            checked={formState.debug_enabled}
+                                            onChange={(value) =>
+                                                setFormState((prev) => ({
+                                                    ...prev,
+                                                    debug_enabled: value,
+                                                    raw_logs_enabled: value,
+                                                }))
+                                            }
+                                        />
+                                        <TextControl
+                                            label={__('Retention window (days)', 'lean-stats')}
+                                            type="number"
+                                            min={1}
+                                            max={365}
+                                            value={String(formState.raw_logs_retention_days)}
+                                            help={__('Raw logs purge automatically after the configured window.', 'lean-stats')}
+                                            onChange={(value) => {
+                                                const next = Number.parseInt(value, 10);
+                                                setFormState((prev) => ({
+                                                    ...prev,
+                                                    raw_logs_retention_days: Number.isNaN(next) ? prev.raw_logs_retention_days : next,
+                                                }));
+                                            }}
+                                        />
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">{__('URL cleaning', 'lean-stats')}</h3>
+                                        <ToggleControl
+                                            label={__('Strip query parameters', 'lean-stats')}
+                                            help={__('Remove query parameters from tracked URLs.', 'lean-stats')}
+                                            checked={formState.url_strip_query}
+                                            onChange={(value) => setFormState((prev) => ({ ...prev, url_strip_query: value }))}
+                                        />
+                                        <TextControl
+                                            label={__('Query parameter allowlist', 'lean-stats')}
+                                            help={__('Comma-separated list (e.g., utm_source, utm_campaign).', 'lean-stats')}
+                                            value={allowlistInput}
+                                            onChange={(value) => {
+                                                setAllowlistInput(value);
+                                                const parsed = value
+                                                    .split(',')
+                                                    .map((item) => item.trim())
+                                                    .filter(Boolean);
+                                                setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
+                                            }}
+                                        />
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">{__('Exclusions', 'lean-stats')}</h3>
+                                        <TextareaControl
+                                            label={__('Excluded paths', 'lean-stats')}
+                                            help={__('One per line or comma-separated (e.g., /privacy, /account).', 'lean-stats')}
+                                            value={excludedPathsInput}
+                                            onChange={(value) => {
+                                                setExcludedPathsInput(value);
+                                                const parsed = value
+                                                    .split(/[\n,]+/)
+                                                    .map((item) => item.trim())
+                                                    .filter(Boolean);
+                                                setFormState((prev) => ({ ...prev, excluded_paths: parsed }));
+                                            }}
+                                        />
+                                        <div>
+                                            <p className="ls-settings-roles__title">{__('Role exclusions', 'lean-stats')}</p>
+                                            <div className="ls-settings-roles__list">
+                                                {roles.length === 0 && <p>{__('No roles available.', 'lean-stats')}</p>}
+                                                {roles.map((role) => (
+                                                    <CheckboxControl
+                                                        key={role.key}
+                                                        label={role.label}
+                                                        checked={formState.excluded_roles.includes(role.key)}
+                                                        onChange={(isChecked) => {
+                                                            setFormState((prev) => {
+                                                                const nextRoles = new Set(prev.excluded_roles);
+                                                                if (isChecked) {
+                                                                    nextRoles.add(role.key);
+                                                                } else {
+                                                                    nextRoles.delete(role.key);
+                                                                }
+                                                                return { ...prev, excluded_roles: Array.from(nextRoles) };
+                                                            });
+                                                        }}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">
+                                            {__('Privacy checklist', 'lean-stats')}
+                                        </h3>
+                                        <ul className="ls-settings-privacy__list">
+                                            {privacyChecklistItems.map((item) => (
+                                                <li key={item}>{item}</li>
+                                            ))}
+                                        </ul>
+                                        {privacyWarnings.length > 0 && (
+                                            <Notice status="warning" isDismissible={false}>
+                                                <p>{__('Review these privacy risks:', 'lean-stats')}</p>
+                                                <ul className="ls-settings-privacy__warnings">
+                                                    {privacyWarnings.map((warning) => (
+                                                        <li key={warning}>{warning}</li>
+                                                    ))}
+                                                </ul>
+                                            </Notice>
+                                        )}
+                                    </CardBody>
+                                </Card>
+                                <Card className="ls-settings-section">
+                                    <CardBody>
+                                        <h3 className="ls-settings-section__title">{__('Data management', 'lean-stats')}</h3>
+                                        <p>{__('Remove all aggregated analytics and raw log entries.', 'lean-stats')}</p>
+                                        <Button
+                                            variant="secondary"
+                                            isDestructive
+                                            onClick={() => setIsPurgeOpen(true)}
+                                        >
+                                            {__('Purge analytics data', 'lean-stats')}
+                                        </Button>
+                                    </CardBody>
+                                </Card>
                                 <Button
                                     variant="primary"
                                     isBusy={isSaving}
@@ -545,6 +691,32 @@ const SettingsPanel = () => {
                                 >
                                     {__('Save', 'lean-stats')}
                                 </Button>
+                                {isPurgeOpen && (
+                                    <Modal
+                                        title={__('Confirm data purge', 'lean-stats')}
+                                        onRequestClose={() => setIsPurgeOpen(false)}
+                                    >
+                                        <p>
+                                            {__(
+                                                'This action permanently removes all stored analytics and raw logs. Settings remain unchanged.',
+                                                'lean-stats'
+                                            )}
+                                        </p>
+                                        <div className="ls-settings-modal__actions">
+                                            <Button variant="secondary" onClick={() => setIsPurgeOpen(false)}>
+                                                {__('Cancel', 'lean-stats')}
+                                            </Button>
+                                            <Button
+                                                variant="primary"
+                                                isDestructive
+                                                isBusy={isPurging}
+                                                onClick={onPurge}
+                                            >
+                                                {__('Purge now', 'lean-stats')}
+                                            </Button>
+                                        </div>
+                                    </Modal>
+                                )}
                             </div>
                         );
                     }}

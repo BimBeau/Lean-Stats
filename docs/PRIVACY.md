@@ -82,6 +82,10 @@ No page view data is associated with a person or persistent identifier.
   - Purged automatically
   - Aggregated statistics remain available for reporting
 
+## Privacy checklist panel
+
+The admin settings screen includes a privacy checklist panel that lists collected data categories and highlights risky configuration choices such as storing query strings, disabling DNT/GPC, enabling raw logs, or retaining raw logs for extended periods.
+
 ---
 
 ## Deduplication

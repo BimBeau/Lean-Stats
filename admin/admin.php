@@ -221,6 +221,12 @@ function lean_stats_get_rest_sources(): array
             'path' => '/admin/kpis',
         ],
         [
+            'key' => 'purge-data',
+            'method' => 'POST',
+            'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
+            'path' => '/admin/purge-data',
+        ],
+        [
             'key' => 'top-pages',
             'method' => 'GET',
             'namespace' => LEAN_STATS_REST_INTERNAL_NAMESPACE,
