@@ -22,7 +22,12 @@ function lean_stats_aggregate_hits(): void
     }
 
     $aggregates = lean_stats_build_aggregates_from_hits($hits);
-    if ($aggregates['updated_hits'] === $hits && $aggregates['daily'] === [] && $aggregates['hourly'] === []) {
+    if (
+        $aggregates['updated_hits'] === $hits
+        && $aggregates['daily'] === []
+        && $aggregates['hourly'] === []
+        && $aggregates['entry_exit'] === []
+    ) {
         return;
     }
 
@@ -34,9 +39,13 @@ function lean_stats_aggregate_hits(): void
         lean_stats_upsert_aggregate_rows('hourly', $aggregates['hourly']);
     }
 
+    if ($aggregates['entry_exit'] !== []) {
+        lean_stats_upsert_entry_exit_rows($aggregates['entry_exit']);
+    }
+
     update_option('lean_stats_hits', $aggregates['updated_hits'], false);
 
-    if ($aggregates['daily'] !== [] || $aggregates['hourly'] !== []) {
+    if ($aggregates['daily'] !== [] || $aggregates['hourly'] !== [] || $aggregates['entry_exit'] !== []) {
         lean_stats_flush_admin_cache();
     }
 }
@@ -49,6 +58,7 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
     $daily = [];
     $hourly = [];
     $updated_hits = [];
+    $entry_exit = [];
 
     foreach ($hits as $hit) {
         if (!is_array($hit)) {
@@ -99,6 +109,26 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
         }
         $hourly[$hourly_key]['hits']++;
 
+        $is_entry = lean_stats_is_entry_hit($page_path, $referrer_domain);
+        $is_exit = lean_stats_is_exit_hit($page_path, $referrer_domain);
+        if ($is_entry || $is_exit) {
+            $entry_exit_key = implode('|', [$date_bucket, $page_path]);
+            if (!isset($entry_exit[$entry_exit_key])) {
+                $entry_exit[$entry_exit_key] = [
+                    'date_bucket' => $date_bucket,
+                    'page_path' => $page_path,
+                    'entries' => 0,
+                    'exits' => 0,
+                ];
+            }
+            if ($is_entry) {
+                $entry_exit[$entry_exit_key]['entries']++;
+            }
+            if ($is_exit) {
+                $entry_exit[$entry_exit_key]['exits']++;
+            }
+        }
+
         $hit['aggregated'] = true;
         $hit['aggregated_at'] = current_time('timestamp');
         $updated_hits[] = $hit;
@@ -107,6 +137,7 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
     return [
         'daily' => array_values($daily),
         'hourly' => array_values($hourly),
+        'entry_exit' => array_values($entry_exit),
         'updated_hits' => $updated_hits,
     ];
 }
@@ -132,6 +163,12 @@ function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): voi
 
     $source_category = lean_stats_get_source_category_from_referrer($referrer_domain);
     lean_stats_increment_hits_daily($date_bucket, $page_path, $referrer_domain, $source_category);
+    lean_stats_increment_entry_exit_daily(
+        $date_bucket,
+        $page_path,
+        lean_stats_is_entry_hit($page_path, $referrer_domain) ? 1 : 0,
+        lean_stats_is_exit_hit($page_path, $referrer_domain) ? 1 : 0
+    );
 
     if ($utm_params !== []) {
         lean_stats_store_utm_daily($date_bucket, $utm_params);
@@ -162,6 +199,36 @@ function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): voi
             ],
         ]
     );
+}
+
+/**
+ * Upsert entry/exit aggregate rows.
+ */
+function lean_stats_upsert_entry_exit_rows(array $rows): void
+{
+    if ($rows === []) {
+        return;
+    }
+
+    global $wpdb;
+
+    $table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+    $placeholders = [];
+    $values = [];
+
+    foreach ($rows as $row) {
+        $placeholders[] = '(%s, %s, %d, %d)';
+        $values[] = $row['date_bucket'];
+        $values[] = $row['page_path'];
+        $values[] = (int) $row['entries'];
+        $values[] = (int) $row['exits'];
+    }
+
+    $sql = "INSERT INTO {$table} (date_bucket, page_path, entries, exits) VALUES "
+        . implode(', ', $placeholders)
+        . ' ON DUPLICATE KEY UPDATE entries = entries + VALUES(entries), exits = exits + VALUES(exits)';
+
+    $wpdb->query($wpdb->prepare($sql, $values));
 }
 
 /**
