@@ -152,6 +152,7 @@ Returned fields:
 - `raw_logs_enabled` (boolean)
 - `raw_logs_retention_days` (integer)
 - `excluded_roles` (array)
+- `excluded_paths` (array)
 - `debug_enabled` (boolean)
 
 `raw_logs_enabled` mirrors `debug_enabled` and reflects whether raw log storage is active.
@@ -170,6 +171,7 @@ JSON payload:
 - `raw_logs_enabled` (boolean, optional)
 - `raw_logs_retention_days` (integer, optional)
 - `excluded_roles` (array, optional)
+- `excluded_paths` (array, optional)
 - `debug_enabled` (boolean, optional)
 
 ### GET `/admin/raw-logs`
@@ -187,3 +189,7 @@ Returned fields:
 - `referrer_domain` (string)
 - `device_class` (string)
 - `post_id` (integer, nullable)
+
+### POST `/admin/purge-data`
+
+Purges aggregated analytics tables and raw logs.

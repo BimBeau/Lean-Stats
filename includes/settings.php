@@ -149,9 +149,19 @@ function lean_stats_get_settings(): array
  */
 function lean_stats_update_settings($settings): array
 {
+    $previous = lean_stats_get_settings();
     $sanitized = lean_stats_sanitize_settings($settings);
     update_option('lean_stats_settings', $sanitized, false);
     update_option('lean_stats_raw_logs_enabled', (bool) $sanitized['raw_logs_enabled'], false);
+
+    if (
+        $sanitized['raw_logs_retention_days'] !== $previous['raw_logs_retention_days']
+        && function_exists('lean_stats_schedule_raw_log_cleanup')
+    ) {
+        lean_stats_schedule_raw_log_cleanup(true);
+    } elseif (function_exists('lean_stats_schedule_raw_log_cleanup')) {
+        lean_stats_schedule_raw_log_cleanup(false);
+    }
 
     return $sanitized;
 }
