@@ -14,6 +14,7 @@ Lean Stats stores settings in the `lean_stats_settings` option and exposes them 
 | `raw_logs_enabled` | boolean | `false` | Mirrors the debug mode state to control raw log storage. |
 | `raw_logs_retention_days` | integer | `1` | Retention window (1–365 days) for raw logs when debug mode is enabled. |
 | `excluded_roles` | array | `[]` | Skips tracking for logged-in users in the listed WordPress roles. |
+| `excluded_paths` | array | `[]` | Skips tracking for requests that match the listed URL paths. |
 | `debug_enabled` | boolean | `false` | Enables verbose console logging for Lean Stats admin screens. |
 
 ## Debug mode and raw logs

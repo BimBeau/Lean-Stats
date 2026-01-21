@@ -10,7 +10,7 @@ The configuration options below control how collection, anonymization, and stora
 - No cookies
 - No persistent identifiers
 - No user-level tracking
-- No IP addresses stored in clear
+- No IP addresses stored
 - No fingerprinting
 
 All metrics are designed to be **anonymous, aggregated, and non-identifying**.
@@ -30,6 +30,9 @@ All metrics are designed to be **anonymous, aggregated, and non-identifying**.
   - `DNT: 1`
   - `Sec-GPC: 1`
 
+- **Excluded paths**  
+  Skips tracking for listed URL paths.
+
 These options help align Lean Stats with privacy-conscious site configurations.
 
 ---
@@ -47,23 +50,13 @@ This prevents accidental storage of personal or sensitive data in URLs.
 
 ---
 
-## Visit counting (session anonymization)
+## Aggregated visit counting
 
-Lean Stats counts **visits as anonymous sessions**, not individuals.
+Lean Stats counts activity using **daily aggregated counters** only.
 
-- **Session hash**
-  - Each visit is identified using an **irreversible hash**
-  - The hash is derived from the IP address combined with a **secret salt**
-  - The salt can be **rotated daily**
-
-- **No IP storage**
-  - IP addresses are **never stored in clear**
-  - Only the hashed value is stored, scoped to a date bucket
-
-This mechanism:
-- prevents long-term tracking
-- prevents re-identification
-- ensures visits cannot be linked across days
+- **No session identifiers**
+  - No IP addresses, cookies, or user IDs are stored
+  - Daily counters update totals per path, referrer domain, 404 path, and search term
 
 ---
 
@@ -91,12 +84,7 @@ No page view data is associated with a person or persistent identifier.
 
 ---
 
-## Rate limiting and deduplication
-
-- **Soft rate limiting**
-  - Uses a hashed IP stored **only in memory cache**
-  - Prevents bursts or abuse
-  - Raw IPs are never persisted
+## Deduplication
 
 - **Deduplication window**
   - Identical hits within a short time window are ignored
