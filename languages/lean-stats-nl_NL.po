@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T10:33:01+00:00\n"
+"POT-Creation-Date: 2026-01-21T10:57:25+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:103 src/admin/index.js:236
-#: src/admin/index.js:743
+#: lean-stats.php includes/settings.php:126 src/admin/index.js:238
+#: src/admin/index.js:761
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:169 src/admin/index.js:41
+#: admin/admin.php:169 src/admin/index.js:42
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: admin/admin.php:174 src/admin/index.js:42 src/admin/index.js:407
+#: admin/admin.php:174 src/admin/index.js:43 src/admin/index.js:412
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -45,19 +45,19 @@ msgstr "U hebt geen toegang tot analyticsgegevens."
 msgid "Invalid REST API nonce."
 msgstr "Ongeldige REST API-nonce."
 
-#: includes/rest/class-lean-stats-admin-controller.php:251
+#: includes/rest/class-lean-stats-admin-controller.php:244
 msgid "Debug mode is disabled."
 msgstr ""
 
-#: includes/rest/class-lean-stats-hit-controller.php:125
+#: includes/rest/class-lean-stats-hit-controller.php:116
 msgid "Invalid page path."
 msgstr "Ongeldig paginapad."
 
-#: includes/rest/class-lean-stats-hit-controller.php:135
+#: includes/rest/class-lean-stats-hit-controller.php:126
 msgid "Invalid device class."
 msgstr "Ongeldige apparaatklasse."
 
-#: includes/rest/class-lean-stats-hit-controller.php:140
+#: includes/rest/class-lean-stats-hit-controller.php:131
 msgid "Invalid timestamp bucket."
 msgstr "Ongeldige tijdstempel-bucket."
 
@@ -69,245 +69,253 @@ msgstr "Laden…"
 msgid "Loading: %s"
 msgstr "Laden: %s"
 
-#: src/admin/index.js:134 src/admin/index.js:344
+#: src/admin/index.js:136 src/admin/index.js:348
 msgid "Missing REST configuration."
 msgstr "Ontbrekende REST-configuratie."
 
-#: src/admin/index.js:158 src/admin/index.js:368
+#: src/admin/index.js:160 src/admin/index.js:372
 msgid "API error (%s)"
 msgstr "API-fout (%s)"
 
-#: src/admin/index.js:173
+#: src/admin/index.js:175
 msgid "Loading error."
 msgstr "Fout bij laden."
 
-#: src/admin/index.js:264
+#: src/admin/index.js:266
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:275
+#: src/admin/index.js:277
 #, fuzzy
 msgid "No raw logs available."
 msgstr "Geen rol beschikbaar."
 
-#: src/admin/index.js:276
+#: src/admin/index.js:278
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Laden van KPI's…"
 
-#: src/admin/index.js:283
+#: src/admin/index.js:285
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:284 src/admin/index.js:636
+#: src/admin/index.js:286 src/admin/index.js:654
 msgid "Page"
 msgstr "Pagina"
 
-#: src/admin/index.js:285 src/admin/index.js:657
+#: src/admin/index.js:287 src/admin/index.js:675
 msgid "Referrer"
 msgstr "Verwijzer"
 
-#: src/admin/index.js:286
+#: src/admin/index.js:288
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:294 src/admin/index.js:650
+#: src/admin/index.js:296 src/admin/index.js:668
 msgid "Direct"
 msgstr "Direct"
 
-#: src/admin/index.js:309
+#: src/admin/index.js:311
 msgid "Period"
 msgstr "Periode"
 
-#: src/admin/index.js:312
+#: src/admin/index.js:314
 msgid "7 days"
 msgstr "7 dagen"
 
-#: src/admin/index.js:313
+#: src/admin/index.js:315
 msgid "30 days"
 msgstr "30 dagen"
 
-#: src/admin/index.js:314
+#: src/admin/index.js:316
 msgid "90 days"
 msgstr "90 dagen"
 
-#: src/admin/index.js:380
+#: src/admin/index.js:385
 msgid "Settings saved."
 msgstr "Instellingen opgeslagen."
 
-#: src/admin/index.js:388
+#: src/admin/index.js:393
 msgid "Error while saving."
 msgstr "Fout bij opslaan."
 
-#: src/admin/index.js:402
+#: src/admin/index.js:407
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:403
+#: src/admin/index.js:408
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:413
+#: src/admin/index.js:418
 msgid "Loading settings…"
 msgstr "Instellingen laden…"
 
-#: src/admin/index.js:435
+#: src/admin/index.js:440
 msgid "Plugin name (menu and dashboard)"
 msgstr "Plug-innaam (menu en dashboard)"
 
-#: src/admin/index.js:436
+#: src/admin/index.js:441
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Leeg laten om \"Lean Stats\" te gebruiken."
 
-#: src/admin/index.js:441
+#: src/admin/index.js:446
 msgid "Strict mode"
 msgstr "Strikte modus"
 
-#: src/admin/index.js:442
+#: src/admin/index.js:447
 msgid "Ignore tracking for logged-in users."
 msgstr "Negeert tracking voor ingelogde gebruikers."
 
-#: src/admin/index.js:447
+#: src/admin/index.js:452
 msgid "Respect DNT / GPC"
 msgstr "DNT / GPC respecteren"
 
-#: src/admin/index.js:448
+#: src/admin/index.js:453
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Negeert tracking als de browser DNT of GPC verzendt."
 
-#: src/admin/index.js:453
+#: src/admin/index.js:458
 msgid "URL cleanup"
 msgstr "URL-opschoning"
 
-#: src/admin/index.js:454
+#: src/admin/index.js:459
 msgid "Remove query parameters."
 msgstr "Verwijdert queryparameters."
 
-#: src/admin/index.js:459
+#: src/admin/index.js:464
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:460
+#: src/admin/index.js:465
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:471
+#: src/admin/index.js:476
 msgid "Query parameter allowlist"
 msgstr "Toegestane lijst van queryparameters"
 
-#: src/admin/index.js:472
+#: src/admin/index.js:477
 msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Komma-gescheiden lijst (bijv. utm_source, utm_campaign)."
 
-#: src/admin/index.js:484
+#: src/admin/index.js:489
+msgid "Excluded paths"
+msgstr ""
+
+#: src/admin/index.js:490
+msgid "One per line or comma-separated (e.g., /privacy, /account)."
+msgstr ""
+
+#: src/admin/index.js:502
 msgid "Raw log retention (days)"
 msgstr "Bewaring van ruwe logs (dagen)"
 
-#: src/admin/index.js:489
+#: src/admin/index.js:507
 msgid "Daily cleanup removes older logs."
 msgstr ""
 
-#: src/admin/index.js:499
+#: src/admin/index.js:517
 msgid "Role exclusions"
 msgstr "Uitsluitingen per rol"
 
-#: src/admin/index.js:501
+#: src/admin/index.js:519
 msgid "No roles available."
 msgstr "Geen rol beschikbaar."
 
-#: src/admin/index.js:526
+#: src/admin/index.js:544
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
-#: src/admin/index.js:528
+#: src/admin/index.js:546
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/admin/index.js:552
+#: src/admin/index.js:570
 msgid "No KPIs available."
 msgstr "Geen KPI beschikbaar."
 
-#: src/admin/index.js:553
+#: src/admin/index.js:571
 msgid "Loading KPIs…"
 msgstr "Laden van KPI's…"
 
-#: src/admin/index.js:567
+#: src/admin/index.js:585
 msgid "Visits"
 msgstr ""
 
-#: src/admin/index.js:576 src/admin/index.js:636 src/admin/index.js:657
+#: src/admin/index.js:594 src/admin/index.js:654 src/admin/index.js:675
 msgid "Page views"
 msgstr ""
 
-#: src/admin/index.js:585
+#: src/admin/index.js:603
 msgid "Unique referrers"
 msgstr "Unieke verwijzers"
 
-#: src/admin/index.js:599
+#: src/admin/index.js:617
 msgid "Traffic over time"
 msgstr "Verkeer in de tijd"
 
-#: src/admin/index.js:604
+#: src/admin/index.js:622
 msgid "No data available for this period."
 msgstr "Geen gegevens beschikbaar voor deze periode."
 
-#: src/admin/index.js:605
+#: src/admin/index.js:623
 msgid "Loading chart…"
 msgstr "Grafiek laden…"
 
-#: src/admin/index.js:608
+#: src/admin/index.js:626
 msgid "Traffic chart"
 msgstr "Grafiek van verkeer"
 
-#: src/admin/index.js:635
+#: src/admin/index.js:653
 msgid "Top pages"
 msgstr "Top pagina's"
 
-#: src/admin/index.js:640
+#: src/admin/index.js:658
 msgid "No popular pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/index.js:656
+#: src/admin/index.js:674
 msgid "Top referrers"
 msgstr "Top verwijzers"
 
-#: src/admin/index.js:661
+#: src/admin/index.js:679
 msgid "No referrers available."
 msgstr "Geen verwijzer beschikbaar."
 
-#: src/admin/index.js:673
+#: src/admin/index.js:691
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: src/admin/index.js:677
+#: src/admin/index.js:695
 msgid "Device breakdown"
 msgstr "Apparaatverdeling"
 
-#: src/admin/index.js:682
+#: src/admin/index.js:700
 msgid "No device data available."
 msgstr "Geen apparaatgegevens beschikbaar."
 
-#: src/admin/index.js:683
+#: src/admin/index.js:701
 msgid "Loading device breakdown…"
 msgstr "Laden van de apparaatverdeling…"
 
-#: src/admin/index.js:686
+#: src/admin/index.js:704
 msgid "Device breakdown chart"
 msgstr "Grafiek van apparaatverdeling"
 
-#: src/admin/index.js:697
+#: src/admin/index.js:715
 msgid "Device breakdown details"
 msgstr "Detail van apparaatverdeling"
 
-#: src/admin/index.js:700
+#: src/admin/index.js:718
 msgid "%s : %s"
 msgstr "%s : %s"
 
-#: src/admin/index.js:734
+#: src/admin/index.js:752
 msgid "Missing admin configuration."
 msgstr "Ontbrekende beheerconfiguratie."
 
-#: src/admin/index.js:762
+#: src/admin/index.js:780
 msgid "No panel available for this screen."
 msgstr "Geen paneel beschikbaar voor dit scherm."
 
