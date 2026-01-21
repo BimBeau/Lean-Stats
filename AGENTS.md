@@ -14,3 +14,8 @@ This repository is the **source of truth** for:
 - Architecture
 
 These documentation files may be synchronized into a separate Pro repository as needed.
+
+## Admin UI design system
+
+- Use the Gutenberg design system exclusively.
+- Use official `@wordpress/components` only for UI components.

@@ -9,8 +9,6 @@ import {
     Card,
     CardBody,
     CheckboxControl,
-    Flex,
-    FlexItem,
     Notice,
     SelectControl,
     TabPanel,
@@ -305,7 +303,7 @@ const SettingsLogsTab = ({ debugEnabled }) => {
 };
 
 const PeriodFilter = ({ value, onChange }) => (
-    <Card>
+    <Card className="ls-dashboard__summary-card ls-dashboard__summary-card--filter">
         <CardBody>
             <SelectControl
                 label={__('Period', 'lean-stats')}
@@ -541,66 +539,55 @@ const SettingsPanel = () => {
 const KpiCards = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/kpis', range);
     const kpis = data?.kpis || null;
+    const isEmpty = !isLoading && !error && !kpis;
+
+    if (isLoading || error || isEmpty) {
+        return (
+            <Card className="ls-dashboard__summary-card ls-dashboard__summary-card--status">
+                <CardBody>
+                    <DataState
+                        isLoading={isLoading}
+                        error={error}
+                        isEmpty={isEmpty}
+                        emptyLabel={__('No KPIs available.', 'lean-stats')}
+                        loadingLabel={__('Loading KPIs…', 'lean-stats')}
+                        skeletonRows={3}
+                    />
+                </CardBody>
+            </Card>
+        );
+    }
 
     return (
-        <LsCard title={__('KPIs', 'lean-stats')}>
-            <DataState
-                isLoading={isLoading}
-                error={error}
-                isEmpty={!isLoading && !error && !kpis}
-                emptyLabel={__('No KPIs available.', 'lean-stats')}
-                    loadingLabel={__('Loading KPIs…', 'lean-stats')}
-                    skeletonRows={3}
-                />
-                {kpis && (
-                    <Flex gap="16" wrap className="ls-kpi-cards">
-                        <FlexItem className="ls-kpi-cards__item">
-                            <Card>
-                                <CardBody className="ls-kpi-card__body">
-                                    <span
-                                        className="dashicons dashicons-chart-bar ls-kpi-card__icon"
-                                        aria-hidden="true"
-                                    />
-                                    <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">{__('Visits', 'lean-stats')}</p>
-                                        <strong className="ls-kpi-card__value">{kpis.visits}</strong>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </FlexItem>
-                        <FlexItem className="ls-kpi-cards__item">
-                            <Card>
-                                <CardBody className="ls-kpi-card__body">
-                                    <span
-                                        className="dashicons dashicons-admin-page ls-kpi-card__icon"
-                                        aria-hidden="true"
-                                    />
-                                    <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">{__('Page views', 'lean-stats')}</p>
-                                        <strong className="ls-kpi-card__value">{kpis.pageViews}</strong>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </FlexItem>
-                        <FlexItem className="ls-kpi-cards__item">
-                            <Card>
-                                <CardBody className="ls-kpi-card__body">
-                                    <span
-                                        className="dashicons dashicons-admin-links ls-kpi-card__icon"
-                                        aria-hidden="true"
-                                    />
-                                    <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">
-                                            {__('Unique referrers', 'lean-stats')}
-                                        </p>
-                                        <strong className="ls-kpi-card__value">{kpis.uniqueReferrers}</strong>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </FlexItem>
-                    </Flex>
-                )}
-        </LsCard>
+        <>
+            <Card className="ls-dashboard__summary-card">
+                <CardBody className="ls-kpi-card__body">
+                    <span className="dashicons dashicons-chart-bar ls-kpi-card__icon" aria-hidden="true" />
+                    <div className="ls-kpi-card__content">
+                        <p className="ls-kpi-card__label">{__('Visits', 'lean-stats')}</p>
+                        <strong className="ls-kpi-card__value">{kpis.visits}</strong>
+                    </div>
+                </CardBody>
+            </Card>
+            <Card className="ls-dashboard__summary-card">
+                <CardBody className="ls-kpi-card__body">
+                    <span className="dashicons dashicons-admin-page ls-kpi-card__icon" aria-hidden="true" />
+                    <div className="ls-kpi-card__content">
+                        <p className="ls-kpi-card__label">{__('Page views', 'lean-stats')}</p>
+                        <strong className="ls-kpi-card__value">{kpis.pageViews}</strong>
+                    </div>
+                </CardBody>
+            </Card>
+            <Card className="ls-dashboard__summary-card">
+                <CardBody className="ls-kpi-card__body">
+                    <span className="dashicons dashicons-admin-links ls-kpi-card__icon" aria-hidden="true" />
+                    <div className="ls-kpi-card__content">
+                        <p className="ls-kpi-card__label">{__('Unique referrers', 'lean-stats')}</p>
+                        <strong className="ls-kpi-card__value">{kpis.uniqueReferrers}</strong>
+                    </div>
+                </CardBody>
+            </Card>
+        </>
     );
 };
 
@@ -726,14 +713,10 @@ const DashboardPanel = () => {
 
     return (
         <div className="ls-dashboard">
-            <Flex gap="16" wrap align="stretch">
-                <FlexItem className="ls-dashboard__filter">
-                    <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-                </FlexItem>
-                <FlexItem className="ls-dashboard__kpis">
-                    <KpiCards range={range} />
-                </FlexItem>
-            </Flex>
+            <div className="ls-dashboard__summary">
+                <PeriodFilter value={rangePreset} onChange={setRangePreset} />
+                <KpiCards range={range} />
+            </div>
             <TimeseriesChart range={range} />
             <div className="ls-dashboard__grid">
                 <TopPagesTable range={range} />
