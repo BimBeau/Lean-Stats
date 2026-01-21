@@ -18,7 +18,8 @@ Lean Stats is built to provide **useful site insights** while staying **minimal,
 Lean Stats focuses on **aggregated metrics**, not user journeys.
 
 ### Core metrics
-- Hits / pageviews (aggregated)
+- Page views (aggregated)
+- Visits (sessions anonymized per day)
 - Time series (per day, optionally per hour)
 - Top pages (by pageviews)
 - Referrers by domain (e.g. `google.com`, `instagram.com`)
@@ -35,8 +36,6 @@ Lean Stats focuses on **aggregated metrics**, not user journeys.
 
 To keep Lean Stats lean and avoid consent-driven tracking patterns, the plugin does **not** provide:
 
-- “Visitors” or “sessions” as exact metrics  
-  *(no cookies → no true session tracking)*
 - Unique visitors (exact), returning visitors, cohorts
 - Individual user journeys or clickstreams
 - Fingerprinting or probabilistic identification
@@ -49,6 +48,7 @@ To keep Lean Stats lean and avoid consent-driven tracking patterns, the plugin d
 Lean Stats is designed to minimize data collection:
 
 - No IP stored in clear (ideally no IP stored at all)
+- Visits use a daily salted, irreversible hash of the IP address (hash only, no IP storage)
 - Referrer stored as domain only (no full referrer URLs)
 - URL cleaning by default (strip query strings unless allowlisted)
 - Data retention: aggregated data kept for reporting; optional short-lived raw logs (if enabled) are limited and purged automatically

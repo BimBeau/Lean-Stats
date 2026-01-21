@@ -13,6 +13,11 @@ Lean Stats focuses on aggregated analytics and minimizes personal data by design
 - **Strip query strings**: removes all query parameters from tracked page paths by default.
 - **Query allowlist**: keeps only specific query keys when stripping is enabled (for example `utm_source`).
 
+## Visit counting
+
+- **Session hash**: visits are counted using a daily salted, irreversible hash of the IP address.
+- **No IP storage**: only the hash is stored alongside the date bucket.
+
 ## Raw logs
 
 - **Raw logs storage**: disabled by default and controlled by debug mode (`lean_stats_settings.debug_enabled`).

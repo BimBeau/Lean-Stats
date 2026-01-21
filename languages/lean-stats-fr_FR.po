@@ -104,7 +104,7 @@ msgid "Traffic chart"
 msgstr "Graphique du trafic"
 
 msgid "Hits"
-msgstr "Visites"
+msgstr "Pages vues"
 
 msgid "Ignore tracking for logged-in users."
 msgstr "Ignore le suivi pour les utilisateurs connectés."
@@ -151,6 +151,9 @@ msgstr "Nom du plugin (menu et tableau de bord)"
 msgid "Page"
 msgstr "Page"
 
+msgid "Page views"
+msgstr "Pages vues"
+
 msgid "Unique pages"
 msgstr "Pages uniques"
 
@@ -192,6 +195,9 @@ msgstr "Top référents"
 
 msgid "Traffic over time"
 msgstr "Trafic dans le temps"
+
+msgid "Visits"
+msgstr "Visites"
 
 msgid "You are not allowed to access analytics data."
 msgstr "Vous n’êtes pas autorisé à accéder aux données d’analytics."

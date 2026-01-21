@@ -562,8 +562,8 @@ const KpiCards = ({ range }) => {
                                         aria-hidden="true"
                                     />
                                     <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">{__('Hits', 'lean-stats')}</p>
-                                        <strong className="ls-kpi-card__value">{kpis.totalHits}</strong>
+                                        <p className="ls-kpi-card__label">{__('Visits', 'lean-stats')}</p>
+                                        <strong className="ls-kpi-card__value">{kpis.visits}</strong>
                                     </div>
                                 </CardBody>
                             </Card>
@@ -576,8 +576,8 @@ const KpiCards = ({ range }) => {
                                         aria-hidden="true"
                                     />
                                     <div className="ls-kpi-card__content">
-                                        <p className="ls-kpi-card__label">{__('Unique pages', 'lean-stats')}</p>
-                                        <strong className="ls-kpi-card__value">{kpis.uniquePages}</strong>
+                                        <p className="ls-kpi-card__label">{__('Page views', 'lean-stats')}</p>
+                                        <strong className="ls-kpi-card__value">{kpis.pageViews}</strong>
                                     </div>
                                 </CardBody>
                             </Card>
@@ -646,7 +646,7 @@ const TopPagesTable = ({ range }) => {
     return (
         <DataTableCard
             title={__('Top pages', 'lean-stats')}
-            headers={[__('Page', 'lean-stats'), __('Hits', 'lean-stats')]}
+            headers={[__('Page', 'lean-stats'), __('Page views', 'lean-stats')]}
             rows={rows}
             isLoading={isLoading}
             error={error}
@@ -667,7 +667,7 @@ const ReferrersTable = ({ range }) => {
     return (
         <DataTableCard
             title={__('Top referrers', 'lean-stats')}
-            headers={[__('Referrer', 'lean-stats'), __('Hits', 'lean-stats')]}
+            headers={[__('Referrer', 'lean-stats'), __('Page views', 'lean-stats')]}
             rows={rows}
             isLoading={isLoading}
             error={error}

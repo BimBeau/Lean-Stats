@@ -100,7 +100,7 @@
         "Graphique du trafic"
       ],
       "Hits": [
-        "Visites"
+        "Pages vues"
       ],
       "Ignore tracking for logged-in users.": [
         "Ignore le suivi pour les utilisateurs connectés."
@@ -147,6 +147,9 @@
       "Page": [
         "Page"
       ],
+      "Page views": [
+        "Pages vues"
+      ],
       "Unique pages": [
         "Pages uniques"
       ],
@@ -188,6 +191,9 @@
       ],
       "Traffic over time": [
         "Trafic dans le temps"
+      ],
+      "Visits": [
+        "Visites"
       ],
       "You are not allowed to access analytics data.": [
         "Vous n’êtes pas autorisé à accéder aux données d’analytics."
