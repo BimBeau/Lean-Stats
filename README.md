@@ -103,12 +103,6 @@ Use the script to generate a distributable plugin archive in `dist/`.
 Build command: npm run build:zip  
 The build process generates `.mo` files and JavaScript translation JSON files in `languages/` when WP-CLI is available.
 
-## ✅ Localization testing
-
-- Site locale `fr_FR`, user locale `en_US`: the Lean Stats admin UI displays English strings.
-- Site locale `en_US`, user locale `fr_FR`: the Lean Stats admin UI displays French strings.
-- Site locale `fr_FR`, user locale not overridden: the Lean Stats admin UI displays French strings.
-
 ## 🗺 Roadmap
 
 - UI improvements & reporting enhancements
