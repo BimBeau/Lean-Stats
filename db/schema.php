@@ -5,6 +5,8 @@
 
 defined('ABSPATH') || exit;
 
+const LEAN_STATS_SCHEMA_VERSION = '2';
+
 /**
  * Create or update the analytics tables.
  */
@@ -17,6 +19,7 @@ function lean_stats_install_schema(): void
     $charset_collate = $wpdb->get_charset_collate();
     $daily_table = $wpdb->prefix . 'lean_stats_daily';
     $hourly_table = $wpdb->prefix . 'lean_stats_hourly';
+    $sessions_table = $wpdb->prefix . 'lean_stats_sessions';
 
     $daily_schema = "CREATE TABLE {$daily_table} (
         date_bucket DATE NOT NULL,
@@ -46,6 +49,29 @@ function lean_stats_install_schema(): void
         KEY referrer_domain (referrer_domain)
     ) {$charset_collate};";
 
+    $sessions_schema = "CREATE TABLE {$sessions_table} (
+        date_bucket DATE NOT NULL,
+        session_hash CHAR(64) NOT NULL,
+        PRIMARY KEY  (date_bucket, session_hash),
+        KEY date_bucket (date_bucket)
+    ) {$charset_collate};";
+
     dbDelta($daily_schema);
     dbDelta($hourly_schema);
+    dbDelta($sessions_schema);
+
+    update_option('lean_stats_schema_version', LEAN_STATS_SCHEMA_VERSION, false);
 }
+
+/**
+ * Ensure the schema is up to date.
+ */
+function lean_stats_maybe_install_schema(): void
+{
+    $installed = get_option('lean_stats_schema_version');
+    if ($installed !== LEAN_STATS_SCHEMA_VERSION) {
+        lean_stats_install_schema();
+    }
+}
+
+add_action('plugins_loaded', 'lean_stats_maybe_install_schema');

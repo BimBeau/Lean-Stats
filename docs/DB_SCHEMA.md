@@ -43,3 +43,17 @@ Indexes:
 - Index: `(date_bucket, referrer_domain)`
 - Index: `page_path(255)`
 - Index: `referrer_domain`
+
+### `wp_lean_stats_sessions`
+
+Stores anonymized visit sessions per day.
+
+Columns:
+
+- `date_bucket` (date)
+- `session_hash` (char(64))
+
+Indexes:
+
+- Primary key: `(date_bucket, session_hash)`
+- Index: `date_bucket`

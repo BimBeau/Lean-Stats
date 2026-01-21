@@ -171,11 +171,11 @@ class Lean_Stats_Admin_Controller {
         }
 
         $table = $wpdb->prefix . 'lean_stats_daily';
+        $sessions_table = $wpdb->prefix . 'lean_stats_sessions';
 
         $query = $wpdb->prepare(
             "SELECT
-                COALESCE(SUM(hits), 0) AS total_hits,
-                COUNT(DISTINCT page_path) AS unique_pages,
+                COALESCE(SUM(hits), 0) AS page_views,
                 COUNT(DISTINCT referrer_domain) AS unique_referrers
             FROM {$table}
             WHERE date_bucket BETWEEN %s AND %s",
@@ -184,9 +184,16 @@ class Lean_Stats_Admin_Controller {
         );
 
         $row = $wpdb->get_row($query, ARRAY_A);
+        $visits = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM {$sessions_table} WHERE date_bucket BETWEEN %s AND %s",
+                $range['start'],
+                $range['end']
+            )
+        );
         $data = [
-            'totalHits' => isset($row['total_hits']) ? (int) $row['total_hits'] : 0,
-            'uniquePages' => isset($row['unique_pages']) ? (int) $row['unique_pages'] : 0,
+            'visits' => $visits !== null ? (int) $visits : 0,
+            'pageViews' => isset($row['page_views']) ? (int) $row['page_views'] : 0,
             'uniqueReferrers' => isset($row['unique_referrers']) ? (int) $row['unique_referrers'] : 0,
         ];
 

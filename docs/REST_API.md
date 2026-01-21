@@ -27,7 +27,7 @@ Admin routes require:
 
 ### GET `/admin/kpis`
 
-Returns aggregated KPIs (total hits, unique pages, unique referrers).
+Returns aggregated KPIs (visits, page views, unique referrers).
 
 Parameters:
 
