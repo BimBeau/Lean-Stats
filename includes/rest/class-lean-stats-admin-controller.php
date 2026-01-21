@@ -674,9 +674,9 @@ class Lean_Stats_Admin_Controller {
      * Resolve cache TTL for admin analytics.
      */
     private function get_cache_ttl(): int {
-        $ttl = (int) apply_filters('lean_stats_admin_cache_ttl', 300);
+        $ttl = (int) apply_filters('lean_stats_admin_cache_ttl', 60);
 
-        return max(300, min(600, $ttl));
+        return max(30, min(120, $ttl));
     }
 
     /**
@@ -695,6 +695,11 @@ class Lean_Stats_Admin_Controller {
      * Fetch cached response payload.
      */
     private function get_cached_payload(string $cache_key): ?array {
+        $cached = wp_cache_get($cache_key, 'lean_stats_admin');
+        if (is_array($cached)) {
+            return $cached;
+        }
+
         $cached = get_transient($cache_key);
 
         return is_array($cached) ? $cached : null;
@@ -709,6 +714,7 @@ class Lean_Stats_Admin_Controller {
             return;
         }
 
+        wp_cache_set($cache_key, $payload, 'lean_stats_admin', $ttl);
         set_transient($cache_key, $payload, $ttl);
     }
 

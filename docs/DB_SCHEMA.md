@@ -20,6 +20,7 @@ Indexes:
 - Index: `date_bucket`
 - Index: `(date_bucket, page_path(255))`
 - Index: `(date_bucket, referrer_domain)`
+- Index: `(date_bucket, page_path(255), referrer_domain)`
 - Index: `page_path(255)`
 - Index: `referrer_domain`
 - Index: `source_category`
@@ -74,6 +75,7 @@ Indexes:
 - Index: `date_bucket`
 - Index: `(date_bucket, page_path(255))`
 - Index: `(date_bucket, referrer_domain)`
+- Index: `(date_bucket, page_path(255), referrer_domain)`
 - Index: `page_path(255)`
 - Index: `referrer_domain`
 
@@ -95,5 +97,6 @@ Indexes:
 - Index: `date_bucket`
 - Index: `(date_bucket, page_path(255))`
 - Index: `(date_bucket, referrer_domain)`
+- Index: `(date_bucket, page_path(255), referrer_domain)`
 - Index: `page_path(255)`
 - Index: `referrer_domain`

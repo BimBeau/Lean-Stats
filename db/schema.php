@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-const LEAN_STATS_SCHEMA_VERSION = '3';
+const LEAN_STATS_SCHEMA_VERSION = '4';
 
 /**
  * Create or update the analytics tables.
@@ -34,6 +34,7 @@ function lean_stats_install_schema(): void
         KEY date_bucket (date_bucket),
         KEY date_bucket_page (date_bucket, page_path(255)),
         KEY date_bucket_referrer (date_bucket, referrer_domain),
+        KEY date_bucket_path_referrer (date_bucket, page_path(255), referrer_domain),
         KEY page_path (page_path(255)),
         KEY referrer_domain (referrer_domain)
     ) {$charset_collate};";
@@ -48,6 +49,7 @@ function lean_stats_install_schema(): void
         KEY date_bucket (date_bucket),
         KEY date_bucket_page (date_bucket, page_path(255)),
         KEY date_bucket_referrer (date_bucket, referrer_domain),
+        KEY date_bucket_path_referrer (date_bucket, page_path(255), referrer_domain),
         KEY page_path (page_path(255)),
         KEY referrer_domain (referrer_domain)
     ) {$charset_collate};";
@@ -62,6 +64,7 @@ function lean_stats_install_schema(): void
         KEY date_bucket (date_bucket),
         KEY date_bucket_page (date_bucket, page_path(255)),
         KEY date_bucket_referrer (date_bucket, referrer_domain),
+        KEY date_bucket_path_referrer (date_bucket, page_path(255), referrer_domain),
         KEY page_path (page_path(255)),
         KEY referrer_domain (referrer_domain),
         KEY source_category (source_category)
