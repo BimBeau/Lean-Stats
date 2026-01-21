@@ -82,6 +82,46 @@ add_filter('lean_stats_admin_capability', function (): string {
 });
 ```
 
+### `lean_stats_internal_referrer_domains`
+
+Filter the list of referrer domains treated as internal traffic for entry and exit approximations.
+
+```php
+add_filter('lean_stats_internal_referrer_domains', function (array $domains): array {
+    $domains[] = 'example.com';
+
+    return $domains;
+});
+```
+
+### `lean_stats_is_entry_hit`
+
+Filter whether a hit counts as an entry. The callback receives the computed boolean, page path, and referrer domain.
+
+```php
+add_filter('lean_stats_is_entry_hit', function (bool $is_entry, string $page_path, ?string $referrer_domain): bool {
+    if ($page_path === '/pricing') {
+        return true;
+    }
+
+    return $is_entry;
+}, 10, 3);
+```
+
+### `lean_stats_is_exit_hit`
+
+Filter whether a hit counts as an exit. The callback receives the computed boolean, page path, and referrer domain.
+
+```php
+add_filter('lean_stats_is_exit_hit', function (bool $is_exit, string $page_path, ?string $referrer_domain): bool {
+    if ($page_path === '/thanks') {
+        return true;
+    }
+
+    return $is_exit;
+}, 10, 3);
+```
+
 ### `lean_stats_dedupe_ttl`
 
 Filter the hit deduplication window (seconds). Default is `20`, min `10`, max `30`.

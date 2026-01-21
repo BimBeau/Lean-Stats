@@ -39,6 +39,8 @@ const DEFAULT_PANELS = [
     { name: 'referrers', title: __('Referrers', 'lean-stats') },
     { name: 'not-found', title: __('404s', 'lean-stats') },
     { name: 'search-terms', title: __('Search Terms', 'lean-stats') },
+    { name: 'entry-pages', title: __('Entry Pages', 'lean-stats') },
+    { name: 'exit-pages', title: __('Exit Pages', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
 ];
 const DEFAULT_SETTINGS = {
@@ -248,6 +250,8 @@ const getPanelComponent = (name) => {
         referrers: ReferrerSourcesPanel,
         'not-found': NotFoundPanel,
         'search-terms': SearchTermsPanel,
+        'entry-pages': EntryPagesPanel,
+        'exit-pages': ExitPagesPanel,
         settings: SettingsPanel,
     };
 
@@ -949,15 +953,23 @@ const ReportTableCard = ({
     endpoint,
     emptyLabel,
     labelFallback,
+    metricLabel = __('Pageviews (hits)', 'lean-stats'),
+    metricKey = 'hits',
+    metricValueKey = 'hits',
 }) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
-    const [orderBy, setOrderBy] = useState('hits');
+    const [orderBy, setOrderBy] = useState(metricKey);
     const [order, setOrder] = useState('desc');
 
     useEffect(() => {
         setPage(1);
     }, [range.start, range.end]);
+
+    useEffect(() => {
+        setOrderBy(metricKey);
+        setOrder('desc');
+    }, [metricKey]);
 
     const { data, isLoading, error } = useAdminEndpoint(
         endpoint,
@@ -998,7 +1010,7 @@ const ReportTableCard = ({
     const rows = items.map((item, index) => ({
         key: `${item.label || labelFallback}-${index}`,
         label: item.label || labelFallback,
-        hits: item.hits,
+        value: item?.[metricValueKey] ?? 0,
     }));
 
     return (
@@ -1008,7 +1020,7 @@ const ReportTableCard = ({
                     label={__('Sort by', 'lean-stats')}
                     value={orderBy}
                     options={[
-                        { label: __('Pageviews (hits)', 'lean-stats'), value: 'hits' },
+                        { label: metricLabel, value: metricKey },
                         { label: labelSortLabel, value: 'label' },
                     ]}
                     onChange={(value) => {
@@ -1059,7 +1071,7 @@ const ReportTableCard = ({
                                     {labelHeader}
                                 </TableCell>
                                 <TableCell as="th" scope="col">
-                                    {__('Pageviews (hits)', 'lean-stats')}
+                                    {metricLabel}
                                 </TableCell>
                             </TableRow>
                         </TableHeader>
@@ -1067,7 +1079,7 @@ const ReportTableCard = ({
                             {rows.map((row) => (
                                 <TableRow key={row.key}>
                                     <TableCell>{row.label}</TableCell>
-                                    <TableCell>{row.hits}</TableCell>
+                                    <TableCell>{row.value}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -1275,7 +1287,10 @@ const ReferrerSourcesTableCard = ({ range }) => {
 
 const AggregatedDataNotice = () => (
     <Notice status="info" isDismissible={false}>
-        {__('All data is aggregated and contains no per-visitor details.', 'lean-stats')}
+        {__(
+            'All data is aggregated and contains no per-visitor details. Entry and exit pages are approximations based on referrer data.',
+            'lean-stats'
+        )}
     </Notice>
 );
 
@@ -1285,6 +1300,9 @@ const ReportPanel = ({
     labelHeader,
     emptyLabel,
     labelFallback,
+    metricLabel,
+    metricKey,
+    metricValueKey,
 }) => {
     const [rangePreset, setRangePreset] = useState('30d');
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
@@ -1302,6 +1320,9 @@ const ReportPanel = ({
                 endpoint={endpoint}
                 emptyLabel={emptyLabel}
                 labelFallback={labelFallback}
+                metricLabel={metricLabel}
+                metricKey={metricKey}
+                metricValueKey={metricValueKey}
             />
         </div>
     );
@@ -1334,6 +1355,32 @@ const SearchTermsPanel = () => (
         endpoint="/search-terms"
         emptyLabel={__('No search terms available.', 'lean-stats')}
         labelFallback={__('Unknown', 'lean-stats')}
+    />
+);
+
+const EntryPagesPanel = () => (
+    <ReportPanel
+        title={__('Entry pages (approx.)', 'lean-stats')}
+        labelHeader={__('Entry page', 'lean-stats')}
+        endpoint="/entry-pages"
+        emptyLabel={__('No entry pages available.', 'lean-stats')}
+        labelFallback="/"
+        metricLabel={__('Entries (approx.)', 'lean-stats')}
+        metricKey="entries"
+        metricValueKey="entries"
+    />
+);
+
+const ExitPagesPanel = () => (
+    <ReportPanel
+        title={__('Exit pages (approx.)', 'lean-stats')}
+        labelHeader={__('Exit page', 'lean-stats')}
+        endpoint="/exit-pages"
+        emptyLabel={__('No exit pages available.', 'lean-stats')}
+        labelFallback="/"
+        metricLabel={__('Exits (approx.)', 'lean-stats')}
+        metricKey="exits"
+        metricValueKey="exits"
     />
 );
 

@@ -83,6 +83,34 @@ class Lean_Stats_Report_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_NAMESPACE,
+            '/entry-pages',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_entry_pages'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => array_merge(
+                    $this->get_date_range_args(),
+                    $this->get_pagination_args('entries')
+                ),
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_NAMESPACE,
+            '/exit-pages',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_exit_pages'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => array_merge(
+                    $this->get_date_range_args(),
+                    $this->get_pagination_args('exits')
+                ),
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_NAMESPACE,
             '/purge',
             [
                 'methods' => 'POST',
@@ -249,6 +277,50 @@ class Lean_Stats_Report_Controller {
     }
 
     /**
+     * Entry pages aggregation.
+     */
+    public function get_entry_pages(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+
+        return $this->build_list_response(
+            $request,
+            $table,
+            'page_path',
+            'entry-pages',
+            'entries',
+            [
+                'entries' => 'metric',
+                'label' => 'page_path',
+            ],
+            'entries'
+        );
+    }
+
+    /**
+     * Exit pages aggregation.
+     */
+    public function get_exit_pages(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+
+        return $this->build_list_response(
+            $request,
+            $table,
+            'page_path',
+            'exit-pages',
+            'exits',
+            [
+                'exits' => 'metric',
+                'label' => 'page_path',
+            ],
+            'exits'
+        );
+    }
+
+    /**
      * Purge cached analytics data.
      */
     public function purge_cache(): WP_REST_Response {
@@ -282,7 +354,7 @@ class Lean_Stats_Report_Controller {
     /**
      * Pagination and sorting args.
      */
-    private function get_pagination_args(): array {
+    private function get_pagination_args(string $default_orderby = 'hits'): array {
         return [
             'page' => [
                 'required' => false,
@@ -297,7 +369,7 @@ class Lean_Stats_Report_Controller {
             'orderby' => [
                 'required' => false,
                 'type' => 'string',
-                'default' => 'hits',
+                'default' => $default_orderby,
             ],
             'order' => [
                 'required' => false,
@@ -387,19 +459,28 @@ class Lean_Stats_Report_Controller {
         WP_REST_Request $request,
         string $table,
         string $label_column,
-        string $cache_id
+        string $cache_id,
+        string $metric_column = 'hits',
+        array $allowed_orderby = [],
+        string $default_orderby = 'hits'
     ): WP_REST_Response {
         global $wpdb;
 
         $range = $this->get_day_range($request);
         $pagination = $this->normalize_pagination($request);
+        if ($allowed_orderby === []) {
+            $allowed_orderby = [
+                'hits' => 'metric',
+                'label' => $label_column,
+            ];
+        }
+        if ($default_orderby === '') {
+            $default_orderby = array_key_first($allowed_orderby) ?: 'hits';
+        }
         $sorting = $this->normalize_sorting(
             $request,
-            [
-                'hits' => 'hits',
-                'label' => $label_column,
-            ],
-            'hits'
+            $allowed_orderby,
+            $default_orderby
         );
         $cache_key = $this->get_cache_key(
             $cache_id,
@@ -425,7 +506,7 @@ class Lean_Stats_Report_Controller {
         $total_items = (int) $wpdb->get_var($count_query);
 
         $list_query = $wpdb->prepare(
-            "SELECT {$label_column} AS label, SUM(hits) AS hits
+            "SELECT {$label_column} AS label, SUM({$metric_column}) AS metric
             FROM {$table}
             WHERE date_bucket BETWEEN %s AND %s
             GROUP BY {$label_column}
@@ -439,10 +520,10 @@ class Lean_Stats_Report_Controller {
 
         $rows = $wpdb->get_results($list_query, ARRAY_A);
         $items = array_map(
-            static function (array $row): array {
+            static function (array $row) use ($metric_column): array {
                 return [
                     'label' => isset($row['label']) ? sanitize_text_field((string) $row['label']) : '',
-                    'hits' => isset($row['hits']) ? (int) $row['hits'] : 0,
+                    $metric_column => isset($row['metric']) ? (int) $row['metric'] : 0,
                 ];
             },
             $rows ?: []

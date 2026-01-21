@@ -75,6 +75,36 @@ Returns paginated hit totals for search terms.
 
 Parameters: same as `/top-pages`.
 
+#### GET `/entry-pages`
+
+Returns paginated entry totals by page path.
+
+Entry counts are aggregated approximations based on referrer presence. An entry is counted when the referrer domain is empty or external to the site.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`entries` or `label`, optional, default `entries`)
+- `order` (`asc` or `desc`, optional, default `desc`)
+
+#### GET `/exit-pages`
+
+Returns paginated exit totals by page path.
+
+Exit counts are aggregated approximations based on referrer presence. An exit is counted when the referrer domain is empty or external to the site.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`exits` or `label`, optional, default `exits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
+
 #### POST `/purge`
 
 Purges cached analytics responses.
