@@ -6,9 +6,12 @@ import { render, useEffect, useMemo, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import {
     Button,
+    ButtonGroup,
     Card,
     CardBody,
     CheckboxControl,
+    Flex,
+    FlexItem,
     Modal,
     Notice,
     SelectControl,
@@ -17,28 +20,14 @@ import {
     TextareaControl,
     ToggleControl,
 } from '@wordpress/components';
-import {
-    CartesianGrid,
-    Cell,
-    Line,
-    LineChart,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from 'recharts';
 
 import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHandlers } from './logger';
 import ChartFrame from './components/ChartFrame';
 import DataState from './components/DataState';
-import DataTableCard from './components/DataTableCard';
 import LsCard from './components/LsCard';
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
-const CHART_COLORS = ['#2271b1', '#72aee6', '#1e8cbe', '#d63638', '#00a32a'];
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
@@ -96,10 +85,10 @@ const getRangeFromPreset = (preset) => {
     };
 };
 
-const buildAdminUrl = (path, params) => {
+const buildRestUrl = (path, params, namespace) => {
     const base = ADMIN_CONFIG?.restUrl ? `${ADMIN_CONFIG.restUrl}` : '';
-    const namespace = ADMIN_CONFIG?.settings?.restInternalNamespace || '';
-    const url = new URL(`${namespace}${path}`, base);
+    const resolvedNamespace = namespace ?? (ADMIN_CONFIG?.settings?.restInternalNamespace || '');
+    const url = new URL(`${resolvedNamespace}${path}`, base);
 
     if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -118,7 +107,10 @@ const useAdminEndpoint = (path, params, options = {}) => {
     const [error, setError] = useState(null);
     const paramsKey = useMemo(() => JSON.stringify(params ?? {}), [params]);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
-    const { enabled = true } = options;
+    const {
+        enabled = true,
+        namespace = ADMIN_CONFIG?.settings?.restInternalNamespace,
+    } = options;
 
     useEffect(() => {
         if (!enabled || !path) {
@@ -149,7 +141,7 @@ const useAdminEndpoint = (path, params, options = {}) => {
             });
 
             try {
-                const response = await fetch(buildAdminUrl(path, params), {
+                const response = await fetch(buildRestUrl(path, params, namespace), {
                     signal: controller.signal,
                     headers: {
                         'X-WP-Nonce': ADMIN_CONFIG.restNonce,
@@ -241,7 +233,7 @@ const getCurrentPanelTitle = (panelName, panels) => {
 
 const getPanelComponent = (name) => {
     const corePanels = {
-        dashboard: DashboardPanel,
+        dashboard: OverviewPanel,
         settings: SettingsPanel,
     };
 
@@ -306,7 +298,7 @@ const SettingsLogsTab = ({ debugEnabled }) => {
 };
 
 const PeriodFilter = ({ value, onChange }) => (
-    <Card className="ls-dashboard__summary-card ls-dashboard__summary-card--filter">
+    <Card className="ls-overview__summary-card ls-overview__summary-card--filter">
         <CardBody>
             <SelectControl
                 label={__('Period', 'lean-stats')}
@@ -391,7 +383,7 @@ const SettingsPanel = () => {
         });
 
         try {
-            const response = await fetch(buildAdminUrl('/admin/settings'), {
+            const response = await fetch(buildRestUrl('/admin/settings'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -450,7 +442,7 @@ const SettingsPanel = () => {
         });
 
         try {
-            const response = await fetch(buildAdminUrl('/admin/purge-data'), {
+            const response = await fetch(buildRestUrl('/admin/purge-data'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -726,21 +718,61 @@ const SettingsPanel = () => {
     );
 };
 
-const KpiCards = ({ range }) => {
-    const { data, isLoading, error } = useAdminEndpoint('/admin/kpis', range);
-    const kpis = data?.kpis || null;
-    const isEmpty = !isLoading && !error && !kpis;
+const LINE_CHART_WIDTH = 640;
+const LINE_CHART_HEIGHT = 240;
+const LINE_CHART_PADDING = 32;
+
+const buildLineChartData = (items) => {
+    const maxHits = items.reduce((max, item) => Math.max(max, item.hits), 0);
+    const width = LINE_CHART_WIDTH;
+    const height = LINE_CHART_HEIGHT;
+    const padding = LINE_CHART_PADDING;
+    const innerWidth = Math.max(width - padding * 2, 1);
+    const innerHeight = Math.max(height - padding * 2, 1);
+    const totalPoints = Math.max(items.length - 1, 1);
+
+    const points = items.map((item, index) => {
+        const x = padding + (innerWidth * index) / totalPoints;
+        const y = height - padding - (maxHits ? (item.hits / maxHits) * innerHeight : 0);
+        return {
+            x,
+            y,
+            label: item.bucket,
+            hits: item.hits,
+        };
+    });
+
+    const path = points
+        .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
+        .join(' ');
+
+    return {
+        points,
+        path,
+        maxHits,
+        width,
+        height,
+        padding,
+    };
+};
+
+const OverviewKpis = ({ range }) => {
+    const { data, isLoading, error } = useAdminEndpoint('/overview', range, {
+        namespace: ADMIN_CONFIG?.settings?.restNamespace,
+    });
+    const overview = data?.overview || null;
+    const isEmpty = !isLoading && !error && !overview;
 
     if (isLoading || error || isEmpty) {
         return (
-            <Card className="ls-dashboard__summary-card ls-dashboard__summary-card--status">
+            <Card className="ls-overview__summary-card ls-overview__summary-card--status">
                 <CardBody>
                     <DataState
                         isLoading={isLoading}
                         error={error}
                         isEmpty={isEmpty}
-                        emptyLabel={__('No KPIs available.', 'lean-stats')}
-                        loadingLabel={__('Loading KPIs…', 'lean-stats')}
+                        emptyLabel={__('No overview data available.', 'lean-stats')}
+                        loadingLabel={__('Loading overview…', 'lean-stats')}
                         skeletonRows={3}
                     />
                 </CardBody>
@@ -748,35 +780,52 @@ const KpiCards = ({ range }) => {
         );
     }
 
+    const cards = [
+        {
+            label: __('Pageviews (hits)', 'lean-stats'),
+            value: overview.pageViews,
+            icon: 'chart-bar',
+        },
+        {
+            label: __('Unique pages', 'lean-stats'),
+            value: overview.uniquePages,
+            icon: 'admin-page',
+        },
+        {
+            label: __('Unique referrers', 'lean-stats'),
+            value: overview.uniqueReferrers,
+            icon: 'admin-links',
+        },
+        {
+            label: __('404 hits', 'lean-stats'),
+            value: overview.notFoundHits,
+            icon: 'warning',
+        },
+        {
+            label: __('Search hits', 'lean-stats'),
+            value: overview.searchHits,
+            icon: 'search',
+        },
+        {
+            label: __('Unique search terms', 'lean-stats'),
+            value: overview.uniqueSearchTerms,
+            icon: 'search',
+        },
+    ];
+
     return (
         <>
-            <Card className="ls-dashboard__summary-card">
-                <CardBody className="ls-kpi-card__body">
-                    <span className="dashicons dashicons-chart-bar ls-kpi-card__icon" aria-hidden="true" />
-                    <div className="ls-kpi-card__content">
-                        <p className="ls-kpi-card__label">{__('Visits', 'lean-stats')}</p>
-                        <strong className="ls-kpi-card__value">{kpis.visits}</strong>
-                    </div>
-                </CardBody>
-            </Card>
-            <Card className="ls-dashboard__summary-card">
-                <CardBody className="ls-kpi-card__body">
-                    <span className="dashicons dashicons-admin-page ls-kpi-card__icon" aria-hidden="true" />
-                    <div className="ls-kpi-card__content">
-                        <p className="ls-kpi-card__label">{__('Page views', 'lean-stats')}</p>
-                        <strong className="ls-kpi-card__value">{kpis.pageViews}</strong>
-                    </div>
-                </CardBody>
-            </Card>
-            <Card className="ls-dashboard__summary-card">
-                <CardBody className="ls-kpi-card__body">
-                    <span className="dashicons dashicons-admin-links ls-kpi-card__icon" aria-hidden="true" />
-                    <div className="ls-kpi-card__content">
-                        <p className="ls-kpi-card__label">{__('Unique referrers', 'lean-stats')}</p>
-                        <strong className="ls-kpi-card__value">{kpis.uniqueReferrers}</strong>
-                    </div>
-                </CardBody>
-            </Card>
+            {cards.map((card) => (
+                <Card key={card.label} className="ls-overview__summary-card">
+                    <CardBody className="ls-kpi-card__body">
+                        <span className={`dashicons dashicons-${card.icon} ls-kpi-card__icon`} aria-hidden="true" />
+                        <div className="ls-kpi-card__content">
+                            <p className="ls-kpi-card__label">{card.label}</p>
+                            <strong className="ls-kpi-card__value">{card.value}</strong>
+                        </div>
+                    </CardBody>
+                </Card>
+            ))}
         </>
     );
 };
@@ -784,72 +833,230 @@ const KpiCards = ({ range }) => {
 const TimeseriesChart = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/timeseries/day', range);
     const items = data?.items || [];
+    const chartData = useMemo(() => buildLineChartData(items), [items]);
 
     return (
-        <LsCard title={__('Traffic over time', 'lean-stats')}>
+        <LsCard title={__('Daily pageviews (hits)', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && items.length === 0}
                 emptyLabel={__('No data available for this period.', 'lean-stats')}
-                    loadingLabel={__('Loading chart…', 'lean-stats')}
-                />
-                {!isLoading && !error && items.length > 0 && (
-                    <ChartFrame height={260} ariaLabel={__('Traffic chart', 'lean-stats')}>
-                        <ResponsiveContainer>
-                            <LineChart data={items} margin={{ top: 8, right: 24, left: 0, bottom: 8 }}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="bucket" />
-                                <YAxis />
-                                <Tooltip />
-                                <Line type="monotone" dataKey="hits" stroke="#2271b1" strokeWidth={2} />
-                            </LineChart>
-                        </ResponsiveContainer>
+                loadingLabel={__('Loading chart…', 'lean-stats')}
+            />
+            {!isLoading && !error && items.length > 0 && (
+                <div className="ls-timeseries">
+                    <ChartFrame height={240} ariaLabel={__('Daily pageviews line chart', 'lean-stats')}>
+                        <svg
+                            viewBox={`0 0 ${chartData.width} ${chartData.height}`}
+                            className="ls-timeseries__svg"
+                            role="img"
+                            aria-label={__('Daily pageviews line chart', 'lean-stats')}
+                        >
+                            <rect
+                                x="0"
+                                y="0"
+                                width={chartData.width}
+                                height={chartData.height}
+                                className="ls-timeseries__bg"
+                            />
+                            <line
+                                x1={chartData.padding}
+                                y1={chartData.padding}
+                                x2={chartData.padding}
+                                y2={chartData.height - chartData.padding}
+                                className="ls-timeseries__axis"
+                            />
+                            <line
+                                x1={chartData.padding}
+                                y1={chartData.height - chartData.padding}
+                                x2={chartData.width - chartData.padding}
+                                y2={chartData.height - chartData.padding}
+                                className="ls-timeseries__axis"
+                            />
+                            <path d={chartData.path} className="ls-timeseries__line" />
+                            {chartData.points.map((point) => (
+                                <circle
+                                    key={`${point.label}-${point.hits}`}
+                                    cx={point.x}
+                                    cy={point.y}
+                                    r="3"
+                                    className="ls-timeseries__point"
+                                />
+                            ))}
+                        </svg>
                     </ChartFrame>
-                )}
+                    <table className="widefat striped ls-timeseries__table" aria-label={__('Daily series table', 'lean-stats')}>
+                        <thead>
+                            <tr>
+                                <th>{__('Date', 'lean-stats')}</th>
+                                <th>{__('Pageviews (hits)', 'lean-stats')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item) => (
+                                <tr key={item.bucket}>
+                                    <td>{item.bucket}</td>
+                                    <td>{item.hits}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </LsCard>
     );
 };
 
-const TopPagesTable = ({ range }) => {
-    const { data, isLoading, error } = useAdminEndpoint('/admin/top-pages', { ...range, limit: 10 });
-    const items = data?.items || [];
-    const rows = items.map((item) => ({
-        key: item.label,
-        label: item.label || '/',
-        value: item.hits,
-    }));
+const ReportTableCard = ({
+    title,
+    labelHeader,
+    range,
+    endpoint,
+    emptyLabel,
+    labelFallback,
+}) => {
+    const [page, setPage] = useState(1);
+    const [perPage, setPerPage] = useState(10);
+    const [orderBy, setOrderBy] = useState('hits');
+    const [order, setOrder] = useState('desc');
 
-    return (
-        <DataTableCard
-            title={__('Top pages', 'lean-stats')}
-            headers={[__('Page', 'lean-stats'), __('Page views', 'lean-stats')]}
-            rows={rows}
-            isLoading={isLoading}
-            error={error}
-            emptyLabel={__('No popular pages available.', 'lean-stats')}
-        />
+    useEffect(() => {
+        setPage(1);
+    }, [range.start, range.end]);
+
+    const { data, isLoading, error } = useAdminEndpoint(
+        endpoint,
+        {
+            ...range,
+            page,
+            per_page: perPage,
+            orderby: orderBy,
+            order,
+        },
+        {
+            namespace: ADMIN_CONFIG?.settings?.restNamespace,
+        }
     );
-};
 
-const ReferrersTable = ({ range }) => {
-    const { data, isLoading, error } = useAdminEndpoint('/admin/referrers', { ...range, limit: 10 });
     const items = data?.items || [];
-    const rows = items.map((item) => ({
-        key: item.label || 'direct',
-        label: item.label || __('Direct', 'lean-stats'),
-        value: item.hits,
+    const pagination = data?.pagination || {};
+    const totalPages = pagination.totalPages || 1;
+    const totalItems = pagination.totalItems || items.length;
+
+    useEffect(() => {
+        if (!isLoading && !error && totalPages && page > totalPages) {
+            setPage(totalPages);
+        }
+    }, [totalPages, page, isLoading, error]);
+
+    const canPrevious = page > 1;
+    const canNext = page < totalPages;
+
+    const orderLabel = order === 'asc' ? __('Ascending', 'lean-stats') : __('Descending', 'lean-stats');
+    const labelSortLabel = sprintf(__('%s label', 'lean-stats'), labelHeader);
+
+    const rows = items.map((item, index) => ({
+        key: `${item.label || labelFallback}-${index}`,
+        label: item.label || labelFallback,
+        hits: item.hits,
     }));
 
     return (
-        <DataTableCard
-            title={__('Top referrers', 'lean-stats')}
-            headers={[__('Referrer', 'lean-stats'), __('Page views', 'lean-stats')]}
-            rows={rows}
-            isLoading={isLoading}
-            error={error}
-            emptyLabel={__('No referrers available.', 'lean-stats')}
-        />
+        <LsCard title={title}>
+            <div className="ls-table-controls">
+                <SelectControl
+                    label={__('Sort by', 'lean-stats')}
+                    value={orderBy}
+                    options={[
+                        { label: __('Pageviews (hits)', 'lean-stats'), value: 'hits' },
+                        { label: labelSortLabel, value: 'label' },
+                    ]}
+                    onChange={(value) => {
+                        setOrderBy(value);
+                        setPage(1);
+                    }}
+                    __nextHasNoMarginBottom
+                />
+                <Button
+                    variant="secondary"
+                    icon={order === 'asc' ? 'arrow-up-alt2' : 'arrow-down-alt2'}
+                    onClick={() => {
+                        setOrder(order === 'asc' ? 'desc' : 'asc');
+                        setPage(1);
+                    }}
+                >
+                    {orderLabel}
+                </Button>
+                <SelectControl
+                    label={__('Rows', 'lean-stats')}
+                    value={String(perPage)}
+                    options={[
+                        { label: '5', value: '5' },
+                        { label: '10', value: '10' },
+                        { label: '20', value: '20' },
+                    ]}
+                    onChange={(value) => {
+                        setPerPage(Number(value));
+                        setPage(1);
+                    }}
+                    __nextHasNoMarginBottom
+                />
+            </div>
+            <DataState
+                isLoading={isLoading}
+                error={error}
+                isEmpty={!isLoading && !error && rows.length === 0}
+                emptyLabel={emptyLabel}
+                loadingLabel={sprintf(__('Loading: %s', 'lean-stats'), title)}
+            />
+            {!isLoading && !error && rows.length > 0 && (
+                <>
+                    <table className="widefat striped ls-report-table" aria-label={title}>
+                        <thead>
+                            <tr>
+                                <th>{labelHeader}</th>
+                                <th>{__('Pageviews (hits)', 'lean-stats')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map((row) => (
+                                <tr key={row.key}>
+                                    <td>{row.label}</td>
+                                    <td>{row.hits}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <Flex className="ls-table-pagination" justify="space-between" align="center">
+                        <FlexItem>
+                            <ButtonGroup>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                                    disabled={!canPrevious}
+                                >
+                                    {__('Previous', 'lean-stats')}
+                                </Button>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                                    disabled={!canNext}
+                                >
+                                    {__('Next', 'lean-stats')}
+                                </Button>
+                            </ButtonGroup>
+                        </FlexItem>
+                        <FlexItem className="ls-table-pagination__meta">
+                            {sprintf(__('Page %1$d of %2$d', 'lean-stats'), page, totalPages)}
+                        </FlexItem>
+                        <FlexItem className="ls-table-pagination__meta">
+                            {sprintf(__('%s items', 'lean-stats'), totalItems)}
+                        </FlexItem>
+                    </Flex>
+                </>
+            )}
+        </LsCard>
     );
 };
 
@@ -862,55 +1069,70 @@ const DeviceSplit = ({ range }) => {
             ? item.label.charAt(0).toUpperCase() + item.label.slice(1)
             : __('Unknown', 'lean-stats'),
     }));
+    const maxHits = labeledItems.reduce((max, item) => Math.max(max, item.hits), 0);
 
     return (
-        <LsCard title={__('Device breakdown', 'lean-stats')}>
+        <LsCard title={__('Device hits (pageviews)', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
                 isEmpty={!isLoading && !error && labeledItems.length === 0}
                 emptyLabel={__('No device data available.', 'lean-stats')}
-                    loadingLabel={__('Loading device breakdown…', 'lean-stats')}
-                />
-                {!isLoading && !error && labeledItems.length > 0 && (
-                    <ChartFrame height={240} ariaLabel={__('Device breakdown chart', 'lean-stats')}>
-                        <ResponsiveContainer>
-                            <PieChart>
-                                <Pie dataKey="hits" data={labeledItems} nameKey="label" innerRadius={40} outerRadius={80}>
-                                    {labeledItems.map((entry, index) => (
-                                        <Cell key={entry.label} fill={CHART_COLORS[index % CHART_COLORS.length]} />
-                                    ))}
-                                </Pie>
-                                <Tooltip />
-                            </PieChart>
-                        </ResponsiveContainer>
-                        <ul aria-label={__('Device breakdown details', 'lean-stats')}>
-                            {labeledItems.map((entry) => (
-                                <li key={entry.label}>
-                                    {sprintf(__('%s : %s', 'lean-stats'), entry.label, entry.hits)}
-                                </li>
-                            ))}
-                        </ul>
-                    </ChartFrame>
-                )}
+                loadingLabel={__('Loading device breakdown…', 'lean-stats')}
+            />
+            {!isLoading && !error && labeledItems.length > 0 && (
+                <div className="ls-device-breakdown">
+                    {labeledItems.map((entry) => {
+                        const percent = maxHits ? Math.round((entry.hits / maxHits) * 100) : 0;
+                        return (
+                            <div key={entry.label} className="ls-device-breakdown__row">
+                                <div className="ls-device-breakdown__label">{entry.label}</div>
+                                <div className="ls-device-breakdown__bar" aria-hidden="true">
+                                    <div
+                                        className="ls-device-breakdown__bar-fill"
+                                        style={{ width: `${percent}%` }}
+                                    />
+                                </div>
+                                <div className="ls-device-breakdown__value">
+                                    {sprintf(__('%s hits', 'lean-stats'), entry.hits)}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
         </LsCard>
     );
 };
 
-const DashboardPanel = () => {
+const OverviewPanel = () => {
     const [rangePreset, setRangePreset] = useState('30d');
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
-        <div className="ls-dashboard">
-            <div className="ls-dashboard__summary">
+        <div className="ls-overview">
+            <div className="ls-overview__summary">
                 <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-                <KpiCards range={range} />
+                <OverviewKpis range={range} />
             </div>
             <TimeseriesChart range={range} />
-            <div className="ls-dashboard__grid">
-                <TopPagesTable range={range} />
-                <ReferrersTable range={range} />
+            <div className="ls-overview__grid">
+                <ReportTableCard
+                    title={__('Top pages', 'lean-stats')}
+                    labelHeader={__('Page', 'lean-stats')}
+                    range={range}
+                    endpoint="/top-pages"
+                    emptyLabel={__('No popular pages available.', 'lean-stats')}
+                    labelFallback="/"
+                />
+                <ReportTableCard
+                    title={__('Top referrers', 'lean-stats')}
+                    labelHeader={__('Referrer', 'lean-stats')}
+                    range={range}
+                    endpoint="/referrers"
+                    emptyLabel={__('No referrers available.', 'lean-stats')}
+                    labelFallback={__('Direct', 'lean-stats')}
+                />
                 <DeviceSplit range={range} />
             </div>
         </div>

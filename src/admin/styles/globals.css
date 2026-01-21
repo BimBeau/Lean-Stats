@@ -3,25 +3,25 @@
     gap: var(--lean-stats-gap-lg);
 }
 
-.ls-admin-app .ls-dashboard,
-.ls-admin-app .ls-dashboard__grid,
+.ls-admin-app .ls-overview,
+.ls-admin-app .ls-overview__grid,
 .ls-admin-app .ls-settings-form {
     display: grid;
     gap: var(--lean-stats-gap-lg);
 }
 
-.ls-admin-app .ls-dashboard__summary {
+.ls-admin-app .ls-overview__summary {
     display: grid;
     gap: var(--lean-stats-gap-lg);
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     align-items: stretch;
 }
 
-.ls-admin-app .ls-dashboard__summary-card {
+.ls-admin-app .ls-overview__summary-card {
     height: 100%;
 }
 
-.ls-admin-app .ls-dashboard__summary-card--status .components-card__body {
+.ls-admin-app .ls-overview__summary-card--status .components-card__body {
     height: 100%;
     display: flex;
     align-items: center;
@@ -66,6 +66,6 @@
     word-break: break-word;
 }
 
-.ls-admin-app .ls-dashboard__grid {
+.ls-admin-app .ls-overview__grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
