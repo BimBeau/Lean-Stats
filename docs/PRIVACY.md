@@ -17,6 +17,32 @@ All metrics are designed to be **anonymous, aggregated, and non-identifying**.
 
 ---
 
+## Collected data (aggregated only)
+
+Lean Stats stores **aggregated counts** with no person-level records.
+
+- Page paths (cleaned by default)
+- Daily or hourly hit totals per page
+- Referrer domains (domain only)
+- Device class (mobile / desktop / tablet)
+- 404 paths with counts
+- Internal search terms with counts
+- Allowlisted UTM campaign values (aggregated)
+- Time buckets (day or hour)
+
+---
+
+## Data never collected
+
+- Full IP addresses or precise location data
+- Cookies, localStorage, sessionStorage, or persistent identifiers
+- User IDs, emails, usernames, or names
+- Full referrer URLs or arbitrary query strings
+- Fingerprints or probabilistic identifiers
+- Session replay, heatmaps, or behavioral profiling
+
+---
+
 ## Tracking controls
 
 - **Strict mode**  
