@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 
 import DataState from '../DataState';
@@ -13,23 +14,25 @@ const DataTableCard = ({ title, headers, rows, isLoading, error, emptyLabel }) =
             loadingLabel={sprintf(__('Loading: %s', 'lean-stats'), title)}
         />
         {!isLoading && !error && rows.length > 0 && (
-            <table className="widefat striped" aria-label={title}>
-                <thead>
-                    <tr>
+            <Table className="widefat striped" aria-label={title}>
+                <TableHeader>
+                    <TableRow>
                         {headers.map((header) => (
-                            <th key={header}>{header}</th>
+                            <TableCell key={header} as="th" scope="col">
+                                {header}
+                            </TableCell>
                         ))}
-                    </tr>
-                </thead>
-                <tbody>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {rows.map((row) => (
-                        <tr key={row.key}>
-                            <td>{row.label}</td>
-                            <td>{row.value}</td>
-                        </tr>
+                        <TableRow key={row.key}>
+                            <TableCell>{row.label}</TableCell>
+                            <TableCell>{row.value}</TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         )}
     </LsCard>
 );
