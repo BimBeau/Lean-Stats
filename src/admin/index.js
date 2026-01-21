@@ -15,11 +15,6 @@ import {
     Modal,
     Notice,
     SelectControl,
-    Table,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableRow,
     TabPanel,
     TextControl,
     TextareaControl,
@@ -1064,26 +1059,22 @@ const ReportTableCard = ({
             />
             {!isLoading && !error && rows.length > 0 && (
                 <>
-                    <Table className="ls-report-table" aria-label={tableLabel}>
-                        <TableHeader>
-                            <TableRow>
-                                <TableCell as="th" scope="col">
-                                    {labelHeader}
-                                </TableCell>
-                                <TableCell as="th" scope="col">
-                                    {metricLabel}
-                                </TableCell>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
+                    <table className="ls-report-table" aria-label={tableLabel}>
+                        <thead>
+                            <tr>
+                                <th scope="col">{labelHeader}</th>
+                                <th scope="col">{metricLabel}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {rows.map((row) => (
-                                <TableRow key={row.key}>
-                                    <TableCell>{row.label}</TableCell>
-                                    <TableCell>{row.value}</TableCell>
-                                </TableRow>
+                                <tr key={row.key}>
+                                    <td>{row.label}</td>
+                                    <td>{row.value}</td>
+                                </tr>
                             ))}
-                        </TableBody>
-                    </Table>
+                        </tbody>
+                    </table>
                     <Flex className="ls-table-pagination" justify="space-between" align="center">
                         <FlexItem>
                             <ButtonGroup>
@@ -1227,30 +1218,24 @@ const ReferrerSourcesTableCard = ({ range }) => {
             />
             {!isLoading && !error && rows.length > 0 && (
                 <>
-                    <Table className="ls-report-table" aria-label={tableLabel}>
-                        <TableHeader>
-                            <TableRow>
-                                <TableCell as="th" scope="col">
-                                    {__('Referrer', 'lean-stats')}
-                                </TableCell>
-                                <TableCell as="th" scope="col">
-                                    {__('Source category', 'lean-stats')}
-                                </TableCell>
-                                <TableCell as="th" scope="col">
-                                    {__('Pageviews (hits)', 'lean-stats')}
-                                </TableCell>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
+                    <table className="ls-report-table" aria-label={tableLabel}>
+                        <thead>
+                            <tr>
+                                <th scope="col">{__('Referrer', 'lean-stats')}</th>
+                                <th scope="col">{__('Source category', 'lean-stats')}</th>
+                                <th scope="col">{__('Pageviews (hits)', 'lean-stats')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {rows.map((row) => (
-                                <TableRow key={row.key}>
-                                    <TableCell>{row.referrer}</TableCell>
-                                    <TableCell>{row.category}</TableCell>
-                                    <TableCell>{row.hits}</TableCell>
-                                </TableRow>
+                                <tr key={row.key}>
+                                    <td>{row.referrer}</td>
+                                    <td>{row.category}</td>
+                                    <td>{row.hits}</td>
+                                </tr>
                             ))}
-                        </TableBody>
-                    </Table>
+                        </tbody>
+                    </table>
                     <Flex className="ls-table-pagination" justify="space-between" align="center">
                         <FlexItem>
                             <ButtonGroup>
