@@ -15,6 +15,11 @@ import {
     Modal,
     Notice,
     SelectControl,
+    Table,
+    TableBody,
+    TableCell,
+    TableHeader,
+    TableRow,
     TabPanel,
     TextControl,
     TextareaControl,
@@ -30,6 +35,9 @@ const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
+    { name: 'top-pages', title: __('Top Pages', 'lean-stats') },
+    { name: 'not-found', title: __('404s', 'lean-stats') },
+    { name: 'search-terms', title: __('Search Terms', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
 ];
 const DEFAULT_SETTINGS = {
@@ -234,6 +242,9 @@ const getCurrentPanelTitle = (panelName, panels) => {
 const getPanelComponent = (name) => {
     const corePanels = {
         dashboard: OverviewPanel,
+        'top-pages': TopPagesPanel,
+        'not-found': NotFoundPanel,
+        'search-terms': SearchTermsPanel,
         settings: SettingsPanel,
     };
 
@@ -955,6 +966,11 @@ const ReportTableCard = ({
 
     const orderLabel = order === 'asc' ? __('Ascending', 'lean-stats') : __('Descending', 'lean-stats');
     const labelSortLabel = sprintf(__('%s label', 'lean-stats'), labelHeader);
+    const orderToggleLabel = sprintf(
+        __('Toggle sort order: %s', 'lean-stats'),
+        orderLabel
+    );
+    const tableLabel = sprintf(__('Table: %s', 'lean-stats'), title);
 
     const rows = items.map((item, index) => ({
         key: `${item.label || labelFallback}-${index}`,
@@ -985,6 +1001,7 @@ const ReportTableCard = ({
                         setOrder(order === 'asc' ? 'desc' : 'asc');
                         setPage(1);
                     }}
+                    aria-label={orderToggleLabel}
                 >
                     {orderLabel}
                 </Button>
@@ -1012,22 +1029,26 @@ const ReportTableCard = ({
             />
             {!isLoading && !error && rows.length > 0 && (
                 <>
-                    <table className="widefat striped ls-report-table" aria-label={title}>
-                        <thead>
-                            <tr>
-                                <th>{labelHeader}</th>
-                                <th>{__('Pageviews (hits)', 'lean-stats')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Table className="ls-report-table" aria-label={tableLabel}>
+                        <TableHeader>
+                            <TableRow>
+                                <TableCell as="th" scope="col">
+                                    {labelHeader}
+                                </TableCell>
+                                <TableCell as="th" scope="col">
+                                    {__('Pageviews (hits)', 'lean-stats')}
+                                </TableCell>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
                             {rows.map((row) => (
-                                <tr key={row.key}>
-                                    <td>{row.label}</td>
-                                    <td>{row.hits}</td>
-                                </tr>
+                                <TableRow key={row.key}>
+                                    <TableCell>{row.label}</TableCell>
+                                    <TableCell>{row.hits}</TableCell>
+                                </TableRow>
                             ))}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                     <Flex className="ls-table-pagination" justify="space-between" align="center">
                         <FlexItem>
                             <ButtonGroup>
@@ -1035,6 +1056,7 @@ const ReportTableCard = ({
                                     variant="secondary"
                                     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                                     disabled={!canPrevious}
+                                    aria-label={__('Previous page', 'lean-stats')}
                                 >
                                     {__('Previous', 'lean-stats')}
                                 </Button>
@@ -1042,6 +1064,7 @@ const ReportTableCard = ({
                                     variant="secondary"
                                     onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
                                     disabled={!canNext}
+                                    aria-label={__('Next page', 'lean-stats')}
                                 >
                                     {__('Next', 'lean-stats')}
                                 </Button>
@@ -1059,6 +1082,70 @@ const ReportTableCard = ({
         </LsCard>
     );
 };
+
+const AggregatedDataNotice = () => (
+    <Notice status="info" isDismissible={false}>
+        {__('All data is aggregated and contains no per-visitor details.', 'lean-stats')}
+    </Notice>
+);
+
+const ReportPanel = ({
+    title,
+    endpoint,
+    labelHeader,
+    emptyLabel,
+    labelFallback,
+}) => {
+    const [rangePreset, setRangePreset] = useState('30d');
+    const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
+
+    return (
+        <div className="ls-report-panel">
+            <div className="ls-report-panel__header">
+                <PeriodFilter value={rangePreset} onChange={setRangePreset} />
+                <AggregatedDataNotice />
+            </div>
+            <ReportTableCard
+                title={title}
+                labelHeader={labelHeader}
+                range={range}
+                endpoint={endpoint}
+                emptyLabel={emptyLabel}
+                labelFallback={labelFallback}
+            />
+        </div>
+    );
+};
+
+const TopPagesPanel = () => (
+    <ReportPanel
+        title={__('Top pages', 'lean-stats')}
+        labelHeader={__('Page', 'lean-stats')}
+        endpoint="/top-pages"
+        emptyLabel={__('No popular pages available.', 'lean-stats')}
+        labelFallback="/"
+    />
+);
+
+const NotFoundPanel = () => (
+    <ReportPanel
+        title={__('Top 404s', 'lean-stats')}
+        labelHeader={__('Missing page', 'lean-stats')}
+        endpoint="/404s"
+        emptyLabel={__('No missing pages available.', 'lean-stats')}
+        labelFallback="/"
+    />
+);
+
+const SearchTermsPanel = () => (
+    <ReportPanel
+        title={__('Search terms', 'lean-stats')}
+        labelHeader={__('Search term', 'lean-stats')}
+        endpoint="/search-terms"
+        emptyLabel={__('No search terms available.', 'lean-stats')}
+        labelFallback={__('Unknown', 'lean-stats')}
+    />
+);
 
 const DeviceSplit = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/device-split', range);

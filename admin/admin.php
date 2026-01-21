@@ -170,6 +170,21 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
+            'name' => 'top-pages',
+            'title' => __('Top Pages', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
+            'name' => 'not-found',
+            'title' => __('404s', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
+            'name' => 'search-terms',
+            'title' => __('Search Terms', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
             'name' => 'settings',
             'title' => __('Settings', 'lean-stats'),
             'type' => 'core',

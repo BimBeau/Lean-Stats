@@ -82,6 +82,12 @@
     margin-bottom: var(--lean-stats-gap-sm);
 }
 
+.ls-report-panel__header {
+    display: grid;
+    gap: var(--lean-stats-gap-sm);
+    margin-bottom: var(--lean-stats-gap-sm);
+}
+
 .ls-table-pagination {
     margin-top: var(--lean-stats-gap-sm);
 }
