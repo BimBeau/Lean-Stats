@@ -102,6 +102,16 @@ add_filter('lean_stats_admin_capability', function (): string {
 });
 ```
 
+### `lean_stats_geolite2_database_path`
+
+Filter the local GeoLite2 database path used for server-side geolocation lookups.
+
+```php
+add_filter('lean_stats_geolite2_database_path', function (string $path): string {
+    return WP_CONTENT_DIR . '/uploads/GeoLite2-City.mmdb';
+});
+```
+
 ### `lean_stats_internal_referrer_domains`
 
 Filter the list of referrer domains treated as internal traffic for entry and exit approximations.

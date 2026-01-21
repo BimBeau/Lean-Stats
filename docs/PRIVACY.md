@@ -34,7 +34,7 @@ Lean Stats stores **aggregated counts** with no person-level records.
 
 ## Data never collected
 
-- Full IP addresses or precise location data
+- Stored full IP addresses or stored precise location data
 - Cookies, localStorage, sessionStorage, or persistent identifiers
 - User IDs, emails, usernames, or names
 - Full referrer URLs or arbitrary query strings
@@ -60,6 +60,14 @@ Lean Stats stores **aggregated counts** with no person-level records.
   Skips tracking for listed URL paths.
 
 These options help align Lean Stats with privacy-conscious site configurations.
+
+---
+
+## Geolocation lookup
+
+- The geolocation panel resolves the current request IP to country, region, and city.
+- The IP address is used only for the lookup and is not stored.
+- MaxMind API credentials are optional; without them, the local GeoLite2 database is used.
 
 ---
 

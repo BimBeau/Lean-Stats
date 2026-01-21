@@ -20,6 +20,10 @@ Lean Stats respects `DNT: 1` and `Sec-GPC: 1` when the privacy toggle is enabled
 
 Raw logs are stored only when debug mode is enabled and expire based on the configured retention window.
 
+### Geolocation
+
+Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. A MaxMind API key enables the hosted lookup; otherwise the local GeoLite2 database is used. Configuration: store a `GeoLite2-City.mmdb` file at `data/GeoLite2-City.mmdb` or use the `lean_stats_geolite2_database_path` filter to point to the local database.
+
 ### Purge
 
 The purge action deletes aggregated analytics tables and raw logs while leaving settings untouched.
@@ -39,6 +43,7 @@ The purge action deletes aggregated analytics tables and raw logs while leaving 
 | `excluded_roles` | array | `[]` | Skips tracking for logged-in users in the listed WordPress roles. |
 | `excluded_paths` | array | `[]` | Skips tracking for requests that match the listed URL paths. |
 | `debug_enabled` | boolean | `false` | Enables verbose console logging for Lean Stats admin screens. |
+| `maxmind_api_key` | string | `""` | Provides MaxMind API credentials in the format `AccountID:LicenseKey`. |
 
 ## Debug mode and raw logs
 

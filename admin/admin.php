@@ -211,6 +211,11 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
+            'name' => 'geolocation',
+            'title' => __('Geolocation', 'lean-stats'),
+            'type' => 'core',
+        ],
+        [
             'name' => 'settings',
             'title' => __('Settings', 'lean-stats'),
             'type' => 'core',
