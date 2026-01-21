@@ -197,6 +197,7 @@ class Lean_Stats_Report_Controller {
             $range['end']
         );
         $search_row = $wpdb->get_row($search_query, ARRAY_A);
+        $series = $this->build_overview_series($range);
 
         $payload = [
             'range' => $range,
@@ -214,6 +215,7 @@ class Lean_Stats_Report_Controller {
                     ? (int) $search_row['unique_search_terms']
                     : 0,
             ],
+            'series' => $series,
         ];
 
         $this->set_cached_payload($cache_key, $payload);
@@ -406,6 +408,70 @@ class Lean_Stats_Report_Controller {
         return [
             'start' => $start,
             'end' => $end,
+        ];
+    }
+
+    /**
+     * Resolve hour range from a day range.
+     */
+    private function get_hour_range(array $range): array {
+        return [
+            'start' => $range['start'] . ' 00:00:00',
+            'end' => $range['end'] . ' 23:00:00',
+        ];
+    }
+
+    /**
+     * Build overview timeseries payload.
+     */
+    private function build_overview_series(array $range): array {
+        global $wpdb;
+
+        $max_hourly_days = (int) apply_filters('lean_stats_overview_hourly_days', 2);
+        $day_span = ((strtotime($range['end']) - strtotime($range['start'])) / DAY_IN_SECONDS) + 1;
+        $use_hourly = $max_hourly_days > 0
+            && $day_span <= $max_hourly_days
+            && lean_stats_hourly_aggregation_enabled();
+
+        if ($use_hourly) {
+            $table = $wpdb->prefix . 'lean_stats_hourly';
+            $hour_range = $this->get_hour_range($range);
+            $query = $wpdb->prepare(
+                "SELECT date_bucket AS bucket, SUM(hits) AS hits
+                FROM {$table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY date_bucket
+                ORDER BY date_bucket ASC",
+                $hour_range['start'],
+                $hour_range['end']
+            );
+        } else {
+            $table = $wpdb->prefix . 'lean_stats_daily';
+            $query = $wpdb->prepare(
+                "SELECT date_bucket AS bucket, SUM(hits) AS hits
+                FROM {$table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY date_bucket
+                ORDER BY date_bucket ASC",
+                $range['start'],
+                $range['end']
+            );
+        }
+
+        $rows = $wpdb->get_results($query, ARRAY_A);
+        $items = array_map(
+            static function (array $row): array {
+                return [
+                    'bucket' => $row['bucket'],
+                    'hits' => (int) $row['hits'],
+                ];
+            },
+            $rows ?: []
+        );
+
+        return [
+            'interval' => $use_hourly ? 'hour' : 'day',
+            'items' => $items,
         ];
     }
 

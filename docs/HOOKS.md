@@ -72,6 +72,26 @@ add_filter('lean_stats_admin_cache_ttl', function (int $ttl): int {
 });
 ```
 
+### `lean_stats_hourly_aggregation_enabled`
+
+Filter whether hourly aggregation writes and queries run. Default is `true`.
+
+```php
+add_filter('lean_stats_hourly_aggregation_enabled', function (): bool {
+    return false;
+});
+```
+
+### `lean_stats_overview_hourly_days`
+
+Filter the maximum number of days that trigger hourly series in the overview endpoint. Default is `2`.
+
+```php
+add_filter('lean_stats_overview_hourly_days', function (): int {
+    return 3;
+});
+```
+
 ### `lean_stats_admin_capability`
 
 Filter the capability required to access protected analytics REST endpoints.
