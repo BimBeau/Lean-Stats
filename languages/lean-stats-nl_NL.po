@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-21T17:00:23+00:00\n"
+"POT-Creation-Date: 2026-01-21T17:19:18+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:137 src/admin/index.js:243
-#: src/admin/index.js:1494
+#: lean-stats.php includes/settings.php:137 src/admin/index.js:238
+#: src/admin/index.js:1479
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -29,37 +29,37 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:180 src/admin/index.js:37
+#: admin/admin.php:180 src/admin/index.js:32
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: admin/admin.php:185 src/admin/index.js:38
+#: admin/admin.php:185 src/admin/index.js:33
 #, fuzzy
 msgid "Top Pages"
 msgstr "Top pagina's"
 
-#: admin/admin.php:190 src/admin/index.js:39
+#: admin/admin.php:190 src/admin/index.js:34
 #, fuzzy
 msgid "Referrers"
 msgstr "Verwijzer"
 
-#: admin/admin.php:195 src/admin/index.js:40
+#: admin/admin.php:195 src/admin/index.js:35
 msgid "404s"
 msgstr ""
 
-#: admin/admin.php:200 src/admin/index.js:41
+#: admin/admin.php:200 src/admin/index.js:36
 msgid "Search Terms"
 msgstr ""
 
-#: admin/admin.php:205 src/admin/index.js:42
+#: admin/admin.php:205 src/admin/index.js:37
 msgid "Entry Pages"
 msgstr ""
 
-#: admin/admin.php:210 src/admin/index.js:43
+#: admin/admin.php:210 src/admin/index.js:38
 msgid "Exit Pages"
 msgstr ""
 
-#: admin/admin.php:215 src/admin/index.js:44 src/admin/index.js:513
+#: admin/admin.php:215 src/admin/index.js:39 src/admin/index.js:508
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -97,540 +97,540 @@ msgstr "Ongeldige tijdstempel-bucket."
 msgid "Loading…"
 msgstr "Laden…"
 
-#: src/admin/components/DataTableCard/index.js:14 src/admin/index.js:1063
+#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1058
 msgid "Loading: %s"
 msgstr "Laden: %s"
 
-#: src/admin/index.js:141 src/admin/index.js:397 src/admin/index.js:457
+#: src/admin/index.js:136 src/admin/index.js:392 src/admin/index.js:452
 msgid "Missing REST configuration."
 msgstr "Ontbrekende REST-configuratie."
 
-#: src/admin/index.js:165 src/admin/index.js:421 src/admin/index.js:480
+#: src/admin/index.js:160 src/admin/index.js:416 src/admin/index.js:475
 msgid "API error (%s)"
 msgstr "API-fout (%s)"
 
-#: src/admin/index.js:180
+#: src/admin/index.js:175
 msgid "Loading error."
 msgstr "Fout bij laden."
 
-#: src/admin/index.js:277
+#: src/admin/index.js:272
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:288
+#: src/admin/index.js:283
 #, fuzzy
 msgid "No raw logs available."
 msgstr "Geen rol beschikbaar."
 
-#: src/admin/index.js:289
+#: src/admin/index.js:284
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Laden van KPI's…"
 
-#: src/admin/index.js:296 src/admin/index.js:930
+#: src/admin/index.js:291 src/admin/index.js:925
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:297 src/admin/index.js:1334 src/admin/index.js:1461
+#: src/admin/index.js:292 src/admin/index.js:1319 src/admin/index.js:1446
 msgid "Page"
 msgstr "Pagina"
 
-#: src/admin/index.js:298 src/admin/index.js:1168 src/admin/index.js:1186
-#: src/admin/index.js:1234 src/admin/index.js:1469
+#: src/admin/index.js:293 src/admin/index.js:1159 src/admin/index.js:1177
+#: src/admin/index.js:1224 src/admin/index.js:1454
 msgid "Referrer"
 msgstr "Verwijzer"
 
-#: src/admin/index.js:299
+#: src/admin/index.js:294
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:307 src/admin/index.js:1167 src/admin/index.js:1168
-#: src/admin/index.js:1473
+#: src/admin/index.js:302 src/admin/index.js:1158 src/admin/index.js:1159
+#: src/admin/index.js:1458
 msgid "Direct"
 msgstr "Direct"
 
-#: src/admin/index.js:322
+#: src/admin/index.js:317
 msgid "Period"
 msgstr "Periode"
 
-#: src/admin/index.js:325
+#: src/admin/index.js:320
 msgid "7 days"
 msgstr "7 dagen"
 
-#: src/admin/index.js:326
+#: src/admin/index.js:321
 msgid "30 days"
 msgstr "30 dagen"
 
-#: src/admin/index.js:327
+#: src/admin/index.js:322
 msgid "90 days"
 msgstr "90 dagen"
 
-#: src/admin/index.js:353
+#: src/admin/index.js:348
 msgid "Aggregated page views by URL path."
 msgstr ""
 
-#: src/admin/index.js:354
+#: src/admin/index.js:349
 msgid "Aggregated referrer domains."
 msgstr ""
 
-#: src/admin/index.js:355
+#: src/admin/index.js:350
 #, fuzzy
 msgid "Aggregated device class totals."
 msgstr "Ongeldige apparaatklasse."
 
-#: src/admin/index.js:356
+#: src/admin/index.js:351
 msgid "Aggregated 404 paths."
 msgstr ""
 
-#: src/admin/index.js:357
+#: src/admin/index.js:352
 msgid "Aggregated on-site search terms."
 msgstr ""
 
-#: src/admin/index.js:358
+#: src/admin/index.js:353
 msgid "Aggregated UTM campaign parameters (when allowlisted)."
 msgstr ""
 
-#: src/admin/index.js:359
+#: src/admin/index.js:354
 msgid ""
 "Raw log snapshots (timestamp, page path, referrer, device) when debug mode "
 "is enabled."
 msgstr ""
 
-#: src/admin/index.js:367
+#: src/admin/index.js:362
 #, fuzzy
 msgid "Tracking continues even when browsers send DNT or GPC."
 msgstr "Negeert tracking als de browser DNT of GPC verzendt."
 
-#: src/admin/index.js:370
+#: src/admin/index.js:365
 msgid "Full query strings remain in stored page paths."
 msgstr ""
 
-#: src/admin/index.js:373
+#: src/admin/index.js:368
 msgid "Raw logs store granular hit details while debug mode is enabled."
 msgstr ""
 
-#: src/admin/index.js:376
+#: src/admin/index.js:371
 #, fuzzy
 msgid "Raw log retention exceeds 30 days."
 msgstr "Bewaring van ruwe logs (dagen)"
 
-#: src/admin/index.js:379
+#: src/admin/index.js:374
 msgid "Allowlisted UTM parameters are stored in aggregated reports."
 msgstr ""
 
-#: src/admin/index.js:435
+#: src/admin/index.js:430
 msgid "Settings saved."
 msgstr "Instellingen opgeslagen."
 
-#: src/admin/index.js:443
+#: src/admin/index.js:438
 msgid "Error while saving."
 msgstr "Fout bij opslaan."
 
-#: src/admin/index.js:485
+#: src/admin/index.js:480
 msgid "Analytics data purged."
 msgstr ""
 
-#: src/admin/index.js:493
+#: src/admin/index.js:488
 #, fuzzy
 msgid "Error while purging."
 msgstr "Fout bij opslaan."
 
-#: src/admin/index.js:508 src/admin/index.js:547
+#: src/admin/index.js:503 src/admin/index.js:542
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:509
+#: src/admin/index.js:504
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:519
+#: src/admin/index.js:514
 msgid "Loading settings…"
 msgstr "Instellingen laden…"
 
-#: src/admin/index.js:549
+#: src/admin/index.js:544
 msgid "Plugin name (menu and dashboard)"
 msgstr "Plug-innaam (menu en dashboard)"
 
-#: src/admin/index.js:550
+#: src/admin/index.js:545
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Leeg laten om \"Lean Stats\" te gebruiken."
 
-#: src/admin/index.js:555
+#: src/admin/index.js:550
 msgid "Strict mode"
 msgstr "Strikte modus"
 
-#: src/admin/index.js:556
+#: src/admin/index.js:551
 msgid "Ignore tracking for logged-in users."
 msgstr "Negeert tracking voor ingelogde gebruikers."
 
-#: src/admin/index.js:565
+#: src/admin/index.js:560
 msgid "Privacy & consent"
 msgstr ""
 
-#: src/admin/index.js:568
+#: src/admin/index.js:563
 msgid "Respect DNT / GPC"
 msgstr "DNT / GPC respecteren"
 
-#: src/admin/index.js:569
+#: src/admin/index.js:564
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Negeert tracking als de browser DNT of GPC verzendt."
 
-#: src/admin/index.js:574
+#: src/admin/index.js:569
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:575
+#: src/admin/index.js:570
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:586
+#: src/admin/index.js:581
 #, fuzzy
 msgid "Retention window (days)"
 msgstr "Bewaring van ruwe logs (dagen)"
 
-#: src/admin/index.js:591
+#: src/admin/index.js:586
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/index.js:604
+#: src/admin/index.js:599
 #, fuzzy
 msgid "URL cleaning"
 msgstr "URL-opschoning"
 
-#: src/admin/index.js:606
+#: src/admin/index.js:601
 #, fuzzy
 msgid "Strip query parameters"
 msgstr "Verwijdert queryparameters."
 
-#: src/admin/index.js:607
+#: src/admin/index.js:602
 #, fuzzy
 msgid "Remove query parameters from tracked URLs."
 msgstr "Verwijdert queryparameters."
 
-#: src/admin/index.js:612
+#: src/admin/index.js:607
 msgid "Query parameter allowlist"
 msgstr "Toegestane lijst van queryparameters"
 
-#: src/admin/index.js:613
+#: src/admin/index.js:608
 msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Komma-gescheiden lijst (bijv. utm_source, utm_campaign)."
 
-#: src/admin/index.js:625
+#: src/admin/index.js:620
 msgid "UTM allowlist"
 msgstr ""
 
-#: src/admin/index.js:626
+#: src/admin/index.js:621
 #, fuzzy
 msgid ""
 "Comma-separated list of UTM parameters to aggregate (e.g., utm_source, "
 "utm_medium)."
 msgstr "Komma-gescheiden lijst (bijv. utm_source, utm_campaign)."
 
-#: src/admin/index.js:641
+#: src/admin/index.js:636
 #, fuzzy
 msgid "Exclusions"
 msgstr "Uitsluitingen per rol"
 
-#: src/admin/index.js:643
+#: src/admin/index.js:638
 msgid "Excluded paths"
 msgstr ""
 
-#: src/admin/index.js:644
+#: src/admin/index.js:639
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
-#: src/admin/index.js:656
+#: src/admin/index.js:651
 msgid "Role exclusions"
 msgstr "Uitsluitingen per rol"
 
-#: src/admin/index.js:658
+#: src/admin/index.js:653
 msgid "No roles available."
 msgstr "Geen rol beschikbaar."
 
-#: src/admin/index.js:684
+#: src/admin/index.js:679
 msgid "Privacy checklist"
 msgstr ""
 
-#: src/admin/index.js:693
+#: src/admin/index.js:688
 msgid "Review these privacy risks:"
 msgstr ""
 
-#: src/admin/index.js:705
+#: src/admin/index.js:700
 msgid "Data management"
 msgstr ""
 
-#: src/admin/index.js:706
+#: src/admin/index.js:701
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/index.js:712
+#: src/admin/index.js:707
 msgid "Purge analytics data"
 msgstr ""
 
-#: src/admin/index.js:720
+#: src/admin/index.js:715
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
-#: src/admin/index.js:722
+#: src/admin/index.js:717
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/admin/index.js:726
+#: src/admin/index.js:721
 msgid "Confirm data purge"
 msgstr ""
 
-#: src/admin/index.js:730
+#: src/admin/index.js:725
 msgid ""
 "This action permanently removes all stored analytics and raw logs. Settings "
 "remain unchanged."
 msgstr ""
 
-#: src/admin/index.js:737
+#: src/admin/index.js:732
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/index.js:745
+#: src/admin/index.js:740
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/index.js:812
+#: src/admin/index.js:807
 #, fuzzy
 msgid "No overview data available."
 msgstr "Geen apparaatgegevens beschikbaar."
 
-#: src/admin/index.js:813
+#: src/admin/index.js:808
 #, fuzzy
 msgid "Loading overview…"
 msgstr "Laden van de apparaatverdeling…"
 
-#: src/admin/index.js:823 src/admin/index.js:931 src/admin/index.js:956
-#: src/admin/index.js:1185 src/admin/index.js:1240
+#: src/admin/index.js:818 src/admin/index.js:926 src/admin/index.js:951
+#: src/admin/index.js:1176 src/admin/index.js:1226
 msgid "Pageviews (hits)"
 msgstr ""
 
-#: src/admin/index.js:828
+#: src/admin/index.js:823
 msgid "Unique pages"
 msgstr "Unieke pagina's"
 
-#: src/admin/index.js:833
+#: src/admin/index.js:828
 msgid "Unique referrers"
 msgstr "Unieke verwijzers"
 
-#: src/admin/index.js:838
+#: src/admin/index.js:833
 msgid "404 hits"
 msgstr ""
 
-#: src/admin/index.js:843
+#: src/admin/index.js:838
 msgid "Search hits"
 msgstr ""
 
-#: src/admin/index.js:848
+#: src/admin/index.js:843
 #, fuzzy
 msgid "Unique search terms"
 msgstr "Unieke verwijzers"
 
-#: src/admin/index.js:877
+#: src/admin/index.js:872
 msgid "Daily pageviews (hits)"
 msgstr ""
 
-#: src/admin/index.js:882
+#: src/admin/index.js:877
 msgid "No data available for this period."
 msgstr "Geen gegevens beschikbaar voor deze periode."
 
-#: src/admin/index.js:883
+#: src/admin/index.js:878
 msgid "Loading chart…"
 msgstr "Grafiek laden…"
 
-#: src/admin/index.js:887 src/admin/index.js:892
+#: src/admin/index.js:882 src/admin/index.js:887
 msgid "Daily pageviews line chart"
 msgstr ""
 
-#: src/admin/index.js:927
+#: src/admin/index.js:922
 msgid "Daily series table"
 msgstr ""
 
-#: src/admin/index.js:1002 src/admin/index.js:1159
+#: src/admin/index.js:997 src/admin/index.js:1150
 msgid "Ascending"
 msgstr ""
 
-#: src/admin/index.js:1002 src/admin/index.js:1159
+#: src/admin/index.js:997 src/admin/index.js:1150
 msgid "Descending"
 msgstr ""
 
-#: src/admin/index.js:1003
+#: src/admin/index.js:998
 msgid "%s label"
 msgstr ""
 
-#: src/admin/index.js:1005 src/admin/index.js:1161
+#: src/admin/index.js:1000 src/admin/index.js:1152
 msgid "Toggle sort order: %s"
 msgstr ""
 
-#: src/admin/index.js:1008
+#: src/admin/index.js:1003
 msgid "Table: %s"
 msgstr ""
 
-#: src/admin/index.js:1020 src/admin/index.js:1182
+#: src/admin/index.js:1015 src/admin/index.js:1173
 msgid "Sort by"
 msgstr ""
 
-#: src/admin/index.js:1044 src/admin/index.js:1207
+#: src/admin/index.js:1039 src/admin/index.js:1198
 msgid "Rows"
 msgstr ""
 
-#: src/admin/index.js:1094 src/admin/index.js:1261
+#: src/admin/index.js:1085 src/admin/index.js:1246
 msgid "Previous page"
 msgstr ""
 
-#: src/admin/index.js:1096 src/admin/index.js:1263
+#: src/admin/index.js:1087 src/admin/index.js:1248
 msgid "Previous"
 msgstr ""
 
-#: src/admin/index.js:1102 src/admin/index.js:1269
+#: src/admin/index.js:1093 src/admin/index.js:1254
 msgid "Next page"
 msgstr ""
 
-#: src/admin/index.js:1104 src/admin/index.js:1271
+#: src/admin/index.js:1095 src/admin/index.js:1256
 msgid "Next"
 msgstr ""
 
-#: src/admin/index.js:1109 src/admin/index.js:1276
+#: src/admin/index.js:1100 src/admin/index.js:1261
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: src/admin/index.js:1112 src/admin/index.js:1279
+#: src/admin/index.js:1103 src/admin/index.js:1264
 msgid "%s items"
 msgstr ""
 
-#: src/admin/index.js:1164
+#: src/admin/index.js:1155
 msgid "Table: Referrer sources"
 msgstr ""
 
-#: src/admin/index.js:1179
+#: src/admin/index.js:1170
 #, fuzzy
 msgid "Referrer sources"
 msgstr "Verwijzer"
 
-#: src/admin/index.js:1187 src/admin/index.js:1237
+#: src/admin/index.js:1178 src/admin/index.js:1225
 msgid "Source category"
 msgstr ""
 
-#: src/admin/index.js:1225
+#: src/admin/index.js:1216
 #, fuzzy
 msgid "No referrer data available."
 msgstr "Geen verwijzer beschikbaar."
 
-#: src/admin/index.js:1226
+#: src/admin/index.js:1217
 #, fuzzy
 msgid "Loading referrer sources…"
 msgstr "Fout bij laden."
 
-#: src/admin/index.js:1290
+#: src/admin/index.js:1275
 msgid ""
 "All data is aggregated and contains no per-visitor details. Entry and exit "
 "pages are approximations based on referrer data."
 msgstr ""
 
-#: src/admin/index.js:1333 src/admin/index.js:1460
+#: src/admin/index.js:1318 src/admin/index.js:1445
 msgid "Top pages"
 msgstr "Top pagina's"
 
-#: src/admin/index.js:1336 src/admin/index.js:1464
+#: src/admin/index.js:1321 src/admin/index.js:1449
 msgid "No popular pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/index.js:1343
+#: src/admin/index.js:1328
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/index.js:1344
+#: src/admin/index.js:1329
 msgid "Missing page"
 msgstr ""
 
-#: src/admin/index.js:1346
+#: src/admin/index.js:1331
 #, fuzzy
 msgid "No missing pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/index.js:1353
+#: src/admin/index.js:1338
 msgid "Search terms"
 msgstr ""
 
-#: src/admin/index.js:1354
+#: src/admin/index.js:1339
 msgid "Search term"
 msgstr ""
 
-#: src/admin/index.js:1356
+#: src/admin/index.js:1341
 #, fuzzy
 msgid "No search terms available."
 msgstr "Geen verwijzer beschikbaar."
 
-#: src/admin/index.js:1357 src/admin/index.js:1409
+#: src/admin/index.js:1342 src/admin/index.js:1394
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: src/admin/index.js:1363
+#: src/admin/index.js:1348
 msgid "Entry pages (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1364
+#: src/admin/index.js:1349
 msgid "Entry page"
 msgstr ""
 
-#: src/admin/index.js:1366
+#: src/admin/index.js:1351
 #, fuzzy
 msgid "No entry pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/index.js:1368
+#: src/admin/index.js:1353
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1376
+#: src/admin/index.js:1361
 msgid "Exit pages (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1377
+#: src/admin/index.js:1362
 msgid "Exit page"
 msgstr ""
 
-#: src/admin/index.js:1379
+#: src/admin/index.js:1364
 #, fuzzy
 msgid "No exit pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/index.js:1381
+#: src/admin/index.js:1366
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1414
+#: src/admin/index.js:1399
 msgid "Device hits (pageviews)"
 msgstr ""
 
-#: src/admin/index.js:1419
+#: src/admin/index.js:1404
 msgid "No device data available."
 msgstr "Geen apparaatgegevens beschikbaar."
 
-#: src/admin/index.js:1420
+#: src/admin/index.js:1405
 msgid "Loading device breakdown…"
 msgstr "Laden van de apparaatverdeling…"
 
-#: src/admin/index.js:1436
+#: src/admin/index.js:1421
 msgid "%s hits"
 msgstr ""
 
-#: src/admin/index.js:1468
+#: src/admin/index.js:1453
 msgid "Top referrers"
 msgstr "Top verwijzers"
 
-#: src/admin/index.js:1472
+#: src/admin/index.js:1457
 msgid "No referrers available."
 msgstr "Geen verwijzer beschikbaar."
 
-#: src/admin/index.js:1485
+#: src/admin/index.js:1470
 msgid "Missing admin configuration."
 msgstr "Ontbrekende beheerconfiguratie."
 
-#: src/admin/index.js:1513
+#: src/admin/index.js:1498
 msgid "No panel available for this screen."
 msgstr "Geen paneel beschikbaar voor dit scherm."
 
