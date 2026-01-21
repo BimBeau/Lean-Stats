@@ -2,6 +2,28 @@
 
 Lean Stats stores settings in the `lean_stats_settings` option and exposes them through the admin settings screen and the REST endpoint `GET /admin/settings`.
 
+## Settings overview
+
+### URL cleaning
+
+Lean Stats strips query strings from tracked page paths by default and keeps only allowlisted query keys. UTM values are stored only when their keys are allowlisted.
+
+### Exclusions
+
+Lean Stats skips tracking for excluded WordPress roles and excluded URL paths.
+
+### DNT/GPC
+
+Lean Stats respects `DNT: 1` and `Sec-GPC: 1` when the privacy toggle is enabled.
+
+### Retention
+
+Raw logs are stored only when debug mode is enabled and expire based on the configured retention window.
+
+### Purge
+
+The purge action deletes aggregated analytics tables and raw logs while leaving settings untouched.
+
 ## Settings reference
 
 | Key | Type | Default | Description |

@@ -134,6 +134,22 @@ Parameters:
 - `start` (YYYY-MM-DD, optional)
 - `end` (YYYY-MM-DD, optional)
 
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01",
+    "end": "2024-01-30"
+  },
+  "kpis": {
+    "visits": 1200,
+    "pageViews": 1200,
+    "uniqueReferrers": 48
+  }
+}
+```
+
 ### GET `/admin/top-pages`
 
 Returns the most viewed pages.
@@ -143,6 +159,23 @@ Parameters:
 - `start` (YYYY-MM-DD, optional)
 - `end` (YYYY-MM-DD, optional)
 - `limit` (integer, optional, default 10, max 100)
+
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01",
+    "end": "2024-01-30"
+  },
+  "items": [
+    {
+      "label": "/",
+      "hits": 240
+    }
+  ]
+}
+```
 
 ### GET `/admin/referrers`
 
@@ -154,6 +187,23 @@ Parameters:
 - `end` (YYYY-MM-DD, optional)
 - `limit` (integer, optional, default 10, max 100)
 
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01",
+    "end": "2024-01-30"
+  },
+  "items": [
+    {
+      "label": "google.com",
+      "hits": 120
+    }
+  ]
+}
+```
+
 ### GET `/admin/timeseries/day`
 
 Returns a daily time series.
@@ -162,6 +212,23 @@ Parameters:
 
 - `start` (YYYY-MM-DD, optional)
 - `end` (YYYY-MM-DD, optional)
+
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01",
+    "end": "2024-01-30"
+  },
+  "items": [
+    {
+      "bucket": "2024-01-01",
+      "hits": 42
+    }
+  ]
+}
+```
 
 ### GET `/admin/timeseries/hour`
 
@@ -172,6 +239,23 @@ Parameters:
 - `start` (YYYY-MM-DD HH:MM:SS, optional)
 - `end` (YYYY-MM-DD HH:MM:SS, optional)
 
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01 00:00:00",
+    "end": "2024-01-01 23:00:00"
+  },
+  "items": [
+    {
+      "bucket": "2024-01-01 08:00:00",
+      "hits": 7
+    }
+  ]
+}
+```
+
 ### GET `/admin/device-split`
 
 Returns the hit breakdown by device type.
@@ -180,6 +264,23 @@ Parameters:
 
 - `start` (YYYY-MM-DD, optional)
 - `end` (YYYY-MM-DD, optional)
+
+Response (200):
+
+```json
+{
+  "range": {
+    "start": "2024-01-01",
+    "end": "2024-01-30"
+  },
+  "items": [
+    {
+      "label": "desktop",
+      "hits": 300
+    }
+  ]
+}
+```
 
 ### GET `/admin/settings`
 
@@ -201,6 +302,26 @@ Returned fields:
 
 `raw_logs_enabled` mirrors `debug_enabled` and reflects whether raw log storage is active.
 
+Response (200):
+
+```json
+{
+  "settings": {
+    "plugin_label": "",
+    "strict_mode": false,
+    "respect_dnt_gpc": true,
+    "url_strip_query": true,
+    "url_query_allowlist": [],
+    "utm_allowlist": [],
+    "raw_logs_enabled": false,
+    "raw_logs_retention_days": 1,
+    "excluded_roles": [],
+    "excluded_paths": [],
+    "debug_enabled": false
+  }
+}
+```
+
 ### POST `/admin/settings`
 
 Updates Lean Stats settings.
@@ -219,6 +340,26 @@ JSON payload:
 - `excluded_paths` (array, optional)
 - `debug_enabled` (boolean, optional)
 
+Response (200):
+
+```json
+{
+  "settings": {
+    "plugin_label": "Lean Stats",
+    "strict_mode": false,
+    "respect_dnt_gpc": true,
+    "url_strip_query": true,
+    "url_query_allowlist": [],
+    "utm_allowlist": [],
+    "raw_logs_enabled": false,
+    "raw_logs_retention_days": 1,
+    "excluded_roles": [],
+    "excluded_paths": [],
+    "debug_enabled": false
+  }
+}
+```
+
 ### GET `/admin/raw-logs`
 
 Returns the most recent raw logs when debug mode is enabled.
@@ -235,6 +376,50 @@ Returned fields:
 - `device_class` (string)
 - `post_id` (integer, nullable)
 
+Response (200):
+
+```json
+{
+  "items": [
+    {
+      "timestamp_bucket": 1716729600,
+      "page_path": "/",
+      "referrer_domain": "google.com",
+      "device_class": "desktop",
+      "post_id": 123
+    }
+  ]
+}
+```
+
+Response (403 when debug mode is disabled):
+
+```json
+{
+  "message": "Debug mode is disabled."
+}
+```
+
 ### POST `/admin/purge-data`
 
 Purges aggregated analytics tables and raw logs.
+
+Response (200):
+
+```json
+{
+  "purged": true,
+  "details": {
+    "tables": {
+      "lean_stats_daily": 0,
+      "lean_stats_hourly": 0,
+      "lean_stats_hits_daily": 0,
+      "lean_stats_entry_exit_daily": 0,
+      "lean_stats_404s_daily": 0,
+      "lean_stats_search_terms_daily": 0,
+      "lean_stats_utm_daily": 0
+    },
+    "rawLogsPurged": true
+  }
+}
+```
