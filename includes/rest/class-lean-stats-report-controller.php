@@ -116,6 +116,12 @@ class Lean_Stats_Report_Controller {
         global $wpdb;
 
         $range = $this->get_day_range($request);
+        $cache_key = $this->get_cache_key('overview', $range);
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
         $daily_table = $wpdb->prefix . 'lean_stats_daily';
         $not_found_table = $wpdb->prefix . 'lean_stats_404s_daily';
         $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
@@ -171,6 +177,8 @@ class Lean_Stats_Report_Controller {
             ],
         ];
 
+        $this->set_cached_payload($cache_key, $payload);
+
         return new WP_REST_Response($payload, 200);
     }
 
@@ -182,7 +190,7 @@ class Lean_Stats_Report_Controller {
 
         $table = $wpdb->prefix . 'lean_stats_daily';
 
-        return $this->build_list_response($request, $table, 'page_path');
+        return $this->build_list_response($request, $table, 'page_path', 'top-pages');
     }
 
     /**
@@ -193,7 +201,7 @@ class Lean_Stats_Report_Controller {
 
         $table = $wpdb->prefix . 'lean_stats_daily';
 
-        return $this->build_list_response($request, $table, 'referrer_domain');
+        return $this->build_list_response($request, $table, 'referrer_domain', 'referrers');
     }
 
     /**
@@ -204,7 +212,7 @@ class Lean_Stats_Report_Controller {
 
         $table = $wpdb->prefix . 'lean_stats_404s_daily';
 
-        return $this->build_list_response($request, $table, 'page_path');
+        return $this->build_list_response($request, $table, 'page_path', 'not-found');
     }
 
     /**
@@ -215,7 +223,7 @@ class Lean_Stats_Report_Controller {
 
         $table = $wpdb->prefix . 'lean_stats_search_terms_daily';
 
-        return $this->build_list_response($request, $table, 'search_term');
+        return $this->build_list_response($request, $table, 'search_term', 'search-terms');
     }
 
     /**
@@ -353,7 +361,12 @@ class Lean_Stats_Report_Controller {
     /**
      * Build paginated list response for a given table/label column.
      */
-    private function build_list_response(WP_REST_Request $request, string $table, string $label_column): WP_REST_Response {
+    private function build_list_response(
+        WP_REST_Request $request,
+        string $table,
+        string $label_column,
+        string $cache_id
+    ): WP_REST_Response {
         global $wpdb;
 
         $range = $this->get_day_range($request);
@@ -366,6 +379,18 @@ class Lean_Stats_Report_Controller {
             ],
             'hits'
         );
+        $cache_key = $this->get_cache_key(
+            $cache_id,
+            [
+                'range' => $range,
+                'pagination' => $pagination,
+                'sorting' => $sorting,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
 
         $count_query = $wpdb->prepare(
             "SELECT COUNT(*) FROM (SELECT 1
@@ -414,6 +439,8 @@ class Lean_Stats_Report_Controller {
             'items' => $items,
         ];
 
+        $this->set_cached_payload($cache_key, $payload);
+
         return new WP_REST_Response($payload, 200);
     }
 
@@ -424,5 +451,53 @@ class Lean_Stats_Report_Controller {
         $capability = apply_filters('lean_stats_admin_capability', 'manage_options');
 
         return is_string($capability) && $capability !== '' ? $capability : 'manage_options';
+    }
+
+    /**
+     * Resolve cache TTL for report analytics.
+     */
+    private function get_cache_ttl(): int {
+        $ttl = (int) apply_filters('lean_stats_report_cache_ttl', 60);
+
+        return max(30, min(120, $ttl));
+    }
+
+    /**
+     * Build a cache key for report analytics responses.
+     */
+    private function get_cache_key(string $endpoint, array $params): string {
+        $payload = [
+            'endpoint' => $endpoint,
+            'params' => $params,
+        ];
+
+        return lean_stats_get_admin_cache_key('report_' . md5(wp_json_encode($payload)));
+    }
+
+    /**
+     * Fetch cached response payload.
+     */
+    private function get_cached_payload(string $cache_key): ?array {
+        $cached = wp_cache_get($cache_key, 'lean_stats_report');
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $cached = get_transient($cache_key);
+
+        return is_array($cached) ? $cached : null;
+    }
+
+    /**
+     * Store cached response payload.
+     */
+    private function set_cached_payload(string $cache_key, array $payload): void {
+        $ttl = $this->get_cache_ttl();
+        if ($ttl <= 0) {
+            return;
+        }
+
+        wp_cache_set($cache_key, $payload, 'lean_stats_report', $ttl);
+        set_transient($cache_key, $payload, $ttl);
     }
 }
