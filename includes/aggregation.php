@@ -8,6 +8,31 @@ defined('ABSPATH') || exit;
 const LEAN_STATS_AGGREGATION_CRON_HOOK = 'lean_stats_aggregate_hits';
 
 /**
+ * Determine whether hourly aggregation is enabled and available.
+ */
+function lean_stats_hourly_aggregation_enabled(): bool
+{
+    static $enabled = null;
+
+    if ($enabled !== null) {
+        return $enabled;
+    }
+
+    $enabled = (bool) apply_filters('lean_stats_hourly_aggregation_enabled', true);
+    if (!$enabled) {
+        return false;
+    }
+
+    global $wpdb;
+
+    $table = $wpdb->prefix . 'lean_stats_hourly';
+    $exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table));
+    $enabled = ($exists === $table);
+
+    return $enabled;
+}
+
+/**
  * Run aggregation for stored raw hits.
  */
 function lean_stats_aggregate_hits(): void
@@ -59,6 +84,7 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
     $hourly = [];
     $updated_hits = [];
     $entry_exit = [];
+    $collect_hourly = lean_stats_hourly_aggregation_enabled();
 
     foreach ($hits as $hit) {
         if (!is_array($hit)) {
@@ -83,7 +109,6 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
         }
 
         $date_bucket = wp_date('Y-m-d', $timestamp);
-        $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
 
         $daily_key = implode('|', [$date_bucket, $page_path, $referrer_domain, $device_class]);
         if (!isset($daily[$daily_key])) {
@@ -97,17 +122,20 @@ function lean_stats_build_aggregates_from_hits(array $hits): array
         }
         $daily[$daily_key]['hits']++;
 
-        $hourly_key = implode('|', [$hour_bucket, $page_path, $referrer_domain, $device_class]);
-        if (!isset($hourly[$hourly_key])) {
-            $hourly[$hourly_key] = [
-                'date_bucket' => $hour_bucket,
-                'page_path' => $page_path,
-                'referrer_domain' => $referrer_domain,
-                'device_class' => $device_class,
-                'hits' => 0,
-            ];
+        if ($collect_hourly) {
+            $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
+            $hourly_key = implode('|', [$hour_bucket, $page_path, $referrer_domain, $device_class]);
+            if (!isset($hourly[$hourly_key])) {
+                $hourly[$hourly_key] = [
+                    'date_bucket' => $hour_bucket,
+                    'page_path' => $page_path,
+                    'referrer_domain' => $referrer_domain,
+                    'device_class' => $device_class,
+                    'hits' => 0,
+                ];
+            }
+            $hourly[$hourly_key]['hits']++;
         }
-        $hourly[$hourly_key]['hits']++;
 
         $is_entry = lean_stats_is_entry_hit($page_path, $referrer_domain);
         $is_exit = lean_stats_is_exit_hit($page_path, $referrer_domain);
@@ -159,7 +187,10 @@ function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): voi
     }
 
     $date_bucket = wp_date('Y-m-d', $timestamp);
-    $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
+    $collect_hourly = lean_stats_hourly_aggregation_enabled();
+    if ($collect_hourly) {
+        $hour_bucket = wp_date('Y-m-d H:00:00', $timestamp);
+    }
 
     $source_category = lean_stats_get_source_category_from_referrer($referrer_domain);
     lean_stats_increment_hits_daily($date_bucket, $page_path, $referrer_domain, $source_category);
@@ -187,18 +218,20 @@ function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): voi
         ]
     );
 
-    lean_stats_upsert_aggregate_rows(
-        'hourly',
-        [
+    if ($collect_hourly) {
+        lean_stats_upsert_aggregate_rows(
+            'hourly',
             [
-                'date_bucket' => $hour_bucket,
-                'page_path' => $page_path,
-                'referrer_domain' => $referrer_domain,
-                'device_class' => $device_class,
-                'hits' => 1,
-            ],
-        ]
-    );
+                [
+                    'date_bucket' => $hour_bucket,
+                    'page_path' => $page_path,
+                    'referrer_domain' => $referrer_domain,
+                    'device_class' => $device_class,
+                    'hits' => 1,
+                ],
+            ]
+        );
+    }
 }
 
 /**

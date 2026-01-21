@@ -37,6 +37,13 @@ Returned fields:
 - `overview.notFoundHits` (integer)
 - `overview.searchHits` (integer)
 - `overview.uniqueSearchTerms` (integer)
+- `series.interval` (`day` or `hour`)
+- `series.items` (array of `{ bucket, hits }` objects)
+
+Series behavior:
+
+- Hourly series returns when the date range is short and hourly aggregation is available.
+- Daily series returns when hourly aggregation is unavailable or the range exceeds the hourly threshold.
 
 #### GET `/top-pages`
 
