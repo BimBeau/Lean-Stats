@@ -144,6 +144,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         'LeanStatsAdmin',
         [
             'rootId' => 'lean-stats-admin',
+            'currentUserId' => get_current_user_id(),
             'restNonce' => wp_create_nonce('wp_rest'),
             'restUrl' => esc_url_raw(rest_url()),
             'roles' => lean_stats_get_roles_for_admin(),
