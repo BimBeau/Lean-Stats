@@ -196,3 +196,38 @@ msgstr "Traffico nel tempo"
 msgid "You are not allowed to access analytics data."
 msgstr "Non sei autorizzato ad accedere ai dati di analisi."
 
+msgid "Visits"
+msgstr "Visite"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Numero di sessioni anonime nel periodo selezionato. La stessa persona può generare più visite."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Sessioni anonime aggregate nel periodo."
+
+msgid "Page views"
+msgstr "Visualizzazioni di pagina"
+
+msgid "Referring sites"
+msgstr "Siti referenti"
+
+msgid "Pages not found (404)"
+msgstr "Pagine non trovate (404)"
+
+msgid "Internal searches"
+msgstr "Ricerche interne"
+
+msgid "Daily page views"
+msgstr "Visualizzazioni di pagina giornaliere"
+
+msgid "Daily page views line chart"
+msgstr "Grafico lineare delle visualizzazioni di pagina giornaliere"
+
+msgid "Device page views"
+msgstr "Visualizzazioni di pagina per dispositivo"
+
+msgid "%s views"
+msgstr "%s visualizzazioni"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "I log grezzi memorizzano dettagli granulari delle visualizzazioni quando la modalità debug è attiva."

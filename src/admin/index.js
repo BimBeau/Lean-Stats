@@ -19,6 +19,7 @@ import {
     TextControl,
     TextareaControl,
     ToggleControl,
+    Tooltip,
 } from '@wordpress/components';
 
 import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHandlers } from './logger';
@@ -425,7 +426,7 @@ const SettingsPanel = () => {
             warnings.push(__('Full query strings remain in stored page paths.', 'lean-stats'));
         }
         if (formState.raw_logs_enabled) {
-            warnings.push(__('Raw logs store granular hit details while debug mode is enabled.', 'lean-stats'));
+            warnings.push(__('Raw logs store granular view details while debug mode is enabled.', 'lean-stats'));
         }
         if (formState.raw_logs_retention_days > 30) {
             warnings.push(__('Raw log retention exceeds 30 days.', 'lean-stats'));
@@ -888,35 +889,40 @@ const OverviewKpis = ({ range }) => {
         );
     }
 
+    const visitsTooltipLong = __(
+        'Number of anonymous sessions over the selected period. The same person can generate multiple visits.',
+        'lean-stats'
+    );
+    const visitsTooltipShort = __('Anonymous sessions aggregated over the selected period.', 'lean-stats');
+    const visitsTooltip =
+        typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 600px)').matches
+            ? visitsTooltipShort
+            : visitsTooltipLong;
     const cards = [
         {
-            label: __('Pageviews (hits)', 'lean-stats'),
+            label: __('Visits', 'lean-stats'),
+            value: overview.pageViews,
+            icon: 'visibility',
+            tooltip: visitsTooltip,
+        },
+        {
+            label: __('Page views', 'lean-stats'),
             value: overview.pageViews,
             icon: 'chart-bar',
         },
         {
-            label: __('Unique pages', 'lean-stats'),
-            value: overview.uniquePages,
-            icon: 'admin-page',
-        },
-        {
-            label: __('Unique referrers', 'lean-stats'),
+            label: __('Referring sites', 'lean-stats'),
             value: overview.uniqueReferrers,
             icon: 'admin-links',
         },
         {
-            label: __('404 hits', 'lean-stats'),
+            label: __('Pages not found (404)', 'lean-stats'),
             value: overview.notFoundHits,
             icon: 'warning',
         },
         {
-            label: __('Search hits', 'lean-stats'),
+            label: __('Internal searches', 'lean-stats'),
             value: overview.searchHits,
-            icon: 'search',
-        },
-        {
-            label: __('Unique search terms', 'lean-stats'),
-            value: overview.uniqueSearchTerms,
             icon: 'search',
         },
     ];
@@ -928,7 +934,21 @@ const OverviewKpis = ({ range }) => {
                     <CardBody className="ls-kpi-card__body">
                         <span className={`dashicons dashicons-${card.icon} ls-kpi-card__icon`} aria-hidden="true" />
                         <div className="ls-kpi-card__content">
-                            <p className="ls-kpi-card__label">{card.label}</p>
+                            <p className="ls-kpi-card__label">
+                                <span className="ls-kpi-card__label-text">{card.label}</span>
+                                {card.tooltip ? (
+                                    <Tooltip text={card.tooltip}>
+                                        <Button
+                                            className="ls-kpi-card__tooltip-button"
+                                            variant="tertiary"
+                                            isSmall
+                                            aria-label={card.tooltip}
+                                        >
+                                            <span className="dashicons dashicons-info-outline" aria-hidden="true" />
+                                        </Button>
+                                    </Tooltip>
+                                ) : null}
+                            </p>
                             <strong className="ls-kpi-card__value">{card.value}</strong>
                         </div>
                     </CardBody>
@@ -944,7 +964,7 @@ const TimeseriesChart = ({ range }) => {
     const chartData = useMemo(() => buildLineChartData(items), [items]);
 
     return (
-        <LsCard title={__('Daily pageviews (hits)', 'lean-stats')}>
+        <LsCard title={__('Daily page views', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
@@ -954,12 +974,12 @@ const TimeseriesChart = ({ range }) => {
             />
             {!isLoading && !error && items.length > 0 && (
                 <div className="ls-timeseries">
-                    <ChartFrame height={240} ariaLabel={__('Daily pageviews line chart', 'lean-stats')}>
+                    <ChartFrame height={240} ariaLabel={__('Daily page views line chart', 'lean-stats')}>
                         <svg
                             viewBox={`0 0 ${chartData.width} ${chartData.height}`}
                             className="ls-timeseries__svg"
                             role="img"
-                            aria-label={__('Daily pageviews line chart', 'lean-stats')}
+                            aria-label={__('Daily page views line chart', 'lean-stats')}
                         >
                             <rect
                                 x="0"
@@ -998,7 +1018,7 @@ const TimeseriesChart = ({ range }) => {
                         <thead>
                             <tr>
                                 <th>{__('Date', 'lean-stats')}</th>
-                                <th>{__('Pageviews (hits)', 'lean-stats')}</th>
+                                <th>{__('Page views', 'lean-stats')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1023,7 +1043,7 @@ const ReportTableCard = ({
     endpoint,
     emptyLabel,
     labelFallback,
-    metricLabel = __('Pageviews (hits)', 'lean-stats'),
+    metricLabel = __('Page views', 'lean-stats'),
     metricKey = 'hits',
     metricValueKey = 'hits',
 }) => {
@@ -1248,7 +1268,7 @@ const ReferrerSourcesTableCard = ({ range }) => {
                     label={__('Sort by', 'lean-stats')}
                     value={orderBy}
                     options={[
-                        { label: __('Pageviews (hits)', 'lean-stats'), value: 'hits' },
+                        { label: __('Page views', 'lean-stats'), value: 'hits' },
                         { label: __('Referrer', 'lean-stats'), value: 'referrer' },
                         { label: __('Source category', 'lean-stats'), value: 'category' },
                     ]}
@@ -1298,7 +1318,7 @@ const ReferrerSourcesTableCard = ({ range }) => {
                             <tr>
                                 <th scope="col">{__('Referrer', 'lean-stats')}</th>
                                 <th scope="col">{__('Source category', 'lean-stats')}</th>
-                                <th scope="col">{__('Pageviews (hits)', 'lean-stats')}</th>
+                                <th scope="col">{__('Page views', 'lean-stats')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1471,7 +1491,7 @@ const DeviceSplit = ({ range }) => {
     const maxHits = labeledItems.reduce((max, item) => Math.max(max, item.hits), 0);
 
     return (
-        <LsCard title={__('Device hits (pageviews)', 'lean-stats')}>
+        <LsCard title={__('Device page views', 'lean-stats')}>
             <DataState
                 isLoading={isLoading}
                 error={error}
@@ -1493,7 +1513,7 @@ const DeviceSplit = ({ range }) => {
                                     />
                                 </div>
                                 <div className="ls-device-breakdown__value">
-                                    {sprintf(__('%s hits', 'lean-stats'), entry.hits)}
+                                    {sprintf(__('%s views', 'lean-stats'), entry.hits)}
                                 </div>
                             </div>
                         );

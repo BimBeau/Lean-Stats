@@ -195,3 +195,39 @@ msgstr "Trafik över tid"
 
 msgid "You are not allowed to access analytics data."
 msgstr "Du har inte behörighet att komma åt analysdata."
+
+msgid "Visits"
+msgstr "Besök"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Antal anonyma sessioner under vald period. Samma person kan generera flera besök."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Anonyma sessioner aggregerade över perioden."
+
+msgid "Page views"
+msgstr "Sidvisningar"
+
+msgid "Referring sites"
+msgstr "Hänvisande webbplatser"
+
+msgid "Pages not found (404)"
+msgstr "Sidor hittades inte (404)"
+
+msgid "Internal searches"
+msgstr "Interna sökningar"
+
+msgid "Daily page views"
+msgstr "Dagliga sidvisningar"
+
+msgid "Daily page views line chart"
+msgstr "Linjediagram över dagliga sidvisningar"
+
+msgid "Device page views"
+msgstr "Sidvisningar per enhet"
+
+msgid "%s views"
+msgstr "%s visningar"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Råloggar lagrar detaljerade visningsdata när felsökningsläget är aktiverat."

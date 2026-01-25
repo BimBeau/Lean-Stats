@@ -195,3 +195,39 @@ msgstr "Verkeer in de tijd"
 
 msgid "You are not allowed to access analytics data."
 msgstr "U hebt geen toegang tot analyticsgegevens."
+
+msgid "Visits"
+msgstr "Bezoeken"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Aantal anonieme sessies in de geselecteerde periode. Dezelfde persoon kan meerdere bezoeken genereren."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Anonieme sessies geaggregeerd over de periode."
+
+msgid "Page views"
+msgstr "Paginaweergaven"
+
+msgid "Referring sites"
+msgstr "Verwijzende sites"
+
+msgid "Pages not found (404)"
+msgstr "Pagina's niet gevonden (404)"
+
+msgid "Internal searches"
+msgstr "Interne zoekopdrachten"
+
+msgid "Daily page views"
+msgstr "Dagelijkse paginaweergaven"
+
+msgid "Daily page views line chart"
+msgstr "Lijngrafiek van dagelijkse paginaweergaven"
+
+msgid "Device page views"
+msgstr "Paginaweergaven per apparaat"
+
+msgid "%s views"
+msgstr "%s weergaven"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Ruwe logboeken slaan gedetailleerde weergavegegevens op wanneer de debugmodus is ingeschakeld."

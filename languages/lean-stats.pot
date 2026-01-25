@@ -196,3 +196,38 @@ msgstr ""
 msgid "You are not allowed to access analytics data."
 msgstr ""
 
+msgid "Visits"
+msgstr ""
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr ""
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr ""
+
+msgid "Page views"
+msgstr ""
+
+msgid "Referring sites"
+msgstr ""
+
+msgid "Pages not found (404)"
+msgstr ""
+
+msgid "Internal searches"
+msgstr ""
+
+msgid "Daily page views"
+msgstr ""
+
+msgid "Daily page views line chart"
+msgstr ""
+
+msgid "Device page views"
+msgstr ""
+
+msgid "%s views"
+msgstr ""
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr ""

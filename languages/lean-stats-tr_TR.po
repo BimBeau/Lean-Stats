@@ -195,3 +195,39 @@ msgstr "Zamana göre trafik"
 
 msgid "You are not allowed to access analytics data."
 msgstr "Analiz verilerine erişim izniniz yok."
+
+msgid "Visits"
+msgstr "Ziyaretler"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Seçilen dönemdeki anonim oturum sayısı. Aynı kişi birden fazla ziyaret oluşturabilir."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Dönem boyunca anonim oturumlar toplulaştırılmıştır."
+
+msgid "Page views"
+msgstr "Sayfa görüntülemeleri"
+
+msgid "Referring sites"
+msgstr "Yönlendiren siteler"
+
+msgid "Pages not found (404)"
+msgstr "Bulunamayan sayfalar (404)"
+
+msgid "Internal searches"
+msgstr "Dahili aramalar"
+
+msgid "Daily page views"
+msgstr "Günlük sayfa görüntülemeleri"
+
+msgid "Daily page views line chart"
+msgstr "Günlük sayfa görüntülemeleri çizgi grafiği"
+
+msgid "Device page views"
+msgstr "Cihaza göre sayfa görüntülemeleri"
+
+msgid "%s views"
+msgstr "%s görüntüleme"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme verilerini saklar."
