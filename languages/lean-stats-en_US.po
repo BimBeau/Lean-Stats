@@ -196,3 +196,38 @@ msgstr "Traffic over time"
 msgid "You are not allowed to access analytics data."
 msgstr "You are not allowed to access analytics data."
 
+msgid "Visits"
+msgstr "Visits"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Anonymous sessions aggregated over the selected period."
+
+msgid "Page views"
+msgstr "Page views"
+
+msgid "Referring sites"
+msgstr "Referring sites"
+
+msgid "Pages not found (404)"
+msgstr "Pages not found (404)"
+
+msgid "Internal searches"
+msgstr "Internal searches"
+
+msgid "Daily page views"
+msgstr "Daily page views"
+
+msgid "Daily page views line chart"
+msgstr "Daily page views line chart"
+
+msgid "Device page views"
+msgstr "Device page views"
+
+msgid "%s views"
+msgstr "%s views"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Raw logs store granular view details while debug mode is enabled."

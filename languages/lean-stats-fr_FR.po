@@ -201,3 +201,33 @@ msgstr "Visites"
 
 msgid "You are not allowed to access analytics data."
 msgstr "Vous n’êtes pas autorisé à accéder aux données d’analytics."
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Nombre de sessions anonymes sur la période sélectionnée. Une même personne peut générer plusieurs visites."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Sessions anonymes agrégées sur la période."
+
+msgid "Referring sites"
+msgstr "Sites référents"
+
+msgid "Pages not found (404)"
+msgstr "Pages introuvables (404)"
+
+msgid "Internal searches"
+msgstr "Recherches internes"
+
+msgid "Daily page views"
+msgstr "Pages vues quotidiennes"
+
+msgid "Daily page views line chart"
+msgstr "Courbe quotidienne des pages vues"
+
+msgid "Device page views"
+msgstr "Pages vues par appareil"
+
+msgid "%s views"
+msgstr "%s vues"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Les journaux bruts stockent des détails de vues granulaires lorsque le mode debug est activé."

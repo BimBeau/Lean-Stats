@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "Du har ikke tilladelse til at få adgang til analysedata."
+      ],
+      "Visits": [
+        "Besøg"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Antal anonyme sessioner i den valgte periode. Den samme person kan generere flere besøg."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Anonyme sessioner aggregeret over perioden."
+      ],
+      "Page views": [
+        "Sidevisninger"
+      ],
+      "Referring sites": [
+        "Henvisende sites"
+      ],
+      "Pages not found (404)": [
+        "Sider ikke fundet (404)"
+      ],
+      "Internal searches": [
+        "Interne søgninger"
+      ],
+      "Daily page views": [
+        "Daglige sidevisninger"
+      ],
+      "Daily page views line chart": [
+        "Linjediagram over daglige sidevisninger"
+      ],
+      "Device page views": [
+        "Sidevisninger pr. enhed"
+      ],
+      "%s views": [
+        "%s visninger"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Rå logs gemmer detaljerede visningsdata, når debug-tilstand er aktiveret."
       ]
     }
   }

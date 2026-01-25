@@ -196,3 +196,38 @@ msgstr "Tráfego ao longo do tempo"
 msgid "You are not allowed to access analytics data."
 msgstr "Não tem permissão para aceder aos dados de analítica."
 
+msgid "Visits"
+msgstr "Visitas"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Número de sessões anónimas no período selecionado. A mesma pessoa pode gerar várias visitas."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Sessões anónimas agregadas no período."
+
+msgid "Page views"
+msgstr "Visualizações de página"
+
+msgid "Referring sites"
+msgstr "Sites de referência"
+
+msgid "Pages not found (404)"
+msgstr "Páginas não encontradas (404)"
+
+msgid "Internal searches"
+msgstr "Pesquisas internas"
+
+msgid "Daily page views"
+msgstr "Visualizações de página diárias"
+
+msgid "Daily page views line chart"
+msgstr "Gráfico de linhas de visualizações de página diárias"
+
+msgid "Device page views"
+msgstr "Visualizações de página por dispositivo"
+
+msgid "%s views"
+msgstr "%s visualizações"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Os registos brutos armazenam detalhes granulares das visualizações quando o modo de depuração está ativo."

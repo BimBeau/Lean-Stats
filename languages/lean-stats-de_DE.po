@@ -196,3 +196,38 @@ msgstr "Traffic im Zeitverlauf"
 msgid "You are not allowed to access analytics data."
 msgstr "Du bist nicht berechtigt, auf Analysedaten zuzugreifen."
 
+msgid "Visits"
+msgstr "Besuche"
+
+msgid "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+msgstr "Anzahl anonymer Sitzungen im ausgewählten Zeitraum. Dieselbe Person kann mehrere Besuche erzeugen."
+
+msgid "Anonymous sessions aggregated over the selected period."
+msgstr "Anonyme Sitzungen für den Zeitraum aggregiert."
+
+msgid "Page views"
+msgstr "Seitenaufrufe"
+
+msgid "Referring sites"
+msgstr "Verweisende Websites"
+
+msgid "Pages not found (404)"
+msgstr "Nicht gefundene Seiten (404)"
+
+msgid "Internal searches"
+msgstr "Interne Suchen"
+
+msgid "Daily page views"
+msgstr "Tägliche Seitenaufrufe"
+
+msgid "Daily page views line chart"
+msgstr "Liniendiagramm der täglichen Seitenaufrufe"
+
+msgid "Device page views"
+msgstr "Seitenaufrufe nach Gerät"
+
+msgid "%s views"
+msgstr "%s Aufrufe"
+
+msgid "Raw logs store granular view details while debug mode is enabled."
+msgstr "Rohprotokolle speichern detaillierte Aufrufdaten, wenn der Debug-Modus aktiviert ist."
