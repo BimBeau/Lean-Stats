@@ -54,6 +54,75 @@ const DEFAULT_SETTINGS = {
     debug_enabled: false,
     maxmind_api_key: '',
 };
+const DEFAULT_RANGE_PRESET = '30d';
+const RANGE_PRESET_OPTIONS = ['7d', '30d', '90d'];
+const RANGE_PRESET_STORAGE_PREFIX = 'lean_stats_range_preset';
+
+const getRangePresetStorageKey = () => {
+    const userId = ADMIN_CONFIG?.currentUserId ? String(ADMIN_CONFIG.currentUserId) : 'default';
+    return `${RANGE_PRESET_STORAGE_PREFIX}:${userId}`;
+};
+
+const normalizeRangePreset = (preset) =>
+    RANGE_PRESET_OPTIONS.includes(preset) ? preset : null;
+
+const getRangePresetFromUrl = () => {
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    return normalizeRangePreset(params.get('period') || params.get('range'));
+};
+
+const getStoredRangePreset = () => {
+    if (typeof window === 'undefined' || !window.localStorage) {
+        return null;
+    }
+
+    try {
+        return normalizeRangePreset(window.localStorage.getItem(getRangePresetStorageKey()));
+    } catch (error) {
+        return null;
+    }
+};
+
+const storeRangePreset = (preset) => {
+    if (typeof window === 'undefined' || !window.localStorage) {
+        return;
+    }
+
+    try {
+        window.localStorage.setItem(getRangePresetStorageKey(), preset);
+    } catch (error) {
+        // Ignore storage failures (e.g. privacy mode).
+    }
+};
+
+const useSharedRangePreset = () => {
+    const urlPreset = getRangePresetFromUrl();
+    const [rangePreset, setRangePresetState] = useState(
+        () => urlPreset || getStoredRangePreset() || DEFAULT_RANGE_PRESET
+    );
+    const [hasUserOverride, setHasUserOverride] = useState(false);
+
+    const setRangePreset = (preset) => {
+        setRangePresetState(preset);
+        setHasUserOverride(true);
+    };
+
+    useEffect(() => {
+        if (urlPreset && !hasUserOverride) {
+            return;
+        }
+
+        if (normalizeRangePreset(rangePreset)) {
+            storeRangePreset(rangePreset);
+        }
+    }, [rangePreset, urlPreset, hasUserOverride]);
+
+    return [rangePreset, setRangePreset];
+};
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -1384,7 +1453,7 @@ const ReportPanel = ({
     metricKey,
     metricValueKey,
 }) => {
-    const [rangePreset, setRangePreset] = useState('30d');
+    const [rangePreset, setRangePreset] = useSharedRangePreset();
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
@@ -1465,7 +1534,7 @@ const ExitPagesPanel = () => (
 );
 
 const ReferrerSourcesPanel = () => {
-    const [rangePreset, setRangePreset] = useState('30d');
+    const [rangePreset, setRangePreset] = useSharedRangePreset();
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
@@ -1525,7 +1594,7 @@ const DeviceSplit = ({ range }) => {
 };
 
 const OverviewPanel = () => {
-    const [rangePreset, setRangePreset] = useState('30d');
+    const [rangePreset, setRangePreset] = useSharedRangePreset();
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
 
     return (
