@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "Analiz verilerine erişim izniniz yok."
+      ],
+      "Visits": [
+        "Ziyaretler"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Seçilen dönemdeki anonim oturum sayısı. Aynı kişi birden fazla ziyaret oluşturabilir."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Dönem boyunca anonim oturumlar toplulaştırılmıştır."
+      ],
+      "Page views": [
+        "Sayfa görüntülemeleri"
+      ],
+      "Referring sites": [
+        "Yönlendiren siteler"
+      ],
+      "Pages not found (404)": [
+        "Bulunamayan sayfalar (404)"
+      ],
+      "Internal searches": [
+        "Dahili aramalar"
+      ],
+      "Daily page views": [
+        "Günlük sayfa görüntülemeleri"
+      ],
+      "Daily page views line chart": [
+        "Günlük sayfa görüntülemeleri çizgi grafiği"
+      ],
+      "Device page views": [
+        "Cihaza göre sayfa görüntülemeleri"
+      ],
+      "%s views": [
+        "%s görüntüleme"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme verilerini saklar."
       ]
     }
   }

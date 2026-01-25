@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "U hebt geen toegang tot analyticsgegevens."
+      ],
+      "Visits": [
+        "Bezoeken"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Aantal anonieme sessies in de geselecteerde periode. Dezelfde persoon kan meerdere bezoeken genereren."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Anonieme sessies geaggregeerd over de periode."
+      ],
+      "Page views": [
+        "Paginaweergaven"
+      ],
+      "Referring sites": [
+        "Verwijzende sites"
+      ],
+      "Pages not found (404)": [
+        "Pagina's niet gevonden (404)"
+      ],
+      "Internal searches": [
+        "Interne zoekopdrachten"
+      ],
+      "Daily page views": [
+        "Dagelijkse paginaweergaven"
+      ],
+      "Daily page views line chart": [
+        "Lijngrafiek van dagelijkse paginaweergaven"
+      ],
+      "Device page views": [
+        "Paginaweergaven per apparaat"
+      ],
+      "%s views": [
+        "%s weergaven"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Ruwe logboeken slaan gedetailleerde weergavegegevens op wanneer de debugmodus is ingeschakeld."
       ]
     }
   }

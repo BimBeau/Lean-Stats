@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "You are not allowed to access analytics data."
+      ],
+      "Visits": [
+        "Visits"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Number of anonymous sessions over the selected period. The same person can generate multiple visits."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Anonymous sessions aggregated over the selected period."
+      ],
+      "Page views": [
+        "Page views"
+      ],
+      "Referring sites": [
+        "Referring sites"
+      ],
+      "Pages not found (404)": [
+        "Pages not found (404)"
+      ],
+      "Internal searches": [
+        "Internal searches"
+      ],
+      "Daily page views": [
+        "Daily page views"
+      ],
+      "Daily page views line chart": [
+        "Daily page views line chart"
+      ],
+      "Device page views": [
+        "Device page views"
+      ],
+      "%s views": [
+        "%s views"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Raw logs store granular view details while debug mode is enabled."
       ]
     }
   }

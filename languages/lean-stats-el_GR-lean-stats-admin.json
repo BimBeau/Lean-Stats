@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "Δεν επιτρέπεται η πρόσβαση στα δεδομένα αναλυτικών."
+      ],
+      "Visits": [
+        "Επισκέψεις"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Αριθμός ανώνυμων συνεδριών στην επιλεγμένη περίοδο. Το ίδιο άτομο μπορεί να δημιουργήσει πολλαπλές επισκέψεις."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Ανώνυμες συνεδρίες συγκεντρωμένες στην περίοδο."
+      ],
+      "Page views": [
+        "Προβολές σελίδας"
+      ],
+      "Referring sites": [
+        "Ιστότοποι παραπομπής"
+      ],
+      "Pages not found (404)": [
+        "Σελίδες δεν βρέθηκαν (404)"
+      ],
+      "Internal searches": [
+        "Εσωτερικές αναζητήσεις"
+      ],
+      "Daily page views": [
+        "Ημερήσιες προβολές σελίδας"
+      ],
+      "Daily page views line chart": [
+        "Γραμμικό διάγραμμα ημερήσιων προβολών σελίδας"
+      ],
+      "Device page views": [
+        "Προβολές σελίδας ανά συσκευή"
+      ],
+      "%s views": [
+        "%s προβολές"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Τα ανεπεξέργαστα αρχεία καταγραφής αποθηκεύουν λεπτομερή δεδομένα προβολών όταν είναι ενεργή η λειτουργία αποσφαλμάτωσης."
       ]
     }
   }

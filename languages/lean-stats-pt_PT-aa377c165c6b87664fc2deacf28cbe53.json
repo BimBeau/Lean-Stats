@@ -191,6 +191,42 @@
       ],
       "You are not allowed to access analytics data.": [
         "Não tem permissão para aceder aos dados de analítica."
+      ],
+      "Visits": [
+        "Visitas"
+      ],
+      "Number of anonymous sessions over the selected period. The same person can generate multiple visits.": [
+        "Número de sessões anónimas no período selecionado. A mesma pessoa pode gerar várias visitas."
+      ],
+      "Anonymous sessions aggregated over the selected period.": [
+        "Sessões anónimas agregadas no período."
+      ],
+      "Page views": [
+        "Visualizações de página"
+      ],
+      "Referring sites": [
+        "Sites de referência"
+      ],
+      "Pages not found (404)": [
+        "Páginas não encontradas (404)"
+      ],
+      "Internal searches": [
+        "Pesquisas internas"
+      ],
+      "Daily page views": [
+        "Visualizações de página diárias"
+      ],
+      "Daily page views line chart": [
+        "Gráfico de linhas de visualizações de página diárias"
+      ],
+      "Device page views": [
+        "Visualizações de página por dispositivo"
+      ],
+      "%s views": [
+        "%s visualizações"
+      ],
+      "Raw logs store granular view details while debug mode is enabled.": [
+        "Os registos brutos armazenam detalhes granulares das visualizações quando o modo de depuração está ativo."
       ]
     }
   }
