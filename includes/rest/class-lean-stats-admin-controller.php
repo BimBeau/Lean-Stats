@@ -192,6 +192,7 @@ class Lean_Stats_Admin_Controller {
         }
 
         $table = $wpdb->prefix . 'lean_stats_daily';
+        $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
 
         $query = $wpdb->prepare(
             "SELECT
@@ -203,10 +204,20 @@ class Lean_Stats_Admin_Controller {
             $range['end']
         );
 
+        $visits_query = $wpdb->prepare(
+            "SELECT COALESCE(SUM(entries), 0) AS visits
+            FROM {$entry_exit_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+
         $row = $wpdb->get_row($query, ARRAY_A);
+        $visits_row = $wpdb->get_row($visits_query, ARRAY_A);
         $page_views = isset($row['page_views']) ? (int) $row['page_views'] : 0;
+        $visits = isset($visits_row['visits']) ? (int) $visits_row['visits'] : 0;
         $data = [
-            'visits' => $page_views,
+            'visits' => $visits,
             'pageViews' => $page_views,
             'uniqueReferrers' => isset($row['unique_referrers']) ? (int) $row['unique_referrers'] : 0,
         ];

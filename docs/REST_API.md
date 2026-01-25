@@ -31,6 +31,7 @@ Parameters:
 
 Returned fields:
 
+- `overview.visits` (integer)
 - `overview.pageViews` (integer)
 - `overview.uniquePages` (integer)
 - `overview.uniqueReferrers` (integer)
@@ -145,7 +146,7 @@ Response (200):
 
 ### GET `/admin/kpis`
 
-Returns aggregated KPIs (visits, page views, unique referrers).
+Returns aggregated KPIs (visits, page views, unique referrers). Visits are aggregated from entry hits (anonymous sessions).
 
 Parameters:
 
@@ -161,7 +162,7 @@ Response (200):
     "end": "2024-01-30"
   },
   "kpis": {
-    "visits": 1200,
+    "visits": 320,
     "pageViews": 1200,
     "uniqueReferrers": 48
   }
