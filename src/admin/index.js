@@ -970,7 +970,7 @@ const OverviewKpis = ({ range }) => {
     const cards = [
         {
             label: __('Visits', 'lean-stats'),
-            value: overview.pageViews,
+            value: overview.visits ?? 0,
             icon: 'visibility',
             tooltip: visitsTooltip,
         },

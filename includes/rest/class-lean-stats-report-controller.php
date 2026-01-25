@@ -162,6 +162,7 @@ class Lean_Stats_Report_Controller {
         }
 
         $daily_table = $wpdb->prefix . 'lean_stats_daily';
+        $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
         $not_found_table = $wpdb->prefix . 'lean_stats_404s_daily';
         $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
 
@@ -177,6 +178,15 @@ class Lean_Stats_Report_Controller {
         );
 
         $overview_row = $wpdb->get_row($overview_query, ARRAY_A);
+
+        $visits_query = $wpdb->prepare(
+            "SELECT COALESCE(SUM(entries), 0) AS visits
+            FROM {$entry_exit_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+        $visits_row = $wpdb->get_row($visits_query, ARRAY_A);
 
         $not_found_query = $wpdb->prepare(
             "SELECT COALESCE(SUM(hits), 0) AS not_found_hits
@@ -202,6 +212,7 @@ class Lean_Stats_Report_Controller {
         $payload = [
             'range' => $range,
             'overview' => [
+                'visits' => isset($visits_row['visits']) ? (int) $visits_row['visits'] : 0,
                 'pageViews' => isset($overview_row['page_views']) ? (int) $overview_row['page_views'] : 0,
                 'uniquePages' => isset($overview_row['unique_pages']) ? (int) $overview_row['unique_pages'] : 0,
                 'uniqueReferrers' => isset($overview_row['unique_referrers'])

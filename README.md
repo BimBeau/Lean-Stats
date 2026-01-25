@@ -19,10 +19,7 @@ Lean Stats uses **clear, privacy-safe metrics** to avoid ambiguity.
 
 ### Visits
 - A **visit** represents an anonymous **session** (not a unique person).
-- Sessions are identified in a **RGPD-compatible** way:
-  - using an **irreversible hash** derived from the IP address
-  - combined with a **secret salt**
-  - the salt can be **rotated daily**
+- Sessions are approximated from **entry hits** (non-internal referrers), not unique people.
 - No IP addresses are stored in clear.
 - No cookies or persistent identifiers are used.
 
