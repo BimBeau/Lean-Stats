@@ -208,7 +208,7 @@
         "Verwijzende sites"
       ],
       "Pages not found (404)": [
-        "Pagina's niet gevonden (404)"
+        "Niet gevonden pagina's"
       ],
       "Internal searches": [
         "Interne zoekopdrachten"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Ruwe logboeken slaan gedetailleerde weergavegegevens op wanneer de debugmodus is ingeschakeld."
+      ],
+      "Pages": [
+        "Pagina's"
+      ],
+      "Entry pages": [
+        "Landingspagina's"
+      ],
+      "Exit pages": [
+        "Uitstappagina's"
       ]
     }
   }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-25T19:15:40+00:00\n"
+"POT-Creation-Date: 2026-01-26T08:18:24+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,30 +34,28 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: admin/admin.php:186 src/admin/index.js:34
-#, fuzzy
-msgid "Top Pages"
-msgstr "Top pages"
+msgid "Pages"
+msgstr "Pages"
 
-#: admin/admin.php:191 src/admin/index.js:35
-#, fuzzy
-msgid "Referrers"
-msgstr "Referrer"
+#: admin/admin.php:191 src/admin/index.js:35 src/admin/index.js:983
+msgid "Referring sites"
+msgstr "Referring sites"
 
-#: admin/admin.php:196 src/admin/index.js:36
-msgid "404s"
-msgstr ""
+#: admin/admin.php:196 src/admin/index.js:36 src/admin/index.js:988
+msgid "Pages not found (404)"
+msgstr "Pages not found"
 
-#: admin/admin.php:201 src/admin/index.js:37
-msgid "Search Terms"
-msgstr ""
+#: admin/admin.php:201 src/admin/index.js:37 src/admin/index.js:993
+msgid "Internal searches"
+msgstr "Internal searches"
 
 #: admin/admin.php:206 src/admin/index.js:38
-msgid "Entry Pages"
-msgstr ""
+msgid "Entry pages"
+msgstr "Entry pages"
 
 #: admin/admin.php:211 src/admin/index.js:39
-msgid "Exit Pages"
-msgstr ""
+msgid "Exit pages"
+msgstr "Exit pages"
 
 #: admin/admin.php:216 src/admin/index.js:40 src/admin/index.js:396
 #: src/admin/index.js:689
@@ -517,18 +515,6 @@ msgstr "Visits"
 msgid "Page views"
 msgstr "Page views"
 
-#: src/admin/index.js:983
-msgid "Referring sites"
-msgstr "Referring sites"
-
-#: src/admin/index.js:988
-msgid "Pages not found (404)"
-msgstr "Pages not found (404)"
-
-#: src/admin/index.js:993
-msgid "Internal searches"
-msgstr "Internal searches"
-
 #: src/admin/index.js:1036
 msgid "Daily page views"
 msgstr "Daily page views"
@@ -586,8 +572,9 @@ msgid "Previous"
 msgstr ""
 
 #: src/admin/index.js:1257 src/admin/index.js:1418
+#, fuzzy
 msgid "Next page"
-msgstr ""
+msgstr "Exit pages"
 
 #: src/admin/index.js:1259 src/admin/index.js:1420
 msgid "Next"
@@ -669,12 +656,14 @@ msgid "Unknown"
 msgstr "Unknown"
 
 #: src/admin/index.js:1512
+#, fuzzy
 msgid "Entry pages (approx.)"
-msgstr ""
+msgstr "Entry pages"
 
 #: src/admin/index.js:1513
+#, fuzzy
 msgid "Entry page"
-msgstr ""
+msgstr "Entry pages"
 
 #: src/admin/index.js:1515
 #, fuzzy
@@ -686,12 +675,14 @@ msgid "Entries (approx.)"
 msgstr ""
 
 #: src/admin/index.js:1525
+#, fuzzy
 msgid "Exit pages (approx.)"
-msgstr ""
+msgstr "Exit pages"
 
 #: src/admin/index.js:1526
+#, fuzzy
 msgid "Exit page"
-msgstr ""
+msgstr "Exit pages"
 
 #: src/admin/index.js:1528
 #, fuzzy

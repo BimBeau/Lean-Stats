@@ -205,10 +205,10 @@
         "Sidevisninger"
       ],
       "Referring sites": [
-        "Henvisende sites"
+        "Henvisende websteder"
       ],
       "Pages not found (404)": [
-        "Sider ikke fundet (404)"
+        "Sider blev ikke fundet"
       ],
       "Internal searches": [
         "Interne søgninger"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Rå logs gemmer detaljerede visningsdata, når debug-tilstand er aktiveret."
+      ],
+      "Pages": [
+        "Sider"
+      ],
+      "Entry pages": [
+        "Indgangssider"
+      ],
+      "Exit pages": [
+        "Udgangssider"
       ]
     }
   }

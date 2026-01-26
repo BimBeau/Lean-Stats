@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lean Stats plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 0.39.0\n"
+"Project-Id-Version: Lean Stats 0.39.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-25T19:15:41+00:00\n"
+"POT-Creation-Date: 2026-01-26T08:18:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -39,32 +39,35 @@ msgstr ""
 
 #: admin/admin.php:186
 #: src/admin/index.js:34
-msgid "Top Pages"
+msgid "Pages"
 msgstr ""
 
 #: admin/admin.php:191
 #: src/admin/index.js:35
-msgid "Referrers"
+#: src/admin/index.js:983
+msgid "Referring sites"
 msgstr ""
 
 #: admin/admin.php:196
 #: src/admin/index.js:36
-msgid "404s"
+#: src/admin/index.js:988
+msgid "Pages not found (404)"
 msgstr ""
 
 #: admin/admin.php:201
 #: src/admin/index.js:37
-msgid "Search Terms"
+#: src/admin/index.js:993
+msgid "Internal searches"
 msgstr ""
 
 #: admin/admin.php:206
 #: src/admin/index.js:38
-msgid "Entry Pages"
+msgid "Entry pages"
 msgstr ""
 
 #: admin/admin.php:211
 #: src/admin/index.js:39
-msgid "Exit Pages"
+msgid "Exit pages"
 msgstr ""
 
 #: admin/admin.php:216
@@ -517,18 +520,6 @@ msgstr ""
 #: src/admin/index.js:1340
 #: src/admin/index.js:1390
 msgid "Page views"
-msgstr ""
-
-#: src/admin/index.js:983
-msgid "Referring sites"
-msgstr ""
-
-#: src/admin/index.js:988
-msgid "Pages not found (404)"
-msgstr ""
-
-#: src/admin/index.js:993
-msgid "Internal searches"
 msgstr ""
 
 #: src/admin/index.js:1036
