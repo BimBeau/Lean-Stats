@@ -114,16 +114,21 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
     foreach ($data_views_dependencies as $handle) {
         if (wp_script_is($handle, 'registered')) {
             $registered_data_views[] = $handle;
-            continue;
+            break;
         }
 
         if ($wp_scripts && isset($wp_scripts->registered[$handle])) {
             $registered_data_views[] = $handle;
+            break;
         }
     }
     $asset_data['dependencies'] = array_values(
         array_unique(array_merge($dependencies, $registered_data_views))
     );
+
+    if (!empty($registered_data_views[0])) {
+        wp_enqueue_script($registered_data_views[0]);
+    }
 
     wp_enqueue_script(
         'lean-stats-admin',
@@ -132,6 +137,43 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         $asset_data['version'],
         true
     );
+
+    if (empty($registered_data_views)) {
+        $checked_handles = $data_views_dependencies;
+        add_action('admin_notices', function () use ($checked_handles): void {
+            echo '<div class="notice notice-error"><p>';
+            echo esc_html__(
+                'Lean Stats requires WordPress Data Views to render reports.',
+                'lean-stats'
+            );
+            echo '</p><p>';
+            echo esc_html(
+                sprintf(
+                    /* translators: %s is a list of script handles. */
+                    __('Script handles checked: %s', 'lean-stats'),
+                    implode(', ', $checked_handles)
+                )
+            );
+            echo '</p><p>';
+            echo esc_html__(
+                'Install or update the Gutenberg plugin, or update WordPress to a version that provides Data Views.',
+                'lean-stats'
+            );
+            echo '</p></div>';
+        });
+
+        wp_add_inline_script(
+            'lean-stats-admin',
+            'window.LEAN_STATS_FATAL = ' . wp_json_encode([
+                'reason' => __(
+                    'Data Views is missing or not registered. Lean Stats cannot render reports.',
+                    'lean-stats'
+                ),
+                'checkedHandles' => $checked_handles,
+            ]) . ';',
+            'before'
+        );
+    }
 
     if (function_exists('wp_set_script_translations')) {
         wp_set_script_translations(
