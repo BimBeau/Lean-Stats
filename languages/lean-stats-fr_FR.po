@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-26T09:23:18+00:00\n"
+"POT-Creation-Date: 2026-01-26T09:28:22+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -124,11 +124,11 @@ msgid "Loading…"
 msgstr "Chargement…"
 
 #: src/admin/components/DataTableCard/index.js:13
-#: src/admin/components/DataViewsTableCard/index.js:49 src/admin/index.js:1219
+#: src/admin/components/DataViewsTableCard/index.js:48 src/admin/index.js:1219
 msgid "Loading: %s"
 msgstr "Chargement : %s"
 
-#: src/admin/components/DataViewsTableCard/index.js:53
+#: src/admin/components/DataViewsTableCard/index.js:52
 msgid ""
 "Data views are unavailable. Update WordPress to enable the interactive table."
 msgstr ""
