@@ -1562,15 +1562,6 @@ const ReferrerSourcesTableCard = ({ range }) => {
     );
 };
 
-const AggregatedDataNotice = () => (
-    <Notice status="info" isDismissible={false}>
-        {__(
-            'All data is aggregated and contains no per-visitor details. Entry and exit pages are approximations based on referrer data.',
-            'lean-stats'
-        )}
-    </Notice>
-);
-
 const ReportPanel = ({
     title,
     endpoint,
@@ -1588,7 +1579,6 @@ const ReportPanel = ({
         <div className="ls-report-panel">
             <div className="ls-report-panel__header">
                 <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-                <AggregatedDataNotice />
             </div>
             <ReportTableCard
                 title={title}
@@ -1622,7 +1612,6 @@ const ReportDataViewsPanel = ({
         <div className="ls-report-panel">
             <div className="ls-report-panel__header">
                 <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-                <AggregatedDataNotice />
             </div>
             <ReportDataViewsCard
                 title={title}
@@ -1727,7 +1716,6 @@ const ReferrerSourcesPanel = () => {
         <div className="ls-report-panel">
             <div className="ls-report-panel__header">
                 <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-                <AggregatedDataNotice />
             </div>
             <ReferrerSourcesTableCard range={range} />
         </div>
