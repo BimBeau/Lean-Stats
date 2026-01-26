@@ -194,11 +194,6 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
-            'name' => 'not-found',
-            'title' => __('Pages not found (404)', 'lean-stats'),
-            'type' => 'core',
-        ],
-        [
             'name' => 'search-terms',
             'title' => __('Internal searches', 'lean-stats'),
             'type' => 'core',

@@ -34,7 +34,6 @@ const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
     { name: 'top-pages', title: __('Pages', 'lean-stats') },
     { name: 'referrers', title: __('Referring sites', 'lean-stats') },
-    { name: 'not-found', title: __('Pages not found (404)', 'lean-stats') },
     { name: 'search-terms', title: __('Internal searches', 'lean-stats') },
     { name: 'geolocation', title: __('Geolocation', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
@@ -313,7 +312,6 @@ const getPanelComponent = (name) => {
         dashboard: OverviewPanel,
         'top-pages': PagesPanel,
         referrers: ReferrerSourcesPanel,
-        'not-found': NotFoundPanel,
         'search-terms': SearchTermsPanel,
         geolocation: GeolocationPanel,
         settings: SettingsPanel,
@@ -1413,6 +1411,7 @@ const PagesPanel = () => {
         { name: 'top-pages', title: __('Pages', 'lean-stats') },
         { name: 'entry-pages', title: __('Entry pages', 'lean-stats') },
         { name: 'exit-pages', title: __('Exit pages', 'lean-stats') },
+        { name: 'not-found', title: __('Pages not found (404)', 'lean-stats') },
     ];
 
     return (
@@ -1424,6 +1423,10 @@ const PagesPanel = () => {
 
                 if (tab.name === 'exit-pages') {
                     return <ExitPagesPanel />;
+                }
+
+                if (tab.name === 'not-found') {
+                    return <NotFoundPanel />;
                 }
 
                 return <TopPagesPanel />;
