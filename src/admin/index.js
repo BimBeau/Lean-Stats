@@ -1162,7 +1162,7 @@ const ReportTableCard = ({
             />
             {!isLoading && !error && rows.length > 0 && (
                 <>
-                    <table className="ls-report-table" aria-label={tableLabel}>
+                    <table className="widefat striped ls-report-table" aria-label={tableLabel}>
                         <thead>
                             <tr>
                                 <th scope="col">{labelHeader}</th>
@@ -1321,7 +1321,7 @@ const ReferrerSourcesTableCard = ({ range }) => {
             />
             {!isLoading && !error && rows.length > 0 && (
                 <>
-                    <table className="ls-report-table" aria-label={tableLabel}>
+                    <table className="widefat striped ls-report-table" aria-label={tableLabel}>
                         <thead>
                             <tr>
                                 <th scope="col">{__('Referrer', 'lean-stats')}</th>
