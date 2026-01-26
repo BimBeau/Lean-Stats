@@ -101,6 +101,15 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         $asset_data = require $asset_file;
     }
 
+    $dependencies = $asset_data['dependencies'] ?? [];
+    if (wp_script_is('wp-dataviews', 'registered')) {
+        $dependencies[] = 'wp-dataviews';
+    }
+    if (wp_script_is('wp-dataviews/wp', 'registered')) {
+        $dependencies[] = 'wp-dataviews/wp';
+    }
+    $asset_data['dependencies'] = array_values(array_unique($dependencies));
+
     wp_enqueue_script(
         'lean-stats-admin',
         LEAN_STATS_URL . 'build/admin.js',
