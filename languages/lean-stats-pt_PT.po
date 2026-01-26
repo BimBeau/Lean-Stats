@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-26T09:20:14+00:00\n"
+"POT-Creation-Date: 2026-01-26T09:23:18+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,32 +29,32 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:190 src/admin/index.js:34
+#: admin/admin.php:196 src/admin/index.js:34
 msgid "Dashboard"
 msgstr "Painel"
 
-#: admin/admin.php:195 src/admin/index.js:35 src/admin/index.js:1644
+#: admin/admin.php:201 src/admin/index.js:35 src/admin/index.js:1644
 msgid "Pages"
 msgstr "Páginas"
 
-#: admin/admin.php:200 src/admin/index.js:36 src/admin/index.js:980
+#: admin/admin.php:206 src/admin/index.js:36 src/admin/index.js:980
 msgid "Referring sites"
 msgstr "Sites de referência"
 
-#: admin/admin.php:205 src/admin/index.js:37 src/admin/index.js:985
+#: admin/admin.php:211 src/admin/index.js:37 src/admin/index.js:985
 msgid "Pages not found (404)"
 msgstr "Páginas não encontradas"
 
-#: admin/admin.php:210 src/admin/index.js:38 src/admin/index.js:990
+#: admin/admin.php:216 src/admin/index.js:38 src/admin/index.js:990
 msgid "Internal searches"
 msgstr "Pesquisas internas"
 
-#: admin/admin.php:215 src/admin/index.js:39 src/admin/index.js:393
+#: admin/admin.php:221 src/admin/index.js:39 src/admin/index.js:393
 #: src/admin/index.js:686
 msgid "Geolocation"
 msgstr ""
 
-#: admin/admin.php:220 src/admin/index.js:40 src/admin/index.js:635
+#: admin/admin.php:226 src/admin/index.js:40 src/admin/index.js:635
 msgid "Settings"
 msgstr "Definições"
 
@@ -124,11 +124,11 @@ msgid "Loading…"
 msgstr "A carregar…"
 
 #: src/admin/components/DataTableCard/index.js:13
-#: src/admin/components/DataViewsTableCard/index.js:44 src/admin/index.js:1219
+#: src/admin/components/DataViewsTableCard/index.js:49 src/admin/index.js:1219
 msgid "Loading: %s"
 msgstr "A carregar: %s"
 
-#: src/admin/components/DataViewsTableCard/index.js:48
+#: src/admin/components/DataViewsTableCard/index.js:53
 msgid ""
 "Data views are unavailable. Update WordPress to enable the interactive table."
 msgstr ""
