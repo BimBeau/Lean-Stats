@@ -98,6 +98,15 @@
     margin-bottom: var(--lean-stats-gap-sm);
 }
 
+.ls-table-controls .components-button {
+    min-height: 40px;
+    padding: 0 12px;
+}
+
+.ls-report-table {
+    width: 100%;
+}
+
 .ls-report-panel__header {
     display: grid;
     gap: var(--lean-stats-gap-sm);
