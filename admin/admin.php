@@ -104,22 +104,23 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
     $dependencies = $asset_data['dependencies'] ?? [];
     $data_views_dependencies = [
         'wp-dataviews',
-        'wp-dataviews/wp',
         'wp-data-views',
-        'wp-data-views/wp',
     ];
+    $needs_data_views = !empty(array_intersect($dependencies, $data_views_dependencies));
     $dependencies = array_values(array_diff($dependencies, $data_views_dependencies));
     $registered_data_views = [];
-    $wp_scripts = function_exists('wp_scripts') ? wp_scripts() : null;
-    foreach ($data_views_dependencies as $handle) {
-        if (wp_script_is($handle, 'registered')) {
-            $registered_data_views[] = $handle;
-            break;
-        }
+    if ($needs_data_views) {
+        $wp_scripts = function_exists('wp_scripts') ? wp_scripts() : null;
+        foreach ($data_views_dependencies as $handle) {
+            if (wp_script_is($handle, 'registered')) {
+                $registered_data_views[] = $handle;
+                break;
+            }
 
-        if ($wp_scripts && isset($wp_scripts->registered[$handle])) {
-            $registered_data_views[] = $handle;
-            break;
+            if ($wp_scripts && isset($wp_scripts->registered[$handle])) {
+                $registered_data_views[] = $handle;
+                break;
+            }
         }
     }
     $asset_data['dependencies'] = array_values(
@@ -138,7 +139,7 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         true
     );
 
-    if (empty($registered_data_views)) {
+    if ($needs_data_views && empty($registered_data_views)) {
         $checked_handles = $data_views_dependencies;
         add_action('admin_notices', function () use ($checked_handles): void {
             echo '<div class="notice notice-error"><p>';

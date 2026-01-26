@@ -1,4 +1,4 @@
-import { DataViews as ImportedDataViews } from '@wordpress/dataviews/wp';
+import { DataViews as ImportedDataViews } from '@wordpress/dataviews';
 import { __, sprintf } from '@wordpress/i18n';
 
 import DataState from '../DataState';
