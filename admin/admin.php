@@ -102,19 +102,28 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
     }
 
     $dependencies = $asset_data['dependencies'] ?? [];
-    $data_views_dependencies = ['wp-dataviews', 'wp-dataviews/wp'];
+    $data_views_dependencies = [
+        'wp-dataviews',
+        'wp-dataviews/wp',
+        'wp-data-views',
+        'wp-data-views/wp',
+    ];
+    $dependencies = array_values(array_diff($dependencies, $data_views_dependencies));
+    $registered_data_views = [];
     $wp_scripts = function_exists('wp_scripts') ? wp_scripts() : null;
     foreach ($data_views_dependencies as $handle) {
         if (wp_script_is($handle, 'registered')) {
-            $dependencies[] = $handle;
+            $registered_data_views[] = $handle;
             continue;
         }
 
         if ($wp_scripts && isset($wp_scripts->registered[$handle])) {
-            $dependencies[] = $handle;
+            $registered_data_views[] = $handle;
         }
     }
-    $asset_data['dependencies'] = array_values(array_unique($dependencies));
+    $asset_data['dependencies'] = array_values(
+        array_unique(array_merge($dependencies, $registered_data_views))
+    );
 
     wp_enqueue_script(
         'lean-stats-admin',

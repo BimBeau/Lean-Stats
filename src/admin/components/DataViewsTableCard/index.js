@@ -1,5 +1,5 @@
 import { Notice } from '@wordpress/components';
-import { DataViews } from '@wordpress/dataviews';
+import { DataViews as ImportedDataViews } from '@wordpress/dataviews/wp';
 import { __, sprintf } from '@wordpress/i18n';
 
 import DataState from '../DataState';
@@ -11,16 +11,46 @@ const DEFAULT_LAYOUTS = {
     },
 };
 
+const DATA_VIEWS_LOOKUPS = [
+    {
+        label: 'imported @wordpress/dataviews/wp',
+        get: () => ImportedDataViews,
+    },
+    {
+        label: 'window.wp.dataviews.DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.dataviews?.DataViews),
+    },
+    {
+        label: 'window.wp["dataviews/wp"].DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.['dataviews/wp']?.DataViews),
+    },
+    {
+        label: 'window.wp.dataviewsWp.DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.dataviewsWp?.DataViews),
+    },
+];
+
+let hasWarnedMissingDataViews = false;
+
 const resolveDataViewsComponent = () => {
-    if (DataViews) {
-        return DataViews;
+    for (const lookup of DATA_VIEWS_LOOKUPS) {
+        const candidate = lookup.get();
+        if (candidate) {
+            return candidate;
+        }
     }
 
-    if (typeof window === 'undefined' || !window.wp) {
-        return null;
+    if (typeof window !== 'undefined' && !hasWarnedMissingDataViews) {
+        hasWarnedMissingDataViews = true;
+        // eslint-disable-next-line no-console
+        console.warn(
+            `Lean Stats: Data Views not found. Checked: ${DATA_VIEWS_LOOKUPS.map(
+                (lookup) => lookup.label
+            ).join(', ')}.`
+        );
     }
 
-    return window.wp?.dataviews?.DataViews || window.wp?.['dataviews/wp']?.DataViews || null;
+    return null;
 };
 
 const DataViewsTableCard = ({
