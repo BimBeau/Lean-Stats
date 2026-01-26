@@ -106,7 +106,7 @@ jobs:
           else
             NOTES="Build automatique Lean Stats ${VERSION}"
           fi
-          NOTES=$(printf "%s\n" "$NOTES" | sed '/Codex Task/Id')
+          NOTES=$(printf "%s\n" "$NOTES" | sed '/BimBeau Task/Id')
 
           # Crée la release si elle n’existe pas (gh crée aussi le tag si besoin)
           if gh release view "$TAG" >/dev/null 2>&1; then
