@@ -102,11 +102,17 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
     }
 
     $dependencies = $asset_data['dependencies'] ?? [];
-    if (wp_script_is('wp-dataviews', 'registered')) {
-        $dependencies[] = 'wp-dataviews';
-    }
-    if (wp_script_is('wp-dataviews/wp', 'registered')) {
-        $dependencies[] = 'wp-dataviews/wp';
+    $data_views_dependencies = ['wp-dataviews', 'wp-dataviews/wp'];
+    $wp_scripts = function_exists('wp_scripts') ? wp_scripts() : null;
+    foreach ($data_views_dependencies as $handle) {
+        if (wp_script_is($handle, 'registered')) {
+            $dependencies[] = $handle;
+            continue;
+        }
+
+        if ($wp_scripts && isset($wp_scripts->registered[$handle])) {
+            $dependencies[] = $handle;
+        }
     }
     $asset_data['dependencies'] = array_values(array_unique($dependencies));
 
