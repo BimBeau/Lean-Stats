@@ -36,8 +36,6 @@ const DEFAULT_PANELS = [
     { name: 'referrers', title: __('Referring sites', 'lean-stats') },
     { name: 'not-found', title: __('Pages not found (404)', 'lean-stats') },
     { name: 'search-terms', title: __('Internal searches', 'lean-stats') },
-    { name: 'entry-pages', title: __('Entry pages', 'lean-stats') },
-    { name: 'exit-pages', title: __('Exit pages', 'lean-stats') },
     { name: 'geolocation', title: __('Geolocation', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
 ];
@@ -314,12 +312,10 @@ const getCurrentPanelTitle = (panelName, panels) => {
 const getPanelComponent = (name) => {
     const corePanels = {
         dashboard: OverviewPanel,
-        'top-pages': TopPagesPanel,
+        'top-pages': PagesPanel,
         referrers: ReferrerSourcesPanel,
         'not-found': NotFoundPanel,
         'search-terms': SearchTermsPanel,
-        'entry-pages': EntryPagesPanel,
-        'exit-pages': ExitPagesPanel,
         geolocation: GeolocationPanel,
         settings: SettingsPanel,
     };
@@ -1640,6 +1636,30 @@ const ReportDataViewsPanel = ({
                 metricValueKey={metricValueKey}
             />
         </div>
+    );
+};
+
+const PagesPanel = () => {
+    const pagesTabs = [
+        { name: 'top-pages', title: __('Pages', 'lean-stats') },
+        { name: 'entry-pages', title: __('Entry pages', 'lean-stats') },
+        { name: 'exit-pages', title: __('Exit pages', 'lean-stats') },
+    ];
+
+    return (
+        <TabPanel className="ls-pages-tabs" tabs={pagesTabs}>
+            {(tab) => {
+                if (tab.name === 'entry-pages') {
+                    return <EntryPagesPanel />;
+                }
+
+                if (tab.name === 'exit-pages') {
+                    return <ExitPagesPanel />;
+                }
+
+                return <TopPagesPanel />;
+            }}
+        </TabPanel>
     );
 };
 

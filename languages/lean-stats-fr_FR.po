@@ -239,4 +239,4 @@ msgid "Entry pages"
 msgstr "Pages d'entrée"
 
 msgid "Exit pages"
-msgstr "Pages de sorties"
+msgstr "Pages de sortie"
