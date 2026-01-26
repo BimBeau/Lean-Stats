@@ -26,7 +26,6 @@ import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHan
 import AdminErrorBoundary from './components/AdminErrorBoundary';
 import ChartFrame from './components/ChartFrame';
 import DataState from './components/DataState';
-import DataViewsTableCard from './components/DataViewsTableCard';
 import LsCard from './components/LsCard';
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
@@ -57,22 +56,6 @@ const DEFAULT_SETTINGS = {
 const DEFAULT_RANGE_PRESET = '30d';
 const RANGE_PRESET_OPTIONS = ['7d', '30d', '90d'];
 const RANGE_PRESET_STORAGE_PREFIX = 'lean_stats_range_preset';
-const DATA_VIEWS_HANDLES = ['wp-dataviews', 'wp-data-views'];
-const DATA_VIEWS_GLOBAL_LOOKUPS = [
-    {
-        label: 'window.wp.dataviews.DataViews',
-        get: () => (typeof window === 'undefined' ? null : window.wp?.dataviews?.DataViews),
-    },
-];
-
-const getDataViewsFatalState = () => {
-    if (typeof window === 'undefined') {
-        return null;
-    }
-
-    return window.LEAN_STATS_FATAL ?? null;
-};
-
 const getRangePresetStorageKey = () => {
     const userId = ADMIN_CONFIG?.currentUserId ? String(ADMIN_CONFIG.currentUserId) : 'default';
     return `${RANGE_PRESET_STORAGE_PREFIX}:${userId}`;
@@ -1231,137 +1214,6 @@ const ReportTableCard = ({
     );
 };
 
-const createReportDataViewFields = ({ labelHeader, metricLabel, metricKey }) => [
-    {
-        id: 'label',
-        type: 'text',
-        label: labelHeader,
-        enableHiding: false,
-    },
-    {
-        id: metricKey,
-        type: 'integer',
-        label: metricLabel,
-        enableHiding: false,
-    },
-];
-
-const mapReportDataViewItems = ({ items, labelFallback, metricKey, metricValueKey }) =>
-    items.map((item, index) => ({
-        id: `${item.label || labelFallback}-${index}`,
-        label: item.label || labelFallback,
-        [metricKey]: item?.[metricValueKey] ?? 0,
-    }));
-
-const createReportDataView = ({ metricKey, perPage = 10 }) => ({
-    type: 'table',
-    search: '',
-    page: 1,
-    perPage,
-    sort: {
-        field: metricKey,
-        direction: 'desc',
-    },
-    fields: ['label', metricKey],
-    layout: {},
-});
-
-const ReportDataViewsCard = ({
-    title,
-    labelHeader,
-    range,
-    endpoint,
-    emptyLabel,
-    labelFallback,
-    metricLabel = __('Page views', 'lean-stats'),
-    metricKey = 'hits',
-    metricValueKey = 'hits',
-}) => {
-    const [view, setView] = useState(() => createReportDataView({ metricKey }));
-
-    useEffect(() => {
-        setView((prev) => ({
-            ...prev,
-            page: 1,
-        }));
-    }, [range.start, range.end]);
-
-    useEffect(() => {
-        setView((prev) => ({
-            ...prev,
-            sort: {
-                field: metricKey,
-                direction: 'desc',
-            },
-            fields: ['label', metricKey],
-        }));
-    }, [metricKey]);
-
-    const viewPage = view.page ?? 1;
-    const viewPerPage = view.perPage ?? 10;
-    const viewSortField = view.sort?.field ?? metricKey;
-    const viewSortDirection = view.sort?.direction ?? 'desc';
-
-    const { data, isLoading, error } = useAdminEndpoint(
-        endpoint,
-        {
-            ...range,
-            page: viewPage,
-            per_page: viewPerPage,
-            orderby: viewSortField,
-            order: viewSortDirection,
-        },
-        {
-            namespace: ADMIN_CONFIG?.settings?.restNamespace,
-        }
-    );
-
-    const items = data?.items || [];
-    const pagination = data?.pagination || {};
-    const totalPages = pagination.totalPages || 1;
-    const totalItems = pagination.totalItems || items.length;
-
-    useEffect(() => {
-        if (!isLoading && !error && totalPages && viewPage > totalPages) {
-            setView((prev) => ({
-                ...prev,
-                page: totalPages,
-            }));
-        }
-    }, [totalPages, viewPage, isLoading, error]);
-
-    const fields = useMemo(
-        () => createReportDataViewFields({ labelHeader, metricLabel, metricKey }),
-        [labelHeader, metricLabel, metricKey]
-    );
-    const rows = useMemo(
-        () => mapReportDataViewItems({ items, labelFallback, metricKey, metricValueKey }),
-        [items, labelFallback, metricKey, metricValueKey]
-    );
-    const paginationInfo = useMemo(
-        () => ({
-            totalItems,
-            totalPages,
-        }),
-        [totalItems, totalPages]
-    );
-
-    return (
-        <DataViewsTableCard
-            title={title}
-            data={rows}
-            fields={fields}
-            view={view}
-            onChangeView={setView}
-            isLoading={isLoading}
-            error={error}
-            emptyLabel={emptyLabel}
-            paginationInfo={paginationInfo}
-            getItemId={(item) => item.id}
-        />
-    );
-};
-
 const ReferrerSourcesTableCard = ({ range }) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
@@ -1556,39 +1408,6 @@ const ReportPanel = ({
     );
 };
 
-const ReportDataViewsPanel = ({
-    title,
-    endpoint,
-    labelHeader,
-    emptyLabel,
-    labelFallback,
-    metricLabel,
-    metricKey,
-    metricValueKey,
-}) => {
-    const [rangePreset, setRangePreset] = useSharedRangePreset();
-    const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
-
-    return (
-        <div className="ls-report-panel">
-            <div className="ls-report-panel__header">
-                <PeriodFilter value={rangePreset} onChange={setRangePreset} />
-            </div>
-            <ReportDataViewsCard
-                title={title}
-                labelHeader={labelHeader}
-                range={range}
-                endpoint={endpoint}
-                emptyLabel={emptyLabel}
-                labelFallback={labelFallback}
-                metricLabel={metricLabel}
-                metricKey={metricKey}
-                metricValueKey={metricValueKey}
-            />
-        </div>
-    );
-};
-
 const PagesPanel = () => {
     const pagesTabs = [
         { name: 'top-pages', title: __('Pages', 'lean-stats') },
@@ -1614,7 +1433,7 @@ const PagesPanel = () => {
 };
 
 const TopPagesPanel = () => (
-    <ReportDataViewsPanel
+    <ReportPanel
         title={__('Top pages', 'lean-stats')}
         labelHeader={__('Page', 'lean-stats')}
         endpoint="/top-pages"
@@ -1740,7 +1559,7 @@ const OverviewPanel = () => {
             </div>
             <TimeseriesChart range={range} />
             <div className="ls-overview__grid">
-                <ReportDataViewsCard
+                <ReportTableCard
                     title={__('Top pages', 'lean-stats')}
                     labelHeader={__('Page', 'lean-stats')}
                     range={range}
@@ -1806,14 +1625,8 @@ const AdminApp = () => {
 const root = document.getElementById('lean-stats-admin');
 
 if (root) {
-    const fatalDataViews = getDataViewsFatalState();
-
     render(
-        <AdminErrorBoundary
-            fatal={fatalDataViews}
-            checkedHandles={DATA_VIEWS_HANDLES}
-            checkedGlobals={DATA_VIEWS_GLOBAL_LOOKUPS.map((lookup) => lookup.label)}
-        >
+        <AdminErrorBoundary>
             <AdminApp />
         </AdminErrorBoundary>,
         root

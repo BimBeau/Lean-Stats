@@ -35,10 +35,7 @@ class AdminErrorBoundary extends Component {
             return (
                 <Notice status="error" isDismissible={false}>
                     <p>
-                        {__(
-                            'Lean Stats requires WordPress Data Views. The admin app cannot load without it.',
-                            'lean-stats'
-                        )}
+                        {__('Lean Stats cannot load the admin interface.', 'lean-stats')}
                     </p>
                     {details?.reason && <p>{details.reason}</p>}
                     {handlesList.length > 0 && (
@@ -57,12 +54,6 @@ class AdminErrorBoundary extends Component {
                             )}
                         </p>
                     )}
-                    <p>
-                        {__(
-                            'Install or update the Gutenberg plugin, or update WordPress to a version that provides Data Views.',
-                            'lean-stats'
-                        )}
-                    </p>
                 </Notice>
             );
         }
