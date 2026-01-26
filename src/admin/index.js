@@ -470,39 +470,6 @@ const SettingsPanel = () => {
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
     const debugEnabled = Boolean(formState.debug_enabled);
 
-    const privacyChecklistItems = useMemo(
-        () => [
-            __('Aggregated page views by URL path.', 'lean-stats'),
-            __('Aggregated referrer domains.', 'lean-stats'),
-            __('Aggregated device class totals.', 'lean-stats'),
-            __('Aggregated 404 paths.', 'lean-stats'),
-            __('Aggregated on-site search terms.', 'lean-stats'),
-            __('Aggregated UTM campaign parameters (when allowlisted).', 'lean-stats'),
-            __('Raw log snapshots (timestamp, page path, referrer, device) when debug mode is enabled.', 'lean-stats'),
-        ],
-        []
-    );
-
-    const privacyWarnings = useMemo(() => {
-        const warnings = [];
-        if (!formState.respect_dnt_gpc) {
-            warnings.push(__('Tracking continues even when browsers send DNT or GPC.', 'lean-stats'));
-        }
-        if (!formState.url_strip_query) {
-            warnings.push(__('Full query strings remain in stored page paths.', 'lean-stats'));
-        }
-        if (formState.raw_logs_enabled) {
-            warnings.push(__('Raw logs store granular view details while debug mode is enabled.', 'lean-stats'));
-        }
-        if (formState.raw_logs_retention_days > 30) {
-            warnings.push(__('Raw log retention exceeds 30 days.', 'lean-stats'));
-        }
-        if (formState.utm_allowlist?.length) {
-            warnings.push(__('Allowlisted UTM parameters are stored in aggregated reports.', 'lean-stats'));
-        }
-        return warnings;
-    }, [formState]);
-
     useEffect(() => {
         if (data?.settings) {
             const normalized = normalizeSettings(data.settings);
@@ -813,28 +780,6 @@ const SettingsPanel = () => {
                                                 ))}
                                             </div>
                                         </div>
-                                    </CardBody>
-                                </Card>
-                                <Card className="ls-settings-section">
-                                    <CardBody>
-                                        <h3 className="ls-settings-section__title">
-                                            {__('Privacy checklist', 'lean-stats')}
-                                        </h3>
-                                        <ul className="ls-settings-privacy__list">
-                                            {privacyChecklistItems.map((item) => (
-                                                <li key={item}>{item}</li>
-                                            ))}
-                                        </ul>
-                                        {privacyWarnings.length > 0 && (
-                                            <Notice status="warning" isDismissible={false}>
-                                                <p>{__('Review these privacy risks:', 'lean-stats')}</p>
-                                                <ul className="ls-settings-privacy__warnings">
-                                                    {privacyWarnings.map((warning) => (
-                                                        <li key={warning}>{warning}</li>
-                                                    ))}
-                                                </ul>
-                                            </Notice>
-                                        )}
                                     </CardBody>
                                 </Card>
                                 <Card className="ls-settings-section">

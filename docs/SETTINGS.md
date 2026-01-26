@@ -54,8 +54,6 @@ Behavior: the cleanup hook (`LEAN_STATS_RAW_LOGS_CRON_HOOK`) uses the retention 
 
 The settings screen exposes a "Logs" tab when debug mode is enabled. The tab lists the most recent raw hits stored in `lean_stats_hits` (timestamp, page path, referrer, device).
 
-## Privacy checklist and data management
-
-The settings screen includes a privacy checklist panel that summarizes collected data and highlights risky configuration choices.
+## Data management
 
 The "Purge analytics data" action deletes aggregated analytics tables and raw logs while leaving settings unchanged.
