@@ -209,10 +209,10 @@ msgid "Page views"
 msgstr "Sidevisninger"
 
 msgid "Referring sites"
-msgstr "Henvisende sites"
+msgstr "Henvisende websteder"
 
 msgid "Pages not found (404)"
-msgstr "Sider ikke fundet (404)"
+msgstr "Sider blev ikke fundet"
 
 msgid "Internal searches"
 msgstr "Interne søgninger"
@@ -231,3 +231,12 @@ msgstr "%s visninger"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Rå logs gemmer detaljerede visningsdata, når debug-tilstand er aktiveret."
+
+msgid "Pages"
+msgstr "Sider"
+
+msgid "Entry pages"
+msgstr "Indgangssider"
+
+msgid "Exit pages"
+msgstr "Udgangssider"

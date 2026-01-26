@@ -208,7 +208,7 @@
         "Hänvisande webbplatser"
       ],
       "Pages not found (404)": [
-        "Sidor hittades inte (404)"
+        "Sidor hittades inte"
       ],
       "Internal searches": [
         "Interna sökningar"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Råloggar lagrar detaljerade visningsdata när felsökningsläget är aktiverat."
+      ],
+      "Pages": [
+        "Sidor"
+      ],
+      "Entry pages": [
+        "Ingångssidor"
+      ],
+      "Exit pages": [
+        "Utgångssidor"
       ]
     }
   }

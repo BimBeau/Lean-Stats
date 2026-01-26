@@ -205,10 +205,10 @@
         "Visualizzazioni di pagina"
       ],
       "Referring sites": [
-        "Siti referenti"
+        "Siti di riferimento"
       ],
       "Pages not found (404)": [
-        "Pagine non trovate (404)"
+        "Pagine non trovate"
       ],
       "Internal searches": [
         "Ricerche interne"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "I log grezzi memorizzano dettagli granulari delle visualizzazioni quando la modalità debug è attiva."
+      ],
+      "Pages": [
+        "Pagine"
+      ],
+      "Entry pages": [
+        "Pagine di ingresso"
+      ],
+      "Exit pages": [
+        "Pagine di uscita"
       ]
     }
   }

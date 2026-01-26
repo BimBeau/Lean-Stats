@@ -212,7 +212,7 @@ msgid "Referring sites"
 msgstr "Yönlendiren siteler"
 
 msgid "Pages not found (404)"
-msgstr "Bulunamayan sayfalar (404)"
+msgstr "Bulunamayan sayfalar"
 
 msgid "Internal searches"
 msgstr "Dahili aramalar"
@@ -231,3 +231,12 @@ msgstr "%s görüntüleme"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme verilerini saklar."
+
+msgid "Pages"
+msgstr "Sayfalar"
+
+msgid "Entry pages"
+msgstr "Giriş sayfaları"
+
+msgid "Exit pages"
+msgstr "Çıkış sayfaları"

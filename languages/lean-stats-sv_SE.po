@@ -212,7 +212,7 @@ msgid "Referring sites"
 msgstr "Hänvisande webbplatser"
 
 msgid "Pages not found (404)"
-msgstr "Sidor hittades inte (404)"
+msgstr "Sidor hittades inte"
 
 msgid "Internal searches"
 msgstr "Interna sökningar"
@@ -231,3 +231,12 @@ msgstr "%s visningar"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Råloggar lagrar detaljerade visningsdata när felsökningsläget är aktiverat."
+
+msgid "Pages"
+msgstr "Sidor"
+
+msgid "Entry pages"
+msgstr "Ingångssidor"
+
+msgid "Exit pages"
+msgstr "Utgångssidor"

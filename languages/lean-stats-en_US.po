@@ -212,7 +212,7 @@ msgid "Referring sites"
 msgstr "Referring sites"
 
 msgid "Pages not found (404)"
-msgstr "Pages not found (404)"
+msgstr "Pages not found"
 
 msgid "Internal searches"
 msgstr "Internal searches"
@@ -231,3 +231,12 @@ msgstr "%s views"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Raw logs store granular view details while debug mode is enabled."
+
+msgid "Pages"
+msgstr "Pages"
+
+msgid "Entry pages"
+msgstr "Entry pages"
+
+msgid "Exit pages"
+msgstr "Exit pages"

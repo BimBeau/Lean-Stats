@@ -212,10 +212,10 @@ msgid "Referring sites"
 msgstr "Verweisende Websites"
 
 msgid "Pages not found (404)"
-msgstr "Nicht gefundene Seiten (404)"
+msgstr "Nicht gefundene Seiten"
 
 msgid "Internal searches"
-msgstr "Interne Suchen"
+msgstr "Interne Suchanfragen"
 
 msgid "Daily page views"
 msgstr "Tägliche Seitenaufrufe"
@@ -231,3 +231,12 @@ msgstr "%s Aufrufe"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Rohprotokolle speichern detaillierte Aufrufdaten, wenn der Debug-Modus aktiviert ist."
+
+msgid "Pages"
+msgstr "Seiten"
+
+msgid "Entry pages"
+msgstr "Einstiegsseiten"
+
+msgid "Exit pages"
+msgstr "Ausstiegsseiten"

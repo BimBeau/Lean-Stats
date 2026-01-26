@@ -212,7 +212,7 @@ msgid "Referring sites"
 msgstr "Sitios de referencia"
 
 msgid "Pages not found (404)"
-msgstr "Páginas no encontradas (404)"
+msgstr "Páginas no encontradas"
 
 msgid "Internal searches"
 msgstr "Búsquedas internas"
@@ -231,3 +231,12 @@ msgstr "%s vistas"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Los registros sin procesar almacenan detalles granulares de las vistas cuando el modo de depuración está activado."
+
+msgid "Pages"
+msgstr "Páginas"
+
+msgid "Entry pages"
+msgstr "Páginas de entrada"
+
+msgid "Exit pages"
+msgstr "Páginas de salida"
