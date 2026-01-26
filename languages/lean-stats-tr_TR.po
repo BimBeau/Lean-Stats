@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-26T08:18:24+00:00\n"
+"POT-Creation-Date: 2026-01-26T08:28:29+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:139 src/admin/index.js:310
-#: src/admin/index.js:1643
+#: lean-stats.php includes/settings.php:139 src/admin/index.js:311
+#: src/admin/index.js:1809
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -29,40 +29,40 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:181 src/admin/index.js:33
+#: admin/admin.php:181 src/admin/index.js:34
 msgid "Dashboard"
 msgstr "Gösterge paneli"
 
-#: admin/admin.php:186 src/admin/index.js:34
+#: admin/admin.php:186 src/admin/index.js:35
 msgid "Pages"
 msgstr "Sayfalar"
 
-#: admin/admin.php:191 src/admin/index.js:35 src/admin/index.js:983
+#: admin/admin.php:191 src/admin/index.js:36 src/admin/index.js:984
 msgid "Referring sites"
 msgstr "Yönlendiren siteler"
 
-#: admin/admin.php:196 src/admin/index.js:36 src/admin/index.js:988
+#: admin/admin.php:196 src/admin/index.js:37 src/admin/index.js:989
 msgid "Pages not found (404)"
 msgstr "Bulunamayan sayfalar"
 
-#: admin/admin.php:201 src/admin/index.js:37 src/admin/index.js:993
+#: admin/admin.php:201 src/admin/index.js:38 src/admin/index.js:994
 msgid "Internal searches"
 msgstr "Dahili aramalar"
 
-#: admin/admin.php:206 src/admin/index.js:38
+#: admin/admin.php:206 src/admin/index.js:39
 msgid "Entry pages"
 msgstr "Giriş sayfaları"
 
-#: admin/admin.php:211 src/admin/index.js:39
+#: admin/admin.php:211 src/admin/index.js:40
 msgid "Exit pages"
 msgstr "Çıkış sayfaları"
 
-#: admin/admin.php:216 src/admin/index.js:40 src/admin/index.js:396
-#: src/admin/index.js:689
+#: admin/admin.php:216 src/admin/index.js:41 src/admin/index.js:397
+#: src/admin/index.js:690
 msgid "Geolocation"
 msgstr ""
 
-#: admin/admin.php:221 src/admin/index.js:41 src/admin/index.js:638
+#: admin/admin.php:221 src/admin/index.js:42 src/admin/index.js:639
 msgid "Settings"
 msgstr "Ayarlar"
 
@@ -131,147 +131,148 @@ msgstr "Geçersiz zaman damgası aralığı."
 msgid "Loading…"
 msgstr "Yükleniyor…"
 
-#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1222
+#: src/admin/components/DataTableCard/index.js:13
+#: src/admin/components/DataViewsTableCard/index.js:32 src/admin/index.js:1223
 msgid "Loading: %s"
 msgstr "Yükleniyor: %s"
 
-#: src/admin/index.js:208 src/admin/index.js:522 src/admin/index.js:582
+#: src/admin/index.js:209 src/admin/index.js:523 src/admin/index.js:583
 msgid "Missing REST configuration."
 msgstr "REST yapılandırması eksik."
 
-#: src/admin/index.js:232 src/admin/index.js:546 src/admin/index.js:605
+#: src/admin/index.js:233 src/admin/index.js:547 src/admin/index.js:606
 msgid "API error (%s)"
 msgstr "API hatası (%s)"
 
-#: src/admin/index.js:247
+#: src/admin/index.js:248
 msgid "Loading error."
 msgstr "Yükleme hatası."
 
-#: src/admin/index.js:345
+#: src/admin/index.js:346
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:356
+#: src/admin/index.js:357
 #, fuzzy
 msgid "No raw logs available."
 msgstr "Rol mevcut değil."
 
-#: src/admin/index.js:357
+#: src/admin/index.js:358
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Göstergeler yükleniyor…"
 
-#: src/admin/index.js:364 src/admin/index.js:1089
+#: src/admin/index.js:365 src/admin/index.js:1090
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:365 src/admin/index.js:1483 src/admin/index.js:1610
+#: src/admin/index.js:366 src/admin/index.js:1649 src/admin/index.js:1776
 msgid "Page"
 msgstr "Sayfa"
 
-#: src/admin/index.js:366 src/admin/index.js:1323 src/admin/index.js:1341
-#: src/admin/index.js:1388 src/admin/index.js:1618
+#: src/admin/index.js:367 src/admin/index.js:1455 src/admin/index.js:1473
+#: src/admin/index.js:1520 src/admin/index.js:1784
 msgid "Referrer"
 msgstr "Yönlendiren"
 
-#: src/admin/index.js:367
+#: src/admin/index.js:368
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:375 src/admin/index.js:1322 src/admin/index.js:1323
-#: src/admin/index.js:1622
+#: src/admin/index.js:376 src/admin/index.js:1454 src/admin/index.js:1455
+#: src/admin/index.js:1788
 msgid "Direct"
 msgstr "Doğrudan"
 
-#: src/admin/index.js:392
+#: src/admin/index.js:393
 msgid "MaxMind API"
 msgstr ""
 
-#: src/admin/index.js:393
+#: src/admin/index.js:394
 msgid "GeoLite2 (local)"
 msgstr ""
 
-#: src/admin/index.js:401
+#: src/admin/index.js:402
 #, fuzzy
 msgid "No geolocation data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/index.js:402
+#: src/admin/index.js:403
 #, fuzzy
 msgid "Looking up location…"
 msgstr "Grafik yükleniyor…"
 
-#: src/admin/index.js:412
+#: src/admin/index.js:413
 msgid "Location is derived from the current request IP and is not stored."
 msgstr ""
 
-#: src/admin/index.js:416
+#: src/admin/index.js:417
 msgid "IP address"
 msgstr ""
 
-#: src/admin/index.js:420
+#: src/admin/index.js:421
 msgid "Country"
 msgstr ""
 
-#: src/admin/index.js:421 src/admin/index.js:425 src/admin/index.js:429
+#: src/admin/index.js:422 src/admin/index.js:426 src/admin/index.js:430
 #, fuzzy
 msgid "Unavailable"
 msgstr "KPI mevcut değil."
 
-#: src/admin/index.js:424
+#: src/admin/index.js:425
 msgid "Region"
 msgstr ""
 
-#: src/admin/index.js:428
+#: src/admin/index.js:429
 msgid "City"
 msgstr ""
 
-#: src/admin/index.js:432
+#: src/admin/index.js:433
 msgid "Source"
 msgstr ""
 
-#: src/admin/index.js:447
+#: src/admin/index.js:448
 msgid "Period"
 msgstr "Dönem"
 
-#: src/admin/index.js:450
+#: src/admin/index.js:451
 msgid "7 days"
 msgstr "7 gün"
 
-#: src/admin/index.js:451
+#: src/admin/index.js:452
 msgid "30 days"
 msgstr "30 gün"
 
-#: src/admin/index.js:452
+#: src/admin/index.js:453
 msgid "90 days"
 msgstr "90 gün"
 
-#: src/admin/index.js:478
+#: src/admin/index.js:479
 msgid "Aggregated page views by URL path."
 msgstr ""
 
-#: src/admin/index.js:479
+#: src/admin/index.js:480
 msgid "Aggregated referrer domains."
 msgstr ""
 
-#: src/admin/index.js:480
+#: src/admin/index.js:481
 #, fuzzy
 msgid "Aggregated device class totals."
 msgstr "Geçersiz cihaz sınıfı."
 
-#: src/admin/index.js:481
+#: src/admin/index.js:482
 msgid "Aggregated 404 paths."
 msgstr ""
 
-#: src/admin/index.js:482
+#: src/admin/index.js:483
 msgid "Aggregated on-site search terms."
 msgstr ""
 
-#: src/admin/index.js:483
+#: src/admin/index.js:484
 msgid "Aggregated UTM campaign parameters (when allowlisted)."
 msgstr ""
 
-#: src/admin/index.js:484
+#: src/admin/index.js:485
 #, fuzzy
 msgid ""
 "Raw log snapshots (timestamp, page path, referrer, device) when debug mode "
@@ -280,226 +281,226 @@ msgstr ""
 "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme "
 "verilerini saklar."
 
-#: src/admin/index.js:492
+#: src/admin/index.js:493
 #, fuzzy
 msgid "Tracking continues even when browsers send DNT or GPC."
 msgstr "Tarayıcı DNT veya GPC gönderirse izlemeyi yok sayar."
 
-#: src/admin/index.js:495
+#: src/admin/index.js:496
 msgid "Full query strings remain in stored page paths."
 msgstr ""
 
-#: src/admin/index.js:498
+#: src/admin/index.js:499
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr ""
 "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme "
 "verilerini saklar."
 
-#: src/admin/index.js:501
+#: src/admin/index.js:502
 #, fuzzy
 msgid "Raw log retention exceeds 30 days."
 msgstr "Ham günlüklerin saklama süresi (gün)"
 
-#: src/admin/index.js:504
+#: src/admin/index.js:505
 msgid "Allowlisted UTM parameters are stored in aggregated reports."
 msgstr ""
 
-#: src/admin/index.js:560
+#: src/admin/index.js:561
 msgid "Settings saved."
 msgstr "Ayarlar kaydedildi."
 
-#: src/admin/index.js:568
+#: src/admin/index.js:569
 msgid "Error while saving."
 msgstr "Kaydetme sırasında hata."
 
-#: src/admin/index.js:610
+#: src/admin/index.js:611
 msgid "Analytics data purged."
 msgstr ""
 
-#: src/admin/index.js:618
+#: src/admin/index.js:619
 #, fuzzy
 msgid "Error while purging."
 msgstr "Kaydetme sırasında hata."
 
-#: src/admin/index.js:633 src/admin/index.js:672
+#: src/admin/index.js:634 src/admin/index.js:673
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:634
+#: src/admin/index.js:635
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:644
+#: src/admin/index.js:645
 msgid "Loading settings…"
 msgstr "Ayarlar yükleniyor…"
 
-#: src/admin/index.js:674
+#: src/admin/index.js:675
 msgid "Plugin name (menu and dashboard)"
 msgstr "Eklenti adı (menü ve gösterge paneli)"
 
-#: src/admin/index.js:675
+#: src/admin/index.js:676
 #, fuzzy
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "\"Lean Stats\" kullanmak için boş bırakın."
 
-#: src/admin/index.js:680
+#: src/admin/index.js:681
 msgid "Strict mode"
 msgstr "Katı mod"
 
-#: src/admin/index.js:681
+#: src/admin/index.js:682
 msgid "Ignore tracking for logged-in users."
 msgstr "Oturum açmış kullanıcılar için izlemeyi yok sayar."
 
-#: src/admin/index.js:691
+#: src/admin/index.js:692
 msgid "MaxMind API key"
 msgstr ""
 
-#: src/admin/index.js:693
+#: src/admin/index.js:694
 msgid ""
 "Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database."
 msgstr ""
 
-#: src/admin/index.js:705
+#: src/admin/index.js:706
 msgid "Privacy & consent"
 msgstr ""
 
-#: src/admin/index.js:708
+#: src/admin/index.js:709
 msgid "Respect DNT / GPC"
 msgstr "DNT / GPC’ye uy"
 
-#: src/admin/index.js:709
+#: src/admin/index.js:710
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Tarayıcı DNT veya GPC gönderirse izlemeyi yok sayar."
 
-#: src/admin/index.js:714
+#: src/admin/index.js:715
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:715
+#: src/admin/index.js:716
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:726
+#: src/admin/index.js:727
 #, fuzzy
 msgid "Retention window (days)"
 msgstr "Ham günlüklerin saklama süresi (gün)"
 
-#: src/admin/index.js:731
+#: src/admin/index.js:732
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/index.js:744
+#: src/admin/index.js:745
 #, fuzzy
 msgid "URL cleaning"
 msgstr "URL temizliği"
 
-#: src/admin/index.js:746
+#: src/admin/index.js:747
 #, fuzzy
 msgid "Strip query parameters"
 msgstr "Sorgu parametrelerini kaldırır."
 
-#: src/admin/index.js:747
+#: src/admin/index.js:748
 #, fuzzy
 msgid "Remove query parameters from tracked URLs."
 msgstr "Sorgu parametrelerini kaldırır."
 
-#: src/admin/index.js:752
+#: src/admin/index.js:753
 msgid "Query parameter allowlist"
 msgstr "Sorgu parametreleri izin listesi"
 
-#: src/admin/index.js:753
+#: src/admin/index.js:754
 msgid "Comma-separated list (e.g., utm_source, utm_campaign)."
 msgstr "Virgülle ayrılmış liste (örn: utm_source, utm_campaign)."
 
-#: src/admin/index.js:765
+#: src/admin/index.js:766
 msgid "UTM allowlist"
 msgstr ""
 
-#: src/admin/index.js:766
+#: src/admin/index.js:767
 #, fuzzy
 msgid ""
 "Comma-separated list of UTM parameters to aggregate (e.g., utm_source, "
 "utm_medium)."
 msgstr "Virgülle ayrılmış liste (örn: utm_source, utm_campaign)."
 
-#: src/admin/index.js:781
+#: src/admin/index.js:782
 #, fuzzy
 msgid "Exclusions"
 msgstr "Role göre hariç tutmalar"
 
-#: src/admin/index.js:783
+#: src/admin/index.js:784
 msgid "Excluded paths"
 msgstr ""
 
-#: src/admin/index.js:784
+#: src/admin/index.js:785
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
-#: src/admin/index.js:796
+#: src/admin/index.js:797
 msgid "Role exclusions"
 msgstr "Role göre hariç tutmalar"
 
-#: src/admin/index.js:798
+#: src/admin/index.js:799
 msgid "No roles available."
 msgstr "Rol mevcut değil."
 
-#: src/admin/index.js:824
+#: src/admin/index.js:825
 msgid "Privacy checklist"
 msgstr ""
 
-#: src/admin/index.js:833
+#: src/admin/index.js:834
 msgid "Review these privacy risks:"
 msgstr ""
 
-#: src/admin/index.js:845
+#: src/admin/index.js:846
 msgid "Data management"
 msgstr ""
 
-#: src/admin/index.js:846
+#: src/admin/index.js:847
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/index.js:852
+#: src/admin/index.js:853
 msgid "Purge analytics data"
 msgstr ""
 
-#: src/admin/index.js:860
+#: src/admin/index.js:861
 msgid "Save settings"
 msgstr "Ayarları kaydet"
 
-#: src/admin/index.js:862
+#: src/admin/index.js:863
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/admin/index.js:866
+#: src/admin/index.js:867
 msgid "Confirm data purge"
 msgstr ""
 
-#: src/admin/index.js:870
+#: src/admin/index.js:871
 msgid ""
 "This action permanently removes all stored analytics and raw logs. Settings "
 "remain unchanged."
 msgstr ""
 
-#: src/admin/index.js:877
+#: src/admin/index.js:878
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/index.js:885
+#: src/admin/index.js:886
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/index.js:952
+#: src/admin/index.js:953
 #, fuzzy
 msgid "No overview data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/index.js:953
+#: src/admin/index.js:954
 #, fuzzy
 msgid "Loading overview…"
 msgstr "Cihaz dağılımı yükleniyor…"
 
-#: src/admin/index.js:961
+#: src/admin/index.js:962
 msgid ""
 "Number of anonymous sessions over the selected period. The same person can "
 "generate multiple visits."
@@ -507,226 +508,226 @@ msgstr ""
 "Seçilen dönemdeki anonim oturum sayısı. Aynı kişi birden fazla ziyaret "
 "oluşturabilir."
 
-#: src/admin/index.js:965
+#: src/admin/index.js:966
 msgid "Anonymous sessions aggregated over the selected period."
 msgstr "Dönem boyunca anonim oturumlar toplulaştırılmıştır."
 
-#: src/admin/index.js:972
+#: src/admin/index.js:973
 msgid "Visits"
 msgstr "Ziyaretler"
 
-#: src/admin/index.js:978 src/admin/index.js:1090 src/admin/index.js:1115
-#: src/admin/index.js:1340 src/admin/index.js:1390
+#: src/admin/index.js:979 src/admin/index.js:1091 src/admin/index.js:1116
+#: src/admin/index.js:1319 src/admin/index.js:1472 src/admin/index.js:1522
 msgid "Page views"
 msgstr "Sayfa görüntülemeleri"
 
-#: src/admin/index.js:1036
+#: src/admin/index.js:1037
 msgid "Daily page views"
 msgstr "Günlük sayfa görüntülemeleri"
 
-#: src/admin/index.js:1041
+#: src/admin/index.js:1042
 msgid "No data available for this period."
 msgstr "Bu dönem için veri mevcut değil."
 
-#: src/admin/index.js:1042
+#: src/admin/index.js:1043
 msgid "Loading chart…"
 msgstr "Grafik yükleniyor…"
 
-#: src/admin/index.js:1046 src/admin/index.js:1051
+#: src/admin/index.js:1047 src/admin/index.js:1052
 msgid "Daily page views line chart"
 msgstr "Günlük sayfa görüntülemeleri çizgi grafiği"
 
-#: src/admin/index.js:1086
+#: src/admin/index.js:1087
 msgid "Daily series table"
 msgstr ""
 
-#: src/admin/index.js:1161 src/admin/index.js:1314
+#: src/admin/index.js:1162 src/admin/index.js:1446
 msgid "Ascending"
 msgstr ""
 
-#: src/admin/index.js:1161 src/admin/index.js:1314
+#: src/admin/index.js:1162 src/admin/index.js:1446
 msgid "Descending"
 msgstr ""
 
-#: src/admin/index.js:1162
+#: src/admin/index.js:1163
 msgid "%s label"
 msgstr ""
 
-#: src/admin/index.js:1164 src/admin/index.js:1316
+#: src/admin/index.js:1165 src/admin/index.js:1448
 msgid "Toggle sort order: %s"
 msgstr ""
 
-#: src/admin/index.js:1167
+#: src/admin/index.js:1168
 msgid "Table: %s"
 msgstr ""
 
-#: src/admin/index.js:1179 src/admin/index.js:1337
+#: src/admin/index.js:1180 src/admin/index.js:1469
 msgid "Sort by"
 msgstr ""
 
-#: src/admin/index.js:1203 src/admin/index.js:1362
+#: src/admin/index.js:1204 src/admin/index.js:1494
 msgid "Rows"
 msgstr ""
 
-#: src/admin/index.js:1249 src/admin/index.js:1410
+#: src/admin/index.js:1250 src/admin/index.js:1542
 msgid "Previous page"
 msgstr ""
 
-#: src/admin/index.js:1251 src/admin/index.js:1412
+#: src/admin/index.js:1252 src/admin/index.js:1544
 msgid "Previous"
 msgstr ""
 
-#: src/admin/index.js:1257 src/admin/index.js:1418
+#: src/admin/index.js:1258 src/admin/index.js:1550
 #, fuzzy
 msgid "Next page"
 msgstr "Çıkış sayfaları"
 
-#: src/admin/index.js:1259 src/admin/index.js:1420
+#: src/admin/index.js:1260 src/admin/index.js:1552
 msgid "Next"
 msgstr ""
 
-#: src/admin/index.js:1264 src/admin/index.js:1425
+#: src/admin/index.js:1265 src/admin/index.js:1557
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: src/admin/index.js:1267 src/admin/index.js:1428
+#: src/admin/index.js:1268 src/admin/index.js:1560
 msgid "%s items"
 msgstr ""
 
-#: src/admin/index.js:1319
+#: src/admin/index.js:1451
 msgid "Table: Referrer sources"
 msgstr ""
 
-#: src/admin/index.js:1334
+#: src/admin/index.js:1466
 #, fuzzy
 msgid "Referrer sources"
 msgstr "Yönlendiren"
 
-#: src/admin/index.js:1342 src/admin/index.js:1389
+#: src/admin/index.js:1474 src/admin/index.js:1521
 msgid "Source category"
 msgstr ""
 
-#: src/admin/index.js:1380
+#: src/admin/index.js:1512
 #, fuzzy
 msgid "No referrer data available."
 msgstr "Yönlendiren mevcut değil."
 
-#: src/admin/index.js:1381
+#: src/admin/index.js:1513
 #, fuzzy
 msgid "Loading referrer sources…"
 msgstr "Yükleme hatası."
 
-#: src/admin/index.js:1439
+#: src/admin/index.js:1571
 msgid ""
 "All data is aggregated and contains no per-visitor details. Entry and exit "
 "pages are approximations based on referrer data."
 msgstr ""
 
-#: src/admin/index.js:1482 src/admin/index.js:1609
+#: src/admin/index.js:1648 src/admin/index.js:1775
 msgid "Top pages"
 msgstr "En çok ziyaret edilen sayfalar"
 
-#: src/admin/index.js:1485 src/admin/index.js:1613
+#: src/admin/index.js:1651 src/admin/index.js:1779
 msgid "No popular pages available."
 msgstr "Popüler sayfa mevcut değil."
 
-#: src/admin/index.js:1492
+#: src/admin/index.js:1658
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/index.js:1493
+#: src/admin/index.js:1659
 msgid "Missing page"
 msgstr ""
 
-#: src/admin/index.js:1495
+#: src/admin/index.js:1661
 #, fuzzy
 msgid "No missing pages available."
 msgstr "Popüler sayfa mevcut değil."
 
-#: src/admin/index.js:1502
+#: src/admin/index.js:1668
 msgid "Search terms"
 msgstr ""
 
-#: src/admin/index.js:1503
+#: src/admin/index.js:1669
 msgid "Search term"
 msgstr ""
 
-#: src/admin/index.js:1505
+#: src/admin/index.js:1671
 #, fuzzy
 msgid "No search terms available."
 msgstr "Yönlendiren mevcut değil."
 
-#: src/admin/index.js:1506 src/admin/index.js:1558
+#: src/admin/index.js:1672 src/admin/index.js:1724
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/admin/index.js:1512
+#: src/admin/index.js:1678
 #, fuzzy
 msgid "Entry pages (approx.)"
 msgstr "Giriş sayfaları"
 
-#: src/admin/index.js:1513
+#: src/admin/index.js:1679
 #, fuzzy
 msgid "Entry page"
 msgstr "Giriş sayfaları"
 
-#: src/admin/index.js:1515
+#: src/admin/index.js:1681
 #, fuzzy
 msgid "No entry pages available."
 msgstr "Popüler sayfa mevcut değil."
 
-#: src/admin/index.js:1517
+#: src/admin/index.js:1683
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1525
+#: src/admin/index.js:1691
 #, fuzzy
 msgid "Exit pages (approx.)"
 msgstr "Çıkış sayfaları"
 
-#: src/admin/index.js:1526
+#: src/admin/index.js:1692
 #, fuzzy
 msgid "Exit page"
 msgstr "Çıkış sayfaları"
 
-#: src/admin/index.js:1528
+#: src/admin/index.js:1694
 #, fuzzy
 msgid "No exit pages available."
 msgstr "Popüler sayfa mevcut değil."
 
-#: src/admin/index.js:1530
+#: src/admin/index.js:1696
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1563
+#: src/admin/index.js:1729
 msgid "Device page views"
 msgstr "Cihaza göre sayfa görüntülemeleri"
 
-#: src/admin/index.js:1568
+#: src/admin/index.js:1734
 msgid "No device data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/index.js:1569
+#: src/admin/index.js:1735
 msgid "Loading device breakdown…"
 msgstr "Cihaz dağılımı yükleniyor…"
 
-#: src/admin/index.js:1585
+#: src/admin/index.js:1751
 msgid "%s views"
 msgstr "%s görüntüleme"
 
-#: src/admin/index.js:1617
+#: src/admin/index.js:1783
 msgid "Top referrers"
 msgstr "En çok yönlendirenler"
 
-#: src/admin/index.js:1621
+#: src/admin/index.js:1787
 msgid "No referrers available."
 msgstr "Yönlendiren mevcut değil."
 
-#: src/admin/index.js:1634
+#: src/admin/index.js:1800
 msgid "Missing admin configuration."
 msgstr "Yönetici yapılandırması eksik."
 
-#: src/admin/index.js:1662
+#: src/admin/index.js:1828
 msgid "No panel available for this screen."
 msgstr "Bu ekran için panel mevcut değil."
 
