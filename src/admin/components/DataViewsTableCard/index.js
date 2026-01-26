@@ -1,4 +1,5 @@
 import { Notice } from '@wordpress/components';
+import { DataViews } from '@wordpress/dataviews';
 import { __, sprintf } from '@wordpress/i18n';
 
 import DataState from '../DataState';
@@ -11,6 +12,10 @@ const DEFAULT_LAYOUTS = {
 };
 
 const resolveDataViewsComponent = () => {
+    if (DataViews) {
+        return DataViews;
+    }
+
     if (typeof window === 'undefined' || !window.wp) {
         return null;
     }
