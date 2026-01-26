@@ -202,16 +202,6 @@ function lean_stats_get_admin_panels(): array
             'type' => 'core',
         ],
         [
-            'name' => 'entry-pages',
-            'title' => __('Entry pages', 'lean-stats'),
-            'type' => 'core',
-        ],
-        [
-            'name' => 'exit-pages',
-            'title' => __('Exit pages', 'lean-stats'),
-            'type' => 'core',
-        ],
-        [
             'name' => 'geolocation',
             'title' => __('Geolocation', 'lean-stats'),
             'type' => 'core',
