@@ -23,6 +23,7 @@ import {
 } from '@wordpress/components';
 
 import { createLogger, createTraceId, getRuntimeDiagnostics, setupGlobalErrorHandlers } from './logger';
+import AdminErrorBoundary from './components/AdminErrorBoundary';
 import ChartFrame from './components/ChartFrame';
 import DataState from './components/DataState';
 import DataViewsTableCard from './components/DataViewsTableCard';
@@ -56,6 +57,60 @@ const DEFAULT_SETTINGS = {
 const DEFAULT_RANGE_PRESET = '30d';
 const RANGE_PRESET_OPTIONS = ['7d', '30d', '90d'];
 const RANGE_PRESET_STORAGE_PREFIX = 'lean_stats_range_preset';
+const DATA_VIEWS_HANDLES = [
+    'wp-dataviews',
+    'wp-dataviews/wp',
+    'wp-data-views',
+    'wp-data-views/wp',
+];
+const DATA_VIEWS_GLOBAL_LOOKUPS = [
+    {
+        label: 'window.wp.dataviews.DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.dataviews?.DataViews),
+    },
+    {
+        label: 'window.wp["dataviews/wp"].DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.['dataviews/wp']?.DataViews),
+    },
+    {
+        label: 'window.wp.dataviewsWp.DataViews',
+        get: () => (typeof window === 'undefined' ? null : window.wp?.dataviewsWp?.DataViews),
+    },
+];
+
+const resolveDataViewsGlobal = () => {
+    for (const lookup of DATA_VIEWS_GLOBAL_LOOKUPS) {
+        const candidate = lookup.get();
+        if (candidate) {
+            return candidate;
+        }
+    }
+
+    return null;
+};
+
+const getDataViewsFatalState = () => {
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
+    if (window.LEAN_STATS_FATAL) {
+        return window.LEAN_STATS_FATAL;
+    }
+
+    if (!resolveDataViewsGlobal()) {
+        return {
+            reason: __(
+                'Data Views is missing or not loaded. Lean Stats cannot render reports.',
+                'lean-stats'
+            ),
+            checkedHandles: DATA_VIEWS_HANDLES,
+            checkedGlobals: DATA_VIEWS_GLOBAL_LOOKUPS.map((lookup) => lookup.label),
+        };
+    }
+
+    return null;
+};
 
 const getRangePresetStorageKey = () => {
     const userId = ADMIN_CONFIG?.currentUserId ? String(ADMIN_CONFIG.currentUserId) : 'default';
@@ -1790,5 +1845,16 @@ const AdminApp = () => {
 const root = document.getElementById('lean-stats-admin');
 
 if (root) {
-    render(<AdminApp />, root);
+    const fatalDataViews = getDataViewsFatalState();
+
+    render(
+        <AdminErrorBoundary
+            fatal={fatalDataViews}
+            checkedHandles={DATA_VIEWS_HANDLES}
+            checkedGlobals={DATA_VIEWS_GLOBAL_LOOKUPS.map((lookup) => lookup.label)}
+        >
+            <AdminApp />
+        </AdminErrorBoundary>,
+        root
+    );
 }
