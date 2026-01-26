@@ -231,3 +231,12 @@ msgstr ""
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Entry pages"
+msgstr ""
+
+msgid "Exit pages"
+msgstr ""

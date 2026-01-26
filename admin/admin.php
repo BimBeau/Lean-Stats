@@ -183,32 +183,32 @@ function lean_stats_get_admin_panels(): array
         ],
         [
             'name' => 'top-pages',
-            'title' => __('Top Pages', 'lean-stats'),
+            'title' => __('Pages', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'referrers',
-            'title' => __('Referrers', 'lean-stats'),
+            'title' => __('Referring sites', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'not-found',
-            'title' => __('404s', 'lean-stats'),
+            'title' => __('Pages not found (404)', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'search-terms',
-            'title' => __('Search Terms', 'lean-stats'),
+            'title' => __('Internal searches', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'entry-pages',
-            'title' => __('Entry Pages', 'lean-stats'),
+            'title' => __('Entry pages', 'lean-stats'),
             'type' => 'core',
         ],
         [
             'name' => 'exit-pages',
-            'title' => __('Exit Pages', 'lean-stats'),
+            'title' => __('Exit pages', 'lean-stats'),
             'type' => 'core',
         ],
         [

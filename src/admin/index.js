@@ -31,12 +31,12 @@ const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
-    { name: 'top-pages', title: __('Top Pages', 'lean-stats') },
-    { name: 'referrers', title: __('Referrers', 'lean-stats') },
-    { name: 'not-found', title: __('404s', 'lean-stats') },
-    { name: 'search-terms', title: __('Search Terms', 'lean-stats') },
-    { name: 'entry-pages', title: __('Entry Pages', 'lean-stats') },
-    { name: 'exit-pages', title: __('Exit Pages', 'lean-stats') },
+    { name: 'top-pages', title: __('Pages', 'lean-stats') },
+    { name: 'referrers', title: __('Referring sites', 'lean-stats') },
+    { name: 'not-found', title: __('Pages not found (404)', 'lean-stats') },
+    { name: 'search-terms', title: __('Internal searches', 'lean-stats') },
+    { name: 'entry-pages', title: __('Entry pages', 'lean-stats') },
+    { name: 'exit-pages', title: __('Exit pages', 'lean-stats') },
     { name: 'geolocation', title: __('Geolocation', 'lean-stats') },
     { name: 'settings', title: __('Settings', 'lean-stats') },
 ];

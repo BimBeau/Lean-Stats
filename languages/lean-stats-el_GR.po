@@ -209,10 +209,10 @@ msgid "Page views"
 msgstr "Προβολές σελίδας"
 
 msgid "Referring sites"
-msgstr "Ιστότοποι παραπομπής"
+msgstr "Παραπέμποντες ιστότοποι"
 
 msgid "Pages not found (404)"
-msgstr "Σελίδες δεν βρέθηκαν (404)"
+msgstr "Σελίδες που δεν βρέθηκαν"
 
 msgid "Internal searches"
 msgstr "Εσωτερικές αναζητήσεις"
@@ -231,3 +231,12 @@ msgstr "%s προβολές"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Τα ανεπεξέργαστα αρχεία καταγραφής αποθηκεύουν λεπτομερή δεδομένα προβολών όταν είναι ενεργή η λειτουργία αποσφαλμάτωσης."
+
+msgid "Pages"
+msgstr "Σελίδες"
+
+msgid "Entry pages"
+msgstr "Σελίδες εισόδου"
+
+msgid "Exit pages"
+msgstr "Σελίδες εξόδου"

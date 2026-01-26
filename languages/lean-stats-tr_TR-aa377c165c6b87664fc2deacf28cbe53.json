@@ -208,7 +208,7 @@
         "Yönlendiren siteler"
       ],
       "Pages not found (404)": [
-        "Bulunamayan sayfalar (404)"
+        "Bulunamayan sayfalar"
       ],
       "Internal searches": [
         "Dahili aramalar"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Hata ayıklama modu etkin olduğunda ham günlükler ayrıntılı görüntüleme verilerini saklar."
+      ],
+      "Pages": [
+        "Sayfalar"
+      ],
+      "Entry pages": [
+        "Giriş sayfaları"
+      ],
+      "Exit pages": [
+        "Çıkış sayfaları"
       ]
     }
   }

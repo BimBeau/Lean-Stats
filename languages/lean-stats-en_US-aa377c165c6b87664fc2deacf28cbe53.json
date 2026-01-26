@@ -208,7 +208,7 @@
         "Referring sites"
       ],
       "Pages not found (404)": [
-        "Pages not found (404)"
+        "Pages not found"
       ],
       "Internal searches": [
         "Internal searches"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Raw logs store granular view details while debug mode is enabled."
+      ],
+      "Pages": [
+        "Pages"
+      ],
+      "Entry pages": [
+        "Entry pages"
+      ],
+      "Exit pages": [
+        "Exit pages"
       ]
     }
   }

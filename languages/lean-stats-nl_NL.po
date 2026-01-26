@@ -212,7 +212,7 @@ msgid "Referring sites"
 msgstr "Verwijzende sites"
 
 msgid "Pages not found (404)"
-msgstr "Pagina's niet gevonden (404)"
+msgstr "Niet gevonden pagina's"
 
 msgid "Internal searches"
 msgstr "Interne zoekopdrachten"
@@ -231,3 +231,12 @@ msgstr "%s weergaven"
 
 msgid "Raw logs store granular view details while debug mode is enabled."
 msgstr "Ruwe logboeken slaan gedetailleerde weergavegegevens op wanneer de debugmodus is ingeschakeld."
+
+msgid "Pages"
+msgstr "Pagina's"
+
+msgid "Entry pages"
+msgstr "Landingspagina's"
+
+msgid "Exit pages"
+msgstr "Uitstappagina's"

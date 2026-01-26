@@ -208,7 +208,7 @@
         "Sitios de referencia"
       ],
       "Pages not found (404)": [
-        "Páginas no encontradas (404)"
+        "Páginas no encontradas"
       ],
       "Internal searches": [
         "Búsquedas internas"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Los registros sin procesar almacenan detalles granulares de las vistas cuando el modo de depuración está activado."
+      ],
+      "Pages": [
+        "Páginas"
+      ],
+      "Entry pages": [
+        "Páginas de entrada"
+      ],
+      "Exit pages": [
+        "Páginas de salida"
       ]
     }
   }

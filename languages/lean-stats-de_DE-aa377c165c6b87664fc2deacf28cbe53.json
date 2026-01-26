@@ -208,10 +208,10 @@
         "Verweisende Websites"
       ],
       "Pages not found (404)": [
-        "Nicht gefundene Seiten (404)"
+        "Nicht gefundene Seiten"
       ],
       "Internal searches": [
-        "Interne Suchen"
+        "Interne Suchanfragen"
       ],
       "Daily page views": [
         "Tägliche Seitenaufrufe"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Rohprotokolle speichern detaillierte Aufrufdaten, wenn der Debug-Modus aktiviert ist."
+      ],
+      "Pages": [
+        "Seiten"
+      ],
+      "Entry pages": [
+        "Einstiegsseiten"
+      ],
+      "Exit pages": [
+        "Ausstiegsseiten"
       ]
     }
   }

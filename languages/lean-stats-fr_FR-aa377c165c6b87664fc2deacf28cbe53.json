@@ -208,7 +208,7 @@
         "Sites référents"
       ],
       "Pages not found (404)": [
-        "Pages introuvables (404)"
+        "Pages introuvables"
       ],
       "Internal searches": [
         "Recherches internes"
@@ -227,6 +227,15 @@
       ],
       "Raw logs store granular view details while debug mode is enabled.": [
         "Les journaux bruts stockent des détails de vues granulaires lorsque le mode debug est activé."
+      ],
+      "Pages": [
+        "Pages"
+      ],
+      "Entry pages": [
+        "Pages d'entrée"
+      ],
+      "Exit pages": [
+        "Pages de sorties"
       ]
     }
   }
