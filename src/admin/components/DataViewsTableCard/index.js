@@ -37,7 +37,6 @@ const DataViewsTableCard = ({
     perPageSizes = [5, 10, 20],
 }) => {
     const DataViewsComponent = resolveDataViewsComponent();
-    const showFallbackTable = !DataViewsComponent && !isLoading && !error && data.length > 0;
 
     return (
         <LsCard title={title}>
@@ -69,29 +68,6 @@ const DataViewsTableCard = ({
                     isLoading={isLoading}
                     config={{ perPageSizes }}
                 />
-            )}
-            {showFallbackTable && (
-                <table className="widefat striped ls-data-views-fallback">
-                    <thead>
-                        <tr>
-                            {fields.map((field) => (
-                                <th key={field.name}>{field.label || field.name}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((item, index) => {
-                            const rowKey = getItemId ? getItemId(item) : `${item?.id ?? index}`;
-                            return (
-                                <tr key={rowKey}>
-                                    {fields.map((field) => (
-                                        <td key={field.name}>{item?.[field.name] ?? ''}</td>
-                                    ))}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
             )}
         </LsCard>
     );
