@@ -68,17 +68,17 @@
 }
 
 .ls-timeseries__bg {
-    fill: var(--ls-bg, #fff);
+    fill: #f6f7f7;
 }
 
 .ls-timeseries__axis {
-    stroke: var(--ls-border, #ccd0d4);
+    stroke: var(--ls-accent);
     stroke-width: 1;
 }
 
 .ls-timeseries__line {
     fill: none;
-    stroke: var(--ls-accent, #2271b1);
+    stroke: var(--ls-text);
     stroke-width: 2;
 }
 
@@ -142,14 +142,14 @@
 }
 
 .ls-device-breakdown__bar {
-    background: var(--ls-bg-muted, #f0f0f1);
+    background: #f6f7f7;
     border-radius: 6px;
     height: 10px;
     overflow: hidden;
 }
 
 .ls-device-breakdown__bar-fill {
-    background: var(--ls-accent, #2271b1);
+    background: var(--ls-text);
     height: 100%;
     border-radius: 6px;
 }
