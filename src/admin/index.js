@@ -44,7 +44,6 @@ const DEFAULT_SETTINGS = {
     respect_dnt_gpc: true,
     url_strip_query: true,
     url_query_allowlist: [],
-    utm_allowlist: [],
     raw_logs_enabled: false,
     raw_logs_retention_days: 1,
     excluded_roles: [],
@@ -457,7 +456,6 @@ const SettingsPanel = () => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/settings');
     const [formState, setFormState] = useState(DEFAULT_SETTINGS);
     const [allowlistInput, setAllowlistInput] = useState('');
-    const [utmAllowlistInput, setUtmAllowlistInput] = useState('');
     const [excludedPathsInput, setExcludedPathsInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
@@ -472,7 +470,6 @@ const SettingsPanel = () => {
             const normalized = normalizeSettings(data.settings);
             setFormState(normalized);
             setAllowlistInput(normalized.url_query_allowlist.join(', '));
-            setUtmAllowlistInput(normalized.utm_allowlist.join(', '));
             setExcludedPathsInput(normalized.excluded_paths.join('\n'));
             window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
         }
@@ -513,7 +510,6 @@ const SettingsPanel = () => {
                 const normalized = normalizeSettings(payload.settings);
                 setFormState(normalized);
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
-                setUtmAllowlistInput(normalized.utm_allowlist.join(', '));
                 setExcludedPathsInput(normalized.excluded_paths.join('\n'));
                 window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
             }
@@ -711,7 +707,10 @@ const SettingsPanel = () => {
                                         />
                                         <TextControl
                                             label={__('Query parameter allowlist', 'lean-stats')}
-                                            help={__('Comma-separated list (e.g., utm_source, utm_campaign).', 'lean-stats')}
+                                            help={__(
+                                                'Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).',
+                                                'lean-stats'
+                                            )}
                                             value={allowlistInput}
                                             onChange={(value) => {
                                                 setAllowlistInput(value);
@@ -720,19 +719,6 @@ const SettingsPanel = () => {
                                                     .map((item) => item.trim())
                                                     .filter(Boolean);
                                                 setFormState((prev) => ({ ...prev, url_query_allowlist: parsed }));
-                                            }}
-                                        />
-                                        <TextControl
-                                            label={__('UTM allowlist', 'lean-stats')}
-                                            help={__('Comma-separated list of UTM parameters to aggregate (e.g., utm_source, utm_medium).', 'lean-stats')}
-                                            value={utmAllowlistInput}
-                                            onChange={(value) => {
-                                                setUtmAllowlistInput(value);
-                                                const parsed = value
-                                                    .split(',')
-                                                    .map((item) => item.trim())
-                                                    .filter(Boolean);
-                                                setFormState((prev) => ({ ...prev, utm_allowlist: parsed }));
                                             }}
                                         />
                                     </CardBody>

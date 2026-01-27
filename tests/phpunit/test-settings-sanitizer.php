@@ -12,7 +12,6 @@ class Lean_Stats_Settings_Sanitizer_Test extends WP_UnitTestCase
             'respect_dnt_gpc' => '',
             'url_strip_query' => '0',
             'url_query_allowlist' => 'utm_source, utm_medium,utm_source',
-            'utm_allowlist' => 'utm_source, utm_campaign, utm_source',
             'raw_logs_retention_days' => -5,
             'excluded_roles' => ['administrator', 'not-a-role'],
         ]);
@@ -21,7 +20,6 @@ class Lean_Stats_Settings_Sanitizer_Test extends WP_UnitTestCase
         $this->assertFalse($settings['respect_dnt_gpc']);
         $this->assertFalse($settings['url_strip_query']);
         $this->assertSame(['utm_source', 'utm_medium'], $settings['url_query_allowlist']);
-        $this->assertSame(['utm_source', 'utm_campaign'], $settings['utm_allowlist']);
         $this->assertSame(1, $settings['raw_logs_retention_days']);
         $this->assertSame(['administrator'], $settings['excluded_roles']);
     }
