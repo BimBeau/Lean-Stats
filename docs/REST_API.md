@@ -308,7 +308,6 @@ Returns Lean Stats settings.
 Returned fields:
 
 - `plugin_label` (string)
-- `strict_mode` (boolean)
 - `respect_dnt_gpc` (boolean)
 - `url_strip_query` (boolean)
 - `url_query_allowlist` (array)
@@ -326,7 +325,6 @@ Response (200):
 {
   "settings": {
     "plugin_label": "",
-    "strict_mode": false,
     "respect_dnt_gpc": true,
     "url_strip_query": true,
     "url_query_allowlist": [],
@@ -346,7 +344,6 @@ Updates Lean Stats settings.
 JSON payload:
 
 - `plugin_label` (string, optional)
-- `strict_mode` (boolean, optional)
 - `respect_dnt_gpc` (boolean, optional)
 - `url_strip_query` (boolean, optional)
 - `url_query_allowlist` (array, optional)
@@ -362,7 +359,6 @@ Response (200):
 {
   "settings": {
     "plugin_label": "Lean Stats",
-    "strict_mode": false,
     "respect_dnt_gpc": true,
     "url_strip_query": true,
     "url_query_allowlist": [],

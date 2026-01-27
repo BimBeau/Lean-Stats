@@ -78,10 +78,6 @@ class Lean_Stats_Hit_Controller {
     private function should_skip_tracking(WP_REST_Request $request): bool {
         $settings = lean_stats_get_settings();
 
-        if (!empty($settings['strict_mode']) && is_user_logged_in()) {
-            return true;
-        }
-
         if (!empty($settings['excluded_roles']) && is_user_logged_in()) {
             $user = wp_get_current_user();
             if (!empty($user->roles)) {
