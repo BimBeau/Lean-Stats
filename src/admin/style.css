@@ -17,7 +17,7 @@
     font-size: 24px;
     width: 24px;
     height: 24px;
-    color: #2271b1;
+    color: var(--ls-accent, #2271b1);
     grid-column: 2;
     grid-row: 2;
     align-self: end;
@@ -34,7 +34,7 @@
 
 .ls-kpi-card__label {
     margin: 0;
-    color: #50575e;
+    color: var(--ls-text, #50575e);
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -68,22 +68,22 @@
 }
 
 .ls-timeseries__bg {
-    fill: #fff;
+    fill: var(--ls-bg, #fff);
 }
 
 .ls-timeseries__axis {
-    stroke: #ccd0d4;
+    stroke: var(--ls-border, #ccd0d4);
     stroke-width: 1;
 }
 
 .ls-timeseries__line {
     fill: none;
-    stroke: #2271b1;
+    stroke: var(--ls-accent, #2271b1);
     stroke-width: 2;
 }
 
 .ls-timeseries__point {
-    fill: #2271b1;
+    fill: var(--ls-accent, #2271b1);
 }
 
 .ls-timeseries__table {
@@ -125,7 +125,7 @@
 }
 
 .ls-table-pagination__meta {
-    color: #50575e;
+    color: var(--ls-text, #50575e);
     font-size: 12px;
 }
 
@@ -142,14 +142,14 @@
 }
 
 .ls-device-breakdown__bar {
-    background: #f0f0f1;
+    background: var(--ls-bg-muted, #f0f0f1);
     border-radius: 6px;
     height: 10px;
     overflow: hidden;
 }
 
 .ls-device-breakdown__bar-fill {
-    background: #2271b1;
+    background: var(--ls-accent, #2271b1);
     height: 100%;
     border-radius: 6px;
 }

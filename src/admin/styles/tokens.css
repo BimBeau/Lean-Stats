@@ -3,5 +3,5 @@
     --lean-stats-gap-md: 12px;
     --lean-stats-gap-lg: 16px;
     --lean-stats-radius-sm: 4px;
-    --lean-stats-skeleton-bg: #f0f0f1;
+    --lean-stats-skeleton-bg: var(--ls-bg-muted, #f0f0f1);
 }
