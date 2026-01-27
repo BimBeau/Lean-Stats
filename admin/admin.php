@@ -75,6 +75,85 @@ function lean_stats_render_admin_page(): void
 }
 
 /**
+ * Get CSS variable values from the current admin color scheme.
+ */
+function lean_stats_get_admin_color_scheme_variables(): array
+{
+    global $_wp_admin_css_colors;
+
+    $scheme = get_user_option('admin_color', get_current_user_id());
+    $scheme = is_string($scheme) && $scheme !== '' ? $scheme : 'fresh';
+
+    $palette = [];
+    if (isset($_wp_admin_css_colors[$scheme]) && !empty($_wp_admin_css_colors[$scheme]->colors)) {
+        $palette = (array) $_wp_admin_css_colors[$scheme]->colors;
+    } elseif (isset($_wp_admin_css_colors['fresh']) && !empty($_wp_admin_css_colors['fresh']->colors)) {
+        $palette = (array) $_wp_admin_css_colors['fresh']->colors;
+    }
+
+    $palette = array_values($palette);
+    $palette = array_pad($palette, 5, null);
+
+    $defaults = [
+        'accent' => '#2271b1',
+        'accent_2' => '#72aee6',
+        'bg' => '#ffffff',
+        'bg_muted' => '#f0f0f1',
+        'text' => '#50575e',
+        'border' => '#ccd0d4',
+    ];
+
+    $normalize_color = static function ($color, string $fallback): string {
+        if (!is_string($color)) {
+            return $fallback;
+        }
+
+        $color = sanitize_hex_color($color);
+        return $color ?: $fallback;
+    };
+
+    $bg_color = $normalize_color($palette[2], $defaults['bg']);
+    $border_color = $palette[4] ?? $palette[2];
+
+    return [
+        '--ls-accent' => $normalize_color($palette[0], $defaults['accent']),
+        '--ls-accent-2' => $normalize_color($palette[1], $defaults['accent_2']),
+        '--ls-bg' => $bg_color,
+        '--ls-bg-muted' => $normalize_color($palette[2], $defaults['bg_muted']),
+        '--ls-text' => $normalize_color($palette[3], $defaults['text']),
+        '--ls-border' => $normalize_color($border_color, $defaults['border']),
+    ];
+}
+
+/**
+ * Inject admin color scheme variables for the Lean Stats admin UI.
+ */
+function lean_stats_add_admin_color_scheme_styles(): void
+{
+    $variables = lean_stats_get_admin_color_scheme_variables();
+    $declarations = [];
+
+    foreach ($variables as $name => $value) {
+        $declarations[] = $name . ': ' . $value;
+    }
+
+    if (empty($declarations)) {
+        return;
+    }
+
+    $inline_css = 'body.wp-admin #lean-stats-admin{' . implode('; ', $declarations) . ';}';
+
+    if (wp_style_is('lean-stats-admin', 'enqueued')) {
+        wp_add_inline_style('lean-stats-admin', $inline_css);
+        return;
+    }
+
+    if (wp_style_is('lean-stats-admin-extras', 'enqueued')) {
+        wp_add_inline_style('lean-stats-admin-extras', $inline_css);
+    }
+}
+
+/**
  * Enqueue the admin bundle and pass initialization data.
  */
 function lean_stats_enqueue_admin_assets(string $hook_suffix): void
@@ -140,6 +219,8 @@ function lean_stats_enqueue_admin_assets(string $hook_suffix): void
         );
         wp_style_add_data('lean-stats-admin-extras', 'rtl', 'replace');
     }
+
+    lean_stats_add_admin_color_scheme_styles();
 
     wp_localize_script(
         'lean-stats-admin',
