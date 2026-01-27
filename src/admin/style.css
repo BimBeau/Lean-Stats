@@ -106,6 +106,8 @@
 
 .ls-table-controls .components-button .dashicons, .ls-table-controls .components-button .dashicons-before:before {
     font-size: 13px;
+    padding: 0;
+    width: 15px;
 }
 
 .ls-report-table {
