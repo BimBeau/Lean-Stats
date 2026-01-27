@@ -99,8 +99,13 @@
 }
 
 .ls-table-controls .components-button {
-    min-height: 40px;
     padding: 0 12px;
+    height: 32px;
+    min-height: 32px;
+}
+
+.ls-table-controls .components-button .dashicons, .ls-table-controls .components-button .dashicons-before:before {
+    font-size: 13px;
 }
 
 .ls-report-table {
