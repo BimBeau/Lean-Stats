@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-01-27T08:19:10+00:00\n"
+"POT-Creation-Date: 2026-01-27T08:26:23+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgstr "Recherches internes"
 #: admin/admin.php:203 src/admin/index.js:38 src/admin/index.js:390
 #: src/admin/index.js:650
 msgid "Geolocation"
-msgstr ""
+msgstr "Géolocalisation"
 
 #: admin/admin.php:208 src/admin/index.js:39 src/admin/index.js:599
 msgid "Settings"
@@ -74,8 +74,9 @@ msgid "MaxMind reader library is unavailable."
 msgstr "Aucun referrer disponible."
 
 #: includes/geolocation.php:205
+#, fuzzy
 msgid "No geolocation data found for this IP."
-msgstr ""
+msgstr "Aucune donnée de géolocalisation disponible."
 
 #: includes/geolocation.php:225
 msgid "Unable to determine the visitor IP."
@@ -83,7 +84,7 @@ msgstr ""
 
 #: includes/geolocation.php:236
 msgid "MaxMind API key must use the format AccountID:LicenseKey."
-msgstr ""
+msgstr "La clé API MaxMind doit utiliser le format AccountID:LicenseKey."
 
 #: includes/raw-logs.php:73
 msgid "Lean Stats raw log cleanup"
@@ -184,17 +185,17 @@ msgid "Direct"
 msgstr "Accès direct"
 
 #: src/admin/index.js:386
+#, fuzzy
 msgid "MaxMind API"
-msgstr ""
+msgstr "Clé API MaxMind"
 
 #: src/admin/index.js:387
 msgid "GeoLite2 (local)"
 msgstr ""
 
 #: src/admin/index.js:395
-#, fuzzy
 msgid "No geolocation data available."
-msgstr "Aucune donnée device disponible."
+msgstr "Aucune donnée de géolocalisation disponible."
 
 #: src/admin/index.js:396
 #, fuzzy
@@ -255,8 +256,9 @@ msgid "Error while saving."
 msgstr "Erreur lors de la sauvegarde."
 
 #: src/admin/index.js:571
+#, fuzzy
 msgid "Analytics data purged."
-msgstr ""
+msgstr "Purger les données d’analytics"
 
 #: src/admin/index.js:579
 #, fuzzy
@@ -293,12 +295,14 @@ msgstr "Ignore le suivi pour les utilisateurs connectés."
 
 #: src/admin/index.js:652
 msgid "MaxMind API key"
-msgstr ""
+msgstr "Clé API MaxMind"
 
 #: src/admin/index.js:654
 msgid ""
 "Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database."
 msgstr ""
+"Format : AccountID:LicenseKey. Laissez vide pour utiliser la base GeoLite2 "
+"locale."
 
 #: src/admin/index.js:666
 msgid "Privacy & consent"
@@ -318,7 +322,7 @@ msgstr ""
 
 #: src/admin/index.js:676
 msgid "Enables detailed console logs and raw log capture."
-msgstr ""
+msgstr "Active les logs détaillés de la console et la capture des logs bruts."
 
 #: src/admin/index.js:687
 #, fuzzy
@@ -328,21 +332,19 @@ msgstr "Rétention des logs bruts (jours)"
 #: src/admin/index.js:692
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
+"Les logs bruts sont purgés automatiquement après la période configurée."
 
 #: src/admin/index.js:705
-#, fuzzy
 msgid "URL cleaning"
 msgstr "Nettoyage des URLs"
 
 #: src/admin/index.js:707
-#, fuzzy
 msgid "Strip query parameters"
-msgstr "Supprime les paramètres de requête."
+msgstr "Supprimer les paramètres de requête"
 
 #: src/admin/index.js:708
-#, fuzzy
 msgid "Remove query parameters from tracked URLs."
-msgstr "Supprime les paramètres de requête."
+msgstr "Supprime les paramètres de requête des URLs suivies."
 
 #: src/admin/index.js:713
 msgid "Query parameter allowlist"
@@ -370,11 +372,11 @@ msgstr "Exclusions par rôle"
 
 #: src/admin/index.js:744
 msgid "Excluded paths"
-msgstr ""
+msgstr "Chemins exclus"
 
 #: src/admin/index.js:745
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
-msgstr ""
+msgstr "Un par ligne ou séparés par des virgules (ex : /privacy, /account)."
 
 #: src/admin/index.js:757
 msgid "Role exclusions"
@@ -386,15 +388,17 @@ msgstr "Aucun rôle disponible."
 
 #: src/admin/index.js:784
 msgid "Data management"
-msgstr ""
+msgstr "Gestion des données"
 
 #: src/admin/index.js:785
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
+"Supprime toutes les données d’analytics agrégées et les entrées de logs "
+"bruts."
 
 #: src/admin/index.js:791
 msgid "Purge analytics data"
-msgstr ""
+msgstr "Purger les données d’analytics"
 
 #: src/admin/index.js:799
 msgid "Save settings"
@@ -479,11 +483,11 @@ msgstr ""
 
 #: src/admin/index.js:1100 src/admin/index.js:1253
 msgid "Ascending"
-msgstr ""
+msgstr "Croissant"
 
 #: src/admin/index.js:1100 src/admin/index.js:1253
 msgid "Descending"
-msgstr ""
+msgstr "Décroissant"
 
 #: src/admin/index.js:1101
 msgid "%s label"
@@ -499,19 +503,20 @@ msgstr ""
 
 #: src/admin/index.js:1118 src/admin/index.js:1276
 msgid "Sort by"
-msgstr ""
+msgstr "Trier par"
 
 #: src/admin/index.js:1142 src/admin/index.js:1301
 msgid "Rows"
-msgstr ""
+msgstr "Lignes"
 
 #: src/admin/index.js:1188 src/admin/index.js:1349
+#, fuzzy
 msgid "Previous page"
-msgstr ""
+msgstr "Précédent"
 
 #: src/admin/index.js:1190 src/admin/index.js:1351
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
 #: src/admin/index.js:1196 src/admin/index.js:1357
 #, fuzzy
@@ -520,15 +525,15 @@ msgstr "Pages de sortie"
 
 #: src/admin/index.js:1198 src/admin/index.js:1359
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: src/admin/index.js:1203 src/admin/index.js:1364
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Page %1$d sur %2$d"
 
 #: src/admin/index.js:1206 src/admin/index.js:1367
 msgid "%s items"
-msgstr ""
+msgstr "%s éléments"
 
 #: src/admin/index.js:1258
 msgid "Table: Referrer sources"
@@ -584,11 +589,11 @@ msgstr "Aucune page populaire disponible."
 
 #: src/admin/index.js:1460
 msgid "Search terms"
-msgstr ""
+msgstr "Termes de recherche"
 
 #: src/admin/index.js:1461
 msgid "Search term"
-msgstr ""
+msgstr "Terme de recherche"
 
 #: src/admin/index.js:1463
 #, fuzzy
@@ -687,6 +692,9 @@ msgstr "Aucun panneau disponible pour cet écran."
 #~ msgid "KPIs"
 #~ msgstr "Indicateurs"
 
+#~ msgid "URL cleanup"
+#~ msgstr "Nettoyage des URLs"
+
 #~ msgid "Unique pages"
 #~ msgstr "Pages uniques"
 
@@ -695,6 +703,9 @@ msgstr "Aucun panneau disponible pour cet écran."
 
 #~ msgid "Device breakdown"
 #~ msgstr "Répartition par device"
+
+#~ msgid "Remove query parameters."
+#~ msgstr "Supprime les paramètres de requête."
 
 #~ msgid "Traffic over time"
 #~ msgstr "Trafic dans le temps"

@@ -236,6 +236,81 @@
       ],
       "Exit pages": [
         "Pages de sortie"
+      ],
+      "Geolocation": [
+        "Géolocalisation"
+      ],
+      "No geolocation data available.": [
+        "Aucune donnée de géolocalisation disponible."
+      ],
+      "MaxMind API key": [
+        "Clé API MaxMind"
+      ],
+      "Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database.": [
+        "Format : AccountID:LicenseKey. Laissez vide pour utiliser la base GeoLite2 locale."
+      ],
+      "MaxMind API key must use the format AccountID:LicenseKey.": [
+        "La clé API MaxMind doit utiliser le format AccountID:LicenseKey."
+      ],
+      "Enables detailed console logs and raw log capture.": [
+        "Active les logs détaillés de la console et la capture des logs bruts."
+      ],
+      "Raw logs purge automatically after the configured window.": [
+        "Les logs bruts sont purgés automatiquement après la période configurée."
+      ],
+      "URL cleaning": [
+        "Nettoyage des URLs"
+      ],
+      "Strip query parameters": [
+        "Supprimer les paramètres de requête"
+      ],
+      "Remove query parameters from tracked URLs.": [
+        "Supprime les paramètres de requête des URLs suivies."
+      ],
+      "Excluded paths": [
+        "Chemins exclus"
+      ],
+      "One per line or comma-separated (e.g., /privacy, /account).": [
+        "Un par ligne ou séparés par des virgules (ex : /privacy, /account)."
+      ],
+      "Data management": [
+        "Gestion des données"
+      ],
+      "Remove all aggregated analytics and raw log entries.": [
+        "Supprime toutes les données d’analytics agrégées et les entrées de logs bruts."
+      ],
+      "Purge analytics data": [
+        "Purger les données d’analytics"
+      ],
+      "Sort by": [
+        "Trier par"
+      ],
+      "Rows": [
+        "Lignes"
+      ],
+      "Ascending": [
+        "Croissant"
+      ],
+      "Descending": [
+        "Décroissant"
+      ],
+      "Previous": [
+        "Précédent"
+      ],
+      "Next": [
+        "Suivant"
+      ],
+      "Page %1$d of %2$d": [
+        "Page %1$d sur %2$d"
+      ],
+      "%s items": [
+        "%s éléments"
+      ],
+      "Search term": [
+        "Terme de recherche"
+      ],
+      "Search terms": [
+        "Termes de recherche"
       ]
     }
   }
