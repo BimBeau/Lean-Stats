@@ -320,6 +320,6 @@ class Lean_Stats_Hit_Controller {
     private function extract_utm_params($page_path): array {
         $settings = lean_stats_get_settings();
 
-        return lean_stats_extract_utm_params($page_path, $settings['utm_allowlist'] ?? []);
+        return lean_stats_extract_utm_params($page_path, $settings['url_query_allowlist'] ?? []);
     }
 }

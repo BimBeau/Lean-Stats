@@ -49,7 +49,7 @@ function lean_stats_track_request(): void
     );
 
     $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '';
-    $utm_params = lean_stats_extract_utm_params($request_uri, $settings['utm_allowlist'] ?? []);
+    $utm_params = lean_stats_extract_utm_params($request_uri, $settings['url_query_allowlist'] ?? []);
     if ($utm_params !== []) {
         lean_stats_store_utm_daily($date_bucket, $utm_params);
     }

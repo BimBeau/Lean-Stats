@@ -312,7 +312,6 @@ Returned fields:
 - `respect_dnt_gpc` (boolean)
 - `url_strip_query` (boolean)
 - `url_query_allowlist` (array)
-- `utm_allowlist` (array)
 - `raw_logs_enabled` (boolean)
 - `raw_logs_retention_days` (integer)
 - `excluded_roles` (array)
@@ -331,7 +330,6 @@ Response (200):
     "respect_dnt_gpc": true,
     "url_strip_query": true,
     "url_query_allowlist": [],
-    "utm_allowlist": [],
     "raw_logs_enabled": false,
     "raw_logs_retention_days": 1,
     "excluded_roles": [],
@@ -352,7 +350,6 @@ JSON payload:
 - `respect_dnt_gpc` (boolean, optional)
 - `url_strip_query` (boolean, optional)
 - `url_query_allowlist` (array, optional)
-- `utm_allowlist` (array, optional)
 - `raw_logs_enabled` (boolean, optional)
 - `raw_logs_retention_days` (integer, optional)
 - `excluded_roles` (array, optional)
@@ -369,7 +366,6 @@ Response (200):
     "respect_dnt_gpc": true,
     "url_strip_query": true,
     "url_query_allowlist": [],
-    "utm_allowlist": [],
     "raw_logs_enabled": false,
     "raw_logs_retention_days": 1,
     "excluded_roles": [],
