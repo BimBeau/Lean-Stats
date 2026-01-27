@@ -14,7 +14,6 @@ function lean_stats_get_settings_defaults(): array
 {
     return [
         'plugin_label' => '',
-        'strict_mode' => false,
         'respect_dnt_gpc' => true,
         'url_strip_query' => true,
         'url_query_allowlist' => [],
@@ -51,7 +50,6 @@ function lean_stats_sanitize_settings($settings): array
     $settings = wp_parse_args($settings, $defaults);
 
     $settings['plugin_label'] = trim(sanitize_text_field($settings['plugin_label']));
-    $settings['strict_mode'] = (bool) rest_sanitize_boolean($settings['strict_mode']);
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
     $settings['maxmind_api_key'] = trim(sanitize_text_field($settings['maxmind_api_key']));
@@ -76,6 +74,7 @@ function lean_stats_sanitize_settings($settings): array
     }
     $settings['raw_logs_retention_days'] = min($retention_days, 365);
 
+    $strict_mode = !empty($settings['strict_mode']) && rest_sanitize_boolean($settings['strict_mode']);
     $excluded_roles = $settings['excluded_roles'];
     if (is_string($excluded_roles)) {
         $excluded_roles = preg_split('/[\s,]+/', $excluded_roles);
@@ -91,7 +90,11 @@ function lean_stats_sanitize_settings($settings): array
     } else {
         $excluded_roles = [];
     }
+    if ($strict_mode && $valid_roles) {
+        $excluded_roles = $valid_roles;
+    }
     $settings['excluded_roles'] = $excluded_roles;
+    unset($settings['strict_mode']);
 
     $excluded_paths = $settings['excluded_paths'];
     if (is_string($excluded_paths)) {

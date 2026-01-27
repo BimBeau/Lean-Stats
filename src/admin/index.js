@@ -40,7 +40,6 @@ const DEFAULT_PANELS = [
 ];
 const DEFAULT_SETTINGS = {
     plugin_label: '',
-    strict_mode: false,
     respect_dnt_gpc: true,
     url_strip_query: true,
     url_query_allowlist: [],
@@ -633,12 +632,6 @@ const SettingsPanel = () => {
                                             value={formState.plugin_label}
                                             onChange={(value) => setFormState((prev) => ({ ...prev, plugin_label: value }))}
                                         />
-                                        <ToggleControl
-                                            label={__('Strict mode', 'lean-stats')}
-                                            help={__('Ignore tracking for logged-in users.', 'lean-stats')}
-                                            checked={formState.strict_mode}
-                                            onChange={(value) => setFormState((prev) => ({ ...prev, strict_mode: value }))}
-                                        />
                                     </CardBody>
                                 </Card>
                                 <Card className="ls-settings-section">
@@ -741,6 +734,12 @@ const SettingsPanel = () => {
                                         />
                                         <div>
                                             <p className="ls-settings-roles__title">{__('Role exclusions', 'lean-stats')}</p>
+                                            <p>
+                                                {__(
+                                                    'Select roles to exclude from tracking. Select all roles to ignore all logged-in users.',
+                                                    'lean-stats'
+                                                )}
+                                            </p>
                                             <div className="ls-settings-roles__list">
                                                 {roles.length === 0 && <p>{__('No roles available.', 'lean-stats')}</p>}
                                                 {roles.map((role) => (

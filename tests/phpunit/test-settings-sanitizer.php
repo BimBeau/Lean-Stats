@@ -15,13 +15,15 @@ class Lean_Stats_Settings_Sanitizer_Test extends WP_UnitTestCase
             'raw_logs_retention_days' => -5,
             'excluded_roles' => ['administrator', 'not-a-role'],
         ]);
+        $roles = wp_roles();
+        $all_roles = $roles ? array_keys($roles->roles) : [];
 
-        $this->assertTrue($settings['strict_mode']);
+        $this->assertArrayNotHasKey('strict_mode', $settings);
         $this->assertFalse($settings['respect_dnt_gpc']);
         $this->assertFalse($settings['url_strip_query']);
         $this->assertSame(['utm_source', 'utm_medium'], $settings['url_query_allowlist']);
         $this->assertSame(1, $settings['raw_logs_retention_days']);
-        $this->assertSame(['administrator'], $settings['excluded_roles']);
+        $this->assertSame($all_roles, $settings['excluded_roles']);
     }
 
     public function test_sanitize_settings_caps_retention_days(): void
