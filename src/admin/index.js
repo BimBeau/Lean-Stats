@@ -823,6 +823,7 @@ const SettingsPanel = () => {
 const LINE_CHART_WIDTH = 640;
 const LINE_CHART_HEIGHT = 240;
 const LINE_CHART_PADDING = 32;
+const LINE_CHART_LABEL_COUNT = 5;
 
 const buildLineChartData = (items) => {
     const maxHits = items.reduce((max, item) => Math.max(max, item.hits), 0);
@@ -848,6 +849,29 @@ const buildLineChartData = (items) => {
         .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
         .join(' ');
 
+    const labelCount = Math.min(LINE_CHART_LABEL_COUNT, items.length);
+    const labelIndices = new Set();
+    if (labelCount <= 1) {
+        labelIndices.add(0);
+    } else {
+        const step = (items.length - 1) / (labelCount - 1);
+        for (let i = 0; i < labelCount; i += 1) {
+            labelIndices.add(Math.round(i * step));
+        }
+    }
+
+    const xLabels = items
+        .map((item, index) => {
+            if (!labelIndices.has(index)) {
+                return null;
+            }
+            return {
+                x: padding + (innerWidth * index) / totalPoints,
+                label: item.bucket,
+            };
+        })
+        .filter(Boolean);
+
     return {
         points,
         path,
@@ -855,6 +879,7 @@ const buildLineChartData = (items) => {
         width,
         height,
         padding,
+        xLabels,
     };
 };
 
@@ -955,6 +980,28 @@ const TimeseriesChart = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/timeseries/day', range);
     const items = data?.items || [];
     const chartData = useMemo(() => buildLineChartData(items), [items]);
+    const [activePoint, setActivePoint] = useState(null);
+
+    const formatAxisLabel = (value) => {
+        const date = new Date(`${value}T00:00:00`);
+        if (Number.isNaN(date.getTime())) {
+            return value;
+        }
+
+        return new Intl.DateTimeFormat(undefined, {
+            day: '2-digit',
+            month: 'short',
+        }).format(date);
+    };
+
+    const chartTooltip = activePoint
+        ? sprintf(
+            __('%1$s · %2$s %3$s', 'lean-stats'),
+            formatAxisLabel(activePoint.label),
+            activePoint.hits,
+            __('Page views', 'lean-stats')
+        )
+        : null;
 
     return (
         <LsCard title={__('Daily page views', 'lean-stats')}>
@@ -968,61 +1015,88 @@ const TimeseriesChart = ({ range }) => {
             {!isLoading && !error && items.length > 0 && (
                 <div className="ls-timeseries">
                     <ChartFrame height={240} ariaLabel={__('Daily page views line chart', 'lean-stats')}>
-                        <svg
-                            viewBox={`0 0 ${chartData.width} ${chartData.height}`}
-                            className="ls-timeseries__svg"
-                            role="img"
-                            aria-label={__('Daily page views line chart', 'lean-stats')}
+                        <div
+                            className="ls-timeseries__chart"
+                            onMouseLeave={() => setActivePoint(null)}
                         >
-                            <rect
-                                x="0"
-                                y="0"
-                                width={chartData.width}
-                                height={chartData.height}
-                                className="ls-timeseries__bg"
-                            />
-                            <line
-                                x1={chartData.padding}
-                                y1={chartData.padding}
-                                x2={chartData.padding}
-                                y2={chartData.height - chartData.padding}
-                                className="ls-timeseries__axis"
-                            />
-                            <line
-                                x1={chartData.padding}
-                                y1={chartData.height - chartData.padding}
-                                x2={chartData.width - chartData.padding}
-                                y2={chartData.height - chartData.padding}
-                                className="ls-timeseries__axis"
-                            />
-                            <path d={chartData.path} className="ls-timeseries__line" />
-                            {chartData.points.map((point) => (
-                                <circle
-                                    key={`${point.label}-${point.hits}`}
-                                    cx={point.x}
-                                    cy={point.y}
-                                    r="3"
-                                    className="ls-timeseries__point"
+                            <svg
+                                viewBox={`0 0 ${chartData.width} ${chartData.height}`}
+                                className="ls-timeseries__svg"
+                                role="img"
+                                aria-label={__('Daily page views line chart', 'lean-stats')}
+                            >
+                                <rect
+                                    x="0"
+                                    y="0"
+                                    width={chartData.width}
+                                    height={chartData.height}
+                                    className="ls-timeseries__bg"
                                 />
-                            ))}
-                        </svg>
+                                <line
+                                    x1={chartData.padding}
+                                    y1={chartData.padding}
+                                    x2={chartData.padding}
+                                    y2={chartData.height - chartData.padding}
+                                    className="ls-timeseries__axis"
+                                />
+                                <line
+                                    x1={chartData.padding}
+                                    y1={chartData.height - chartData.padding}
+                                    x2={chartData.width - chartData.padding}
+                                    y2={chartData.height - chartData.padding}
+                                    className="ls-timeseries__axis"
+                                />
+                                <path d={chartData.path} className="ls-timeseries__line" />
+                                {chartData.xLabels.map((label) => (
+                                    <text
+                                        key={`label-${label.label}`}
+                                        x={label.x}
+                                        y={chartData.height - chartData.padding + 18}
+                                        textAnchor="middle"
+                                        className="ls-timeseries__axis-label"
+                                    >
+                                        {formatAxisLabel(label.label)}
+                                    </text>
+                                ))}
+                                {chartData.points.map((point) => (
+                                    <circle
+                                        key={`${point.label}-${point.hits}`}
+                                        cx={point.x}
+                                        cy={point.y}
+                                        r="3"
+                                        className={`ls-timeseries__point${
+                                            activePoint?.label === point.label ? ' is-active' : ''
+                                        }`}
+                                        onMouseEnter={() => setActivePoint(point)}
+                                        onFocus={() => setActivePoint(point)}
+                                        onBlur={() => setActivePoint(null)}
+                                        tabIndex="0"
+                                    >
+                                        <title>
+                                            {sprintf(
+                                                __('%1$s: %2$s %3$s', 'lean-stats'),
+                                                formatAxisLabel(point.label),
+                                                point.hits,
+                                                __('Page views', 'lean-stats')
+                                            )}
+                                        </title>
+                                    </circle>
+                                ))}
+                            </svg>
+                            {activePoint && (
+                                <div
+                                    className="ls-timeseries__tooltip"
+                                    role="status"
+                                    style={{
+                                        left: `${(activePoint.x / chartData.width) * 100}%`,
+                                        top: `${(activePoint.y / chartData.height) * 100}%`,
+                                    }}
+                                >
+                                    {chartTooltip}
+                                </div>
+                            )}
+                        </div>
                     </ChartFrame>
-                    <table className="widefat striped ls-timeseries__table" aria-label={__('Daily series table', 'lean-stats')}>
-                        <thead>
-                            <tr>
-                                <th>{__('Date', 'lean-stats')}</th>
-                                <th>{__('Page views', 'lean-stats')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item) => (
-                                <tr key={item.bucket}>
-                                    <td>{item.bucket}</td>
-                                    <td>{item.hits}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
                 </div>
             )}
         </LsCard>

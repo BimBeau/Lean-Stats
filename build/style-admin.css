@@ -3,3 +3,4 @@
 
 .ls-admin-app .ls-chart-frame{width:100%}.ls-admin-app .ls-chart-frame[data-height="240"]{height:240px}.ls-admin-app .ls-chart-frame[data-height="260"]{height:260px}
 .ls-admin-app .ls-data-state{display:grid;gap:var(--lean-stats-gap-md);padding:var(--lean-stats-gap-lg)}.ls-admin-app .ls-data-state__header{align-items:center;display:flex;gap:var(--lean-stats-gap-sm)}.ls-admin-app .ls-skeleton{display:grid;gap:var(--lean-stats-gap-sm)}.ls-admin-app .ls-skeleton__bar{background-color:var(--lean-stats-skeleton-bg);border-radius:var(--lean-stats-radius-sm);height:12px}.ls-admin-app .ls-skeleton__bar--w80{width:80%}.ls-admin-app .ls-skeleton__bar--w74{width:74%}.ls-admin-app .ls-skeleton__bar--w68{width:68%}.ls-admin-app .ls-skeleton__bar--w62{width:62%}.ls-admin-app .ls-skeleton__bar--w56{width:56%}.ls-admin-app .ls-skeleton__bar--w50{width:50%}
+
