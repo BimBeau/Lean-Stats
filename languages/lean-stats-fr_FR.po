@@ -240,3 +240,78 @@ msgstr "Pages d'entrée"
 
 msgid "Exit pages"
 msgstr "Pages de sortie"
+
+msgid "Geolocation"
+msgstr "Géolocalisation"
+
+msgid "No geolocation data available."
+msgstr "Aucune donnée de géolocalisation disponible."
+
+msgid "MaxMind API key"
+msgstr "Clé API MaxMind"
+
+msgid "Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database."
+msgstr "Format : AccountID:LicenseKey. Laissez vide pour utiliser la base GeoLite2 locale."
+
+msgid "MaxMind API key must use the format AccountID:LicenseKey."
+msgstr "La clé API MaxMind doit utiliser le format AccountID:LicenseKey."
+
+msgid "Enables detailed console logs and raw log capture."
+msgstr "Active les logs détaillés de la console et la capture des logs bruts."
+
+msgid "Raw logs purge automatically after the configured window."
+msgstr "Les logs bruts sont purgés automatiquement après la période configurée."
+
+msgid "URL cleaning"
+msgstr "Nettoyage des URLs"
+
+msgid "Strip query parameters"
+msgstr "Supprimer les paramètres de requête"
+
+msgid "Remove query parameters from tracked URLs."
+msgstr "Supprime les paramètres de requête des URLs suivies."
+
+msgid "Excluded paths"
+msgstr "Chemins exclus"
+
+msgid "One per line or comma-separated (e.g., /privacy, /account)."
+msgstr "Un par ligne ou séparés par des virgules (ex : /privacy, /account)."
+
+msgid "Data management"
+msgstr "Gestion des données"
+
+msgid "Remove all aggregated analytics and raw log entries."
+msgstr "Supprime toutes les données d’analytics agrégées et les entrées de logs bruts."
+
+msgid "Purge analytics data"
+msgstr "Purger les données d’analytics"
+
+msgid "Sort by"
+msgstr "Trier par"
+
+msgid "Rows"
+msgstr "Lignes"
+
+msgid "Ascending"
+msgstr "Croissant"
+
+msgid "Descending"
+msgstr "Décroissant"
+
+msgid "Previous"
+msgstr "Précédent"
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "Page %1$d of %2$d"
+msgstr "Page %1$d sur %2$d"
+
+msgid "%s items"
+msgstr "%s éléments"
+
+msgid "Search term"
+msgstr "Terme de recherche"
+
+msgid "Search terms"
+msgstr "Termes de recherche"
