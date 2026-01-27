@@ -3,6 +3,10 @@
     gap: var(--lean-stats-gap-lg);
 }
 
+.ls-admin-app select {
+    font-size: 14px;
+}
+
 .ls-admin-app .ls-overview,
 .ls-admin-app .ls-overview__grid,
 .ls-admin-app .ls-settings-form {
