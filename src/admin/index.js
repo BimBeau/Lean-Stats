@@ -1021,6 +1021,9 @@ const TimeseriesChart = ({ range }) => {
                         >
                             <svg
                                 viewBox={`0 0 ${chartData.width} ${chartData.height}`}
+                                width="100%"
+                                height="100%"
+                                preserveAspectRatio="xMidYMid meet"
                                 className="ls-timeseries__svg"
                                 role="img"
                                 aria-label={__('Daily page views line chart', 'lean-stats')}
