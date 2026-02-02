@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T13:45:54+00:00\n"
+"POT-Creation-Date: 2026-02-02T13:53:46+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,8 +34,9 @@ msgid "Dashboard"
 msgstr "Instrumentpanel"
 
 #: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1596
-msgid "Pages"
-msgstr "Sidor"
+#: src/admin/index.js:1625 src/admin/index.js:1751
+msgid "Top pages"
+msgstr "Topp-sidor"
 
 #: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:1043
 msgid "Referring sites"
@@ -561,10 +562,6 @@ msgstr "Ingångssidor"
 msgid "Exit pages"
 msgstr "Utgångssidor"
 
-#: src/admin/index.js:1625 src/admin/index.js:1751
-msgid "Top pages"
-msgstr "Topp-sidor"
-
 #: src/admin/index.js:1628 src/admin/index.js:1755
 msgid "No popular pages available."
 msgstr "Ingen populär sida tillgänglig."
@@ -712,3 +709,6 @@ msgstr "Ingen panel tillgänglig för den här skärmen."
 #~ msgstr ""
 #~ "Råloggar lagrar detaljerade visningsdata när felsökningsläget är "
 #~ "aktiverat."
+
+#~ msgid "Pages"
+#~ msgstr "Sidor"

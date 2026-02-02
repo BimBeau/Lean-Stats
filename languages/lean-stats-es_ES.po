@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T13:45:54+00:00\n"
+"POT-Creation-Date: 2026-02-02T13:53:46+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,8 +34,9 @@ msgid "Dashboard"
 msgstr "Panel de control"
 
 #: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1596
-msgid "Pages"
-msgstr "Páginas"
+#: src/admin/index.js:1625 src/admin/index.js:1751
+msgid "Top pages"
+msgstr "Top páginas"
 
 #: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:1043
 msgid "Referring sites"
@@ -561,10 +562,6 @@ msgstr "Páginas de entrada"
 msgid "Exit pages"
 msgstr "Páginas de salida"
 
-#: src/admin/index.js:1625 src/admin/index.js:1751
-msgid "Top pages"
-msgstr "Top páginas"
-
 #: src/admin/index.js:1628 src/admin/index.js:1755
 msgid "No popular pages available."
 msgstr "No hay páginas populares disponibles."
@@ -712,3 +709,6 @@ msgstr "No hay panel disponible para esta pantalla."
 #~ msgstr ""
 #~ "Los registros sin procesar almacenan detalles granulares de las vistas "
 #~ "cuando el modo de depuración está activado."
+
+#~ msgid "Pages"
+#~ msgstr "Páginas"

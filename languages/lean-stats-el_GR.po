@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T13:45:54+00:00\n"
+"POT-Creation-Date: 2026-02-02T13:53:46+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,8 +34,9 @@ msgid "Dashboard"
 msgstr "Πίνακας ελέγχου"
 
 #: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1596
-msgid "Pages"
-msgstr "Σελίδες"
+#: src/admin/index.js:1625 src/admin/index.js:1751
+msgid "Top pages"
+msgstr "Κορυφαίες σελίδες"
 
 #: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:1043
 msgid "Referring sites"
@@ -562,10 +563,6 @@ msgstr "Σελίδες εισόδου"
 msgid "Exit pages"
 msgstr "Σελίδες εξόδου"
 
-#: src/admin/index.js:1625 src/admin/index.js:1751
-msgid "Top pages"
-msgstr "Κορυφαίες σελίδες"
-
 #: src/admin/index.js:1628 src/admin/index.js:1755
 msgid "No popular pages available."
 msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
@@ -713,3 +710,6 @@ msgstr "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν τ
 #~ msgstr ""
 #~ "Τα ανεπεξέργαστα αρχεία καταγραφής αποθηκεύουν λεπτομερή δεδομένα "
 #~ "προβολών όταν είναι ενεργή η λειτουργία αποσφαλμάτωσης."
+
+#~ msgid "Pages"
+#~ msgstr "Σελίδες"
