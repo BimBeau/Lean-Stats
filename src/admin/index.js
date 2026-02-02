@@ -32,7 +32,7 @@ const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
 const DEFAULT_PANELS = [
     { name: 'dashboard', title: __('Dashboard', 'lean-stats') },
-    { name: 'top-pages', title: __('Pages', 'lean-stats') },
+    { name: 'top-pages', title: __('Top pages', 'lean-stats') },
     { name: 'referrers', title: __('Referring sites', 'lean-stats') },
     { name: 'search-terms', title: __('Internal searches', 'lean-stats') },
     { name: 'geolocation', title: __('Geolocation', 'lean-stats') },
@@ -1593,7 +1593,7 @@ const ReportPanel = ({
 
 const PagesPanel = () => {
     const pagesTabs = [
-        { name: 'top-pages', title: __('Pages', 'lean-stats') },
+        { name: 'top-pages', title: __('Top pages', 'lean-stats') },
         { name: 'entry-pages', title: __('Entry pages', 'lean-stats') },
         { name: 'exit-pages', title: __('Exit pages', 'lean-stats') },
         { name: 'not-found', title: __('Pages not found (404)', 'lean-stats') },

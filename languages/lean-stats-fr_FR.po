@@ -188,7 +188,7 @@ msgid "Dashboard"
 msgstr "Tableau de bord"
 
 msgid "Top pages"
-msgstr "Pages principales"
+msgstr "Top Pages"
 
 msgid "Top referrers"
 msgstr "Top référents"
