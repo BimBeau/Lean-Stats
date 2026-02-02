@@ -1152,8 +1152,8 @@ const TimeseriesChart = ({ range }) => {
                             >
                                 <defs>
                                     <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stopColor="var(--ls-accent, #2271b1)" stopOpacity="0.35" />
-                                        <stop offset="100%" stopColor="var(--ls-accent, #2271b1)" stopOpacity="0" />
+                                        <stop offset="0%" stopColor="var(--ls-text-2, #2271b1)" stopOpacity="0.35" />
+                                        <stop offset="100%" stopColor="var(--ls-text-2, #2271b1)" stopOpacity="0" />
                                     </linearGradient>
                                 </defs>
                                 <rect
