@@ -67,7 +67,7 @@ These options help align Lean Stats with privacy-conscious site configurations.
 
 - The geolocation panel resolves the current request IP to country, region, and city.
 - The IP address is used only for the lookup and is not stored.
-- MaxMind API credentials are optional; without them, the local GeoLite2 database is used.
+- MaxMind Account ID and License Key are required to enable IP geolocation.
 
 ---
 

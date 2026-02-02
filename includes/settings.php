@@ -22,7 +22,8 @@ function lean_stats_get_settings_defaults(): array
         'excluded_roles' => [],
         'excluded_paths' => [],
         'debug_enabled' => false,
-        'maxmind_api_key' => '',
+        'maxmind_account_id' => '',
+        'maxmind_license_key' => '',
     ];
 }
 
@@ -52,7 +53,8 @@ function lean_stats_sanitize_settings($settings): array
     $settings['plugin_label'] = trim(sanitize_text_field($settings['plugin_label']));
     $settings['respect_dnt_gpc'] = (bool) rest_sanitize_boolean($settings['respect_dnt_gpc']);
     $settings['url_strip_query'] = (bool) rest_sanitize_boolean($settings['url_strip_query']);
-    $settings['maxmind_api_key'] = trim(sanitize_text_field($settings['maxmind_api_key']));
+    $settings['maxmind_account_id'] = trim(sanitize_text_field($settings['maxmind_account_id']));
+    $settings['maxmind_license_key'] = trim(sanitize_text_field($settings['maxmind_license_key']));
     $raw_logs_enabled = (bool) rest_sanitize_boolean($settings['raw_logs_enabled']);
     $debug_enabled = (bool) rest_sanitize_boolean($settings['debug_enabled']);
     $settings['debug_enabled'] = $debug_enabled || $raw_logs_enabled;
@@ -116,7 +118,46 @@ function lean_stats_sanitize_settings($settings): array
     }
     $settings['excluded_paths'] = array_values(array_unique($normalized_paths));
 
+    if (isset($settings['maxmind_api_key'])) {
+        unset($settings['maxmind_api_key']);
+    }
+
     return $settings;
+}
+
+/**
+ * Validate MaxMind credentials from settings.
+ */
+function lean_stats_validate_maxmind_settings(array $settings): array
+{
+    $errors = [];
+    $account_id = trim((string) ($settings['maxmind_account_id'] ?? ''));
+    $license_key = trim((string) ($settings['maxmind_license_key'] ?? ''));
+
+    if ($account_id === '') {
+        $errors['maxmind_account_id'] = __('MaxMind Account ID is required.', 'lean-stats');
+    } elseif (!ctype_digit($account_id)) {
+        $errors['maxmind_account_id'] = __('MaxMind Account ID must be numeric.', 'lean-stats');
+    }
+
+    if ($license_key === '') {
+        $errors['maxmind_license_key'] = __('MaxMind License Key is required.', 'lean-stats');
+    }
+
+    return $errors;
+}
+
+/**
+ * Format validation errors for MaxMind credentials.
+ */
+function lean_stats_format_maxmind_errors(array $errors): string
+{
+    $messages = array_values(array_filter($errors));
+    if (!$messages) {
+        return __('MaxMind credentials are required to enable IP geolocation.', 'lean-stats');
+    }
+
+    return implode(' ', $messages);
 }
 
 /**
@@ -156,6 +197,17 @@ function lean_stats_update_settings($settings): array
 {
     $previous = lean_stats_get_settings();
     $sanitized = lean_stats_sanitize_settings($settings);
+    $errors = lean_stats_validate_maxmind_settings($sanitized);
+    if ($errors) {
+        return new WP_Error(
+            'lean_stats_invalid_maxmind_credentials',
+            lean_stats_format_maxmind_errors($errors),
+            [
+                'status' => 400,
+                'field_errors' => $errors,
+            ]
+        );
+    }
     update_option('lean_stats_settings', $sanitized, false);
     update_option('lean_stats_raw_logs_enabled', (bool) $sanitized['raw_logs_enabled'], false);
 
