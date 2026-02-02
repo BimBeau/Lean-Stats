@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T14:00:59+00:00\n"
+"POT-Creation-Date: 2026-02-02T14:24:56+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,29 +29,29 @@ msgstr ""
 msgid "BimBeau"
 msgstr ""
 
-#: admin/admin.php:264 src/admin/index.js:34
+#: admin/admin.php:265 src/admin/index.js:34
 msgid "Dashboard"
 msgstr "Kontrolpanel"
 
-#: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1606
+#: admin/admin.php:270 src/admin/index.js:35 src/admin/index.js:1606
 #: src/admin/index.js:1635 src/admin/index.js:1761
 msgid "Top pages"
 msgstr "Top sider"
 
-#: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:1043
+#: admin/admin.php:275 src/admin/index.js:36 src/admin/index.js:1043
 msgid "Referring sites"
 msgstr "Henvisende websteder"
 
-#: admin/admin.php:279 src/admin/index.js:37 src/admin/index.js:1053
+#: admin/admin.php:280 src/admin/index.js:37 src/admin/index.js:1053
 msgid "Internal searches"
 msgstr "Interne søgninger"
 
-#: admin/admin.php:284 src/admin/index.js:38 src/admin/index.js:386
+#: admin/admin.php:285 src/admin/index.js:38 src/admin/index.js:386
 #: src/admin/index.js:671
 msgid "Geolocation"
 msgstr ""
 
-#: admin/admin.php:289 src/admin/index.js:39 src/admin/index.js:626
+#: admin/admin.php:290 src/admin/index.js:39 src/admin/index.js:626
 msgid "Settings"
 msgstr "Indstillinger"
 
