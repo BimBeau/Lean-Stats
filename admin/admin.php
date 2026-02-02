@@ -120,7 +120,8 @@ function lean_stats_get_admin_color_scheme_variables(): array
         '--ls-accent-2' => $normalize_color($palette[1], $defaults['accent_2']),
         '--ls-bg' => $bg_color,
         '--ls-bg-muted' => $normalize_color($palette[2], $defaults['bg_muted']),
-        '--ls-text' => $normalize_color($palette[3], $defaults['text']),
+        '--ls-text' => $normalize_color($palette[0], $defaults['accent']),
+        '--ls-text-2' => $normalize_color($palette[3], $defaults['text']),
         '--ls-border' => $normalize_color($border_color, $defaults['border']),
     ];
 }
