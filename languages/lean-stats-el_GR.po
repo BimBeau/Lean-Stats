@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T13:33:55+00:00\n"
+"POT-Creation-Date: 2026-02-02T13:45:54+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:131 src/admin/index.js:305
-#: src/admin/index.js:1713
+#: lean-stats.php includes/settings.php:172 src/admin/index.js:306
+#: src/admin/index.js:1785
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -33,56 +33,29 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Πίνακας ελέγχου"
 
-#: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1524
+#: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1596
 msgid "Pages"
 msgstr "Σελίδες"
 
-#: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:971
+#: admin/admin.php:274 src/admin/index.js:36 src/admin/index.js:1043
 msgid "Referring sites"
 msgstr "Παραπέμποντες ιστότοποι"
 
-#: admin/admin.php:279 src/admin/index.js:37 src/admin/index.js:981
+#: admin/admin.php:279 src/admin/index.js:37 src/admin/index.js:1053
 msgid "Internal searches"
 msgstr "Εσωτερικές αναζητήσεις"
 
-#: admin/admin.php:284 src/admin/index.js:38 src/admin/index.js:388
-#: src/admin/index.js:639
+#: admin/admin.php:284 src/admin/index.js:38 src/admin/index.js:386
+#: src/admin/index.js:671
 msgid "Geolocation"
 msgstr ""
 
-#: admin/admin.php:289 src/admin/index.js:39 src/admin/index.js:594
+#: admin/admin.php:289 src/admin/index.js:39 src/admin/index.js:626
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: includes/geolocation.php:154
-#, fuzzy, php-format
-msgid "MaxMind API error (%s)."
-msgstr "Σφάλμα API (%s)"
-
-#: includes/geolocation.php:161
-#, fuzzy
-msgid "Invalid MaxMind API response."
-msgstr "Μη έγκυρο nonce REST API."
-
-#: includes/geolocation.php:181
-msgid "GeoLite2 database is missing or unreadable."
-msgstr ""
-
-#: includes/geolocation.php:189
-#, fuzzy
-msgid "MaxMind reader library is unavailable."
-msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
-
-#: includes/geolocation.php:205
-msgid "No geolocation data found for this IP."
-msgstr ""
-
-#: includes/geolocation.php:225
+#: includes/geolocation.php:84
 msgid "Unable to determine the visitor IP."
-msgstr ""
-
-#: includes/geolocation.php:236
-msgid "MaxMind API key must use the format AccountID:LicenseKey."
 msgstr ""
 
 #: includes/raw-logs.php:73
@@ -99,7 +72,7 @@ msgstr "Δεν επιτρέπεται η πρόσβαση στα δεδομέν�
 msgid "Invalid REST API nonce."
 msgstr "Μη έγκυρο nonce REST API."
 
-#: includes/rest/class-lean-stats-admin-controller.php:290
+#: includes/rest/class-lean-stats-admin-controller.php:293
 msgid "Debug mode is disabled."
 msgstr ""
 
@@ -114,6 +87,32 @@ msgstr "Μη έγκυρη κατηγορία συσκευής."
 #: includes/rest/class-lean-stats-hit-controller.php:128
 msgid "Invalid timestamp bucket."
 msgstr "Μη έγκυρο εύρος χρονικής σήμανσης."
+
+#: includes/services/class-lean-stats-maxmind-service.php:37
+#, fuzzy, php-format
+msgid "MaxMind API error (%s)."
+msgstr "Σφάλμα API (%s)"
+
+#: includes/services/class-lean-stats-maxmind-service.php:44
+#, fuzzy
+msgid "Invalid MaxMind API response."
+msgstr "Μη έγκυρο nonce REST API."
+
+#: includes/settings.php:138 src/admin/index.js:471
+msgid "MaxMind Account ID is required."
+msgstr ""
+
+#: includes/settings.php:140 src/admin/index.js:473
+msgid "MaxMind Account ID must be numeric."
+msgstr ""
+
+#: includes/settings.php:144 src/admin/index.js:477
+msgid "MaxMind License Key is required."
+msgstr ""
+
+#: includes/settings.php:157
+msgid "MaxMind credentials are required to enable IP geolocation."
+msgstr ""
 
 #: src/admin/components/AdminErrorBoundary/index.js:38
 msgid "Lean Stats cannot load the admin interface."
@@ -131,298 +130,306 @@ msgstr ""
 msgid "Loading…"
 msgstr "Φόρτωση…"
 
-#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1274
+#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1346
 msgid "Loading: %s"
 msgstr "Φόρτωση: %s"
 
-#: src/admin/index.js:203 src/admin/index.js:479 src/admin/index.js:538
+#: src/admin/index.js:204 src/admin/index.js:496 src/admin/index.js:570
 msgid "Missing REST configuration."
 msgstr "Λείπει ρύθμιση REST."
 
-#: src/admin/index.js:227 src/admin/index.js:503 src/admin/index.js:561
+#: src/admin/index.js:228 src/admin/index.js:535 src/admin/index.js:593
 msgid "API error (%s)"
 msgstr "Σφάλμα API (%s)"
 
-#: src/admin/index.js:242
+#: src/admin/index.js:243
 msgid "Loading error."
 msgstr "Σφάλμα φόρτωσης."
 
-#: src/admin/index.js:337
+#: src/admin/index.js:338
 msgid "Enable debug mode to display raw logs."
 msgstr ""
 
-#: src/admin/index.js:348
+#: src/admin/index.js:349
 #, fuzzy
 msgid "No raw logs available."
 msgstr "Δεν υπάρχει διαθέσιμος ρόλος."
 
-#: src/admin/index.js:349
+#: src/admin/index.js:350
 #, fuzzy
 msgid "Loading raw logs…"
 msgstr "Φόρτωση KPI…"
 
-#: src/admin/index.js:356
+#: src/admin/index.js:357
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:357 src/admin/index.js:1554 src/admin/index.js:1680
+#: src/admin/index.js:358 src/admin/index.js:1626 src/admin/index.js:1752
 msgid "Page"
 msgstr "Σελίδα"
 
-#: src/admin/index.js:358 src/admin/index.js:1375 src/admin/index.js:1393
-#: src/admin/index.js:1440 src/admin/index.js:1688
+#: src/admin/index.js:359 src/admin/index.js:1447 src/admin/index.js:1465
+#: src/admin/index.js:1512 src/admin/index.js:1760
 msgid "Referrer"
 msgstr "Παραπέμπτης"
 
-#: src/admin/index.js:359
+#: src/admin/index.js:360
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:367 src/admin/index.js:1374 src/admin/index.js:1375
-#: src/admin/index.js:1692
+#: src/admin/index.js:368 src/admin/index.js:1446 src/admin/index.js:1447
+#: src/admin/index.js:1764
 msgid "Direct"
 msgstr "Άμεσο"
 
-#: src/admin/index.js:384
+#: src/admin/index.js:383
 msgid "MaxMind API"
 msgstr ""
 
-#: src/admin/index.js:385
-msgid "GeoLite2 (local)"
-msgstr ""
-
-#: src/admin/index.js:393
+#: src/admin/index.js:391
 #, fuzzy
 msgid "No geolocation data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/index.js:394
+#: src/admin/index.js:392
 #, fuzzy
 msgid "Looking up location…"
 msgstr "Φόρτωση γραφήματος…"
 
-#: src/admin/index.js:404
+#: src/admin/index.js:402
 msgid "Location is derived from the current request IP and is not stored."
 msgstr ""
 
-#: src/admin/index.js:408
+#: src/admin/index.js:406
 msgid "IP address"
 msgstr ""
 
-#: src/admin/index.js:412
+#: src/admin/index.js:410
 msgid "Country"
 msgstr ""
 
-#: src/admin/index.js:413 src/admin/index.js:417 src/admin/index.js:421
+#: src/admin/index.js:411 src/admin/index.js:415 src/admin/index.js:419
 #, fuzzy
 msgid "Unavailable"
 msgstr "Δεν υπάρχουν διαθέσιμα KPI."
 
-#: src/admin/index.js:416
+#: src/admin/index.js:414
 msgid "Region"
 msgstr ""
 
-#: src/admin/index.js:420
+#: src/admin/index.js:418
 msgid "City"
 msgstr ""
 
-#: src/admin/index.js:424
+#: src/admin/index.js:422
 msgid "Source"
 msgstr ""
 
-#: src/admin/index.js:439
+#: src/admin/index.js:437
 msgid "Period"
 msgstr "Περίοδος"
 
-#: src/admin/index.js:442
+#: src/admin/index.js:440
 msgid "7 days"
 msgstr "7 ημέρες"
 
-#: src/admin/index.js:443
+#: src/admin/index.js:441
 msgid "30 days"
 msgstr "30 ημέρες"
 
-#: src/admin/index.js:444
+#: src/admin/index.js:442
 msgid "90 days"
 msgstr "90 ημέρες"
 
-#: src/admin/index.js:516
+#: src/admin/index.js:548
 msgid "Settings saved."
 msgstr "Οι ρυθμίσεις αποθηκεύτηκαν."
 
-#: src/admin/index.js:524
+#: src/admin/index.js:556
 msgid "Error while saving."
 msgstr "Σφάλμα κατά την αποθήκευση."
 
-#: src/admin/index.js:566
+#: src/admin/index.js:598
 msgid "Analytics data purged."
 msgstr ""
 
-#: src/admin/index.js:574
+#: src/admin/index.js:606
 #, fuzzy
 msgid "Error while purging."
 msgstr "Σφάλμα κατά την αποθήκευση."
 
-#: src/admin/index.js:589 src/admin/index.js:628
+#: src/admin/index.js:621 src/admin/index.js:660
 msgid "General"
 msgstr ""
 
-#: src/admin/index.js:590
+#: src/admin/index.js:622
 msgid "Logs"
 msgstr ""
 
-#: src/admin/index.js:600
+#: src/admin/index.js:632
 msgid "Loading settings…"
 msgstr "Φόρτωση ρυθμίσεων…"
 
-#: src/admin/index.js:630
+#: src/admin/index.js:662
 msgid "Plugin name (menu and dashboard)"
 msgstr "Όνομα πρόσθετου (μενού και πίνακας ελέγχου)"
 
-#: src/admin/index.js:631
+#: src/admin/index.js:663
 #, fuzzy
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Αφήστε κενό για χρήση του \"Lean Stats\"."
 
-#: src/admin/index.js:641
-msgid "MaxMind API key"
-msgstr ""
-
-#: src/admin/index.js:643
+#: src/admin/index.js:673
 msgid ""
-"Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database."
+"MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr ""
 
-#: src/admin/index.js:655
+#: src/admin/index.js:679
+msgid "MaxMind Account ID"
+msgstr ""
+
+#: src/admin/index.js:683
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr ""
+
+#: src/admin/index.js:701
+msgid "MaxMind License Key"
+msgstr ""
+
+#: src/admin/index.js:705
+msgid "License Key for MaxMind IP geolocation."
+msgstr ""
+
+#: src/admin/index.js:727
 msgid "Privacy & consent"
 msgstr ""
 
-#: src/admin/index.js:658
+#: src/admin/index.js:730
 msgid "Respect DNT / GPC"
 msgstr "Σεβασμός DNT / GPC"
 
-#: src/admin/index.js:659
+#: src/admin/index.js:731
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Παράβλεψη παρακολούθησης αν ο περιηγητής στέλνει DNT ή GPC."
 
-#: src/admin/index.js:664
+#: src/admin/index.js:736
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/index.js:665
+#: src/admin/index.js:737
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/index.js:676
+#: src/admin/index.js:748
 #, fuzzy
 msgid "Retention window (days)"
 msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
 
-#: src/admin/index.js:681
+#: src/admin/index.js:753
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/index.js:694
+#: src/admin/index.js:766
 #, fuzzy
 msgid "URL cleaning"
 msgstr "Καθαρισμός URL"
 
-#: src/admin/index.js:696
+#: src/admin/index.js:768
 #, fuzzy
 msgid "Strip query parameters"
 msgstr "Αφαιρεί τις παραμέτρους αιτήματος."
 
-#: src/admin/index.js:697
+#: src/admin/index.js:769
 #, fuzzy
 msgid "Remove query parameters from tracked URLs."
 msgstr "Αφαιρεί τις παραμέτρους αιτήματος."
 
-#: src/admin/index.js:702
+#: src/admin/index.js:774
 msgid "Query parameter allowlist"
 msgstr "Λίστα επιτρεπόμενων παραμέτρων αιτήματος"
 
-#: src/admin/index.js:703
+#: src/admin/index.js:775
 msgid ""
 "Comma-separated list of allowed query keys (used for URL tracking and UTM "
 "aggregation)."
 msgstr ""
 
-#: src/admin/index.js:721
+#: src/admin/index.js:793
 #, fuzzy
 msgid "Exclusions"
 msgstr "Εξαιρέσεις ανά ρόλο"
 
-#: src/admin/index.js:723
+#: src/admin/index.js:795
 msgid "Excluded paths"
 msgstr ""
 
-#: src/admin/index.js:724
+#: src/admin/index.js:796
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
-#: src/admin/index.js:736
+#: src/admin/index.js:808
 msgid "Role exclusions"
 msgstr "Εξαιρέσεις ανά ρόλο"
 
-#: src/admin/index.js:738
+#: src/admin/index.js:810
 msgid ""
 "Select roles to exclude from tracking. Select all roles to ignore all logged-"
 "in users."
 msgstr ""
 
-#: src/admin/index.js:744
+#: src/admin/index.js:816
 msgid "No roles available."
 msgstr "Δεν υπάρχει διαθέσιμος ρόλος."
 
-#: src/admin/index.js:769
+#: src/admin/index.js:841
 msgid "Data management"
 msgstr ""
 
-#: src/admin/index.js:770
+#: src/admin/index.js:842
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/index.js:776
+#: src/admin/index.js:848
 msgid "Purge analytics data"
 msgstr ""
 
-#: src/admin/index.js:784
+#: src/admin/index.js:856
 msgid "Save settings"
 msgstr "Αποθήκευση ρυθμίσεων"
 
-#: src/admin/index.js:786
+#: src/admin/index.js:858
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: src/admin/index.js:790
+#: src/admin/index.js:862
 msgid "Confirm data purge"
 msgstr ""
 
-#: src/admin/index.js:794
+#: src/admin/index.js:866
 msgid ""
 "This action permanently removes all stored analytics and raw logs. Settings "
 "remain unchanged."
 msgstr ""
 
-#: src/admin/index.js:801
+#: src/admin/index.js:873
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/index.js:809
+#: src/admin/index.js:881
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/index.js:940
+#: src/admin/index.js:1012
 #, fuzzy
 msgid "No overview data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/index.js:941
+#: src/admin/index.js:1013
 #, fuzzy
 msgid "Loading overview…"
 msgstr "Φόρτωση κατανομής συσκευών…"
 
-#: src/admin/index.js:949
+#: src/admin/index.js:1021
 msgid ""
 "Number of anonymous sessions over the selected period. The same person can "
 "generate multiple visits."
@@ -430,236 +437,236 @@ msgstr ""
 "Αριθμός ανώνυμων συνεδριών στην επιλεγμένη περίοδο. Το ίδιο άτομο μπορεί να "
 "δημιουργήσει πολλαπλές επισκέψεις."
 
-#: src/admin/index.js:953
+#: src/admin/index.js:1025
 msgid "Anonymous sessions aggregated over the selected period."
 msgstr "Ανώνυμες συνεδρίες συγκεντρωμένες στην περίοδο."
 
-#: src/admin/index.js:960
+#: src/admin/index.js:1032
 msgid "Visits"
 msgstr "Επισκέψεις"
 
-#: src/admin/index.js:966 src/admin/index.js:1041 src/admin/index.js:1134
-#: src/admin/index.js:1167 src/admin/index.js:1392 src/admin/index.js:1442
+#: src/admin/index.js:1038 src/admin/index.js:1113 src/admin/index.js:1206
+#: src/admin/index.js:1239 src/admin/index.js:1464 src/admin/index.js:1514
 msgid "Page views"
 msgstr "Προβολές σελίδας"
 
-#: src/admin/index.js:976 src/admin/index.js:1527
+#: src/admin/index.js:1048 src/admin/index.js:1599
 msgid "Pages not found (404)"
 msgstr "Σελίδες που δεν βρέθηκαν"
 
-#: src/admin/index.js:1038
+#: src/admin/index.js:1110
 msgid "%1$s · %2$s %3$s"
 msgstr ""
 
-#: src/admin/index.js:1047
+#: src/admin/index.js:1119
 msgid "Daily page views"
 msgstr "Ημερήσιες προβολές σελίδας"
 
-#: src/admin/index.js:1052
+#: src/admin/index.js:1124
 msgid "No data available for this period."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα για αυτήν την περίοδο."
 
-#: src/admin/index.js:1053
+#: src/admin/index.js:1125
 msgid "Loading chart…"
 msgstr "Φόρτωση γραφήματος…"
 
-#: src/admin/index.js:1057 src/admin/index.js:1069
+#: src/admin/index.js:1129 src/admin/index.js:1141
 msgid "Daily page views line chart"
 msgstr "Γραμμικό διάγραμμα ημερήσιων προβολών σελίδας"
 
-#: src/admin/index.js:1131
+#: src/admin/index.js:1203
 msgid "%1$s: %2$s %3$s"
 msgstr ""
 
-#: src/admin/index.js:1213 src/admin/index.js:1366
+#: src/admin/index.js:1285 src/admin/index.js:1438
 msgid "Ascending"
 msgstr ""
 
-#: src/admin/index.js:1213 src/admin/index.js:1366
+#: src/admin/index.js:1285 src/admin/index.js:1438
 msgid "Descending"
 msgstr ""
 
-#: src/admin/index.js:1214
+#: src/admin/index.js:1286
 msgid "%s label"
 msgstr ""
 
-#: src/admin/index.js:1216 src/admin/index.js:1368
+#: src/admin/index.js:1288 src/admin/index.js:1440
 msgid "Toggle sort order: %s"
 msgstr ""
 
-#: src/admin/index.js:1219
+#: src/admin/index.js:1291
 msgid "Table: %s"
 msgstr ""
 
-#: src/admin/index.js:1231 src/admin/index.js:1389
+#: src/admin/index.js:1303 src/admin/index.js:1461
 msgid "Sort by"
 msgstr ""
 
-#: src/admin/index.js:1255 src/admin/index.js:1414
+#: src/admin/index.js:1327 src/admin/index.js:1486
 msgid "Rows"
 msgstr ""
 
-#: src/admin/index.js:1301 src/admin/index.js:1462
+#: src/admin/index.js:1373 src/admin/index.js:1534
 msgid "Previous page"
 msgstr ""
 
-#: src/admin/index.js:1303 src/admin/index.js:1464
+#: src/admin/index.js:1375 src/admin/index.js:1536
 msgid "Previous"
 msgstr ""
 
-#: src/admin/index.js:1309 src/admin/index.js:1470
+#: src/admin/index.js:1381 src/admin/index.js:1542
 #, fuzzy
 msgid "Next page"
 msgstr "Σελίδες εξόδου"
 
-#: src/admin/index.js:1311 src/admin/index.js:1472
+#: src/admin/index.js:1383 src/admin/index.js:1544
 msgid "Next"
 msgstr ""
 
-#: src/admin/index.js:1316 src/admin/index.js:1477
+#: src/admin/index.js:1388 src/admin/index.js:1549
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: src/admin/index.js:1319 src/admin/index.js:1480
+#: src/admin/index.js:1391 src/admin/index.js:1552
 msgid "%s items"
 msgstr ""
 
-#: src/admin/index.js:1371
+#: src/admin/index.js:1443
 msgid "Table: Referrer sources"
 msgstr ""
 
-#: src/admin/index.js:1386
+#: src/admin/index.js:1458
 #, fuzzy
 msgid "Referrer sources"
 msgstr "Παραπέμπτης"
 
-#: src/admin/index.js:1394 src/admin/index.js:1441
+#: src/admin/index.js:1466 src/admin/index.js:1513
 msgid "Source category"
 msgstr ""
 
-#: src/admin/index.js:1432
+#: src/admin/index.js:1504
 #, fuzzy
 msgid "No referrer data available."
 msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
 
-#: src/admin/index.js:1433
+#: src/admin/index.js:1505
 #, fuzzy
 msgid "Loading referrer sources…"
 msgstr "Σφάλμα φόρτωσης."
 
-#: src/admin/index.js:1525
+#: src/admin/index.js:1597
 msgid "Entry pages"
 msgstr "Σελίδες εισόδου"
 
-#: src/admin/index.js:1526
+#: src/admin/index.js:1598
 msgid "Exit pages"
 msgstr "Σελίδες εξόδου"
 
-#: src/admin/index.js:1553 src/admin/index.js:1679
+#: src/admin/index.js:1625 src/admin/index.js:1751
 msgid "Top pages"
 msgstr "Κορυφαίες σελίδες"
 
-#: src/admin/index.js:1556 src/admin/index.js:1683
+#: src/admin/index.js:1628 src/admin/index.js:1755
 msgid "No popular pages available."
 msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
 
-#: src/admin/index.js:1563
+#: src/admin/index.js:1635
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/index.js:1564
+#: src/admin/index.js:1636
 msgid "Missing page"
 msgstr ""
 
-#: src/admin/index.js:1566
+#: src/admin/index.js:1638
 #, fuzzy
 msgid "No missing pages available."
 msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
 
-#: src/admin/index.js:1573
+#: src/admin/index.js:1645
 msgid "Search terms"
 msgstr ""
 
-#: src/admin/index.js:1574
+#: src/admin/index.js:1646
 msgid "Search term"
 msgstr ""
 
-#: src/admin/index.js:1576
+#: src/admin/index.js:1648
 #, fuzzy
 msgid "No search terms available."
 msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
 
-#: src/admin/index.js:1577 src/admin/index.js:1628
+#: src/admin/index.js:1649 src/admin/index.js:1700
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/admin/index.js:1583
+#: src/admin/index.js:1655
 #, fuzzy
 msgid "Entry pages (approx.)"
 msgstr "Σελίδες εισόδου"
 
-#: src/admin/index.js:1584
+#: src/admin/index.js:1656
 #, fuzzy
 msgid "Entry page"
 msgstr "Σελίδες εισόδου"
 
-#: src/admin/index.js:1586
+#: src/admin/index.js:1658
 #, fuzzy
 msgid "No entry pages available."
 msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
 
-#: src/admin/index.js:1588
+#: src/admin/index.js:1660
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1596
+#: src/admin/index.js:1668
 #, fuzzy
 msgid "Exit pages (approx.)"
 msgstr "Σελίδες εξόδου"
 
-#: src/admin/index.js:1597
+#: src/admin/index.js:1669
 #, fuzzy
 msgid "Exit page"
 msgstr "Σελίδες εξόδου"
 
-#: src/admin/index.js:1599
+#: src/admin/index.js:1671
 #, fuzzy
 msgid "No exit pages available."
 msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα."
 
-#: src/admin/index.js:1601
+#: src/admin/index.js:1673
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1633
+#: src/admin/index.js:1705
 msgid "Device page views"
 msgstr "Προβολές σελίδας ανά συσκευή"
 
-#: src/admin/index.js:1638
+#: src/admin/index.js:1710
 msgid "No device data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/index.js:1639
+#: src/admin/index.js:1711
 msgid "Loading device breakdown…"
 msgstr "Φόρτωση κατανομής συσκευών…"
 
-#: src/admin/index.js:1655
+#: src/admin/index.js:1727
 msgid "%s views"
 msgstr "%s προβολές"
 
-#: src/admin/index.js:1687
+#: src/admin/index.js:1759
 msgid "Top referrers"
 msgstr "Κορυφαίοι παραπέμπτες"
 
-#: src/admin/index.js:1691
+#: src/admin/index.js:1763
 msgid "No referrers available."
 msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
 
-#: src/admin/index.js:1704
+#: src/admin/index.js:1776
 msgid "Missing admin configuration."
 msgstr "Λείπει ρύθμιση διαχειριστή."
 
-#: src/admin/index.js:1732
+#: src/admin/index.js:1804
 msgid "No panel available for this screen."
 msgstr "Δεν υπάρχει διαθέσιμο πάνελ για αυτήν την οθόνη."
 
