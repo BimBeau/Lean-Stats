@@ -82,22 +82,27 @@
     stroke-width: 1;
 }
 
+.ls-timeseries__area {
+    stroke: none;
+}
+
 .ls-timeseries__line {
     fill: none;
-    stroke: var(--ls-text);
-    stroke-width: 2;
+    stroke: var(--ls-accent, #2271b1);
+    stroke-width: 2.5;
 }
 
 .ls-timeseries__point {
     fill: var(--ls-accent, #2271b1);
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    stroke: #ffffff;
+    stroke-width: 2;
+    opacity: 1;
+    transition: transform 0.2s ease;
     cursor: pointer;
 }
 
-.ls-timeseries__svg:hover .ls-timeseries__point,
 .ls-timeseries__point.is-active {
-    opacity: 1;
+    transform: scale(1.1);
 }
 
 .ls-timeseries__axis-label {
