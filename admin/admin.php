@@ -95,12 +95,12 @@ function lean_stats_get_admin_color_scheme_variables(): array
     $palette = array_pad($palette, 5, null);
 
     $defaults = [
-        'accent' => '#2271b1',
-        'accent_2' => '#72aee6',
-        'bg' => '#ffffff',
-        'bg_muted' => '#f0f0f1',
-        'text' => '#50575e',
-        'border' => '#ccd0d4',
+        'accent' => '#1d2327',
+        'accent_2' => '#2c3338',
+        'bg' => '#2271b1',
+        'bg_muted' => '#2271b1',
+        'text' => '#1d2327',
+        'border' => '#2271b1',
     ];
 
     $normalize_color = static function ($color, string $fallback): string {
