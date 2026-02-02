@@ -161,71 +161,18 @@ class Lean_Stats_Report_Controller {
             return new WP_REST_Response($cached, 200);
         }
 
-        $daily_table = $wpdb->prefix . 'lean_stats_daily';
-        $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
-        $not_found_table = $wpdb->prefix . 'lean_stats_404s_daily';
-        $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
-
-        $overview_query = $wpdb->prepare(
-            "SELECT
-                COALESCE(SUM(hits), 0) AS page_views,
-                COUNT(DISTINCT page_path) AS unique_pages,
-                COUNT(DISTINCT NULLIF(referrer_domain, '')) AS unique_referrers
-            FROM {$daily_table}
-            WHERE date_bucket BETWEEN %s AND %s",
-            $range['start'],
-            $range['end']
-        );
-
-        $overview_row = $wpdb->get_row($overview_query, ARRAY_A);
-
-        $visits_query = $wpdb->prepare(
-            "SELECT COALESCE(SUM(entries), 0) AS visits
-            FROM {$entry_exit_table}
-            WHERE date_bucket BETWEEN %s AND %s",
-            $range['start'],
-            $range['end']
-        );
-        $visits_row = $wpdb->get_row($visits_query, ARRAY_A);
-
-        $not_found_query = $wpdb->prepare(
-            "SELECT COALESCE(SUM(hits), 0) AS not_found_hits
-            FROM {$not_found_table}
-            WHERE date_bucket BETWEEN %s AND %s",
-            $range['start'],
-            $range['end']
-        );
-        $not_found_row = $wpdb->get_row($not_found_query, ARRAY_A);
-
-        $search_query = $wpdb->prepare(
-            "SELECT
-                COALESCE(SUM(hits), 0) AS search_hits,
-                COUNT(DISTINCT search_term) AS unique_search_terms
-            FROM {$search_terms_table}
-            WHERE date_bucket BETWEEN %s AND %s",
-            $range['start'],
-            $range['end']
-        );
-        $search_row = $wpdb->get_row($search_query, ARRAY_A);
+        $overview = $this->build_overview_totals($range);
+        $comparison_range = $this->get_previous_range($range);
+        $comparison_overview = $this->build_overview_totals($comparison_range);
         $series = $this->build_overview_series($range);
 
         $payload = [
             'range' => $range,
-            'overview' => [
-                'visits' => isset($visits_row['visits']) ? (int) $visits_row['visits'] : 0,
-                'pageViews' => isset($overview_row['page_views']) ? (int) $overview_row['page_views'] : 0,
-                'uniquePages' => isset($overview_row['unique_pages']) ? (int) $overview_row['unique_pages'] : 0,
-                'uniqueReferrers' => isset($overview_row['unique_referrers'])
-                    ? (int) $overview_row['unique_referrers']
-                    : 0,
-                'notFoundHits' => isset($not_found_row['not_found_hits'])
-                    ? (int) $not_found_row['not_found_hits']
-                    : 0,
-                'searchHits' => isset($search_row['search_hits']) ? (int) $search_row['search_hits'] : 0,
-                'uniqueSearchTerms' => isset($search_row['unique_search_terms'])
-                    ? (int) $search_row['unique_search_terms']
-                    : 0,
+            'comparison' => [
+                'range' => $comparison_range,
+                'overview' => $comparison_overview,
             ],
+            'overview' => $overview,
             'series' => $series,
         ];
 
@@ -423,12 +370,95 @@ class Lean_Stats_Report_Controller {
     }
 
     /**
+     * Resolve previous day range matching the length of the current range.
+     */
+    private function get_previous_range(array $range): array {
+        $start_timestamp = strtotime($range['start']);
+        $end_timestamp = strtotime($range['end']);
+        $day_span = (int) round(($end_timestamp - $start_timestamp) / DAY_IN_SECONDS) + 1;
+        $previous_end = $start_timestamp - DAY_IN_SECONDS;
+        $previous_start = $previous_end - (($day_span - 1) * DAY_IN_SECONDS);
+
+        return [
+            'start' => wp_date('Y-m-d', $previous_start),
+            'end' => wp_date('Y-m-d', $previous_end),
+        ];
+    }
+
+    /**
      * Resolve hour range from a day range.
      */
     private function get_hour_range(array $range): array {
         return [
             'start' => $range['start'] . ' 00:00:00',
             'end' => $range['end'] . ' 23:00:00',
+        ];
+    }
+
+    /**
+     * Build overview totals for a given range.
+     */
+    private function build_overview_totals(array $range): array {
+        global $wpdb;
+
+        $daily_table = $wpdb->prefix . 'lean_stats_daily';
+        $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+        $not_found_table = $wpdb->prefix . 'lean_stats_404s_daily';
+        $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
+
+        $overview_query = $wpdb->prepare(
+            "SELECT
+                COALESCE(SUM(hits), 0) AS page_views,
+                COUNT(DISTINCT page_path) AS unique_pages,
+                COUNT(DISTINCT NULLIF(referrer_domain, '')) AS unique_referrers
+            FROM {$daily_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+        $overview_row = $wpdb->get_row($overview_query, ARRAY_A);
+
+        $visits_query = $wpdb->prepare(
+            "SELECT COALESCE(SUM(entries), 0) AS visits
+            FROM {$entry_exit_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+        $visits_row = $wpdb->get_row($visits_query, ARRAY_A);
+
+        $not_found_query = $wpdb->prepare(
+            "SELECT COALESCE(SUM(hits), 0) AS not_found_hits
+            FROM {$not_found_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+        $not_found_row = $wpdb->get_row($not_found_query, ARRAY_A);
+
+        $search_query = $wpdb->prepare(
+            "SELECT
+                COALESCE(SUM(hits), 0) AS search_hits,
+                COUNT(DISTINCT search_term) AS unique_search_terms
+            FROM {$search_terms_table}
+            WHERE date_bucket BETWEEN %s AND %s",
+            $range['start'],
+            $range['end']
+        );
+        $search_row = $wpdb->get_row($search_query, ARRAY_A);
+
+        return [
+            'visits' => isset($visits_row['visits']) ? (int) $visits_row['visits'] : 0,
+            'pageViews' => isset($overview_row['page_views']) ? (int) $overview_row['page_views'] : 0,
+            'uniquePages' => isset($overview_row['unique_pages']) ? (int) $overview_row['unique_pages'] : 0,
+            'uniqueReferrers' => isset($overview_row['unique_referrers'])
+                ? (int) $overview_row['unique_referrers']
+                : 0,
+            'notFoundHits' => isset($not_found_row['not_found_hits']) ? (int) $not_found_row['not_found_hits'] : 0,
+            'searchHits' => isset($search_row['search_hits']) ? (int) $search_row['search_hits'] : 0,
+            'uniqueSearchTerms' => isset($search_row['unique_search_terms'])
+                ? (int) $search_row['unique_search_terms']
+                : 0,
         ];
     }
 

@@ -57,6 +57,22 @@
     font-size: 24px;
 }
 
+.ls-kpi-card__value-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ls-kpi-card__badge.components-badge {
+    font-size: 11px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 999px;
+    color: var(--ls-text, #50575e);
+    background: var(--ls-surface-2, #f0f0f1);
+}
+
 .ls-timeseries {
     display: grid;
     gap: var(--lean-stats-gap-md);
