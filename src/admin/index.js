@@ -12,6 +12,7 @@ import {
     CheckboxControl,
     Flex,
     FlexItem,
+    Badge,
     Modal,
     Notice,
     SelectControl,
@@ -994,11 +995,38 @@ const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
     };
 };
 
+const calculateChangePercent = (current, previous) => {
+    if (previous === null || previous === undefined) {
+        return null;
+    }
+
+    if (previous === 0) {
+        return current === 0 ? 0 : 100;
+    }
+
+    return ((current - previous) / previous) * 100;
+};
+
+const formatChangePercent = (value) => {
+    if (value === null || value === undefined) {
+        return null;
+    }
+
+    const formatter = new Intl.NumberFormat(undefined, {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 0,
+        signDisplay: 'exceptZero',
+    });
+
+    return `${formatter.format(value)}%`;
+};
+
 const OverviewKpis = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/overview', range, {
         namespace: ADMIN_CONFIG?.settings?.restNamespace,
     });
     const overview = data?.overview || null;
+    const comparisonOverview = data?.comparison?.overview || null;
     const isEmpty = !isLoading && !error && !overview;
 
     if (isLoading || error || isEmpty) {
@@ -1033,26 +1061,31 @@ const OverviewKpis = ({ range }) => {
             value: overview.visits ?? 0,
             icon: 'visibility',
             tooltip: visitsTooltip,
+            comparisonValue: comparisonOverview?.visits,
         },
         {
             label: __('Page views', 'lean-stats'),
             value: overview.pageViews,
             icon: 'chart-bar',
+            comparisonValue: comparisonOverview?.pageViews,
         },
         {
             label: __('Referring sites', 'lean-stats'),
             value: overview.uniqueReferrers,
             icon: 'admin-links',
+            comparisonValue: comparisonOverview?.uniqueReferrers,
         },
         {
             label: __('Pages not found (404)', 'lean-stats'),
             value: overview.notFoundHits,
             icon: 'warning',
+            comparisonValue: comparisonOverview?.notFoundHits,
         },
         {
             label: __('Internal searches', 'lean-stats'),
             value: overview.searchHits,
             icon: 'search',
+            comparisonValue: comparisonOverview?.searchHits,
         },
     ];
 
@@ -1078,7 +1111,31 @@ const OverviewKpis = ({ range }) => {
                                     </Tooltip>
                                 ) : null}
                             </p>
-                            <strong className="ls-kpi-card__value">{card.value}</strong>
+                            <div className="ls-kpi-card__value-row">
+                                <strong className="ls-kpi-card__value">{card.value}</strong>
+                                {(() => {
+                                    const changePercent = calculateChangePercent(
+                                        card.value,
+                                        card.comparisonValue
+                                    );
+                                    const formattedChange = formatChangePercent(changePercent);
+                                    if (!formattedChange) {
+                                        return null;
+                                    }
+
+                                    return (
+                                        <Badge
+                                            className="ls-kpi-card__badge"
+                                            aria-label={sprintf(
+                                                __('Change vs previous period: %s', 'lean-stats'),
+                                                formattedChange
+                                            )}
+                                        >
+                                            {formattedChange}
+                                        </Badge>
+                                    );
+                                })()}
+                            </div>
                         </div>
                     </CardBody>
                 </Card>
