@@ -256,6 +256,9 @@ class Lean_Stats_Admin_Controller {
         }
 
         $settings = lean_stats_update_settings($payload);
+        if (is_wp_error($settings)) {
+            return $settings;
+        }
 
         return new WP_REST_Response(
             [

@@ -103,7 +103,7 @@ Lean Stats is designed to minimize data collection:
 - **Exclusions**: skips tracking for specified roles and URL paths.
 - **DNT/GPC**: respects `DNT: 1` and `Sec-GPC: 1` when enabled.
 - **Retention**: raw logs keep a short, configurable retention window when debug mode is enabled.
-- **Geolocation**: MaxMind API credentials enable hosted lookups; otherwise the local GeoLite2 database is used.
+- **Geolocation**: MaxMind Account ID and License Key enable IP geolocation via the MaxMind API.
 - **Purge**: a purge action deletes aggregated analytics tables and raw logs while keeping settings.
 
 ## 🧩 Admin UI

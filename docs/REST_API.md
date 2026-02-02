@@ -128,7 +128,7 @@ Admin routes require:
 
 ### GET `/admin/geolocation`
 
-Returns geolocation data for the current request IP using MaxMind (API or local GeoLite2).
+Returns geolocation data for the current request IP using the MaxMind API.
 
 Response (200):
 
