@@ -825,6 +825,40 @@ const LINE_CHART_HEIGHT = 240;
 const LINE_CHART_PADDING = 32;
 const LINE_CHART_LABEL_COUNT = 5;
 
+const buildSmoothPath = (points, smoothing = 0.2) => {
+    if (points.length === 0) {
+        return '';
+    }
+
+    const controlPoint = (current, previous, next, reverse = false) => {
+        const previousPoint = previous || current;
+        const nextPoint = next || current;
+        const length = Math.hypot(nextPoint.x - previousPoint.x, nextPoint.y - previousPoint.y);
+        const angle =
+            Math.atan2(nextPoint.y - previousPoint.y, nextPoint.x - previousPoint.x) +
+            (reverse ? Math.PI : 0);
+        const controlLength = length * smoothing;
+
+        return {
+            x: current.x + Math.cos(angle) * controlLength,
+            y: current.y + Math.sin(angle) * controlLength,
+        };
+    };
+
+    return points.reduce((path, point, index, allPoints) => {
+        if (index === 0) {
+            return `M ${point.x} ${point.y}`;
+        }
+
+        const previousPoint = allPoints[index - 1];
+        const nextPoint = allPoints[index + 1];
+        const controlPointStart = controlPoint(previousPoint, allPoints[index - 2], point);
+        const controlPointEnd = controlPoint(point, previousPoint, nextPoint, true);
+
+        return `${path} C ${controlPointStart.x} ${controlPointStart.y} ${controlPointEnd.x} ${controlPointEnd.y} ${point.x} ${point.y}`;
+    }, '');
+};
+
 const buildLineChartData = (items) => {
     const maxHits = items.reduce((max, item) => Math.max(max, item.hits), 0);
     const width = LINE_CHART_WIDTH;
@@ -845,9 +879,12 @@ const buildLineChartData = (items) => {
         };
     });
 
-    const path = points
-        .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
-        .join(' ');
+    const linePath = buildSmoothPath(points);
+    const baselineY = height - padding;
+    const areaPath =
+        points.length > 0
+            ? `${linePath} L ${points[points.length - 1].x} ${baselineY} L ${points[0].x} ${baselineY} Z`
+            : '';
 
     const labelCount = Math.min(LINE_CHART_LABEL_COUNT, items.length);
     const labelIndices = new Set();
@@ -874,11 +911,13 @@ const buildLineChartData = (items) => {
 
     return {
         points,
-        path,
+        linePath,
+        areaPath,
         maxHits,
         width,
         height,
         padding,
+        baselineY,
         xLabels,
     };
 };
@@ -1002,6 +1041,7 @@ const TimeseriesChart = ({ range }) => {
             __('Page views', 'lean-stats')
         )
         : null;
+    const gradientId = 'ls-timeseries-gradient';
 
     return (
         <LsCard title={__('Daily page views', 'lean-stats')}>
@@ -1028,6 +1068,12 @@ const TimeseriesChart = ({ range }) => {
                                 role="img"
                                 aria-label={__('Daily page views line chart', 'lean-stats')}
                             >
+                                <defs>
+                                    <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="var(--ls-accent, #2271b1)" stopOpacity="0.35" />
+                                        <stop offset="100%" stopColor="var(--ls-accent, #2271b1)" stopOpacity="0" />
+                                    </linearGradient>
+                                </defs>
                                 <rect
                                     x="0"
                                     y="0"
@@ -1049,7 +1095,12 @@ const TimeseriesChart = ({ range }) => {
                                     y2={chartData.height - chartData.padding}
                                     className="ls-timeseries__axis"
                                 />
-                                <path d={chartData.path} className="ls-timeseries__line" />
+                                <path
+                                    d={chartData.areaPath}
+                                    className="ls-timeseries__area"
+                                    fill={`url(#${gradientId})`}
+                                />
+                                <path d={chartData.linePath} className="ls-timeseries__line" />
                                 {chartData.xLabels.map((label) => (
                                     <text
                                         key={`label-${label.label}`}
@@ -1066,7 +1117,7 @@ const TimeseriesChart = ({ range }) => {
                                         key={`${point.label}-${point.hits}`}
                                         cx={point.x}
                                         cy={point.y}
-                                        r="3"
+                                        r="4"
                                         className={`ls-timeseries__point${
                                             activePoint?.label === point.label ? ' is-active' : ''
                                         }`}
