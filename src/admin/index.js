@@ -2,7 +2,7 @@
  * Admin entry point for Lean Stats.
  */
 
-import { render, useEffect, useMemo, useState } from '@wordpress/element';
+import { render, useCallback, useEffect, useMemo, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import {
     Button,
@@ -931,9 +931,9 @@ const buildSmoothPath = (points, smoothing = 0.2) => {
     }, '');
 };
 
-const buildLineChartData = (items) => {
+const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
     const maxHits = items.reduce((max, item) => Math.max(max, item.hits), 0);
-    const width = LINE_CHART_WIDTH;
+    const width = Math.max(Math.round(chartWidth), LINE_CHART_PADDING * 2 + 1);
     const height = LINE_CHART_HEIGHT;
     const padding = LINE_CHART_PADDING;
     const innerWidth = Math.max(width - padding * 2, 1);
@@ -1090,8 +1090,14 @@ const OverviewKpis = ({ range }) => {
 const TimeseriesChart = ({ range }) => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/timeseries/day', range);
     const items = data?.items || [];
-    const chartData = useMemo(() => buildLineChartData(items), [items]);
+    const [chartWidth, setChartWidth] = useState(LINE_CHART_WIDTH);
+    const chartData = useMemo(() => buildLineChartData(items, chartWidth), [items, chartWidth]);
     const [activePoint, setActivePoint] = useState(null);
+    // ResizeObserver updates width without changing the fixed 240px height.
+    const handleChartResize = useCallback(({ width }) => {
+        const nextWidth = Math.max(Math.round(width), LINE_CHART_PADDING * 2 + 1);
+        setChartWidth((prev) => (prev === nextWidth ? prev : nextWidth));
+    }, []);
 
     const formatAxisLabel = (value) => {
         const date = new Date(`${value}T00:00:00`);
@@ -1126,7 +1132,11 @@ const TimeseriesChart = ({ range }) => {
             />
             {!isLoading && !error && items.length > 0 && (
                 <div className="ls-timeseries">
-                    <ChartFrame height={240} ariaLabel={__('Daily page views line chart', 'lean-stats')}>
+                    <ChartFrame
+                        height={LINE_CHART_HEIGHT}
+                        ariaLabel={__('Daily page views line chart', 'lean-stats')}
+                        onResize={handleChartResize}
+                    >
                         <div
                             className="ls-timeseries__chart"
                             onMouseLeave={() => setActivePoint(null)}
