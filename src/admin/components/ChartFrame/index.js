@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from '@wordpress/element';
 
 const useSizedContainer = () => {
     const ref = useRef(null);
-    const [hasSize, setHasSize] = useState(false);
+    const [size, setSize] = useState({ width: 0, height: 0 });
+    const hasSize = size.width > 0 && size.height > 0;
 
     useEffect(() => {
         const node = ref.current;
@@ -12,8 +13,13 @@ const useSizedContainer = () => {
 
         const updateSize = () => {
             const rect = node.getBoundingClientRect();
-            const nextHasSize = rect.width > 0 && rect.height > 0;
-            setHasSize((prev) => (prev === nextHasSize ? prev : nextHasSize));
+            const nextSize = {
+                width: Math.round(rect.width),
+                height: Math.round(rect.height),
+            };
+            setSize((prev) =>
+                prev.width === nextSize.width && prev.height === nextSize.height ? prev : nextSize
+            );
         };
 
         updateSize();
@@ -35,11 +41,19 @@ const useSizedContainer = () => {
         };
     }, []);
 
-    return { ref, hasSize };
+    return { ref, size, hasSize };
 };
 
-const ChartFrame = ({ height, ariaLabel, children }) => {
-    const { ref, hasSize } = useSizedContainer();
+const ChartFrame = ({ height, ariaLabel, children, onResize }) => {
+    const { ref, size, hasSize } = useSizedContainer();
+
+    useEffect(() => {
+        if (!hasSize || !onResize) {
+            return;
+        }
+
+        onResize(size);
+    }, [hasSize, onResize, size]);
 
     return (
         <div ref={ref} className="ls-chart-frame" data-height={height} role="img" aria-label={ariaLabel}>
