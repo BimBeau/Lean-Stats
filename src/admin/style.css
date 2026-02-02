@@ -93,7 +93,7 @@
 }
 
 .ls-timeseries__point {
-    fill: var(--ls-accent, #2271b1);
+    fill: var(--ls-bg, #2271b1);
     stroke: #ffffff;
     stroke-width: 2;
     opacity: 1;
