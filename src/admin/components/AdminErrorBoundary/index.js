@@ -31,13 +31,15 @@ class AdminErrorBoundary extends Component {
         if (details) {
             const handlesList = (details?.checkedHandles || checkedHandles).filter(Boolean);
             const globalsList = (details?.checkedGlobals || checkedGlobals).filter(Boolean);
+            const detailMessage =
+                details?.reason || details?.message || (typeof details === 'string' ? details : '');
 
             return (
                 <Notice status="error" isDismissible={false}>
                     <p>
                         {__('Lean Stats cannot load the admin interface.', 'lean-stats')}
                     </p>
-                    {details?.reason && <p>{details.reason}</p>}
+                    {detailMessage && <p>{detailMessage}</p>}
                     {handlesList.length > 0 && (
                         <p>
                             {sprintf(
