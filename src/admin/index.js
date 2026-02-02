@@ -48,7 +48,8 @@ const DEFAULT_SETTINGS = {
     excluded_roles: [],
     excluded_paths: [],
     debug_enabled: false,
-    maxmind_api_key: '',
+    maxmind_account_id: '',
+    maxmind_license_key: '',
 };
 const DEFAULT_RANGE_PRESET = '30d';
 const RANGE_PRESET_OPTIONS = ['7d', '30d', '90d'];
@@ -379,10 +380,7 @@ const GeolocationPanel = () => {
     const { data, isLoading, error } = useAdminEndpoint('/admin/geolocation');
     const location = data?.location || null;
     const hasLocation = location && !location.error;
-    const sourceLabel =
-        location?.source === 'maxmind-api'
-            ? __('MaxMind API', 'lean-stats')
-            : __('GeoLite2 (local)', 'lean-stats');
+    const sourceLabel = __('MaxMind API', 'lean-stats');
 
     return (
         <LsCard title={__('Geolocation', 'lean-stats')}>
@@ -458,11 +456,29 @@ const SettingsPanel = () => {
     const [excludedPathsInput, setExcludedPathsInput] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveNotice, setSaveNotice] = useState(null);
+    const [validationErrors, setValidationErrors] = useState({});
     const [isPurgeOpen, setIsPurgeOpen] = useState(false);
     const [isPurging, setIsPurging] = useState(false);
     const [purgeNotice, setPurgeNotice] = useState(null);
     const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
     const debugEnabled = Boolean(formState.debug_enabled);
+    const validateMaxMindFields = (nextState) => {
+        const errors = {};
+        const accountId = String(nextState.maxmind_account_id || '').trim();
+        const licenseKey = String(nextState.maxmind_license_key || '').trim();
+
+        if (!accountId) {
+            errors.maxmind_account_id = __('MaxMind Account ID is required.', 'lean-stats');
+        } else if (!/^\d+$/.test(accountId)) {
+            errors.maxmind_account_id = __('MaxMind Account ID must be numeric.', 'lean-stats');
+        }
+
+        if (!licenseKey) {
+            errors.maxmind_license_key = __('MaxMind License Key is required.', 'lean-stats');
+        }
+
+        return errors;
+    };
 
     useEffect(() => {
         if (data?.settings) {
@@ -471,12 +487,23 @@ const SettingsPanel = () => {
             setAllowlistInput(normalized.url_query_allowlist.join(', '));
             setExcludedPathsInput(normalized.excluded_paths.join('\n'));
             window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
+            setValidationErrors({});
         }
     }, [data]);
 
     const onSave = async () => {
         if (!ADMIN_CONFIG?.restNonce || !ADMIN_CONFIG?.restUrl) {
             setSaveNotice({ status: 'error', message: __('Missing REST configuration.', 'lean-stats') });
+            return;
+        }
+
+        const errors = validateMaxMindFields(formState);
+        if (Object.keys(errors).length > 0) {
+            setValidationErrors(errors);
+            setSaveNotice({
+                status: 'error',
+                message: Object.values(errors).join(' '),
+            });
             return;
         }
 
@@ -498,19 +525,24 @@ const SettingsPanel = () => {
                 body: JSON.stringify(formState),
             });
 
+            const payload = await response.json().catch(() => null);
+
             if (!response.ok) {
+                if (payload?.data?.field_errors) {
+                    setValidationErrors(payload.data.field_errors);
+                }
                 throw new Error(
-                    sprintf(__('API error (%s)', 'lean-stats'), response.status)
+                    payload?.message || sprintf(__('API error (%s)', 'lean-stats'), response.status)
                 );
             }
 
-            const payload = await response.json();
             if (payload?.settings) {
                 const normalized = normalizeSettings(payload.settings);
                 setFormState(normalized);
                 setAllowlistInput(normalized.url_query_allowlist.join(', '));
                 setExcludedPathsInput(normalized.excluded_paths.join('\n'));
                 window.LEAN_STATS_DEBUG = Boolean(normalized.debug_enabled);
+                setValidationErrors({});
             }
 
             setSaveNotice({ status: 'success', message: __('Settings saved.', 'lean-stats') });
@@ -637,15 +669,55 @@ const SettingsPanel = () => {
                                 <Card className="ls-settings-section">
                                     <CardBody>
                                         <h3 className="ls-settings-section__title">{__('Geolocation', 'lean-stats')}</h3>
-                                        <TextControl
-                                            label={__('MaxMind API key', 'lean-stats')}
-                                            type="password"
-                                            help={__(
-                                                'Format: AccountID:LicenseKey. Leave blank to use the local GeoLite2 database.',
+                                        <p>
+                                            {__(
+                                                'MaxMind Account ID and License Key are required to enable IP geolocation.',
                                                 'lean-stats'
                                             )}
-                                            value={formState.maxmind_api_key}
-                                            onChange={(value) => setFormState((prev) => ({ ...prev, maxmind_api_key: value }))}
+                                        </p>
+                                        <TextControl
+                                            label={__('MaxMind Account ID', 'lean-stats')}
+                                            type="text"
+                                            help={
+                                                validationErrors.maxmind_account_id ||
+                                                __(
+                                                    'Numeric Account ID for MaxMind IP geolocation.',
+                                                    'lean-stats'
+                                                )
+                                            }
+                                            value={formState.maxmind_account_id}
+                                            onChange={(value) => {
+                                                setFormState((prev) => ({ ...prev, maxmind_account_id: value }));
+                                                if (validationErrors.maxmind_account_id) {
+                                                    setValidationErrors((prev) => ({
+                                                        ...prev,
+                                                        maxmind_account_id: null,
+                                                    }));
+                                                }
+                                            }}
+                                            isInvalid={Boolean(validationErrors.maxmind_account_id)}
+                                        />
+                                        <TextControl
+                                            label={__('MaxMind License Key', 'lean-stats')}
+                                            type="password"
+                                            help={
+                                                validationErrors.maxmind_license_key ||
+                                                __(
+                                                    'License Key for MaxMind IP geolocation.',
+                                                    'lean-stats'
+                                                )
+                                            }
+                                            value={formState.maxmind_license_key}
+                                            onChange={(value) => {
+                                                setFormState((prev) => ({ ...prev, maxmind_license_key: value }));
+                                                if (validationErrors.maxmind_license_key) {
+                                                    setValidationErrors((prev) => ({
+                                                        ...prev,
+                                                        maxmind_license_key: null,
+                                                    }));
+                                                }
+                                            }}
+                                            isInvalid={Boolean(validationErrors.maxmind_license_key)}
                                         />
                                     </CardBody>
                                 </Card>
