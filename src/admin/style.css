@@ -88,7 +88,7 @@
 
 .ls-timeseries__line {
     fill: none;
-    stroke: var(--ls-accent, #2271b1);
+    stroke: var(--ls-border, #2271b1);
     stroke-width: 2.5;
 }
 
@@ -183,7 +183,7 @@
 }
 
 .ls-device-breakdown__bar-fill {
-    background: var(--ls-text);
+    background: var(--ls-bg);
     height: 100%;
     border-radius: 6px;
 }
