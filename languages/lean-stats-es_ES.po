@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-02T13:53:46+00:00\n"
+"POT-Creation-Date: 2026-02-02T14:00:59+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: lean-stats.php includes/settings.php:172 src/admin/index.js:306
-#: src/admin/index.js:1785
+#: src/admin/index.js:1795
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -33,8 +33,8 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Panel de control"
 
-#: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1596
-#: src/admin/index.js:1625 src/admin/index.js:1751
+#: admin/admin.php:269 src/admin/index.js:35 src/admin/index.js:1606
+#: src/admin/index.js:1635 src/admin/index.js:1761
 msgid "Top pages"
 msgstr "Top páginas"
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Loading…"
 msgstr "Cargando…"
 
-#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1346
+#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1356
 msgid "Loading: %s"
 msgstr "Cargando: %s"
 
@@ -165,12 +165,12 @@ msgstr "Cargando indicadores…"
 msgid "Date"
 msgstr ""
 
-#: src/admin/index.js:358 src/admin/index.js:1626 src/admin/index.js:1752
+#: src/admin/index.js:358 src/admin/index.js:1636 src/admin/index.js:1762
 msgid "Page"
 msgstr "Página"
 
-#: src/admin/index.js:359 src/admin/index.js:1447 src/admin/index.js:1465
-#: src/admin/index.js:1512 src/admin/index.js:1760
+#: src/admin/index.js:359 src/admin/index.js:1457 src/admin/index.js:1475
+#: src/admin/index.js:1522 src/admin/index.js:1770
 msgid "Referrer"
 msgstr "Referente"
 
@@ -178,8 +178,8 @@ msgstr "Referente"
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:368 src/admin/index.js:1446 src/admin/index.js:1447
-#: src/admin/index.js:1764
+#: src/admin/index.js:368 src/admin/index.js:1456 src/admin/index.js:1457
+#: src/admin/index.js:1774
 msgid "Direct"
 msgstr "Directo"
 
@@ -445,224 +445,224 @@ msgstr "Sesiones anónimas agregadas en el período."
 msgid "Visits"
 msgstr "Visitas"
 
-#: src/admin/index.js:1038 src/admin/index.js:1113 src/admin/index.js:1206
-#: src/admin/index.js:1239 src/admin/index.js:1464 src/admin/index.js:1514
+#: src/admin/index.js:1038 src/admin/index.js:1119 src/admin/index.js:1216
+#: src/admin/index.js:1249 src/admin/index.js:1474 src/admin/index.js:1524
 msgid "Page views"
 msgstr "Páginas vistas"
 
-#: src/admin/index.js:1048 src/admin/index.js:1599
+#: src/admin/index.js:1048 src/admin/index.js:1609
 msgid "Pages not found (404)"
 msgstr "Páginas no encontradas"
 
-#: src/admin/index.js:1110
+#: src/admin/index.js:1116
 msgid "%1$s · %2$s %3$s"
 msgstr ""
 
-#: src/admin/index.js:1119
+#: src/admin/index.js:1125
 msgid "Daily page views"
 msgstr "Páginas vistas diarias"
 
-#: src/admin/index.js:1124
+#: src/admin/index.js:1130
 msgid "No data available for this period."
 msgstr "No hay datos disponibles para este período."
 
-#: src/admin/index.js:1125
+#: src/admin/index.js:1131
 msgid "Loading chart…"
 msgstr "Cargando gráfico…"
 
-#: src/admin/index.js:1129 src/admin/index.js:1141
+#: src/admin/index.js:1137 src/admin/index.js:1151
 msgid "Daily page views line chart"
 msgstr "Gráfico de líneas de páginas vistas diarias"
 
-#: src/admin/index.js:1203
+#: src/admin/index.js:1213
 msgid "%1$s: %2$s %3$s"
 msgstr ""
 
-#: src/admin/index.js:1285 src/admin/index.js:1438
+#: src/admin/index.js:1295 src/admin/index.js:1448
 msgid "Ascending"
 msgstr ""
 
-#: src/admin/index.js:1285 src/admin/index.js:1438
+#: src/admin/index.js:1295 src/admin/index.js:1448
 msgid "Descending"
 msgstr ""
 
-#: src/admin/index.js:1286
+#: src/admin/index.js:1296
 msgid "%s label"
 msgstr ""
 
-#: src/admin/index.js:1288 src/admin/index.js:1440
+#: src/admin/index.js:1298 src/admin/index.js:1450
 msgid "Toggle sort order: %s"
 msgstr ""
 
-#: src/admin/index.js:1291
+#: src/admin/index.js:1301
 msgid "Table: %s"
 msgstr ""
 
-#: src/admin/index.js:1303 src/admin/index.js:1461
+#: src/admin/index.js:1313 src/admin/index.js:1471
 msgid "Sort by"
 msgstr ""
 
-#: src/admin/index.js:1327 src/admin/index.js:1486
+#: src/admin/index.js:1337 src/admin/index.js:1496
 msgid "Rows"
 msgstr ""
 
-#: src/admin/index.js:1373 src/admin/index.js:1534
+#: src/admin/index.js:1383 src/admin/index.js:1544
 msgid "Previous page"
 msgstr ""
 
-#: src/admin/index.js:1375 src/admin/index.js:1536
+#: src/admin/index.js:1385 src/admin/index.js:1546
 msgid "Previous"
 msgstr ""
 
-#: src/admin/index.js:1381 src/admin/index.js:1542
+#: src/admin/index.js:1391 src/admin/index.js:1552
 #, fuzzy
 msgid "Next page"
 msgstr "Páginas de salida"
 
-#: src/admin/index.js:1383 src/admin/index.js:1544
+#: src/admin/index.js:1393 src/admin/index.js:1554
 msgid "Next"
 msgstr ""
 
-#: src/admin/index.js:1388 src/admin/index.js:1549
+#: src/admin/index.js:1398 src/admin/index.js:1559
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: src/admin/index.js:1391 src/admin/index.js:1552
+#: src/admin/index.js:1401 src/admin/index.js:1562
 msgid "%s items"
 msgstr ""
 
-#: src/admin/index.js:1443
+#: src/admin/index.js:1453
 msgid "Table: Referrer sources"
 msgstr ""
 
-#: src/admin/index.js:1458
+#: src/admin/index.js:1468
 #, fuzzy
 msgid "Referrer sources"
 msgstr "Referente"
 
-#: src/admin/index.js:1466 src/admin/index.js:1513
+#: src/admin/index.js:1476 src/admin/index.js:1523
 msgid "Source category"
 msgstr ""
 
-#: src/admin/index.js:1504
+#: src/admin/index.js:1514
 #, fuzzy
 msgid "No referrer data available."
 msgstr "No hay referente disponible."
 
-#: src/admin/index.js:1505
+#: src/admin/index.js:1515
 #, fuzzy
 msgid "Loading referrer sources…"
 msgstr "Error de carga."
 
-#: src/admin/index.js:1597
+#: src/admin/index.js:1607
 msgid "Entry pages"
 msgstr "Páginas de entrada"
 
-#: src/admin/index.js:1598
+#: src/admin/index.js:1608
 msgid "Exit pages"
 msgstr "Páginas de salida"
 
-#: src/admin/index.js:1628 src/admin/index.js:1755
+#: src/admin/index.js:1638 src/admin/index.js:1765
 msgid "No popular pages available."
 msgstr "No hay páginas populares disponibles."
 
-#: src/admin/index.js:1635
+#: src/admin/index.js:1645
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/index.js:1636
-msgid "Missing page"
-msgstr ""
-
-#: src/admin/index.js:1638
-#, fuzzy
-msgid "No missing pages available."
-msgstr "No hay páginas populares disponibles."
-
-#: src/admin/index.js:1645
-msgid "Search terms"
-msgstr ""
-
 #: src/admin/index.js:1646
-msgid "Search term"
+msgid "Missing page"
 msgstr ""
 
 #: src/admin/index.js:1648
 #, fuzzy
+msgid "No missing pages available."
+msgstr "No hay páginas populares disponibles."
+
+#: src/admin/index.js:1655
+msgid "Search terms"
+msgstr ""
+
+#: src/admin/index.js:1656
+msgid "Search term"
+msgstr ""
+
+#: src/admin/index.js:1658
+#, fuzzy
 msgid "No search terms available."
 msgstr "No hay referente disponible."
 
-#: src/admin/index.js:1649 src/admin/index.js:1700
+#: src/admin/index.js:1659 src/admin/index.js:1710
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/admin/index.js:1655
+#: src/admin/index.js:1665
 #, fuzzy
 msgid "Entry pages (approx.)"
 msgstr "Páginas de entrada"
 
-#: src/admin/index.js:1656
+#: src/admin/index.js:1666
 #, fuzzy
 msgid "Entry page"
 msgstr "Páginas de entrada"
 
-#: src/admin/index.js:1658
+#: src/admin/index.js:1668
 #, fuzzy
 msgid "No entry pages available."
 msgstr "No hay páginas populares disponibles."
 
-#: src/admin/index.js:1660
+#: src/admin/index.js:1670
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1668
+#: src/admin/index.js:1678
 #, fuzzy
 msgid "Exit pages (approx.)"
 msgstr "Páginas de salida"
 
-#: src/admin/index.js:1669
+#: src/admin/index.js:1679
 #, fuzzy
 msgid "Exit page"
 msgstr "Páginas de salida"
 
-#: src/admin/index.js:1671
+#: src/admin/index.js:1681
 #, fuzzy
 msgid "No exit pages available."
 msgstr "No hay páginas populares disponibles."
 
-#: src/admin/index.js:1673
+#: src/admin/index.js:1683
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1705
+#: src/admin/index.js:1715
 msgid "Device page views"
 msgstr "Páginas vistas por dispositivo"
 
-#: src/admin/index.js:1710
+#: src/admin/index.js:1720
 msgid "No device data available."
 msgstr "No hay datos de dispositivos disponibles."
 
-#: src/admin/index.js:1711
+#: src/admin/index.js:1721
 msgid "Loading device breakdown…"
 msgstr "Cargando la distribución por dispositivo…"
 
-#: src/admin/index.js:1727
+#: src/admin/index.js:1737
 msgid "%s views"
 msgstr "%s vistas"
 
-#: src/admin/index.js:1759
+#: src/admin/index.js:1769
 msgid "Top referrers"
 msgstr "Top referentes"
 
-#: src/admin/index.js:1763
+#: src/admin/index.js:1773
 msgid "No referrers available."
 msgstr "No hay referente disponible."
 
-#: src/admin/index.js:1776
+#: src/admin/index.js:1786
 msgid "Missing admin configuration."
 msgstr "Falta la configuración de administración."
 
-#: src/admin/index.js:1804
+#: src/admin/index.js:1814
 msgid "No panel available for this screen."
 msgstr "No hay panel disponible para esta pantalla."
 
