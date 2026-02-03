@@ -12,12 +12,15 @@ class Lean_Stats_MaxMind_Service {
     public function lookup(string $ip, string $account_id, string $license_key): array {
         $url = sprintf('https://geoip.maxmind.com/geoip/v2.1/city/%s', rawurlencode($ip));
         $auth = base64_encode($account_id . ':' . $license_key);
+        $version = defined('LEAN_STATS_VERSION') ? LEAN_STATS_VERSION : 'unknown';
+        $user_agent = sprintf('Lean Stats/%s; %s', $version, home_url('/'));
         $response = wp_remote_get(
             $url,
             [
                 'headers' => [
                     'Authorization' => 'Basic ' . $auth,
                     'Accept' => 'application/json',
+                    'User-Agent' => $user_agent,
                 ],
                 'timeout' => 5,
             ]
@@ -33,8 +36,20 @@ class Lean_Stats_MaxMind_Service {
         $body = wp_remote_retrieve_body($response);
 
         if ($code !== 200) {
+            $detail = '';
+            $decoded = json_decode($body, true);
+            if (is_array($decoded)) {
+                $error_message = (string) ($decoded['error'] ?? '');
+                $error_code = (string) ($decoded['code'] ?? '');
+                if ($error_message || $error_code) {
+                    $detail = trim($error_message . ($error_code ? ' (' . $error_code . ')' : ''));
+                }
+            }
+
             return [
-                'error' => sprintf(__('MaxMind API error (%s).', 'lean-stats'), $code),
+                'error' => $detail
+                    ? sprintf(__('MaxMind API error (%1$s): %2$s.', 'lean-stats'), $code, $detail)
+                    : sprintf(__('MaxMind API error (%s).', 'lean-stats'), $code),
             ];
         }
 
