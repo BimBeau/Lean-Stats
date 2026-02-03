@@ -13,6 +13,7 @@ import {
     Flex,
     FlexItem,
     Badge,
+    __experimentalBadge as ExperimentalBadge,
     Modal,
     Notice,
     SelectControl,
@@ -28,6 +29,16 @@ import AdminErrorBoundary from './components/AdminErrorBoundary';
 import ChartFrame from './components/ChartFrame';
 import DataState from './components/DataState';
 import LsCard from './components/LsCard';
+
+const KpiBadge = ({ children, ...props }) => {
+    const BadgeComponent = Badge || ExperimentalBadge || 'span';
+
+    return (
+        <BadgeComponent className="ls-kpi-card__badge" {...props}>
+            {children}
+        </BadgeComponent>
+    );
+};
 
 const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 const DEBUG_FLAG = () => Boolean(window.LEAN_STATS_DEBUG ?? ADMIN_CONFIG?.settings?.debugEnabled);
@@ -1124,15 +1135,14 @@ const OverviewKpis = ({ range }) => {
                                     }
 
                                     return (
-                                        <Badge
-                                            className="ls-kpi-card__badge"
+                                        <KpiBadge
                                             aria-label={sprintf(
                                                 __('Change vs previous period: %s', 'lean-stats'),
                                                 formattedChange
                                             )}
                                         >
                                             {formattedChange}
-                                        </Badge>
+                                        </KpiBadge>
                                     );
                                 })()}
                             </div>
