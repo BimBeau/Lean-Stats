@@ -1224,9 +1224,8 @@ const TimeseriesChart = ({ range }) => {
 
     const chartTooltip = activePoint
         ? sprintf(
-            __('%1$s · %2$s %3$s', 'lean-stats'),
-            formatAxisLabel(activePoint.label),
-            activePoint.hits,
+            __('%1$s %2$s', 'lean-stats'),
+            formatYAxisValue(activePoint.hits),
             __('Page views', 'lean-stats')
         )
         : null;
@@ -1352,11 +1351,14 @@ const TimeseriesChart = ({ range }) => {
                             </svg>
                             {activePoint && (
                                 <div
+                                    key={`${activePoint.label}-${activePoint.hits}`}
                                     className="ls-timeseries__tooltip"
                                     role="status"
                                     style={{
                                         left: `${(activePoint.x / chartData.width) * 100}%`,
-                                        top: `${(activePoint.y / chartData.height) * 100}%`,
+                                        top: `calc(${
+                                            (activePoint.y / chartData.height) * 100
+                                        }% - 3px)`,
                                     }}
                                 >
                                     {chartTooltip}
