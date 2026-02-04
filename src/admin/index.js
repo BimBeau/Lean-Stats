@@ -908,6 +908,7 @@ const LINE_CHART_WIDTH = 640;
 const LINE_CHART_HEIGHT = 240;
 const LINE_CHART_PADDING = 32;
 const LINE_CHART_LABEL_COUNT = 5;
+const LINE_CHART_Y_TICK_COUNT = 4;
 
 const buildSmoothPath = (points, smoothing = 0.2) => {
     if (points.length === 0) {
@@ -993,6 +994,20 @@ const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
         })
         .filter(Boolean);
 
+    const yTicks = Array.from({ length: LINE_CHART_Y_TICK_COUNT }, (_, index) => {
+        if (LINE_CHART_Y_TICK_COUNT <= 1) {
+            return {
+                y: padding,
+                value: maxHits,
+            };
+        }
+        const ratio = index / (LINE_CHART_Y_TICK_COUNT - 1);
+        return {
+            y: padding + innerHeight * ratio,
+            value: Math.round(maxHits * (1 - ratio)),
+        };
+    });
+
     return {
         points,
         linePath,
@@ -1003,6 +1018,7 @@ const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
         padding,
         baselineY,
         xLabels,
+        yTicks,
     };
 };
 
@@ -1178,6 +1194,34 @@ const TimeseriesChart = ({ range }) => {
         }).format(date);
     };
 
+    const formatYAxisValue = (value) => new Intl.NumberFormat().format(value);
+
+    const handleChartMouseMove = useCallback(
+        (event) => {
+            if (!chartData.points.length) {
+                return;
+            }
+            const bounds = event.currentTarget.getBoundingClientRect();
+            if (!bounds.width) {
+                return;
+            }
+            const relativeX = ((event.clientX - bounds.left) / bounds.width) * chartData.width;
+            let closestPoint = chartData.points[0];
+            let closestDistance = Math.abs(closestPoint.x - relativeX);
+            chartData.points.forEach((point) => {
+                const distance = Math.abs(point.x - relativeX);
+                if (distance < closestDistance) {
+                    closestPoint = point;
+                    closestDistance = distance;
+                }
+            });
+            setActivePoint((previous) =>
+                previous?.label === closestPoint.label ? previous : closestPoint
+            );
+        },
+        [chartData.points, chartData.width]
+    );
+
     const chartTooltip = activePoint
         ? sprintf(
             __('%1$s · %2$s %3$s', 'lean-stats'),
@@ -1216,6 +1260,7 @@ const TimeseriesChart = ({ range }) => {
                                 className="ls-timeseries__svg"
                                 role="img"
                                 aria-label={__('Daily page views line chart', 'lean-stats')}
+                                onMouseMove={handleChartMouseMove}
                             >
                                 <defs>
                                     <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
@@ -1230,6 +1275,25 @@ const TimeseriesChart = ({ range }) => {
                                     height={chartData.height}
                                     className="ls-timeseries__bg"
                                 />
+                                {chartData.yTicks.map((tick) => (
+                                    <g key={`tick-${tick.value}-${tick.y}`}>
+                                        <line
+                                            x1={chartData.padding}
+                                            y1={tick.y}
+                                            x2={chartData.width - chartData.padding}
+                                            y2={tick.y}
+                                            className="ls-timeseries__grid-line"
+                                        />
+                                        <text
+                                            x={chartData.padding - 8}
+                                            y={tick.y + 4}
+                                            textAnchor="end"
+                                            className="ls-timeseries__axis-label ls-timeseries__axis-label--y"
+                                        >
+                                            {formatYAxisValue(tick.value)}
+                                        </text>
+                                    </g>
+                                ))}
                                 <line
                                     x1={chartData.padding}
                                     y1={chartData.padding}

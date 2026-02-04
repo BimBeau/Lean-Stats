@@ -11,6 +11,7 @@
     grid-template-rows: auto auto;
     column-gap: 12px;
     row-gap: 6px;
+    line-height: normal;
 }
 
 .ls-kpi-card__icon {
@@ -90,11 +91,16 @@
 }
 
 .ls-timeseries__bg {
-    fill: #f6f7f7;
+    fill: #ffffff;
 }
 
 .ls-timeseries__axis {
     stroke: var(--ls-accent);
+    stroke-width: 1;
+}
+
+.ls-timeseries__grid-line {
+    stroke: #dcdcde;
     stroke-width: 1;
 }
 
@@ -117,15 +123,25 @@
     transform-box: fill-box;
     transform-origin: center;
     cursor: pointer;
+    outline: none;
 }
 
 .ls-timeseries__point.is-active {
     transform: scale(1.1);
 }
 
+.ls-timeseries__point:focus {
+    outline: none;
+}
+
 .ls-timeseries__axis-label {
     fill: var(--ls-text, #50575e);
     font-size: 12px;
+}
+
+.ls-timeseries__axis-label--y {
+    fill: var(--ls-text, #50575e);
+    font-size: 11px;
 }
 
 .ls-timeseries__tooltip {
