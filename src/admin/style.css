@@ -68,10 +68,10 @@
 .ls-kpi-card__badge.components-badge {
     font-size: 11px;
     line-height: 1;
-    padding: 4px 6px;
-    border-radius: 999px;
-    color: var(--ls-text, #50575e);
-    background: var(--ls-surface-2, #f0f0f1);
+    padding: 1px 4px;
+    border-radius: 5px;
+    color: var(--ls-border, #2271b1);
+    background: color-mix(in srgb, var(--ls-bg) 15%, transparent);
 }
 
 .ls-timeseries {
