@@ -70,8 +70,8 @@
     line-height: 1;
     padding: 1px 4px;
     border-radius: 5px;
-    color: var(--ls-border, #2271b1);
-    background: color-mix(in srgb, var(--ls-bg) 15%, transparent);
+    color: var(--ls-border);
+    background-color: color-mix(in srgb, var(--ls-bg) 15%, transparent);
 }
 
 .ls-timeseries {
