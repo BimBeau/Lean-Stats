@@ -146,7 +146,7 @@
 
 .ls-timeseries__tooltip {
     position: absolute;
-    transform: translate(-50%, -120%);
+    transform: translate(-50%, calc(-120% - 3px));
     opacity: 0;
     animation: ls-timeseries-tooltip-in 0.2s ease-out forwards;
     background: #ffffff;
@@ -163,11 +163,11 @@
 @keyframes ls-timeseries-tooltip-in {
     from {
         opacity: 0;
-        transform: translate(-50%, -90%);
+        transform: translate(-50%, calc(-90% - 3px));
     }
     to {
         opacity: 1;
-        transform: translate(-50%, -120%);
+        transform: translate(-50%, calc(-120% - 3px));
     }
 }
 
