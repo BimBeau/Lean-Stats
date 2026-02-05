@@ -130,7 +130,7 @@ msgstr "Geçersiz sayfa yolu."
 msgid "Invalid timestamp bucket."
 msgstr "Geçersiz zaman damgası aralığı."
 
-msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgid "Leave blank to use \"Lean Stats\"."
 msgstr "\"Lean Stats\" kullanmak için boş bırakın."
 
 msgid "Lean Stats"
