@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T14:40:00+00:00\n"
+"POT-Creation-Date: 2026-02-05T14:46:26+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,8 +35,7 @@ msgid "Dashboard"
 msgstr "Panel de control"
 
 #: admin/admin.php:270 src/admin/constants/index.js:7
-#: src/admin/panels/OverviewPanel.js:25 src/admin/panels/TopPagesPanel.js:8
-#: src/admin/panels/TopPagesPanel.js:57
+#: src/admin/panels/OverviewPanel.js:25
 msgid "Pages"
 msgstr "Páginas"
 
@@ -483,6 +482,10 @@ msgstr ""
 msgid "Purge now"
 msgstr ""
 
+#: src/admin/panels/TopPagesPanel.js:8 src/admin/panels/TopPagesPanel.js:57
+msgid "Top pages"
+msgstr "Top páginas"
+
 #: src/admin/panels/TopPagesPanel.js:19
 msgid "Top 404s"
 msgstr ""
@@ -741,9 +744,6 @@ msgstr "Gráfico de líneas de páginas vistas diarias"
 
 #~ msgid "Device breakdown"
 #~ msgstr "Distribución por dispositivo"
-
-#~ msgid "Top pages"
-#~ msgstr "Top páginas"
 
 #~ msgid "Traffic over time"
 #~ msgstr "Tráfico en el tiempo"
