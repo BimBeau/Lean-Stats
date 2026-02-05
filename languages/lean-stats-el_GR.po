@@ -130,7 +130,7 @@ msgstr "Μη έγκυρη διαδρομή σελίδας."
 msgid "Invalid timestamp bucket."
 msgstr "Μη έγκυρο εύρος χρονικής σήμανσης."
 
-msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Αφήστε κενό για χρήση του \"Lean Stats\"."
 
 msgid "Lean Stats"
