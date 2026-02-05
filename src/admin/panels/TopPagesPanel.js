@@ -21,7 +21,6 @@ const NotFoundPanel = () => (
     endpoint="/404s"
     emptyLabel={__("No missing pages available.", "lean-stats")}
     labelFallback="/"
-    supportsPageLabelToggle
   />
 );
 
