@@ -55,10 +55,12 @@
 }
 
 .ls-kpi-card__value {
+    margin: 0;
     font-size: 24px;
 }
 
 .ls-kpi-card__value-row {
+    margin: 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -88,6 +90,7 @@
 }
 .ls-kpi-card__badge {
     display: inline-flex;
+    width: fit-content;
     align-items: center;
     font-size: 11px;
     line-height: 1;

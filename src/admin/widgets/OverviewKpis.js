@@ -138,16 +138,18 @@ const OverviewKpis = ({ range }) => {
             <CardBody className="ls-kpi-card__body">
               <div className="ls-kpi-card__content">
                 <p className="ls-kpi-card__label">{card.label}</p>
-                <p className="ls-kpi-card__value">{currentValue}</p>
-                {changeLabel !== null && (
-                  <KpiBadge
-                    status={
-                      isPositive ? "success" : isNegative ? "warning" : "info"
-                    }
-                  >
-                    {changeLabel}
-                  </KpiBadge>
-                )}
+                <p className="ls-kpi-card__value-row">
+                  <span className="ls-kpi-card__value">{currentValue}</span>
+                  {changeLabel !== null && (
+                    <KpiBadge
+                      status={
+                        isPositive ? "success" : isNegative ? "warning" : "info"
+                      }
+                    >
+                      {changeLabel}
+                    </KpiBadge>
+                  )}
+                </p>
               </div>
               <span
                 className={`dashicons dashicons-${card.icon} ls-kpi-card__icon`}
