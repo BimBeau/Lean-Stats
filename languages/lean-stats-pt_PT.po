@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T13:55:57+00:00\n"
+"POT-Creation-Date: 2026-02-05T14:00:46+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:172 src/admin/AdminApp.js:97
-#: src/admin/AdminApp.js:1974
+#: lean-stats.php includes/settings.php:172 src/admin/AdminApp.js:33
+#: src/admin/panels/registry.js:28
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -34,28 +34,28 @@ msgstr "Lean Stats"
 msgid "Dashboard"
 msgstr "Painel"
 
-#: admin/admin.php:270 src/admin/AdminApp.js:1771 src/admin/AdminApp.js:1800
-#: src/admin/AdminApp.js:1938 src/admin/constants/index.js:7
+#: admin/admin.php:270 src/admin/constants/index.js:7
+#: src/admin/panels/OverviewPanel.js:25 src/admin/panels/TopPagesPanel.js:8
+#: src/admin/panels/TopPagesPanel.js:58
 msgid "Top pages"
 msgstr "Top páginas"
 
-#: admin/admin.php:275 src/admin/AdminApp.js:1004
-#: src/admin/constants/index.js:8
+#: admin/admin.php:275 src/admin/constants/index.js:8
 msgid "Referring sites"
 msgstr "Sites de referência"
 
-#: admin/admin.php:280 src/admin/AdminApp.js:1016
-#: src/admin/constants/index.js:9
+#: admin/admin.php:280 src/admin/constants/index.js:9
 msgid "Internal searches"
 msgstr "Pesquisas internas"
 
-#: admin/admin.php:285 src/admin/AdminApp.js:177 src/admin/AdminApp.js:497
-#: src/admin/constants/index.js:10
+#: admin/admin.php:285 src/admin/constants/index.js:10
+#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/SettingsPanel.js:348
 msgid "Geolocation"
 msgstr ""
 
-#: admin/admin.php:290 src/admin/AdminApp.js:442
-#: src/admin/constants/index.js:11
+#: admin/admin.php:290 src/admin/constants/index.js:11
+#: src/admin/panels/SettingsPanel.js:293
 msgid "Settings"
 msgstr "Definições"
 
@@ -108,15 +108,15 @@ msgstr "Erro de API (%s)"
 msgid "Invalid MaxMind API response."
 msgstr "Nonce da API REST inválido."
 
-#: includes/settings.php:138 src/admin/AdminApp.js:263
+#: includes/settings.php:138 src/admin/panels/SettingsPanel.js:114
 msgid "MaxMind Account ID is required."
 msgstr ""
 
-#: includes/settings.php:140 src/admin/AdminApp.js:268
+#: includes/settings.php:140 src/admin/panels/SettingsPanel.js:119
 msgid "MaxMind Account ID must be numeric."
 msgstr ""
 
-#: includes/settings.php:144 src/admin/AdminApp.js:275
+#: includes/settings.php:144 src/admin/panels/SettingsPanel.js:126
 msgid "MaxMind License Key is required."
 msgstr ""
 
@@ -124,544 +124,22 @@ msgstr ""
 msgid "MaxMind credentials are required to enable IP geolocation."
 msgstr ""
 
-#: src/admin/AdminApp.js:129
-msgid "Enable debug mode to display raw logs."
-msgstr ""
-
-#: src/admin/AdminApp.js:140
-#, fuzzy
-msgid "No raw logs available."
-msgstr "Nenhum papel disponível."
-
-#: src/admin/AdminApp.js:141
-#, fuzzy
-msgid "Loading raw logs…"
-msgstr "A carregar indicadores…"
-
-#: src/admin/AdminApp.js:148
-msgid "Date"
-msgstr ""
-
-#: src/admin/AdminApp.js:149
-msgid "Page"
-msgstr "Página"
-
-#: src/admin/AdminApp.js:150 src/admin/AdminApp.js:1608
-#: src/admin/AdminApp.js:1629 src/admin/AdminApp.js:1679
-#: src/admin/AdminApp.js:1948
-msgid "Referrer"
-msgstr "Referenciador"
-
-#: src/admin/AdminApp.js:151
-msgid "Device"
-msgstr ""
-
-#: src/admin/AdminApp.js:159 src/admin/AdminApp.js:1606
-#: src/admin/AdminApp.js:1609 src/admin/AdminApp.js:1952
-msgid "Direct"
-msgstr "Direto"
-
-#: src/admin/AdminApp.js:174
-msgid "MaxMind API"
-msgstr ""
-
-#: src/admin/AdminApp.js:182
-#, fuzzy
-msgid "No geolocation data available."
-msgstr "Nenhum dado de dispositivo disponível."
-
-#: src/admin/AdminApp.js:183
-#, fuzzy
-msgid "Looking up location…"
-msgstr "A carregar gráfico…"
-
-#: src/admin/AdminApp.js:194
-msgid "Location is derived from the current request IP and is not stored."
-msgstr ""
-
-#: src/admin/AdminApp.js:202
-msgid "IP address"
-msgstr ""
-
-#: src/admin/AdminApp.js:206
-msgid "Country"
-msgstr ""
-
-#: src/admin/AdminApp.js:207 src/admin/AdminApp.js:211
-#: src/admin/AdminApp.js:215
-#, fuzzy
-msgid "Unavailable"
-msgstr "Nenhum KPI disponível."
-
-#: src/admin/AdminApp.js:210
-msgid "Region"
-msgstr ""
-
-#: src/admin/AdminApp.js:214
-msgid "City"
-msgstr ""
-
-#: src/admin/AdminApp.js:218
-msgid "Source"
-msgstr ""
-
-#: src/admin/AdminApp.js:233
-msgid "Period"
-msgstr "Período"
-
-#: src/admin/AdminApp.js:299 src/admin/AdminApp.js:380
-#: src/admin/api/useAdminEndpoint.js:52
-msgid "Missing REST configuration."
-msgstr "Configuração REST em falta."
-
-#: src/admin/AdminApp.js:340 src/admin/AdminApp.js:404
-#: src/admin/api/useAdminEndpoint.js:76
-msgid "API error (%s)"
-msgstr "Erro de API (%s)"
-
-#: src/admin/AdminApp.js:355
-msgid "Settings saved."
-msgstr "Definições guardadas."
-
-#: src/admin/AdminApp.js:364
-msgid "Error while saving."
-msgstr "Erro ao guardar."
-
-#: src/admin/AdminApp.js:411
-msgid "Analytics data purged."
-msgstr ""
-
-#: src/admin/AdminApp.js:420
-#, fuzzy
-msgid "Error while purging."
-msgstr "Erro ao guardar."
-
-#: src/admin/AdminApp.js:435 src/admin/AdminApp.js:473
-msgid "General"
-msgstr ""
-
-#: src/admin/AdminApp.js:437
-msgid "Logs"
-msgstr ""
-
-#: src/admin/AdminApp.js:448
-msgid "Loading settings…"
-msgstr "A carregar definições…"
-
-#: src/admin/AdminApp.js:476
-msgid "Plugin name (menu and dashboard)"
-msgstr "Nome do plugin (menu e painel)"
-
-#: src/admin/AdminApp.js:480
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "Deixar vazio para usar \"Lean Stats\"."
-
-#: src/admin/AdminApp.js:500
-msgid ""
-"MaxMind Account ID and License Key are required to enable IP geolocation."
-msgstr ""
-
-#: src/admin/AdminApp.js:506
-msgid "MaxMind Account ID"
-msgstr ""
-
-#: src/admin/AdminApp.js:510
-msgid "Numeric Account ID for MaxMind IP geolocation."
-msgstr ""
-
-#: src/admin/AdminApp.js:531
-msgid "MaxMind License Key"
-msgstr ""
-
-#: src/admin/AdminApp.js:535
-msgid "License Key for MaxMind IP geolocation."
-msgstr ""
-
-#: src/admin/AdminApp.js:560
-msgid "Privacy & consent"
-msgstr ""
-
-#: src/admin/AdminApp.js:563
-msgid "Respect DNT / GPC"
-msgstr "Respeitar DNT / GPC"
-
-#: src/admin/AdminApp.js:564
-msgid "Ignore tracking if the browser sends DNT or GPC."
-msgstr "Ignorar o rastreio se o navegador enviar DNT ou GPC."
-
-#: src/admin/AdminApp.js:577
-msgid "Debug mode"
-msgstr ""
-
-#: src/admin/AdminApp.js:578
-msgid "Enables detailed console logs and raw log capture."
-msgstr ""
-
-#: src/admin/AdminApp.js:592
-#, fuzzy
-msgid "Retention window (days)"
-msgstr "Retenção de registos brutos (dias)"
-
-#: src/admin/AdminApp.js:597
-msgid "Raw logs purge automatically after the configured window."
-msgstr ""
-
-#: src/admin/AdminApp.js:616
-#, fuzzy
-msgid "URL cleaning"
-msgstr "Limpeza de URLs"
-
-#: src/admin/AdminApp.js:619
-#, fuzzy
-msgid "Strip query parameters"
-msgstr "Remove os parâmetros de consulta."
-
-#: src/admin/AdminApp.js:620
-#, fuzzy
-msgid "Remove query parameters from tracked URLs."
-msgstr "Remove os parâmetros de consulta."
-
-#: src/admin/AdminApp.js:633
-msgid "Query parameter allowlist"
-msgstr "Lista de permissões de parâmetros de consulta"
-
-#: src/admin/AdminApp.js:634
-msgid ""
-"Comma-separated list of allowed query keys (used for URL tracking and UTM "
-"aggregation)."
-msgstr ""
-
-#: src/admin/AdminApp.js:656
-#, fuzzy
-msgid "Exclusions"
-msgstr "Exclusões por papel"
-
-#: src/admin/AdminApp.js:659
-msgid "Excluded paths"
-msgstr ""
-
-#: src/admin/AdminApp.js:660
-msgid "One per line or comma-separated (e.g., /privacy, /account)."
-msgstr ""
-
-#: src/admin/AdminApp.js:679
-msgid "Role exclusions"
-msgstr "Exclusões por papel"
-
-#: src/admin/AdminApp.js:682
-msgid ""
-"Select roles to exclude from tracking. Select all roles to ignore all logged-"
-"in users."
-msgstr ""
-
-#: src/admin/AdminApp.js:689
-msgid "No roles available."
-msgstr "Nenhum papel disponível."
-
-#: src/admin/AdminApp.js:721
-msgid "Data management"
-msgstr ""
-
-#: src/admin/AdminApp.js:724
-msgid "Remove all aggregated analytics and raw log entries."
-msgstr ""
-
-#: src/admin/AdminApp.js:734
-msgid "Purge analytics data"
-msgstr ""
-
-#: src/admin/AdminApp.js:742
-msgid "Save settings"
-msgstr "Guardar definições"
-
-#: src/admin/AdminApp.js:744
-msgid "Save"
-msgstr "Guardar"
-
-#: src/admin/AdminApp.js:748
-msgid "Confirm data purge"
-msgstr ""
-
-#: src/admin/AdminApp.js:752
-msgid ""
-"This action permanently removes all stored analytics and raw logs. Settings "
-"remain unchanged."
-msgstr ""
-
-#: src/admin/AdminApp.js:762
-msgid "Cancel"
-msgstr ""
-
-#: src/admin/AdminApp.js:770
-msgid "Purge now"
-msgstr ""
-
-#: src/admin/AdminApp.js:940 src/admin/components/DataState/index.js:19
-msgid "Loading…"
-msgstr "A carregar…"
-
-#: src/admin/AdminApp.js:966
-#, fuzzy
-msgid "No overview data available."
-msgstr "Nenhum dado de dispositivo disponível."
-
-#: src/admin/AdminApp.js:967
-#, fuzzy
-msgid "Loading overview…"
-msgstr "A carregar a distribuição por dispositivo…"
-
-#: src/admin/AdminApp.js:975
-msgid ""
-"Number of anonymous sessions over the selected period. The same person can "
-"generate multiple visits."
-msgstr ""
-"Número de sessões anónimas no período selecionado. A mesma pessoa pode gerar "
-"várias visitas."
-
-#: src/admin/AdminApp.js:979
-msgid "Anonymous sessions aggregated over the selected period."
-msgstr "Sessões anónimas agregadas no período."
-
-#: src/admin/AdminApp.js:991
-msgid "Visits"
-msgstr "Visitas"
-
-#: src/admin/AdminApp.js:998 src/admin/AdminApp.js:1328
-#: src/admin/AdminApp.js:1628 src/admin/AdminApp.js:1681
-msgid "Page views"
-msgstr "Visualizações de página"
-
-#: src/admin/AdminApp.js:1010 src/admin/AdminApp.js:1774
-msgid "Pages not found (404)"
-msgstr "Páginas não encontradas"
-
-#: src/admin/AdminApp.js:1066
-msgid "Change vs previous period: %s"
-msgstr ""
-
-#: src/admin/AdminApp.js:1133
-#, fuzzy
-msgid "%s page view"
-msgid_plural "%s page views"
-msgstr[0] "Visualizações de página"
-msgstr[1] "Visualizações de página"
-
-#: src/admin/AdminApp.js:1166 src/admin/AdminApp.js:1290
-#, fuzzy
-msgid "%1$s : %2$s"
-msgstr "%s : %s"
-
-#: src/admin/AdminApp.js:1174
-msgid "Daily page views"
-msgstr "Visualizações de página diárias"
-
-#: src/admin/AdminApp.js:1179
-msgid "No data available for this period."
-msgstr "Nenhum dado disponível para este período."
-
-#: src/admin/AdminApp.js:1180
-msgid "Loading chart…"
-msgstr "A carregar gráfico…"
-
-#: src/admin/AdminApp.js:1186 src/admin/AdminApp.js:1200
-msgid "Daily page views line chart"
-msgstr "Gráfico de linhas de visualizações de página diárias"
-
-#: src/admin/AdminApp.js:1340 src/admin/AdminApp.js:1447
-msgid "Title"
-msgstr ""
-
-#: src/admin/AdminApp.js:1406 src/admin/AdminApp.js:1597
-msgid "Ascending"
-msgstr ""
-
-#: src/admin/AdminApp.js:1407 src/admin/AdminApp.js:1598
-msgid "Descending"
-msgstr ""
-
-#: src/admin/AdminApp.js:1409
-msgid "%s label"
-msgstr ""
-
-#: src/admin/AdminApp.js:1413 src/admin/AdminApp.js:1600
-msgid "Toggle sort order: %s"
-msgstr ""
-
-#: src/admin/AdminApp.js:1416
-msgid "Table: %s"
-msgstr ""
-
-#: src/admin/AdminApp.js:1429 src/admin/AdminApp.js:1625
-msgid "Sort by"
-msgstr ""
-
-#: src/admin/AdminApp.js:1443
-msgid "Display"
-msgstr ""
-
-#: src/admin/AdminApp.js:1446
-msgid "URL"
-msgstr ""
-
-#: src/admin/AdminApp.js:1471 src/admin/AdminApp.js:1650
-msgid "Rows"
-msgstr ""
-
-#: src/admin/AdminApp.js:1490 src/admin/components/DataTableCard/index.js:13
-msgid "Loading: %s"
-msgstr "A carregar: %s"
-
-#: src/admin/AdminApp.js:1528 src/admin/AdminApp.js:1705
-msgid "Previous page"
-msgstr ""
-
-#: src/admin/AdminApp.js:1530 src/admin/AdminApp.js:1707
-msgid "Previous"
-msgstr ""
-
-#: src/admin/AdminApp.js:1538 src/admin/AdminApp.js:1715
-#, fuzzy
-msgid "Next page"
-msgstr "Páginas de saída"
-
-#: src/admin/AdminApp.js:1540 src/admin/AdminApp.js:1717
-msgid "Next"
-msgstr ""
-
-#: src/admin/AdminApp.js:1545 src/admin/AdminApp.js:1722
-msgid "Page %1$d of %2$d"
-msgstr ""
-
-#: src/admin/AdminApp.js:1548 src/admin/AdminApp.js:1725
-msgid "%s items"
-msgstr ""
-
-#: src/admin/AdminApp.js:1603
-msgid "Table: Referrer sources"
-msgstr ""
-
-#: src/admin/AdminApp.js:1622
-#, fuzzy
-msgid "Referrer sources"
-msgstr "Referenciador"
-
-#: src/admin/AdminApp.js:1630 src/admin/AdminApp.js:1680
-msgid "Source category"
-msgstr ""
-
-#: src/admin/AdminApp.js:1668
-#, fuzzy
-msgid "No referrer data available."
-msgstr "Nenhum referenciador disponível."
-
-#: src/admin/AdminApp.js:1669
-#, fuzzy
-msgid "Loading referrer sources…"
-msgstr "Erro de carregamento."
-
-#: src/admin/AdminApp.js:1772
-msgid "Entry pages"
-msgstr "Páginas de entrada"
-
-#: src/admin/AdminApp.js:1773
-msgid "Exit pages"
-msgstr "Páginas de saída"
-
-#: src/admin/AdminApp.js:1801 src/admin/AdminApp.js:1812
-#: src/admin/AdminApp.js:1833 src/admin/AdminApp.js:1847
-#: src/admin/AdminApp.js:1939
-msgid "Url"
-msgstr ""
-
-#: src/admin/AdminApp.js:1803 src/admin/AdminApp.js:1942
-msgid "No popular pages available."
-msgstr "Nenhuma página popular disponível."
-
-#: src/admin/AdminApp.js:1811
-msgid "Top 404s"
-msgstr ""
-
-#: src/admin/AdminApp.js:1814
-#, fuzzy
-msgid "No missing pages available."
-msgstr "Nenhuma página popular disponível."
-
-#: src/admin/AdminApp.js:1822
-msgid "Search terms"
-msgstr ""
-
-#: src/admin/AdminApp.js:1823
-msgid "Search term"
-msgstr ""
-
-#: src/admin/AdminApp.js:1825
-#, fuzzy
-msgid "No search terms available."
-msgstr "Nenhum referenciador disponível."
-
-#: src/admin/AdminApp.js:1826 src/admin/AdminApp.js:1882
-msgid "Unknown"
-msgstr "Desconhecido"
-
-#: src/admin/AdminApp.js:1832
-#, fuzzy
-msgid "Entry pages (approx.)"
-msgstr "Páginas de entrada"
-
-#: src/admin/AdminApp.js:1835
-#, fuzzy
-msgid "No entry pages available."
-msgstr "Nenhuma página popular disponível."
-
-#: src/admin/AdminApp.js:1837
-msgid "Entries (approx.)"
-msgstr ""
-
-#: src/admin/AdminApp.js:1846
-#, fuzzy
-msgid "Exit pages (approx.)"
-msgstr "Páginas de saída"
-
-#: src/admin/AdminApp.js:1849
-#, fuzzy
-msgid "No exit pages available."
-msgstr "Nenhuma página popular disponível."
-
-#: src/admin/AdminApp.js:1851
-msgid "Exits (approx.)"
-msgstr ""
-
-#: src/admin/AdminApp.js:1890
-msgid "Device page views"
-msgstr "Visualizações de página por dispositivo"
-
-#: src/admin/AdminApp.js:1895
-msgid "No device data available."
-msgstr "Nenhum dado de dispositivo disponível."
-
-#: src/admin/AdminApp.js:1896
-msgid "Loading device breakdown…"
-msgstr "A carregar a distribuição por dispositivo…"
-
-#: src/admin/AdminApp.js:1914
-msgid "%s views"
-msgstr "%s visualizações"
-
-#: src/admin/AdminApp.js:1947
-msgid "Top referrers"
-msgstr "Top referenciadores"
-
-#: src/admin/AdminApp.js:1951
-msgid "No referrers available."
-msgstr "Nenhum referenciador disponível."
-
-#: src/admin/AdminApp.js:1964
+#: src/admin/AdminApp.js:47
 msgid "Missing admin configuration."
 msgstr "Configuração de administração em falta."
 
-#: src/admin/AdminApp.js:1995
+#: src/admin/AdminApp.js:57
 msgid "No panel available for this screen."
 msgstr "Nenhum painel disponível para este ecrã."
+
+#: src/admin/api/useAdminEndpoint.js:52 src/admin/panels/SettingsPanel.js:150
+#: src/admin/panels/SettingsPanel.js:231
+msgid "Missing REST configuration."
+msgstr "Configuração REST em falta."
+
+#: src/admin/api/useAdminEndpoint.js:76
+msgid "API error (%s)"
+msgstr "Erro de API (%s)"
 
 #: src/admin/api/useAdminEndpoint.js:91
 msgid "Loading error."
@@ -679,6 +157,15 @@ msgstr ""
 msgid "Global namespaces checked: %s"
 msgstr ""
 
+#: src/admin/components/DataState/index.js:19
+#: src/admin/widgets/OverviewKpis.js:49
+msgid "Loading…"
+msgstr "A carregar…"
+
+#: src/admin/components/DataTableCard/index.js:13
+msgid "Loading: %s"
+msgstr "A carregar: %s"
+
 #: src/admin/constants/index.js:32
 msgid "7 days"
 msgstr "7 dias"
@@ -690,6 +177,555 @@ msgstr "30 dias"
 #: src/admin/constants/index.js:34
 msgid "90 days"
 msgstr "90 dias"
+
+#: src/admin/panels/GeolocationPanel.js:11
+msgid "MaxMind API"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:19
+#, fuzzy
+msgid "No geolocation data available."
+msgstr "Nenhum dado de dispositivo disponível."
+
+#: src/admin/panels/GeolocationPanel.js:20
+#, fuzzy
+msgid "Looking up location…"
+msgstr "A carregar gráfico…"
+
+#: src/admin/panels/GeolocationPanel.js:31
+msgid "Location is derived from the current request IP and is not stored."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:39
+msgid "IP address"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:43
+msgid "Country"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:44
+#: src/admin/panels/GeolocationPanel.js:48
+#: src/admin/panels/GeolocationPanel.js:52
+#, fuzzy
+msgid "Unavailable"
+msgstr "Nenhum KPI disponível."
+
+#: src/admin/panels/GeolocationPanel.js:47
+msgid "Region"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:51
+msgid "City"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:55
+msgid "Source"
+msgstr ""
+
+#: src/admin/panels/OverviewPanel.js:26 src/admin/panels/TopPagesPanel.js:9
+#: src/admin/panels/TopPagesPanel.js:20 src/admin/panels/TopPagesPanel.js:31
+#: src/admin/panels/TopPagesPanel.js:45
+msgid "Url"
+msgstr ""
+
+#: src/admin/panels/OverviewPanel.js:29 src/admin/panels/TopPagesPanel.js:11
+msgid "No popular pages available."
+msgstr "Nenhuma página popular disponível."
+
+#: src/admin/panels/OverviewPanel.js:34
+msgid "Top referrers"
+msgstr "Top referenciadores"
+
+#: src/admin/panels/OverviewPanel.js:35 src/admin/panels/SettingsPanel.js:75
+#: src/admin/widgets/ReferrerSourcesTableCard.js:68
+#: src/admin/widgets/ReferrerSourcesTableCard.js:93
+#: src/admin/widgets/ReferrerSourcesTableCard.js:148
+msgid "Referrer"
+msgstr "Referenciador"
+
+#: src/admin/panels/OverviewPanel.js:38
+msgid "No referrers available."
+msgstr "Nenhum referenciador disponível."
+
+#: src/admin/panels/OverviewPanel.js:39 src/admin/panels/SettingsPanel.js:84
+#: src/admin/widgets/ReferrerSourcesTableCard.js:66
+#: src/admin/widgets/ReferrerSourcesTableCard.js:69
+msgid "Direct"
+msgstr "Direto"
+
+#: src/admin/panels/SearchTermsPanel.js:7
+msgid "Search terms"
+msgstr ""
+
+#: src/admin/panels/SearchTermsPanel.js:8
+msgid "Search term"
+msgstr ""
+
+#: src/admin/panels/SearchTermsPanel.js:10
+#, fuzzy
+msgid "No search terms available."
+msgstr "Nenhum referenciador disponível."
+
+#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:16
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: src/admin/panels/SettingsPanel.js:54
+msgid "Enable debug mode to display raw logs."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:65
+#, fuzzy
+msgid "No raw logs available."
+msgstr "Nenhum papel disponível."
+
+#: src/admin/panels/SettingsPanel.js:66
+#, fuzzy
+msgid "Loading raw logs…"
+msgstr "A carregar indicadores…"
+
+#: src/admin/panels/SettingsPanel.js:73
+msgid "Date"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:74
+#: src/admin/widgets/ReferrerSourcesTableCard.js:191
+#: src/admin/widgets/ReportTableCard.js:245
+msgid "Page"
+msgstr "Página"
+
+#: src/admin/panels/SettingsPanel.js:76
+msgid "Device"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:191 src/admin/panels/SettingsPanel.js:255
+#, fuzzy
+msgid "API error"
+msgstr "Erro de API (%s)"
+
+#: src/admin/panels/SettingsPanel.js:206
+msgid "Settings saved."
+msgstr "Definições guardadas."
+
+#: src/admin/panels/SettingsPanel.js:215
+msgid "Error while saving."
+msgstr "Erro ao guardar."
+
+#: src/admin/panels/SettingsPanel.js:262
+msgid "Analytics data purged."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:271
+#, fuzzy
+msgid "Error while purging."
+msgstr "Erro ao guardar."
+
+#: src/admin/panels/SettingsPanel.js:286 src/admin/panels/SettingsPanel.js:324
+msgid "General"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:288
+msgid "Logs"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:299
+msgid "Loading settings…"
+msgstr "A carregar definições…"
+
+#: src/admin/panels/SettingsPanel.js:327
+msgid "Plugin name (menu and dashboard)"
+msgstr "Nome do plugin (menu e painel)"
+
+#: src/admin/panels/SettingsPanel.js:331
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Deixar vazio para usar \"Lean Stats\"."
+
+#: src/admin/panels/SettingsPanel.js:351
+msgid ""
+"MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:357
+msgid "MaxMind Account ID"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:361
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:382
+msgid "MaxMind License Key"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:386
+msgid "License Key for MaxMind IP geolocation."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:411
+msgid "Privacy & consent"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:414
+msgid "Respect DNT / GPC"
+msgstr "Respeitar DNT / GPC"
+
+#: src/admin/panels/SettingsPanel.js:415
+msgid "Ignore tracking if the browser sends DNT or GPC."
+msgstr "Ignorar o rastreio se o navegador enviar DNT ou GPC."
+
+#: src/admin/panels/SettingsPanel.js:428
+msgid "Debug mode"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:429
+msgid "Enables detailed console logs and raw log capture."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:443
+#, fuzzy
+msgid "Retention window (days)"
+msgstr "Retenção de registos brutos (dias)"
+
+#: src/admin/panels/SettingsPanel.js:448
+msgid "Raw logs purge automatically after the configured window."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:467
+#, fuzzy
+msgid "URL cleaning"
+msgstr "Limpeza de URLs"
+
+#: src/admin/panels/SettingsPanel.js:470
+#, fuzzy
+msgid "Strip query parameters"
+msgstr "Remove os parâmetros de consulta."
+
+#: src/admin/panels/SettingsPanel.js:471
+#, fuzzy
+msgid "Remove query parameters from tracked URLs."
+msgstr "Remove os parâmetros de consulta."
+
+#: src/admin/panels/SettingsPanel.js:484
+msgid "Query parameter allowlist"
+msgstr "Lista de permissões de parâmetros de consulta"
+
+#: src/admin/panels/SettingsPanel.js:485
+msgid ""
+"Comma-separated list of allowed query keys (used for URL tracking and UTM "
+"aggregation)."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:507
+#, fuzzy
+msgid "Exclusions"
+msgstr "Exclusões por papel"
+
+#: src/admin/panels/SettingsPanel.js:510
+msgid "Excluded paths"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:511
+msgid "One per line or comma-separated (e.g., /privacy, /account)."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:530
+msgid "Role exclusions"
+msgstr "Exclusões por papel"
+
+#: src/admin/panels/SettingsPanel.js:533
+msgid ""
+"Select roles to exclude from tracking. Select all roles to ignore all logged-"
+"in users."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:540
+msgid "No roles available."
+msgstr "Nenhum papel disponível."
+
+#: src/admin/panels/SettingsPanel.js:572
+msgid "Data management"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:575
+msgid "Remove all aggregated analytics and raw log entries."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:585
+msgid "Purge analytics data"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:593
+msgid "Save settings"
+msgstr "Guardar definições"
+
+#: src/admin/panels/SettingsPanel.js:595
+msgid "Save"
+msgstr "Guardar"
+
+#: src/admin/panels/SettingsPanel.js:599
+msgid "Confirm data purge"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:603
+msgid ""
+"This action permanently removes all stored analytics and raw logs. Settings "
+"remain unchanged."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:613
+msgid "Cancel"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:621
+msgid "Purge now"
+msgstr ""
+
+#: src/admin/panels/TopPagesPanel.js:19
+msgid "Top 404s"
+msgstr ""
+
+#: src/admin/panels/TopPagesPanel.js:22
+#, fuzzy
+msgid "No missing pages available."
+msgstr "Nenhuma página popular disponível."
+
+#: src/admin/panels/TopPagesPanel.js:30
+#, fuzzy
+msgid "Entry pages (approx.)"
+msgstr "Páginas de entrada"
+
+#: src/admin/panels/TopPagesPanel.js:33
+#, fuzzy
+msgid "No entry pages available."
+msgstr "Nenhuma página popular disponível."
+
+#: src/admin/panels/TopPagesPanel.js:35
+msgid "Entries (approx.)"
+msgstr ""
+
+#: src/admin/panels/TopPagesPanel.js:44
+#, fuzzy
+msgid "Exit pages (approx.)"
+msgstr "Páginas de saída"
+
+#: src/admin/panels/TopPagesPanel.js:47
+#, fuzzy
+msgid "No exit pages available."
+msgstr "Nenhuma página popular disponível."
+
+#: src/admin/panels/TopPagesPanel.js:49
+msgid "Exits (approx.)"
+msgstr ""
+
+#: src/admin/panels/TopPagesPanel.js:59
+msgid "Entry pages"
+msgstr "Páginas de entrada"
+
+#: src/admin/panels/TopPagesPanel.js:60
+msgid "Exit pages"
+msgstr "Páginas de saída"
+
+#: src/admin/panels/TopPagesPanel.js:63
+msgid "Pages not found (404)"
+msgstr "Páginas não encontradas"
+
+#: src/admin/widgets/DeviceSplit.js:24
+msgid "Device page views"
+msgstr "Visualizações de página por dispositivo"
+
+#: src/admin/widgets/DeviceSplit.js:29
+msgid "No device data available."
+msgstr "Nenhum dado de dispositivo disponível."
+
+#: src/admin/widgets/DeviceSplit.js:30
+msgid "Loading device breakdown…"
+msgstr "A carregar a distribuição por dispositivo…"
+
+#: src/admin/widgets/DeviceSplit.js:48
+#, fuzzy
+msgid "views"
+msgstr "%s visualizações"
+
+#: src/admin/widgets/OverviewKpis.js:75
+#, fuzzy
+msgid "No overview metrics available."
+msgstr "Nenhum dado de dispositivo disponível."
+
+#: src/admin/widgets/OverviewKpis.js:76
+msgid "Loading KPIs…"
+msgstr "A carregar indicadores…"
+
+#: src/admin/widgets/OverviewKpis.js:87
+#: src/admin/widgets/ReferrerSourcesTableCard.js:89
+#: src/admin/widgets/ReferrerSourcesTableCard.js:150
+#: src/admin/widgets/ReportTableCard.js:25
+msgid "Page views"
+msgstr "Visualizações de página"
+
+#: src/admin/widgets/OverviewKpis.js:94
+#, fuzzy
+msgid "Visitors"
+msgstr "Visitas"
+
+#: src/admin/widgets/OverviewKpis.js:101
+#, fuzzy
+msgid "Top page"
+msgstr "Top páginas"
+
+#: src/admin/widgets/OverviewKpis.js:109
+msgid "Bounce rate"
+msgstr ""
+
+#: src/admin/widgets/OverviewKpis.js:117
+msgid "Average time"
+msgstr ""
+
+#: src/admin/widgets/OverviewKpis.js:122
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/widgets/PeriodFilter.js:10
+msgid "Period"
+msgstr "Período"
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:56
+#: src/admin/widgets/ReportTableCard.js:103
+msgid "Ascending"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:57
+#: src/admin/widgets/ReportTableCard.js:104
+msgid "Descending"
+msgstr ""
+
+#. translators: %s: current sort order label.
+#: src/admin/widgets/ReferrerSourcesTableCard.js:59
+#: src/admin/widgets/ReportTableCard.js:108
+msgid "Toggle sort order"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:63
+msgid "Table: Referrer sources"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:82
+#, fuzzy
+msgid "Referrer sources"
+msgstr "Referenciador"
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:85
+#: src/admin/widgets/ReportTableCard.js:126
+msgid "Sort by"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:97
+#: src/admin/widgets/ReferrerSourcesTableCard.js:149
+msgid "Source category"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:119
+#: src/admin/widgets/ReportTableCard.js:171
+msgid "Rows"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:137
+#, fuzzy
+msgid "No referrer data available."
+msgstr "Nenhum referenciador disponível."
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:138
+#, fuzzy
+msgid "Loading referrer sources…"
+msgstr "Erro de carregamento."
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:174
+#: src/admin/widgets/ReportTableCard.js:228
+msgid "Previous page"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:176
+#: src/admin/widgets/ReportTableCard.js:230
+msgid "Previous"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:184
+#: src/admin/widgets/ReportTableCard.js:238
+#, fuzzy
+msgid "Next page"
+msgstr "Páginas de saída"
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:186
+#: src/admin/widgets/ReportTableCard.js:240
+msgid "Next"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:191
+#: src/admin/widgets/ReportTableCard.js:245
+msgid "of"
+msgstr ""
+
+#: src/admin/widgets/ReferrerSourcesTableCard.js:197
+#: src/admin/widgets/ReportTableCard.js:251
+msgid "items"
+msgstr ""
+
+#: src/admin/widgets/ReportTableCard.js:37
+#: src/admin/widgets/ReportTableCard.js:145
+msgid "Title"
+msgstr ""
+
+#. translators: %s: active first-column label.
+#: src/admin/widgets/ReportTableCard.js:106
+msgid "label"
+msgstr ""
+
+#. translators: %s: table title.
+#: src/admin/widgets/ReportTableCard.js:113
+msgid "Table"
+msgstr ""
+
+#: src/admin/widgets/ReportTableCard.js:140
+msgid "Display"
+msgstr ""
+
+#: src/admin/widgets/ReportTableCard.js:143
+msgid "URL"
+msgstr ""
+
+#: src/admin/widgets/ReportTableCard.js:190
+#, fuzzy
+msgid "Loading"
+msgstr "A carregar…"
+
+#: src/admin/widgets/TimeseriesChart.js:63
+#, fuzzy
+msgid "page view"
+msgid_plural "page views"
+msgstr[0] "Visualizações de página"
+msgstr[1] "Visualizações de página"
+
+#: src/admin/widgets/TimeseriesChart.js:105
+msgid "Daily page views"
+msgstr "Visualizações de página diárias"
+
+#: src/admin/widgets/TimeseriesChart.js:110
+msgid "No data available for this period."
+msgstr "Nenhum dado disponível para este período."
+
+#: src/admin/widgets/TimeseriesChart.js:111
+msgid "Loading chart…"
+msgstr "A carregar gráfico…"
+
+#: src/admin/widgets/TimeseriesChart.js:117
+#: src/admin/widgets/TimeseriesChart.js:131
+msgid "Daily page views line chart"
+msgstr "Gráfico de linhas de visualizações de página diárias"
+
+#~ msgid "%s : %s"
+#~ msgstr "%s : %s"
 
 #~ msgid "Device breakdown details"
 #~ msgstr "Detalhe da distribuição por dispositivo"
@@ -726,6 +762,16 @@ msgstr "90 dias"
 
 #~ msgid "Traffic over time"
 #~ msgstr "Tráfego ao longo do tempo"
+
+#~ msgid ""
+#~ "Number of anonymous sessions over the selected period. The same person "
+#~ "can generate multiple visits."
+#~ msgstr ""
+#~ "Número de sessões anónimas no período selecionado. A mesma pessoa pode "
+#~ "gerar várias visitas."
+
+#~ msgid "Anonymous sessions aggregated over the selected period."
+#~ msgstr "Sessões anónimas agregadas no período."
 
 #~ msgid "Raw logs store granular view details while debug mode is enabled."
 #~ msgstr ""
