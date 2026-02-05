@@ -17,6 +17,7 @@ import {
     Modal,
     Notice,
     SelectControl,
+    Spinner,
     TabPanel,
     TextControl,
     TextareaControl,
@@ -1119,7 +1120,39 @@ const OverviewKpis = ({ range }) => {
     const comparisonOverview = data?.comparison?.overview || null;
     const isEmpty = !isLoading && !error && !overview;
 
-    if (isLoading || error || isEmpty) {
+    if (isLoading) {
+        const loadingCards = [
+            { icon: 'visibility' },
+            { icon: 'chart-bar' },
+            { icon: 'admin-links' },
+            { icon: 'warning' },
+            { icon: 'search' },
+        ];
+
+        return (
+            <>
+                {loadingCards.map((card, index) => (
+                    <Card key={`loading-${card.icon}-${index}`} className="ls-overview__summary-card">
+                        <CardBody className="ls-kpi-card__body ls-kpi-card__body--loading">
+                            <div className="ls-kpi-card__content">
+                                <p className="ls-kpi-card__label ls-kpi-card__label--loading">
+                                    <Spinner />
+                                    <span>{__('Loading…', 'lean-stats')}</span>
+                                </p>
+                                <span className="ls-kpi-card__value-skeleton" aria-hidden="true" />
+                            </div>
+                            <span
+                                className={`dashicons dashicons-${card.icon} ls-kpi-card__icon`}
+                                aria-hidden="true"
+                            />
+                        </CardBody>
+                    </Card>
+                ))}
+            </>
+        );
+    }
+
+    if (error || isEmpty) {
         return (
             <Card className="ls-overview__summary-card ls-overview__summary-card--status">
                 <CardBody>
