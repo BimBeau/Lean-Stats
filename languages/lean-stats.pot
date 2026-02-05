@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 1.3.7\n"
+"Project-Id-Version: Lean Stats 1.3.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-05T14:17:28+00:00\n"
+"POT-Creation-Date: 2026-02-05T14:23:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -173,7 +173,7 @@ msgid "Global namespaces checked: %s"
 msgstr ""
 
 #: src/admin/components/DataState/index.js:19
-#: src/admin/widgets/OverviewKpis.js:49
+#: src/admin/widgets/OverviewKpis.js:52
 msgid "Loading…"
 msgstr ""
 
@@ -545,38 +545,38 @@ msgstr ""
 msgid "views"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:75
+#: src/admin/widgets/OverviewKpis.js:78
 msgid "No overview metrics available."
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:76
+#: src/admin/widgets/OverviewKpis.js:79
 msgid "Loading KPIs…"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:87
+#: src/admin/widgets/OverviewKpis.js:90
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
 #: src/admin/widgets/ReportTableCard.js:25
 msgid "Page views"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:94
+#: src/admin/widgets/OverviewKpis.js:97
 msgid "Visitors"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:101
+#: src/admin/widgets/OverviewKpis.js:104
 msgid "Top page"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:109
+#: src/admin/widgets/OverviewKpis.js:112
 msgid "Bounce rate"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:117
+#: src/admin/widgets/OverviewKpis.js:120
 msgid "Average time"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:122
+#: src/admin/widgets/OverviewKpis.js:125
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
