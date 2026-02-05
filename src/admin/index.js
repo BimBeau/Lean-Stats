@@ -3,7 +3,7 @@
  */
 
 import { render, useCallback, useEffect, useMemo, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import {
     Button,
     ButtonGroup,
@@ -1298,12 +1298,18 @@ const TimeseriesChart = ({ range }) => {
             return value;
         }
 
-        return new Intl.DateTimeFormat(undefined, {
+        const locale = new Intl.DateTimeFormat().resolvedOptions().locale || '';
+        const isEnglishLocale = /^en(?:-|$)/i.test(locale);
+
+        return new Intl.DateTimeFormat(isEnglishLocale ? 'en-US' : undefined, {
             day: '2-digit',
-            month: 'long',
-            year: 'numeric',
+            month: '2-digit',
+            year: '2-digit',
         }).format(date);
     };
+
+    const formatPageViewsLabel = (value) =>
+        sprintf(_n('%s page view', '%s page views', value, 'lean-stats'), formatYAxisValue(value));
 
     const handleChartMouseMove = useCallback(
         (event) => {
@@ -1333,10 +1339,9 @@ const TimeseriesChart = ({ range }) => {
 
     const chartTooltip = activePoint
         ? sprintf(
-            __('%1$s: %2$s %3$s', 'lean-stats'),
+            __('%1$s : %2$s', 'lean-stats'),
             formatTooltipDate(activePoint.label),
-            formatYAxisValue(activePoint.hits),
-            __('Page views', 'lean-stats')
+            formatPageViewsLabel(activePoint.hits)
         )
         : null;
     const gradientId = 'ls-timeseries-gradient';
@@ -1450,10 +1455,9 @@ const TimeseriesChart = ({ range }) => {
                                     >
                                         <title>
                                             {sprintf(
-                                                __('%1$s: %2$s %3$s', 'lean-stats'),
-                                                formatAxisLabel(point.label),
-                                                point.hits,
-                                                __('Page views', 'lean-stats')
+                                                __('%1$s : %2$s', 'lean-stats'),
+                                                formatTooltipDate(point.label),
+                                                formatPageViewsLabel(point.hits)
                                             )}
                                         </title>
                                     </circle>
