@@ -66,6 +66,9 @@ const DEFAULT_SETTINGS = {
 const DEFAULT_RANGE_PRESET = '30d';
 const RANGE_PRESET_OPTIONS = ['7d', '30d', '90d'];
 const RANGE_PRESET_STORAGE_PREFIX = 'lean_stats_range_preset';
+const PAGE_LABEL_DISPLAY_OPTIONS = ['url', 'title'];
+const DEFAULT_PAGE_LABEL_DISPLAY = 'url';
+const PAGE_LABEL_DISPLAY_STORAGE_PREFIX = 'lean_stats_page_label_display';
 const getRangePresetStorageKey = () => {
     const userId = ADMIN_CONFIG?.currentUserId ? String(ADMIN_CONFIG.currentUserId) : 'default';
     return `${RANGE_PRESET_STORAGE_PREFIX}:${userId}`;
@@ -107,6 +110,54 @@ const storeRangePreset = (preset) => {
     }
 };
 
+const getPageLabelDisplayStorageKey = () => {
+    const userId = ADMIN_CONFIG?.currentUserId ? String(ADMIN_CONFIG.currentUserId) : 'default';
+    return `${PAGE_LABEL_DISPLAY_STORAGE_PREFIX}:${userId}`;
+};
+
+const normalizePageLabelDisplay = (mode) =>
+    PAGE_LABEL_DISPLAY_OPTIONS.includes(mode) ? mode : null;
+
+const getStoredPageLabelDisplay = () => {
+    if (typeof window === 'undefined' || !window.localStorage) {
+        return null;
+    }
+
+    try {
+        return normalizePageLabelDisplay(
+            window.localStorage.getItem(getPageLabelDisplayStorageKey())
+        );
+    } catch (error) {
+        return null;
+    }
+};
+
+const storePageLabelDisplay = (mode) => {
+    if (typeof window === 'undefined' || !window.localStorage) {
+        return;
+    }
+
+    try {
+        window.localStorage.setItem(getPageLabelDisplayStorageKey(), mode);
+    } catch (error) {
+        // Ignore storage failures (e.g. privacy mode).
+    }
+};
+
+const useSharedPageLabelDisplay = () => {
+    const [pageLabelDisplay, setPageLabelDisplay] = useState(
+        () => getStoredPageLabelDisplay() || DEFAULT_PAGE_LABEL_DISPLAY
+    );
+
+    useEffect(() => {
+        if (normalizePageLabelDisplay(pageLabelDisplay)) {
+            storePageLabelDisplay(pageLabelDisplay);
+        }
+    }, [pageLabelDisplay]);
+
+    return [pageLabelDisplay, setPageLabelDisplay];
+};
+
 const useSharedRangePreset = () => {
     const urlPreset = getRangePresetFromUrl();
     const [rangePreset, setRangePresetState] = useState(
@@ -145,6 +196,14 @@ const formatLogTimestamp = (timestamp) => {
 
     const date = new Date(timestamp * 1000);
     return date.toLocaleString();
+};
+
+const truncatePageTitle = (title) => {
+    if (typeof title !== 'string') {
+        return '';
+    }
+
+    return title.length > 40 ? `${title.slice(0, 40)}...` : title;
 };
 
 const getRangeFromPreset = (preset) => {
@@ -1400,11 +1459,19 @@ const ReportTableCard = ({
     metricLabel = __('Page views', 'lean-stats'),
     metricKey = 'hits',
     metricValueKey = 'hits',
+    supportsPageLabelToggle = false,
 }) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
     const [orderBy, setOrderBy] = useState(metricKey);
     const [order, setOrder] = useState('desc');
+    const [pageLabelDisplay, setPageLabelDisplay] = useSharedPageLabelDisplay();
+    const activeLabelHeader =
+        supportsPageLabelToggle && pageLabelDisplay === 'title'
+            ? __('Title', 'lean-stats')
+            : labelHeader;
+    const activeLabelSortKey =
+        supportsPageLabelToggle && pageLabelDisplay === 'title' ? 'page_title' : 'label';
 
     useEffect(() => {
         setPage(1);
@@ -1414,6 +1481,18 @@ const ReportTableCard = ({
         setOrderBy(metricKey);
         setOrder('desc');
     }, [metricKey]);
+
+    useEffect(() => {
+        if (supportsPageLabelToggle && orderBy === 'label' && activeLabelSortKey === 'page_title') {
+            setOrderBy('page_title');
+            setPage(1);
+        }
+
+        if (supportsPageLabelToggle && orderBy === 'page_title' && activeLabelSortKey === 'label') {
+            setOrderBy('label');
+            setPage(1);
+        }
+    }, [supportsPageLabelToggle, orderBy, activeLabelSortKey]);
 
     const { data, isLoading, error } = useAdminEndpoint(
         endpoint,
@@ -1444,7 +1523,7 @@ const ReportTableCard = ({
     const canNext = page < totalPages;
 
     const orderLabel = order === 'asc' ? __('Ascending', 'lean-stats') : __('Descending', 'lean-stats');
-    const labelSortLabel = sprintf(__('%s label', 'lean-stats'), labelHeader);
+    const labelSortLabel = sprintf(__('%s label', 'lean-stats'), activeLabelHeader);
     const orderToggleLabel = sprintf(
         __('Toggle sort order: %s', 'lean-stats'),
         orderLabel
@@ -1454,6 +1533,7 @@ const ReportTableCard = ({
     const rows = items.map((item, index) => ({
         key: `${item.label || labelFallback}-${index}`,
         label: item.label || labelFallback,
+        pageTitle: item.page_title || '',
         value: item?.[metricValueKey] ?? 0,
     }));
 
@@ -1465,7 +1545,7 @@ const ReportTableCard = ({
                     value={orderBy}
                     options={[
                         { label: metricLabel, value: metricKey },
-                        { label: labelSortLabel, value: 'label' },
+                        { label: labelSortLabel, value: activeLabelSortKey },
                     ]}
                     onChange={(value) => {
                         setOrderBy(value);
@@ -1473,6 +1553,23 @@ const ReportTableCard = ({
                     }}
                     __nextHasNoMarginBottom
                 />
+                {supportsPageLabelToggle && (
+                    <SelectControl
+                        label={__('Display', 'lean-stats')}
+                        value={pageLabelDisplay}
+                        options={[
+                            { label: __('URL', 'lean-stats'), value: 'url' },
+                            { label: __('Title', 'lean-stats'), value: 'title' },
+                        ]}
+                        onChange={(value) => {
+                            const nextMode = normalizePageLabelDisplay(value) || DEFAULT_PAGE_LABEL_DISPLAY;
+                            setPageLabelDisplay(nextMode);
+                            setOrderBy(nextMode === 'title' ? 'page_title' : 'label');
+                            setPage(1);
+                        }}
+                        __nextHasNoMarginBottom
+                    />
+                )}
                 <Button
                     variant="secondary"
                     icon={order === 'asc' ? 'arrow-up-alt2' : 'arrow-down-alt2'}
@@ -1511,14 +1608,14 @@ const ReportTableCard = ({
                     <table className="widefat striped ls-report-table" aria-label={tableLabel}>
                         <thead>
                             <tr>
-                                <th scope="col">{labelHeader}</th>
+                                <th scope="col">{activeLabelHeader}</th>
                                 <th scope="col">{metricLabel}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {rows.map((row) => (
                                 <tr key={row.key}>
-                                    <td>{row.label}</td>
+                                    <td>{supportsPageLabelToggle && pageLabelDisplay === 'title' ? truncatePageTitle(row.pageTitle || row.label) : row.label}</td>
                                     <td>{row.value}</td>
                                 </tr>
                             ))}
@@ -1728,6 +1825,7 @@ const ReportPanel = ({
     metricLabel,
     metricKey,
     metricValueKey,
+    supportsPageLabelToggle = false,
 }) => {
     const [rangePreset, setRangePreset] = useSharedRangePreset();
     const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
@@ -1747,6 +1845,7 @@ const ReportPanel = ({
                 metricLabel={metricLabel}
                 metricKey={metricKey}
                 metricValueKey={metricValueKey}
+                supportsPageLabelToggle={supportsPageLabelToggle}
             />
         </div>
     );
@@ -1784,20 +1883,22 @@ const PagesPanel = () => {
 const TopPagesPanel = () => (
     <ReportPanel
         title={__('Top pages', 'lean-stats')}
-        labelHeader={__('Page', 'lean-stats')}
+        labelHeader={__('Url', 'lean-stats')}
         endpoint="/top-pages"
         emptyLabel={__('No popular pages available.', 'lean-stats')}
         labelFallback="/"
+        supportsPageLabelToggle
     />
 );
 
 const NotFoundPanel = () => (
     <ReportPanel
         title={__('Top 404s', 'lean-stats')}
-        labelHeader={__('Missing page', 'lean-stats')}
+        labelHeader={__('Url', 'lean-stats')}
         endpoint="/404s"
         emptyLabel={__('No missing pages available.', 'lean-stats')}
         labelFallback="/"
+        supportsPageLabelToggle
     />
 );
 
@@ -1814,26 +1915,28 @@ const SearchTermsPanel = () => (
 const EntryPagesPanel = () => (
     <ReportPanel
         title={__('Entry pages (approx.)', 'lean-stats')}
-        labelHeader={__('Entry page', 'lean-stats')}
+        labelHeader={__('Url', 'lean-stats')}
         endpoint="/entry-pages"
         emptyLabel={__('No entry pages available.', 'lean-stats')}
         labelFallback="/"
         metricLabel={__('Entries (approx.)', 'lean-stats')}
         metricKey="entries"
         metricValueKey="entries"
+        supportsPageLabelToggle
     />
 );
 
 const ExitPagesPanel = () => (
     <ReportPanel
         title={__('Exit pages (approx.)', 'lean-stats')}
-        labelHeader={__('Exit page', 'lean-stats')}
+        labelHeader={__('Url', 'lean-stats')}
         endpoint="/exit-pages"
         emptyLabel={__('No exit pages available.', 'lean-stats')}
         labelFallback="/"
         metricLabel={__('Exits (approx.)', 'lean-stats')}
         metricKey="exits"
         metricValueKey="exits"
+        supportsPageLabelToggle
     />
 );
 
@@ -1910,11 +2013,12 @@ const OverviewPanel = () => {
             <div className="ls-overview__grid">
                 <ReportTableCard
                     title={__('Top pages', 'lean-stats')}
-                    labelHeader={__('Page', 'lean-stats')}
+                    labelHeader={__('Url', 'lean-stats')}
                     range={range}
                     endpoint="/top-pages"
                     emptyLabel={__('No popular pages available.', 'lean-stats')}
                     labelFallback="/"
+                    supportsPageLabelToggle
                 />
                 <ReportTableCard
                     title={__('Top referrers', 'lean-stats')}
