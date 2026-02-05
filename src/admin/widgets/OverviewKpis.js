@@ -1,4 +1,4 @@
-import { __, _n } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { Card, CardBody, Spinner } from "@wordpress/components";
 
 import useAdminEndpoint from "../api/useAdminEndpoint";
@@ -7,7 +7,6 @@ import { ADMIN_CONFIG } from "../constants";
 import {
   calculateChangePercent,
   formatChangePercent,
-  truncatePageTitle,
 } from "../lib/formatters";
 
 const KpiBadge = ({ children, status = "info" }) => {
@@ -86,53 +85,51 @@ const OverviewKpis = ({ range }) => {
 
   const cards = [
     {
+      key: "visits",
+      label: __("Visits", "lean-stats"),
+      value: overview.visits,
+      icon: "visibility",
+      comparison: comparisonOverview?.visits,
+    },
+    {
       key: "pageViews",
       label: __("Page views", "lean-stats"),
       value: overview.pageViews,
-      icon: "visibility",
+      icon: "chart-bar",
       comparison: comparisonOverview?.pageViews,
     },
     {
-      key: "visitors",
-      label: __("Visitors", "lean-stats"),
-      value: overview.visitors,
-      icon: "chart-bar",
-      comparison: comparisonOverview?.visitors,
-    },
-    {
-      key: "topPage",
-      label: __("Top page", "lean-stats"),
-      value: truncatePageTitle(overview.topPage),
+      key: "uniqueReferrers",
+      label: __("Referring sites", "lean-stats"),
+      value: overview.uniqueReferrers,
       icon: "admin-links",
-      comparison: comparisonOverview?.topPage,
-      isText: true,
+      comparison: comparisonOverview?.uniqueReferrers,
     },
     {
-      key: "bounceRate",
-      label: __("Bounce rate", "lean-stats"),
-      value: `${overview.bounceRate}%`,
+      key: "notFoundHits",
+      label: __("Pages not found (404)", "lean-stats"),
+      value: overview.notFoundHits,
       icon: "warning",
-      comparison: comparisonOverview?.bounceRate,
-      formatter: (nextValue) => `${nextValue}%`,
+      comparison: comparisonOverview?.notFoundHits,
     },
     {
-      key: "avgTime",
-      label: __("Average time", "lean-stats"),
-      value: overview.avgTime,
+      key: "searchHits",
+      label: __("Internal searches", "lean-stats"),
+      value: overview.searchHits,
       icon: "search",
-      comparison: comparisonOverview?.avgTime,
-      formatter: (nextValue) =>
-        `${nextValue} ${_n("second", "seconds", nextValue, "lean-stats")}`,
+      comparison: comparisonOverview?.searchHits,
     },
   ];
 
   return (
     <>
       {cards.map((card) => {
-        const changePercent = calculateChangePercent(
-          card.value,
-          card.comparison,
-        );
+        const currentValue = Number(card.value) || 0;
+        const previousValue =
+          card.comparison === null || card.comparison === undefined
+            ? null
+            : Number(card.comparison);
+        const changePercent = calculateChangePercent(currentValue, previousValue);
         const changeLabel = formatChangePercent(changePercent);
         const isPositive = changePercent > 0;
         const isNegative = changePercent < 0;
@@ -141,13 +138,7 @@ const OverviewKpis = ({ range }) => {
             <CardBody className="ls-kpi-card__body">
               <div className="ls-kpi-card__content">
                 <p className="ls-kpi-card__label">{card.label}</p>
-                <p
-                  className={`ls-kpi-card__value${
-                    card.isText ? " ls-kpi-card__value--text" : ""
-                  }`}
-                >
-                  {card.value}
-                </p>
+                <p className="ls-kpi-card__value">{currentValue}</p>
                 {changeLabel !== null && (
                   <KpiBadge
                     status={
