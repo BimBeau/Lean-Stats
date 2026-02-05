@@ -1,0 +1,250 @@
+import { useCallback, useMemo, useState } from "@wordpress/element";
+import { __, _n } from "@wordpress/i18n";
+
+import useAdminEndpoint from "../api/useAdminEndpoint";
+import ChartFrame from "../components/ChartFrame";
+import DataState from "../components/DataState";
+import LsCard from "../components/LsCard";
+import {
+  LINE_CHART_HEIGHT,
+  LINE_CHART_PADDING,
+  LINE_CHART_WIDTH,
+  buildLineChartData,
+} from "../charts/lineChart";
+const TimeseriesChart = ({ range }) => {
+  const { data, isLoading, error } = useAdminEndpoint(
+    "/admin/timeseries/day",
+    range,
+  );
+  const items = data?.items ?? [];
+  const [chartWidth, setChartWidth] = useState(LINE_CHART_WIDTH);
+  const chartData = useMemo(
+    () => buildLineChartData(items, chartWidth),
+    [items, chartWidth],
+  );
+  const [activePoint, setActivePoint] = useState(null);
+  // ResizeObserver updates width without changing the fixed 240px height.
+  const handleChartResize = useCallback(({ width }) => {
+    const nextWidth = Math.max(Math.round(width), LINE_CHART_PADDING * 2 + 1);
+    setChartWidth((prev) => (prev === nextWidth ? prev : nextWidth));
+  }, []);
+
+  const formatAxisLabel = (value) => {
+    const date = new Date(`${value}T00:00:00`);
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+
+    return new Intl.DateTimeFormat(undefined, {
+      day: "2-digit",
+      month: "short",
+    }).format(date);
+  };
+
+  const formatYAxisValue = (value) => new Intl.NumberFormat().format(value);
+
+  const formatTooltipDate = (value) => {
+    const date = new Date(`${value}T00:00:00`);
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+
+    const locale = new Intl.DateTimeFormat().resolvedOptions().locale || "";
+    const isEnglishLocale = /^en(?:-|$)/i.test(locale);
+
+    return new Intl.DateTimeFormat(isEnglishLocale ? "en-US" : undefined, {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    }).format(date);
+  };
+
+  const formatPageViewsLabel = (value) =>
+    `${formatYAxisValue(value)} ${_n(
+      "page view",
+      "page views",
+      value,
+      "lean-stats",
+    )}`;
+
+  const handleChartMouseMove = useCallback(
+    (event) => {
+      if (!chartData.points.length) {
+        return;
+      }
+      const bounds = event.currentTarget.getBoundingClientRect();
+      if (!bounds.width) {
+        return;
+      }
+      const relativeX =
+        ((event.clientX - bounds.left) / bounds.width) * chartData.width;
+      let closestPoint = chartData.points[0];
+      let closestDistance = Math.abs(closestPoint.x - relativeX);
+      chartData.points.forEach((point) => {
+        const distance = Math.abs(point.x - relativeX);
+        if (distance < closestDistance) {
+          closestPoint = point;
+          closestDistance = distance;
+        }
+      });
+      setActivePoint((previous) =>
+        previous?.label === closestPoint.label ? previous : closestPoint,
+      );
+    },
+    [chartData.points, chartData.width],
+  );
+
+  const chartTooltip = activePoint
+    ? `${formatTooltipDate(activePoint.label)} : ${formatPageViewsLabel(
+        activePoint.hits,
+      )}`
+    : null;
+  const gradientId = "ls-timeseries-gradient";
+
+  return (
+    <LsCard title={__("Daily page views", "lean-stats")}>
+      <DataState
+        isLoading={isLoading}
+        error={error}
+        isEmpty={!isLoading && !error && items.length === 0}
+        emptyLabel={__("No data available for this period.", "lean-stats")}
+        loadingLabel={__("Loading chart…", "lean-stats")}
+      />
+      {!isLoading && !error && items.length > 0 && (
+        <div className="ls-timeseries">
+          <ChartFrame
+            height={LINE_CHART_HEIGHT}
+            ariaLabel={__("Daily page views line chart", "lean-stats")}
+            onResize={handleChartResize}
+          >
+            <div
+              className="ls-timeseries__chart"
+              onMouseLeave={() => setActivePoint(null)}
+            >
+              <svg
+                viewBox={`0 0 ${chartData.width} ${chartData.height}`}
+                width="100%"
+                height="100%"
+                preserveAspectRatio="xMidYMid meet"
+                className="ls-timeseries__svg"
+                role="img"
+                aria-label={__("Daily page views line chart", "lean-stats")}
+                onMouseMove={handleChartMouseMove}
+              >
+                <defs>
+                  <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="0%"
+                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopOpacity="0.35"
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopOpacity="0"
+                    />
+                  </linearGradient>
+                </defs>
+                <rect
+                  x="0"
+                  y="0"
+                  width={chartData.width}
+                  height={chartData.height}
+                  className="ls-timeseries__bg"
+                />
+                {chartData.yTicks.map((tick) => (
+                  <g key={`tick-${tick.value}-${tick.y}`}>
+                    <line
+                      x1={chartData.padding}
+                      y1={tick.y}
+                      x2={chartData.width - chartData.padding}
+                      y2={tick.y}
+                      className="ls-timeseries__grid-line"
+                    />
+                    <text
+                      x={chartData.padding - 8}
+                      y={tick.y + 4}
+                      textAnchor="end"
+                      className="ls-timeseries__axis-label ls-timeseries__axis-label--y"
+                    >
+                      {formatYAxisValue(tick.value)}
+                    </text>
+                  </g>
+                ))}
+                <line
+                  x1={chartData.padding}
+                  y1={chartData.padding}
+                  x2={chartData.padding}
+                  y2={chartData.height - chartData.padding}
+                  className="ls-timeseries__axis"
+                />
+                <line
+                  x1={chartData.padding}
+                  y1={chartData.height - chartData.padding}
+                  x2={chartData.width - chartData.padding}
+                  y2={chartData.height - chartData.padding}
+                  className="ls-timeseries__axis"
+                />
+                <path
+                  d={chartData.areaPath}
+                  className="ls-timeseries__area"
+                  fill={`url(#${gradientId})`}
+                />
+                <path d={chartData.linePath} className="ls-timeseries__line" />
+                {chartData.xLabels.map((label) => (
+                  <text
+                    key={`label-${label.label}`}
+                    x={label.x}
+                    y={chartData.height - chartData.padding + 18}
+                    textAnchor="middle"
+                    className="ls-timeseries__axis-label"
+                  >
+                    {formatAxisLabel(label.label)}
+                  </text>
+                ))}
+                {chartData.points.map((point) => (
+                  <circle
+                    key={`${point.label}-${point.hits}`}
+                    cx={point.x}
+                    cy={point.y}
+                    r="4"
+                    className={`ls-timeseries__point${
+                      activePoint?.label === point.label ? " is-active" : ""
+                    }`}
+                    onMouseEnter={() => setActivePoint(point)}
+                    onFocus={() => setActivePoint(point)}
+                    onBlur={() => setActivePoint(null)}
+                    tabIndex="0"
+                  >
+                    <title>
+                      {`${formatTooltipDate(
+                        point.label,
+                      )} : ${formatPageViewsLabel(point.hits)}`}
+                    </title>
+                  </circle>
+                ))}
+              </svg>
+              {activePoint && (
+                <div
+                  key={`${activePoint.label}-${activePoint.hits}`}
+                  className="ls-timeseries__tooltip"
+                  role="status"
+                  style={{
+                    left: `${(activePoint.x / chartData.width) * 100}%`,
+                    top: `calc(${
+                      (activePoint.y / chartData.height) * 100
+                    }% - 3px)`,
+                  }}
+                >
+                  {chartTooltip}
+                </div>
+              )}
+            </div>
+          </ChartFrame>
+        </div>
+      )}
+    </LsCard>
+  );
+};
+
+export default TimeseriesChart;
