@@ -267,7 +267,7 @@ function lean_stats_get_admin_panels(): array
         ],
         [
             'name' => 'top-pages',
-            'title' => __('Top pages', 'lean-stats'),
+            'title' => __('Pages', 'lean-stats'),
             'type' => 'core',
         ],
         [

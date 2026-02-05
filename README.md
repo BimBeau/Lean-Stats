@@ -38,7 +38,7 @@ Lean Stats focuses on **aggregated metrics**, not user journeys.
 - Page views (total pages displayed)
 - Visits (anonymous sessions)
 - Time series (per day, optionally per hour)
-- Top pages (by page views)
+- Pages (by page views)
 - Referrers by domain (e.g. `google.com`, `instagram.com`)
 - Device class (mobile / desktop / tablet)
 
