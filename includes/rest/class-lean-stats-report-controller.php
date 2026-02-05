@@ -554,6 +554,7 @@ class Lean_Stats_Report_Controller {
         }
 
         return [
+            'orderby_key' => $orderby_key,
             'orderby' => $allowed_orderby[$orderby_key],
             'order' => $order,
         ];
@@ -575,11 +576,16 @@ class Lean_Stats_Report_Controller {
 
         $range = $this->get_day_range($request);
         $pagination = $this->normalize_pagination($request);
+        $is_page_path_table = $label_column === 'page_path';
+
         if ($allowed_orderby === []) {
             $allowed_orderby = [
                 'hits' => 'metric',
                 'label' => $label_column,
             ];
+        }
+        if ($is_page_path_table && !isset($allowed_orderby['page_title'])) {
+            $allowed_orderby['page_title'] = 'page_title';
         }
         if ($default_orderby === '') {
             $default_orderby = array_key_first($allowed_orderby) ?: 'hits';
@@ -602,39 +608,83 @@ class Lean_Stats_Report_Controller {
             return new WP_REST_Response($cached, 200);
         }
 
-        $count_query = $wpdb->prepare(
-            "SELECT COUNT(*) FROM (SELECT 1
-            FROM {$table}
-            WHERE date_bucket BETWEEN %s AND %s
-            GROUP BY {$label_column}) AS totals",
-            $range['start'],
-            $range['end']
-        );
-        $total_items = (int) $wpdb->get_var($count_query);
+        if ($is_page_path_table && $sorting['orderby_key'] === 'page_title') {
+            $all_rows_query = $wpdb->prepare(
+                "SELECT {$label_column} AS label, SUM({$metric_column}) AS metric
+                FROM {$table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY {$label_column}",
+                $range['start'],
+                $range['end']
+            );
+            $all_rows = $wpdb->get_results($all_rows_query, ARRAY_A) ?: [];
+            $all_items = array_map(
+                function (array $row) use ($metric_column): array {
+                    $label = isset($row['label']) ? sanitize_text_field((string) $row['label']) : '';
 
-        $list_query = $wpdb->prepare(
-            "SELECT {$label_column} AS label, SUM({$metric_column}) AS metric
-            FROM {$table}
-            WHERE date_bucket BETWEEN %s AND %s
-            GROUP BY {$label_column}
-            ORDER BY {$sorting['orderby']} {$sorting['order']}
-            LIMIT %d OFFSET %d",
-            $range['start'],
-            $range['end'],
-            $pagination['per_page'],
-            $pagination['offset']
-        );
+                    return [
+                        'label' => $label,
+                        'page_title' => $this->resolve_page_title_from_path($label),
+                        $metric_column => isset($row['metric']) ? (int) $row['metric'] : 0,
+                    ];
+                },
+                $all_rows
+            );
 
-        $rows = $wpdb->get_results($list_query, ARRAY_A);
-        $items = array_map(
-            static function (array $row) use ($metric_column): array {
-                return [
-                    'label' => isset($row['label']) ? sanitize_text_field((string) $row['label']) : '',
-                    $metric_column => isset($row['metric']) ? (int) $row['metric'] : 0,
-                ];
-            },
-            $rows ?: []
-        );
+            usort(
+                $all_items,
+                static function (array $left, array $right): int {
+                    return strcasecmp((string) ($left['page_title'] ?? ''), (string) ($right['page_title'] ?? ''));
+                }
+            );
+            if ($sorting['order'] === 'DESC') {
+                $all_items = array_reverse($all_items);
+            }
+
+            $total_items = count($all_items);
+            $items = array_slice($all_items, $pagination['offset'], $pagination['per_page']);
+        } else {
+            $count_query = $wpdb->prepare(
+                "SELECT COUNT(*) FROM (SELECT 1
+                FROM {$table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY {$label_column}) AS totals",
+                $range['start'],
+                $range['end']
+            );
+            $total_items = (int) $wpdb->get_var($count_query);
+
+            $list_query = $wpdb->prepare(
+                "SELECT {$label_column} AS label, SUM({$metric_column}) AS metric
+                FROM {$table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY {$label_column}
+                ORDER BY {$sorting['orderby']} {$sorting['order']}
+                LIMIT %d OFFSET %d",
+                $range['start'],
+                $range['end'],
+                $pagination['per_page'],
+                $pagination['offset']
+            );
+
+            $rows = $wpdb->get_results($list_query, ARRAY_A);
+            $items = array_map(
+                function (array $row) use ($metric_column, $is_page_path_table): array {
+                    $label = isset($row['label']) ? sanitize_text_field((string) $row['label']) : '';
+                    $item = [
+                        'label' => $label,
+                        $metric_column => isset($row['metric']) ? (int) $row['metric'] : 0,
+                    ];
+
+                    if ($is_page_path_table) {
+                        $item['page_title'] = $this->resolve_page_title_from_path($label);
+                    }
+
+                    return $item;
+                },
+                $rows ?: []
+            );
+        }
 
         $payload = [
             'range' => $range,
@@ -739,6 +789,46 @@ class Lean_Stats_Report_Controller {
         $this->set_cached_payload($cache_key, $payload);
 
         return new WP_REST_Response($payload, 200);
+    }
+
+    /**
+     * Resolve a page title from a tracked page path.
+     */
+    private function resolve_page_title_from_path(string $page_path): string {
+        static $title_cache = [];
+
+        if (isset($title_cache[$page_path])) {
+            return $title_cache[$page_path];
+        }
+
+        $normalized_path = trim($page_path);
+        if ($normalized_path === '') {
+            $title_cache[$page_path] = '';
+
+            return '';
+        }
+
+        if ($normalized_path === '/') {
+            $front_page_id = (int) get_option('page_on_front');
+            if ($front_page_id > 0) {
+                $front_title = get_the_title($front_page_id);
+                $title_cache[$page_path] = is_string($front_title) ? sanitize_text_field($front_title) : '';
+
+                return $title_cache[$page_path];
+            }
+        }
+
+        $post_id = url_to_postid(home_url($normalized_path));
+        if ($post_id <= 0) {
+            $title_cache[$page_path] = '';
+
+            return '';
+        }
+
+        $title = get_the_title($post_id);
+        $title_cache[$page_path] = is_string($title) ? sanitize_text_field($title) : '';
+
+        return $title_cache[$page_path];
     }
 
     /**
