@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T13:50:10+00:00\n"
+"POT-Creation-Date: 2026-02-05T13:55:57+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,8 +26,9 @@ msgstr ""
 
 #. Author of the plugin
 #: lean-stats.php
-msgid "BimBeau"
-msgstr ""
+#, fuzzy
+msgid "BimBeau (Lean Stats)"
+msgstr "Lean Stats"
 
 #: admin/admin.php:265 src/admin/constants/index.js:6
 msgid "Dashboard"
