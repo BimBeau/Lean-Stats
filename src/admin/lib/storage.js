@@ -9,7 +9,7 @@ import {
 const normalizeRangePreset = (preset) =>
   RANGE_PRESET_OPTIONS.includes(preset) ? preset : null;
 
-const normalizePageLabelDisplay = (mode) =>
+export const normalizePageLabelDisplay = (mode) =>
   PAGE_LABEL_DISPLAY_OPTIONS.includes(mode) ? mode : null;
 
 export const getRangePresetStorageKey = () => {
