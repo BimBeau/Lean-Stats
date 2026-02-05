@@ -87,12 +87,29 @@
     background-color: var(--lean-stats-skeleton-bg);
 }
 .ls-kpi-card__badge {
+    display: inline-flex;
+    align-items: center;
     font-size: 11px;
     line-height: 1;
     padding: 4px 6px;
     border-radius: 5px;
-    color: var(--ls-border);
-    background-color: color-mix(in srgb, var(--ls-bg) 15%, transparent);
+    color: var(--ls-text, #1e1e1e);
+    background-color: color-mix(in srgb, var(--ls-accent) 12%, white);
+}
+
+.ls-kpi-card__badge--success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+}
+
+.ls-kpi-card__badge--warning {
+    color: #664d03;
+    background-color: #fff3cd;
+}
+
+.ls-kpi-card__badge--info {
+    color: #0c4a6e;
+    background-color: #d9edf7;
 }
 
 .ls-timeseries {
