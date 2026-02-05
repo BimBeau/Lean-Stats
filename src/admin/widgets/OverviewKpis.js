@@ -1,5 +1,5 @@
 import { __, _n } from "@wordpress/i18n";
-import { Badge, Card, CardBody, Spinner } from "@wordpress/components";
+import { Card, CardBody, Spinner } from "@wordpress/components";
 
 import useAdminEndpoint from "../api/useAdminEndpoint";
 import DataState from "../components/DataState";
@@ -10,11 +10,14 @@ import {
   truncatePageTitle,
 } from "../lib/formatters";
 
-const KpiBadge = ({ children, ...props }) => {
+const KpiBadge = ({ children, status = "info" }) => {
   return (
-    <Badge className="ls-kpi-card__badge" {...props}>
+    <span
+      className={`ls-kpi-card__badge ls-kpi-card__badge--${status}`}
+      role="status"
+    >
       {children}
-    </Badge>
+    </span>
   );
 };
 
@@ -133,14 +136,6 @@ const OverviewKpis = ({ range }) => {
         const changeLabel = formatChangePercent(changePercent);
         const isPositive = changePercent > 0;
         const isNegative = changePercent < 0;
-        let badgeStatus = "info";
-        if (isPositive) {
-          badgeStatus = "success";
-        }
-        if (isNegative) {
-          badgeStatus = "warning";
-        }
-
         return (
           <Card key={card.key} className="ls-overview__summary-card">
             <CardBody className="ls-kpi-card__body">
