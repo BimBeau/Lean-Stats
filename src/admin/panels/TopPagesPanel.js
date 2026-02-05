@@ -5,7 +5,7 @@ import ReportPanel from "./ReportPanel";
 
 const TopPagesReportPanel = () => (
   <ReportPanel
-    title={__("Top pages", "lean-stats")}
+    title={__("Pages", "lean-stats")}
     labelHeader={__("Url", "lean-stats")}
     endpoint="/top-pages"
     emptyLabel={__("No popular pages available.", "lean-stats")}
@@ -54,7 +54,7 @@ const ExitPagesPanel = () => (
 
 const TopPagesPanel = () => {
   const pagesTabs = [
-    { name: "top-pages", title: __("Top pages", "lean-stats") },
+    { name: "top-pages", title: __("Pages", "lean-stats") },
     { name: "entry-pages", title: __("Entry pages", "lean-stats") },
     { name: "exit-pages", title: __("Exit pages", "lean-stats") },
     {

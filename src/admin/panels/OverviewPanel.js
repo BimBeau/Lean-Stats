@@ -22,7 +22,7 @@ const OverviewPanel = () => {
       <TimeseriesChart range={range} />
       <div className="ls-overview__grid">
         <ReportTableCard
-          title={__("Top pages", "lean-stats")}
+          title={__("Pages", "lean-stats")}
           labelHeader={__("Url", "lean-stats")}
           range={range}
           endpoint="/top-pages"

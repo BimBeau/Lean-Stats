@@ -4,7 +4,7 @@ export const ADMIN_CONFIG = window.LeanStatsAdmin || null;
 
 export const DEFAULT_PANELS = [
   { name: "dashboard", title: __("Dashboard", "lean-stats") },
-  { name: "top-pages", title: __("Top pages", "lean-stats") },
+  { name: "top-pages", title: __("Pages", "lean-stats") },
   { name: "referrers", title: __("Referring sites", "lean-stats") },
   { name: "search-terms", title: __("Internal searches", "lean-stats") },
   { name: "geolocation", title: __("Geolocation", "lean-stats") },
