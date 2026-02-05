@@ -130,7 +130,7 @@ msgstr "Ugyldig sidesti."
 msgid "Invalid timestamp bucket."
 msgstr "Ugyldig tidsstempel-bucket."
 
-msgid "Laisser vide pour utiliser \"Lean Stats\"."
+msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Lad stå tomt for at bruge \"Lean Stats\"."
 
 msgid "Lean Stats"
