@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T14:30:02+00:00\n"
+"POT-Creation-Date: 2026-02-05T14:35:05+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,8 +37,8 @@ msgstr "Πίνακας ελέγχου"
 #: admin/admin.php:270 src/admin/constants/index.js:7
 #: src/admin/panels/OverviewPanel.js:25 src/admin/panels/TopPagesPanel.js:8
 #: src/admin/panels/TopPagesPanel.js:57
-msgid "Top pages"
-msgstr "Κορυφαίες σελίδες"
+msgid "Pages"
+msgstr "Σελίδες"
 
 #: admin/admin.php:275 src/admin/constants/index.js:8
 msgid "Referring sites"
@@ -777,6 +777,3 @@ msgstr "Γραμμικό διάγραμμα ημερήσιων προβολών 
 #~ msgstr ""
 #~ "Τα ανεπεξέργαστα αρχεία καταγραφής αποθηκεύουν λεπτομερή δεδομένα "
 #~ "προβολών όταν είναι ενεργή η λειτουργία αποσφαλμάτωσης."
-
-#~ msgid "Pages"
-#~ msgstr "Σελίδες"
