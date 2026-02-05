@@ -3,13 +3,18 @@
  * Plugin Name: Lean Stats
  * Description: Privacy-friendly, self-hosted analytics for WordPress.
  * Version: 1.3.4
- * Author: BimBeau
- * Author: Lean Stats
+ * Author: BimBeau (Lean Stats)
  * Text Domain: lean-stats
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 8.0
+ *
+ * License: GPLv3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 
 defined('ABSPATH') || exit;
 
