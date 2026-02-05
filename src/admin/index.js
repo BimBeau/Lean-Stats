@@ -1200,6 +1200,19 @@ const TimeseriesChart = ({ range }) => {
 
     const formatYAxisValue = (value) => new Intl.NumberFormat().format(value);
 
+    const formatTooltipDate = (value) => {
+        const date = new Date(`${value}T00:00:00`);
+        if (Number.isNaN(date.getTime())) {
+            return value;
+        }
+
+        return new Intl.DateTimeFormat(undefined, {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+        }).format(date);
+    };
+
     const handleChartMouseMove = useCallback(
         (event) => {
             if (!chartData.points.length) {
@@ -1228,7 +1241,8 @@ const TimeseriesChart = ({ range }) => {
 
     const chartTooltip = activePoint
         ? sprintf(
-            __('%1$s %2$s', 'lean-stats'),
+            __('%1$s: %2$s %3$s', 'lean-stats'),
+            formatTooltipDate(activePoint.label),
             formatYAxisValue(activePoint.hits),
             __('Page views', 'lean-stats')
         )
