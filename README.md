@@ -117,6 +117,10 @@ Lean Stats integrates directly inside WordPress Admin:
 - Settings screen for strict mode, DNT / GPC compliance, URL allowlists, retention, and role exclusions
 - Geolocation screen that shows the current request country, region, and city without storing IP addresses
 
+## 🧱 Admin code organization
+
+Contribution entry points in `src/admin` follow the modular architecture: `panels/` contains top-level admin screens, `hooks/` provides shared React behavior, and `api/` contains REST helpers consumed by panels and widgets. Shared UI primitives live in `components/`, reusable dashboard blocks live in `widgets/`, and cross-cutting utilities and constants live in `lib/` and `constants/`.
+
 ## 🌍 Localization
 
 Lean Stats uses the `lean-stats` text domain for PHP and JavaScript strings, and the admin UI follows the effective WordPress locale (user profile locale overrides the site locale). The `languages/` directory stores translation sources for French, English, Spanish, German, Italian, Portuguese, Swedish, Danish, Dutch, and Turkish.
