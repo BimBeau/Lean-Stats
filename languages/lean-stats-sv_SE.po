@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T14:35:05+00:00\n"
+"POT-Creation-Date: 2026-02-05T14:40:00+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,10 +41,12 @@ msgid "Pages"
 msgstr "Sidor"
 
 #: admin/admin.php:275 src/admin/constants/index.js:8
+#: src/admin/widgets/OverviewKpis.js:103
 msgid "Referring sites"
 msgstr "Hänvisande webbplatser"
 
 #: admin/admin.php:280 src/admin/constants/index.js:9
+#: src/admin/widgets/OverviewKpis.js:117
 msgid "Internal searches"
 msgstr "Interna sökningar"
 
@@ -158,7 +160,7 @@ msgid "Global namespaces checked: %s"
 msgstr ""
 
 #: src/admin/components/DataState/index.js:19
-#: src/admin/widgets/OverviewKpis.js:52
+#: src/admin/widgets/OverviewKpis.js:51
 msgid "Loading…"
 msgstr "Laddar…"
 
@@ -526,7 +528,7 @@ msgstr "Ingångssidor"
 msgid "Exit pages"
 msgstr "Utgångssidor"
 
-#: src/admin/panels/TopPagesPanel.js:62
+#: src/admin/panels/TopPagesPanel.js:62 src/admin/widgets/OverviewKpis.js:110
 msgid "Pages not found (404)"
 msgstr "Sidor hittades inte"
 
@@ -547,45 +549,25 @@ msgstr "Laddar enhetsfördelning…"
 msgid "views"
 msgstr "%s visningar"
 
-#: src/admin/widgets/OverviewKpis.js:78
+#: src/admin/widgets/OverviewKpis.js:77
 #, fuzzy
 msgid "No overview metrics available."
 msgstr "Ingen enhetsdata tillgänglig."
 
-#: src/admin/widgets/OverviewKpis.js:79
+#: src/admin/widgets/OverviewKpis.js:78
 msgid "Loading KPIs…"
 msgstr "Laddar KPI:er…"
 
-#: src/admin/widgets/OverviewKpis.js:90
+#: src/admin/widgets/OverviewKpis.js:89
+msgid "Visits"
+msgstr "Besök"
+
+#: src/admin/widgets/OverviewKpis.js:96
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
 #: src/admin/widgets/ReportTableCard.js:25
 msgid "Page views"
 msgstr "Sidvisningar"
-
-#: src/admin/widgets/OverviewKpis.js:97
-#, fuzzy
-msgid "Visitors"
-msgstr "Besök"
-
-#: src/admin/widgets/OverviewKpis.js:104
-#, fuzzy
-msgid "Top page"
-msgstr "Topp-sidor"
-
-#: src/admin/widgets/OverviewKpis.js:112
-msgid "Bounce rate"
-msgstr ""
-
-#: src/admin/widgets/OverviewKpis.js:120
-msgid "Average time"
-msgstr ""
-
-#: src/admin/widgets/OverviewKpis.js:125
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
 
 #: src/admin/widgets/PeriodFilter.js:10
 msgid "Period"
@@ -759,6 +741,9 @@ msgstr "Linjediagram över dagliga sidvisningar"
 
 #~ msgid "Device breakdown"
 #~ msgstr "Enhetsfördelning"
+
+#~ msgid "Top pages"
+#~ msgstr "Topp-sidor"
 
 #~ msgid "Traffic over time"
 #~ msgstr "Trafik över tid"
