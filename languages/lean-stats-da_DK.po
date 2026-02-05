@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-05T13:30:30+00:00\n"
+"POT-Creation-Date: 2026-02-05T13:34:52+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: lean-stats.php includes/settings.php:172 src/admin/index.js:378
-#: src/admin/index.js:2083
+#: src/admin/index.js:2087
 msgid "Lean Stats"
 msgstr "Lean Stats"
 
@@ -33,8 +33,8 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Kontrolpanel"
 
-#: admin/admin.php:270 src/admin/index.js:48 src/admin/index.js:1889
-#: src/admin/index.js:1918 src/admin/index.js:2048
+#: admin/admin.php:270 src/admin/index.js:48 src/admin/index.js:1893
+#: src/admin/index.js:1922 src/admin/index.js:2052
 msgid "Top pages"
 msgstr "Top sider"
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Loading…"
 msgstr "Indlæser…"
 
-#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1637
+#: src/admin/components/DataTableCard/index.js:13 src/admin/index.js:1641
 msgid "Loading: %s"
 msgstr "Indlæser: %s"
 
@@ -174,8 +174,8 @@ msgstr ""
 msgid "Page"
 msgstr "Side"
 
-#: src/admin/index.js:431 src/admin/index.js:1738 src/admin/index.js:1756
-#: src/admin/index.js:1803 src/admin/index.js:2058
+#: src/admin/index.js:431 src/admin/index.js:1742 src/admin/index.js:1760
+#: src/admin/index.js:1807 src/admin/index.js:2062
 msgid "Referrer"
 msgstr "Henviser"
 
@@ -183,8 +183,8 @@ msgstr "Henviser"
 msgid "Device"
 msgstr ""
 
-#: src/admin/index.js:440 src/admin/index.js:1737 src/admin/index.js:1738
-#: src/admin/index.js:2062
+#: src/admin/index.js:440 src/admin/index.js:1741 src/admin/index.js:1742
+#: src/admin/index.js:2066
 msgid "Direct"
 msgstr "Direkte"
 
@@ -451,12 +451,12 @@ msgstr "Anonyme sessioner aggregeret over perioden."
 msgid "Visits"
 msgstr "Besøg"
 
-#: src/admin/index.js:1190 src/admin/index.js:1339 src/admin/index.js:1456
-#: src/admin/index.js:1492 src/admin/index.js:1755 src/admin/index.js:1805
+#: src/admin/index.js:1190 src/admin/index.js:1496 src/admin/index.js:1759
+#: src/admin/index.js:1809
 msgid "Page views"
 msgstr "Sidevisninger"
 
-#: src/admin/index.js:1202 src/admin/index.js:1892
+#: src/admin/index.js:1202 src/admin/index.js:1896
 msgid "Pages not found (404)"
 msgstr "Sider blev ikke fundet"
 
@@ -464,219 +464,224 @@ msgstr "Sider blev ikke fundet"
 msgid "Change vs previous period: %s"
 msgstr ""
 
-#: src/admin/index.js:1336 src/admin/index.js:1453
-msgid "%1$s: %2$s %3$s"
-msgstr ""
+#: src/admin/index.js:1312
+#, fuzzy
+msgid "%s page view"
+msgid_plural "%s page views"
+msgstr[0] "Sidevisninger"
+msgstr[1] "Sidevisninger"
 
-#: src/admin/index.js:1345
+#: src/admin/index.js:1342 src/admin/index.js:1458
+#, fuzzy
+msgid "%1$s : %2$s"
+msgstr "%s : %s"
+
+#: src/admin/index.js:1350
 msgid "Daily page views"
 msgstr "Daglige sidevisninger"
 
-#: src/admin/index.js:1350
+#: src/admin/index.js:1355
 msgid "No data available for this period."
 msgstr "Ingen data tilgængelig for denne periode."
 
-#: src/admin/index.js:1351
+#: src/admin/index.js:1356
 msgid "Loading chart…"
 msgstr "Indlæser graf…"
 
-#: src/admin/index.js:1357 src/admin/index.js:1371
+#: src/admin/index.js:1362 src/admin/index.js:1376
 msgid "Daily page views line chart"
 msgstr "Linjediagram over daglige sidevisninger"
 
-#: src/admin/index.js:1504 src/admin/index.js:1595
+#: src/admin/index.js:1508 src/admin/index.js:1599
 msgid "Title"
 msgstr ""
 
-#: src/admin/index.js:1558 src/admin/index.js:1729
+#: src/admin/index.js:1562 src/admin/index.js:1733
 msgid "Ascending"
 msgstr ""
 
-#: src/admin/index.js:1558 src/admin/index.js:1729
+#: src/admin/index.js:1562 src/admin/index.js:1733
 msgid "Descending"
 msgstr ""
 
-#: src/admin/index.js:1559
+#: src/admin/index.js:1563
 msgid "%s label"
 msgstr ""
 
-#: src/admin/index.js:1561 src/admin/index.js:1731
+#: src/admin/index.js:1565 src/admin/index.js:1735
 msgid "Toggle sort order: %s"
 msgstr ""
 
-#: src/admin/index.js:1564
+#: src/admin/index.js:1568
 msgid "Table: %s"
 msgstr ""
 
-#: src/admin/index.js:1577 src/admin/index.js:1752
+#: src/admin/index.js:1581 src/admin/index.js:1756
 msgid "Sort by"
 msgstr ""
 
-#: src/admin/index.js:1591
+#: src/admin/index.js:1595
 msgid "Display"
 msgstr ""
 
-#: src/admin/index.js:1594
+#: src/admin/index.js:1598
 msgid "URL"
 msgstr ""
 
-#: src/admin/index.js:1618 src/admin/index.js:1777
+#: src/admin/index.js:1622 src/admin/index.js:1781
 msgid "Rows"
 msgstr ""
 
-#: src/admin/index.js:1664 src/admin/index.js:1825
+#: src/admin/index.js:1668 src/admin/index.js:1829
 msgid "Previous page"
 msgstr ""
 
-#: src/admin/index.js:1666 src/admin/index.js:1827
+#: src/admin/index.js:1670 src/admin/index.js:1831
 msgid "Previous"
 msgstr ""
 
-#: src/admin/index.js:1672 src/admin/index.js:1833
+#: src/admin/index.js:1676 src/admin/index.js:1837
 #, fuzzy
 msgid "Next page"
 msgstr "Udgangssider"
 
-#: src/admin/index.js:1674 src/admin/index.js:1835
+#: src/admin/index.js:1678 src/admin/index.js:1839
 msgid "Next"
 msgstr ""
 
-#: src/admin/index.js:1679 src/admin/index.js:1840
+#: src/admin/index.js:1683 src/admin/index.js:1844
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: src/admin/index.js:1682 src/admin/index.js:1843
+#: src/admin/index.js:1686 src/admin/index.js:1847
 msgid "%s items"
 msgstr ""
 
-#: src/admin/index.js:1734
+#: src/admin/index.js:1738
 msgid "Table: Referrer sources"
 msgstr ""
 
-#: src/admin/index.js:1749
+#: src/admin/index.js:1753
 #, fuzzy
 msgid "Referrer sources"
 msgstr "Henviser"
 
-#: src/admin/index.js:1757 src/admin/index.js:1804
+#: src/admin/index.js:1761 src/admin/index.js:1808
 msgid "Source category"
 msgstr ""
 
-#: src/admin/index.js:1795
+#: src/admin/index.js:1799
 #, fuzzy
 msgid "No referrer data available."
 msgstr "Ingen henviser tilgængelig."
 
-#: src/admin/index.js:1796
+#: src/admin/index.js:1800
 #, fuzzy
 msgid "Loading referrer sources…"
 msgstr "Indlæsningsfejl."
 
-#: src/admin/index.js:1890
+#: src/admin/index.js:1894
 msgid "Entry pages"
 msgstr "Indgangssider"
 
-#: src/admin/index.js:1891
+#: src/admin/index.js:1895
 msgid "Exit pages"
 msgstr "Udgangssider"
 
-#: src/admin/index.js:1919 src/admin/index.js:1930 src/admin/index.js:1951
-#: src/admin/index.js:1965 src/admin/index.js:2049
+#: src/admin/index.js:1923 src/admin/index.js:1934 src/admin/index.js:1955
+#: src/admin/index.js:1969 src/admin/index.js:2053
 msgid "Url"
 msgstr ""
 
-#: src/admin/index.js:1921 src/admin/index.js:2052
+#: src/admin/index.js:1925 src/admin/index.js:2056
 msgid "No popular pages available."
 msgstr "Ingen populære sider tilgængelig."
 
-#: src/admin/index.js:1929
+#: src/admin/index.js:1933
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/index.js:1932
+#: src/admin/index.js:1936
 #, fuzzy
 msgid "No missing pages available."
 msgstr "Ingen populære sider tilgængelig."
 
-#: src/admin/index.js:1940
+#: src/admin/index.js:1944
 msgid "Search terms"
 msgstr ""
 
-#: src/admin/index.js:1941
+#: src/admin/index.js:1945
 msgid "Search term"
 msgstr ""
 
-#: src/admin/index.js:1943
+#: src/admin/index.js:1947
 #, fuzzy
 msgid "No search terms available."
 msgstr "Ingen henviser tilgængelig."
 
-#: src/admin/index.js:1944 src/admin/index.js:1997
+#: src/admin/index.js:1948 src/admin/index.js:2001
 msgid "Unknown"
 msgstr "Ukendt"
 
-#: src/admin/index.js:1950
+#: src/admin/index.js:1954
 #, fuzzy
 msgid "Entry pages (approx.)"
 msgstr "Indgangssider"
 
-#: src/admin/index.js:1953
+#: src/admin/index.js:1957
 #, fuzzy
 msgid "No entry pages available."
 msgstr "Ingen populære sider tilgængelig."
 
-#: src/admin/index.js:1955
+#: src/admin/index.js:1959
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/index.js:1964
+#: src/admin/index.js:1968
 #, fuzzy
 msgid "Exit pages (approx.)"
 msgstr "Udgangssider"
 
-#: src/admin/index.js:1967
+#: src/admin/index.js:1971
 #, fuzzy
 msgid "No exit pages available."
 msgstr "Ingen populære sider tilgængelig."
 
-#: src/admin/index.js:1969
+#: src/admin/index.js:1973
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/index.js:2002
+#: src/admin/index.js:2006
 msgid "Device page views"
 msgstr "Sidevisninger pr. enhed"
 
-#: src/admin/index.js:2007
+#: src/admin/index.js:2011
 msgid "No device data available."
 msgstr "Ingen enhedsdata tilgængelig."
 
-#: src/admin/index.js:2008
+#: src/admin/index.js:2012
 msgid "Loading device breakdown…"
 msgstr "Indlæser enhedsfordeling…"
 
-#: src/admin/index.js:2024
+#: src/admin/index.js:2028
 msgid "%s views"
 msgstr "%s visninger"
 
-#: src/admin/index.js:2057
+#: src/admin/index.js:2061
 msgid "Top referrers"
 msgstr "Top henvisere"
 
-#: src/admin/index.js:2061
+#: src/admin/index.js:2065
 msgid "No referrers available."
 msgstr "Ingen henviser tilgængelig."
 
-#: src/admin/index.js:2074
+#: src/admin/index.js:2078
 msgid "Missing admin configuration."
 msgstr "Manglende admin-konfiguration."
 
-#: src/admin/index.js:2102
+#: src/admin/index.js:2106
 msgid "No panel available for this screen."
 msgstr "Ingen panel tilgængelig for denne skærm."
-
-#~ msgid "%s : %s"
-#~ msgstr "%s : %s"
 
 #~ msgid "Device breakdown details"
 #~ msgstr "Detaljeret enhedsfordeling"
