@@ -232,6 +232,12 @@
     width: 15px;
 }
 
+.ls-pages-tabs{
+    display: flex;
+    flex-direction: column;
+    gap: var(--lean-stats-gap-lg);
+}
+
 .ls-report-table {
     width: 100%;
 }
@@ -239,7 +245,7 @@
 .ls-report-panel__header {
     display: grid;
     gap: var(--lean-stats-gap-sm);
-    margin-bottom: var(--lean-stats-gap-sm);
+    margin-bottom: var(--lean-stats-gap-lg);
 }
 
 .ls-table-pagination {
