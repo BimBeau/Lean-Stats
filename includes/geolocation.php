@@ -102,6 +102,7 @@ function lean_stats_get_geolocation_payload(): array
         return [
             'error' => $location['error'],
             'ip' => $ip,
+            'details' => $location['details'] ?? null,
             'source' => $location['source'] ?? 'maxmind-api',
         ];
     }
