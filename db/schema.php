@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-const LEAN_STATS_SCHEMA_VERSION = '6';
+const LEAN_STATS_SCHEMA_VERSION = '7';
 
 /**
  * Create or update the analytics tables.
@@ -25,6 +25,7 @@ function lean_stats_install_schema(): void
     $search_terms_table = $wpdb->prefix . 'lean_stats_search_terms_daily';
     $utm_table = $wpdb->prefix . 'lean_stats_utm_daily';
     $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
+    $geo_table = $wpdb->prefix . 'lean_stats_geo_daily';
 
     $daily_schema = "CREATE TABLE {$daily_table} (
         date_bucket DATE NOT NULL,
@@ -111,6 +112,19 @@ function lean_stats_install_schema(): void
         KEY page_path (page_path(255))
     ) {$charset_collate};";
 
+    $geo_schema = "CREATE TABLE {$geo_table} (
+        date_bucket DATE NOT NULL,
+        country_code CHAR(2) NOT NULL,
+        region_code VARCHAR(20) NOT NULL,
+        city_name VARCHAR(255) NOT NULL,
+        hits BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        PRIMARY KEY  (date_bucket, country_code, region_code, city_name(191)),
+        KEY date_bucket (date_bucket),
+        KEY country_code (country_code),
+        KEY region_code (region_code),
+        KEY city_name (city_name(191))
+    ) {$charset_collate};";
+
     dbDelta($daily_schema);
     dbDelta($hourly_schema);
     dbDelta($hits_daily_schema);
@@ -118,6 +132,7 @@ function lean_stats_install_schema(): void
     dbDelta($search_terms_schema);
     dbDelta($utm_schema);
     dbDelta($entry_exit_schema);
+    dbDelta($geo_schema);
 
     $wpdb->query("DROP TABLE IF EXISTS {$sessions_table}");
 

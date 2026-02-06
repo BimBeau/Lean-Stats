@@ -74,6 +74,26 @@ Indexes:
 - Index: `date_bucket`
 - Index: `page_path(255)`
 
+### `wp_lean_stats_geo_daily`
+
+Stores aggregated geolocation hits per day, country, region, and city.
+
+Columns:
+
+- `date_bucket` (date)
+- `country_code` (string, ISO 3166-1 alpha-2)
+- `region_code` (string)
+- `city_name` (string)
+- `hits` (bigint)
+
+Indexes:
+
+- Primary key: `(date_bucket, country_code, region_code, city_name(191))`
+- Index: `date_bucket`
+- Index: `country_code`
+- Index: `region_code`
+- Index: `city_name(191)`
+
 ### `wp_lean_stats_utm_daily`
 
 Stores aggregated UTM parameters per day.

@@ -29,6 +29,7 @@ Lean Stats stores **aggregated counts** with no person-level records.
 - Internal search terms with counts
 - Allowlisted UTM campaign values (aggregated)
 - Time buckets (day or hour)
+- Geolocation counters by country, region, and city (aggregated)
 
 ---
 

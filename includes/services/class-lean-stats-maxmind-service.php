@@ -87,7 +87,9 @@ class Lean_Stats_MaxMind_Service {
 
         return [
             'country' => lean_stats_pick_maxmind_name($payload['country']['names'] ?? []),
+            'country_code' => sanitize_text_field((string) ($payload['country']['iso_code'] ?? '')),
             'region' => lean_stats_pick_maxmind_name($payload['subdivisions'][0]['names'] ?? []),
+            'region_code' => sanitize_text_field((string) ($payload['subdivisions'][0]['iso_code'] ?? '')),
             'city' => lean_stats_pick_maxmind_name($payload['city']['names'] ?? []),
             'source' => 'maxmind-api',
         ];
