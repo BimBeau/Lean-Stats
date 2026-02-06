@@ -271,8 +271,6 @@ msgstr "Kaynak kategorisi"
 msgid "No search terms available."
 msgstr "Kullanılabilir arama terimi yok."
 
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "\"Lean Stats\" kullanmak için boş bırakın."
 
 msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr "IP coğrafi konumlandırmayı etkinleştirmek için MaxMind Hesap Kimliği ve Lisans Anahtarı gereklidir."

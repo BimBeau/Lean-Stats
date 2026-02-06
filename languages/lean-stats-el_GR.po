@@ -271,8 +271,6 @@ msgstr "Κατηγορία πηγής"
 msgid "No search terms available."
 msgstr "Δεν υπάρχουν διαθέσιμοι όροι αναζήτησης."
 
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "Αφήστε κενό για να χρησιμοποιηθεί το \"Lean Stats\"."
 
 msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr "Απαιτούνται το ID λογαριασμού και το κλειδί άδειας MaxMind για την ενεργοποίηση γεωεντοπισμού IP."
