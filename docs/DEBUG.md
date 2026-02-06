@@ -35,6 +35,6 @@ Checklist:
 
 1. Open `/wp-admin/admin.php?page=lean-stats`.
 2. Toggle **Debug mode** on and reload the page.
-3. Confirm the console shows `[LeanStats]` logs without deprecation warnings for `SelectControl`.
+3. Confirm the console shows `[LeanStats]` logs with action metadata.
 4. Toggle **Debug mode** off and reload the page.
 5. Confirm only critical errors remain in the console.

@@ -64,11 +64,21 @@ add_filter('lean_stats_rest_sources', function (array $sources): array {
 
 ### `lean_stats_admin_cache_ttl`
 
-Filter the admin analytics cache TTL (seconds). Default is `300`, min `300`, max `600`.
+Filter the admin analytics cache TTL (seconds). Default is `60`, min `30`, max `120`.
 
 ```php
 add_filter('lean_stats_admin_cache_ttl', function (int $ttl): int {
     return 600;
+});
+```
+
+### `lean_stats_report_cache_ttl`
+
+Filter the report analytics cache TTL (seconds). Default is `60`, min `30`, max `120`.
+
+```php
+add_filter('lean_stats_report_cache_ttl', function (int $ttl): int {
+    return 90;
 });
 ```
 
@@ -152,26 +162,6 @@ add_filter('lean_stats_dedupe_ttl', function (int $ttl): int {
 });
 ```
 
-### `lean_stats_rate_limit_window`
-
-Filter the rate limit window (seconds). Default is `10`, min `5`, max `60`.
-
-```php
-add_filter('lean_stats_rate_limit_window', function (int $window): int {
-    return 20;
-});
-```
-
-### `lean_stats_rate_limit_max`
-
-Filter the maximum number of hits per rate limit window. Default is `30`, min `1`.
-
-```php
-add_filter('lean_stats_rate_limit_max', function (int $max): int {
-    return 50;
-});
-```
-
 ### `lean_stats_max_hits`
 
 Filter the maximum number of raw hits stored when raw logging is enabled. Default is `1000`.
@@ -190,6 +180,16 @@ Filter the raw logs retention window in seconds. Default is computed from the `r
 add_filter('lean_stats_raw_logs_retention_seconds', function (int $seconds): int {
     return 12 * HOUR_IN_SECONDS;
 });
+```
+
+### `lean_stats_raw_logs_cleanup_interval`
+
+Filter the raw logs cleanup interval (seconds). Default is derived from `raw_logs_retention_days` with a minimum of one hour.
+
+```php
+add_filter('lean_stats_raw_logs_cleanup_interval', function (int $interval, int $retention_days): int {
+    return $interval;
+}, 10, 2);
 ```
 
 ## Actions

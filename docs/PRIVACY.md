@@ -24,7 +24,7 @@ Lean Stats stores **aggregated counts** with no person-level records.
 - Page paths (cleaned by default)
 - Daily or hourly hit totals per page
 - Referrer domains (domain only)
-- Device class (mobile / desktop / tablet)
+- Device class (mobile / desktop / tablet / bot)
 - 404 paths with counts
 - Internal search terms with counts
 - Allowlisted UTM campaign values (aggregated)
@@ -44,9 +44,6 @@ Lean Stats stores **aggregated counts** with no person-level records.
 ---
 
 ## Tracking controls
-
-- **Strict mode**  
-  Skips tracking for all logged-in users.
 
 - **Excluded roles**  
   Skips tracking for logged-in users with specific WordPress roles.
@@ -109,6 +106,7 @@ No page view data is associated with a person or persistent identifier.
 - **Raw logs storage**
   - Disabled by default
   - Controlled by debug mode (`lean_stats_settings.debug_enabled`)
+  - Stored in the `lean_stats_hits` option
   - Intended only for short-term debugging
 
 - **Retention**
