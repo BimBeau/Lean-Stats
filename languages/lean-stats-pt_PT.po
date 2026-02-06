@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-06T09:46:50+00:00\n"
+"POT-Creation-Date: 2026-02-06T10:02:03+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -94,17 +94,17 @@ msgstr "Classe de dispositivo inválida."
 msgid "Invalid timestamp bucket."
 msgstr "Intervalo de tempo inválido."
 
-#: includes/services/class-lean-stats-maxmind-service.php:70
+#: includes/services/class-lean-stats-maxmind-service.php:74
 #, fuzzy, php-format
 msgid "MaxMind API error (%1$s): %2$s."
 msgstr "Erro de API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:71
+#: includes/services/class-lean-stats-maxmind-service.php:75
 #, fuzzy, php-format
 msgid "MaxMind API error (%s)."
 msgstr "Erro de API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:80
+#: includes/services/class-lean-stats-maxmind-service.php:84
 #, fuzzy
 msgid "Invalid MaxMind API response."
 msgstr "Nonce da API REST inválido."
