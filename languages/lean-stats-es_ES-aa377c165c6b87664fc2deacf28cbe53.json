@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Páginas de salida"
+      ],
+      "Display": [
+        "Mostrar"
+      ],
+      "of": [
+        "de"
+      ],
+      "items": [
+        "elementos"
+      ],
+      "label": [
+        "etiqueta"
+      ],
+      "Entries (approx.)": [
+        "Entradas"
+      ],
+      "Exits (approx.)": [
+        "Salidas"
+      ],
+      "Title": [
+        "Título"
+      ],
+      "Referrer sources": [
+        "Fuentes de referencia"
+      ],
+      "Source category": [
+        "Categoría de fuente"
+      ],
+      "No search terms available.": [
+        "No hay términos de búsqueda disponibles."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Dejar en blanco para usar \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "El ID de cuenta y la clave de licencia de MaxMind son necesarios para activar la geolocalización por IP."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "ID de cuenta numérico para la geolocalización IP de MaxMind."
+      ],
+      "MaxMind License Key": [
+        "Clave de licencia de MaxMind"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Clave de licencia para la geolocalización IP de MaxMind."
+      ],
+      "Privacy & consent": [
+        "Privacidad y consentimiento"
+      ],
+      "Retention window (days)": [
+        "Ventana de retención (días)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Lista separada por comas de claves de consulta permitidas (usada para el seguimiento de URL y la agregación UTM)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Seleccione roles para excluir del seguimiento. Seleccione todos los roles para ignorar a todos los usuarios conectados."
+      ],
+      "Desktop": [
+        "Escritorio"
+      ],
+      "view": [
+        "vista",
+        "vistas"
       ]
     }
   }

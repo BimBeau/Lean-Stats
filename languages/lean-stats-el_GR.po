@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-06T09:10:55+00:00\n"
+"POT-Creation-Date: 2026-02-06T09:46:50+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,7 @@ msgid "Internal searches"
 msgstr "Εσωτερικές αναζητήσεις"
 
 #: admin/admin.php:285 src/admin/constants/index.js:10
-#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:30
 #: src/admin/panels/SettingsPanel.js:348
 msgid "Geolocation"
 msgstr ""
@@ -94,17 +94,17 @@ msgstr "Μη έγκυρη κατηγορία συσκευής."
 msgid "Invalid timestamp bucket."
 msgstr "Μη έγκυρο εύρος χρονικής σήμανσης."
 
-#: includes/services/class-lean-stats-maxmind-service.php:51
+#: includes/services/class-lean-stats-maxmind-service.php:70
 #, fuzzy, php-format
 msgid "MaxMind API error (%1$s): %2$s."
 msgstr "Σφάλμα API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:52
+#: includes/services/class-lean-stats-maxmind-service.php:71
 #, fuzzy, php-format
 msgid "MaxMind API error (%s)."
 msgstr "Σφάλμα API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:59
+#: includes/services/class-lean-stats-maxmind-service.php:80
 #, fuzzy
 msgid "Invalid MaxMind API response."
 msgstr "Μη έγκυρο nonce REST API."
@@ -118,12 +118,16 @@ msgid "MaxMind Account ID must be numeric."
 msgstr ""
 
 #: includes/settings.php:144 src/admin/panels/SettingsPanel.js:126
+#, fuzzy
 msgid "MaxMind License Key is required."
-msgstr ""
+msgstr "Κλειδί άδειας MaxMind"
 
 #: includes/settings.php:157
+#, fuzzy
 msgid "MaxMind credentials are required to enable IP geolocation."
 msgstr ""
+"Απαιτούνται το ID λογαριασμού και το κλειδί άδειας MaxMind για την "
+"ενεργοποίηση γεωεντοπισμού IP."
 
 #: src/admin/AdminApp.js:47
 msgid "Missing admin configuration."
@@ -183,44 +187,69 @@ msgstr "90 ημέρες"
 msgid "MaxMind API"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:19
+#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:72
+msgid "IP address"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:15
+msgid "HTTP status"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:16
+msgid "MaxMind error code"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:18
+msgid "MaxMind error message"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:21
+msgid "Request ID"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:23
+msgid "Response excerpt"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:35
 #, fuzzy
 msgid "No geolocation data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/panels/GeolocationPanel.js:20
+#: src/admin/panels/GeolocationPanel.js:36
 #, fuzzy
 msgid "Looking up location…"
 msgstr "Φόρτωση γραφήματος…"
 
-#: src/admin/panels/GeolocationPanel.js:31
+#: src/admin/panels/GeolocationPanel.js:46
+msgid "MaxMind API diagnostics"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:64
 msgid "Location is derived from the current request IP and is not stored."
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:39
-msgid "IP address"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:43
+#: src/admin/panels/GeolocationPanel.js:76
 msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:44
-#: src/admin/panels/GeolocationPanel.js:48
-#: src/admin/panels/GeolocationPanel.js:52
+#: src/admin/panels/GeolocationPanel.js:77
+#: src/admin/panels/GeolocationPanel.js:81
+#: src/admin/panels/GeolocationPanel.js:85
 #, fuzzy
 msgid "Unavailable"
 msgstr "Δεν υπάρχουν διαθέσιμα KPI."
 
-#: src/admin/panels/GeolocationPanel.js:47
+#: src/admin/panels/GeolocationPanel.js:80
 msgid "Region"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:51
+#: src/admin/panels/GeolocationPanel.js:84
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:88
 msgid "Source"
 msgstr ""
 
@@ -264,11 +293,10 @@ msgid "Search term"
 msgstr ""
 
 #: src/admin/panels/SearchTermsPanel.js:10
-#, fuzzy
 msgid "No search terms available."
-msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
+msgstr "Δεν υπάρχουν διαθέσιμοι όροι αναζήτησης."
 
-#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:16
+#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -346,6 +374,8 @@ msgstr "Αφήστε κενό για χρήση του \"Lean Stats\"."
 msgid ""
 "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr ""
+"Απαιτούνται το ID λογαριασμού και το κλειδί άδειας MaxMind για την "
+"ενεργοποίηση γεωεντοπισμού IP."
 
 #: src/admin/panels/SettingsPanel.js:357
 msgid "MaxMind Account ID"
@@ -353,19 +383,19 @@ msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:361
 msgid "Numeric Account ID for MaxMind IP geolocation."
-msgstr ""
+msgstr "Αριθμητικό ID λογαριασμού για γεωεντοπισμό IP MaxMind."
 
 #: src/admin/panels/SettingsPanel.js:382
 msgid "MaxMind License Key"
-msgstr ""
+msgstr "Κλειδί άδειας MaxMind"
 
 #: src/admin/panels/SettingsPanel.js:386
 msgid "License Key for MaxMind IP geolocation."
-msgstr ""
+msgstr "Κλειδί άδειας για γεωεντοπισμό IP MaxMind."
 
 #: src/admin/panels/SettingsPanel.js:411
 msgid "Privacy & consent"
-msgstr ""
+msgstr "Απόρρητο και συναίνεση"
 
 #: src/admin/panels/SettingsPanel.js:414
 msgid "Respect DNT / GPC"
@@ -384,9 +414,8 @@ msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:443
-#, fuzzy
 msgid "Retention window (days)"
-msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
+msgstr "Παράθυρο διατήρησης (ημέρες)"
 
 #: src/admin/panels/SettingsPanel.js:448
 msgid "Raw logs purge automatically after the configured window."
@@ -416,6 +445,8 @@ msgid ""
 "Comma-separated list of allowed query keys (used for URL tracking and UTM "
 "aggregation)."
 msgstr ""
+"Λίστα επιτρεπόμενων κλειδιών ερωτήματος χωρισμένη με κόμματα "
+"(χρησιμοποιείται για παρακολούθηση URL και συγκέντρωση UTM)."
 
 #: src/admin/panels/SettingsPanel.js:507
 #, fuzzy
@@ -439,6 +470,8 @@ msgid ""
 "Select roles to exclude from tracking. Select all roles to ignore all logged-"
 "in users."
 msgstr ""
+"Επιλέξτε ρόλους για εξαίρεση από την παρακολούθηση. Επιλέξτε όλους τους "
+"ρόλους για να αγνοηθούν όλοι οι συνδεδεμένοι χρήστες."
 
 #: src/admin/panels/SettingsPanel.js:540
 msgid "No roles available."
@@ -498,7 +531,7 @@ msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα
 #: src/admin/panels/TopPagesPanel.js:29
 #, fuzzy
 msgid "Entry pages (approx.)"
-msgstr "Σελίδες εισόδου"
+msgstr "Είσοδοι"
 
 #: src/admin/panels/TopPagesPanel.js:32
 #, fuzzy
@@ -507,12 +540,12 @@ msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα
 
 #: src/admin/panels/TopPagesPanel.js:34
 msgid "Entries (approx.)"
-msgstr ""
+msgstr "Είσοδοι"
 
 #: src/admin/panels/TopPagesPanel.js:43
 #, fuzzy
 msgid "Exit pages (approx.)"
-msgstr "Σελίδες εξόδου"
+msgstr "Έξοδοι"
 
 #: src/admin/panels/TopPagesPanel.js:46
 #, fuzzy
@@ -521,7 +554,7 @@ msgstr "Δεν υπάρχει διαθέσιμη δημοφιλής σελίδα
 
 #: src/admin/panels/TopPagesPanel.js:48
 msgid "Exits (approx.)"
-msgstr ""
+msgstr "Έξοδοι"
 
 #: src/admin/panels/TopPagesPanel.js:58
 msgid "Entry pages"
@@ -535,22 +568,27 @@ msgstr "Σελίδες εξόδου"
 msgid "Pages not found (404)"
 msgstr "Σελίδες που δεν βρέθηκαν"
 
-#: src/admin/widgets/DeviceSplit.js:24
+#: src/admin/widgets/DeviceSplit.js:18
+msgid "Desktop"
+msgstr "Επιτραπέζιος"
+
+#: src/admin/widgets/DeviceSplit.js:36
 msgid "Device page views"
 msgstr "Προβολές σελίδας ανά συσκευή"
 
-#: src/admin/widgets/DeviceSplit.js:29
+#: src/admin/widgets/DeviceSplit.js:41
 msgid "No device data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/widgets/DeviceSplit.js:30
+#: src/admin/widgets/DeviceSplit.js:42
 msgid "Loading device breakdown…"
 msgstr "Φόρτωση κατανομής συσκευών…"
 
-#: src/admin/widgets/DeviceSplit.js:48
-#, fuzzy
-msgid "views"
-msgstr "%s προβολές"
+#: src/admin/widgets/DeviceSplit.js:60
+msgid "view"
+msgid_plural "views"
+msgstr[0] "προβολή"
+msgstr[1] "προβολές"
 
 #: src/admin/widgets/OverviewKpis.js:77
 #, fuzzy
@@ -593,13 +631,13 @@ msgid "Toggle sort order"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:63
+#, fuzzy
 msgid "Table: Referrer sources"
-msgstr ""
+msgstr "Πηγές παραπομπής"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:82
-#, fuzzy
 msgid "Referrer sources"
-msgstr "Παραπέμπτης"
+msgstr "Πηγές παραπομπής"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:85
 #: src/admin/widgets/ReportTableCard.js:126
@@ -609,7 +647,7 @@ msgstr ""
 #: src/admin/widgets/ReferrerSourcesTableCard.js:97
 #: src/admin/widgets/ReferrerSourcesTableCard.js:149
 msgid "Source category"
-msgstr ""
+msgstr "Κατηγορία πηγής"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:119
 #: src/admin/widgets/ReportTableCard.js:171
@@ -624,7 +662,7 @@ msgstr "Δεν υπάρχει διαθέσιμος παραπέμπτης."
 #: src/admin/widgets/ReferrerSourcesTableCard.js:138
 #, fuzzy
 msgid "Loading referrer sources…"
-msgstr "Σφάλμα φόρτωσης."
+msgstr "Πηγές παραπομπής"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:174
 #: src/admin/widgets/ReportTableCard.js:228
@@ -650,22 +688,22 @@ msgstr ""
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
 #: src/admin/widgets/ReportTableCard.js:245
 msgid "of"
-msgstr ""
+msgstr "από"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:197
 #: src/admin/widgets/ReportTableCard.js:251
 msgid "items"
-msgstr ""
+msgstr "στοιχεία"
 
 #: src/admin/widgets/ReportTableCard.js:37
 #: src/admin/widgets/ReportTableCard.js:145
 msgid "Title"
-msgstr ""
+msgstr "Τίτλος"
 
 #. translators: %s: active first-column label.
 #: src/admin/widgets/ReportTableCard.js:106
 msgid "label"
-msgstr ""
+msgstr "ετικέτα"
 
 #. translators: %s: table title.
 #: src/admin/widgets/ReportTableCard.js:113
@@ -674,7 +712,7 @@ msgstr ""
 
 #: src/admin/widgets/ReportTableCard.js:140
 msgid "Display"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: src/admin/widgets/ReportTableCard.js:143
 msgid "URL"
@@ -745,6 +783,9 @@ msgstr "Γραμμικό διάγραμμα ημερήσιων προβολών 
 #~ msgid "Device breakdown"
 #~ msgstr "Κατανομή ανά συσκευή"
 
+#~ msgid "Raw log retention (days)"
+#~ msgstr "Διατήρηση ακατέργαστων καταγραφών (ημέρες)"
+
 #~ msgid "Traffic over time"
 #~ msgstr "Επισκεψιμότητα με την πάροδο του χρόνου"
 
@@ -757,6 +798,9 @@ msgstr "Γραμμικό διάγραμμα ημερήσιων προβολών 
 
 #~ msgid "Anonymous sessions aggregated over the selected period."
 #~ msgstr "Ανώνυμες συνεδρίες συγκεντρωμένες στην περίοδο."
+
+#~ msgid "%s views"
+#~ msgstr "%s προβολές"
 
 #~ msgid "Raw logs store granular view details while debug mode is enabled."
 #~ msgstr ""

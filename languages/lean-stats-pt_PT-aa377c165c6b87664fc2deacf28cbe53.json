@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Páginas de saída"
+      ],
+      "Display": [
+        "Exibir"
+      ],
+      "of": [
+        "de"
+      ],
+      "items": [
+        "itens"
+      ],
+      "label": [
+        "rótulo"
+      ],
+      "Entries (approx.)": [
+        "Entradas"
+      ],
+      "Exits (approx.)": [
+        "Saídas"
+      ],
+      "Title": [
+        "Título"
+      ],
+      "Referrer sources": [
+        "Fontes de referência"
+      ],
+      "Source category": [
+        "Categoria de fonte"
+      ],
+      "No search terms available.": [
+        "Nenhum termo de pesquisa disponível."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Deixar em branco para usar \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "O ID da conta e a chave de licença MaxMind são necessários para ativar a geolocalização por IP."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "ID numérico da conta para geolocalização IP da MaxMind."
+      ],
+      "MaxMind License Key": [
+        "Chave de licença da MaxMind"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Chave de licença para geolocalização IP da MaxMind."
+      ],
+      "Privacy & consent": [
+        "Privacidade e consentimento"
+      ],
+      "Retention window (days)": [
+        "Janela de retenção (dias)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Lista separada por vírgulas de chaves de consulta permitidas (usada para rastreamento de URL e agregação UTM)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Selecione funções para excluir do rastreamento. Selecione todas as funções para ignorar todos os usuários conectados."
+      ],
+      "Desktop": [
+        "Desktop"
+      ],
+      "view": [
+        "visualização",
+        "visualizações"
       ]
     }
   }

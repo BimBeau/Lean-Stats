@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-06T09:10:55+00:00\n"
+"POT-Creation-Date: 2026-02-06T09:46:50+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,7 @@ msgid "Internal searches"
 msgstr "Recherches internes"
 
 #: admin/admin.php:285 src/admin/constants/index.js:10
-#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:30
 #: src/admin/panels/SettingsPanel.js:348
 msgid "Geolocation"
 msgstr "Géolocalisation"
@@ -94,17 +94,17 @@ msgstr "Classe d’appareil invalide."
 msgid "Invalid timestamp bucket."
 msgstr "Intervalle de temps invalide."
 
-#: includes/services/class-lean-stats-maxmind-service.php:51
+#: includes/services/class-lean-stats-maxmind-service.php:70
 #, fuzzy, php-format
 msgid "MaxMind API error (%1$s): %2$s."
 msgstr "Erreur API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:52
+#: includes/services/class-lean-stats-maxmind-service.php:71
 #, fuzzy, php-format
 msgid "MaxMind API error (%s)."
 msgstr "Erreur API (%s)"
 
-#: includes/services/class-lean-stats-maxmind-service.php:59
+#: includes/services/class-lean-stats-maxmind-service.php:80
 #, fuzzy
 msgid "Invalid MaxMind API response."
 msgstr "Nonce d’API REST invalide."
@@ -118,12 +118,16 @@ msgid "MaxMind Account ID must be numeric."
 msgstr ""
 
 #: includes/settings.php:144 src/admin/panels/SettingsPanel.js:126
+#, fuzzy
 msgid "MaxMind License Key is required."
-msgstr ""
+msgstr "Clé de licence MaxMind"
 
 #: includes/settings.php:157
+#, fuzzy
 msgid "MaxMind credentials are required to enable IP geolocation."
 msgstr ""
+"L’ID de compte et la clé de licence MaxMind sont requis pour activer la "
+"géolocalisation IP."
 
 #: src/admin/AdminApp.js:47
 msgid "Missing admin configuration."
@@ -184,43 +188,70 @@ msgstr "90 jours"
 msgid "MaxMind API"
 msgstr "Clé API MaxMind"
 
-#: src/admin/panels/GeolocationPanel.js:19
+#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:72
+msgid "IP address"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:15
+msgid "HTTP status"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:16
+#, fuzzy
+msgid "MaxMind error code"
+msgstr "Clé API MaxMind"
+
+#: src/admin/panels/GeolocationPanel.js:18
+msgid "MaxMind error message"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:21
+msgid "Request ID"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:23
+msgid "Response excerpt"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:35
 msgid "No geolocation data available."
 msgstr "Aucune donnée de géolocalisation disponible."
 
-#: src/admin/panels/GeolocationPanel.js:20
+#: src/admin/panels/GeolocationPanel.js:36
 #, fuzzy
 msgid "Looking up location…"
 msgstr "Chargement du graphique…"
 
-#: src/admin/panels/GeolocationPanel.js:31
+#: src/admin/panels/GeolocationPanel.js:46
+#, fuzzy
+msgid "MaxMind API diagnostics"
+msgstr "Clé API MaxMind"
+
+#: src/admin/panels/GeolocationPanel.js:64
 msgid "Location is derived from the current request IP and is not stored."
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:39
-msgid "IP address"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:43
+#: src/admin/panels/GeolocationPanel.js:76
 msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:44
-#: src/admin/panels/GeolocationPanel.js:48
-#: src/admin/panels/GeolocationPanel.js:52
+#: src/admin/panels/GeolocationPanel.js:77
+#: src/admin/panels/GeolocationPanel.js:81
+#: src/admin/panels/GeolocationPanel.js:85
 #, fuzzy
 msgid "Unavailable"
 msgstr "Aucun KPI disponible."
 
-#: src/admin/panels/GeolocationPanel.js:47
+#: src/admin/panels/GeolocationPanel.js:80
 msgid "Region"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:51
+#: src/admin/panels/GeolocationPanel.js:84
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:88
 msgid "Source"
 msgstr ""
 
@@ -264,11 +295,10 @@ msgid "Search term"
 msgstr "Terme de recherche"
 
 #: src/admin/panels/SearchTermsPanel.js:10
-#, fuzzy
 msgid "No search terms available."
-msgstr "Aucun referrer disponible."
+msgstr "Aucun terme de recherche disponible."
 
-#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:16
+#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -347,6 +377,8 @@ msgstr "Laisser vide pour utiliser \"Lean Stats\"."
 msgid ""
 "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr ""
+"L’ID de compte et la clé de licence MaxMind sont requis pour activer la "
+"géolocalisation IP."
 
 #: src/admin/panels/SettingsPanel.js:357
 #, fuzzy
@@ -355,20 +387,19 @@ msgstr "Clé API MaxMind"
 
 #: src/admin/panels/SettingsPanel.js:361
 msgid "Numeric Account ID for MaxMind IP geolocation."
-msgstr ""
+msgstr "ID de compte numérique pour la géolocalisation IP MaxMind."
 
 #: src/admin/panels/SettingsPanel.js:382
-#, fuzzy
 msgid "MaxMind License Key"
-msgstr "Clé API MaxMind"
+msgstr "Clé de licence MaxMind"
 
 #: src/admin/panels/SettingsPanel.js:386
 msgid "License Key for MaxMind IP geolocation."
-msgstr ""
+msgstr "Clé de licence pour la géolocalisation IP MaxMind."
 
 #: src/admin/panels/SettingsPanel.js:411
 msgid "Privacy & consent"
-msgstr ""
+msgstr "Confidentialité et consentement"
 
 #: src/admin/panels/SettingsPanel.js:414
 msgid "Respect DNT / GPC"
@@ -387,9 +418,8 @@ msgid "Enables detailed console logs and raw log capture."
 msgstr "Active les logs détaillés de la console et la capture des logs bruts."
 
 #: src/admin/panels/SettingsPanel.js:443
-#, fuzzy
 msgid "Retention window (days)"
-msgstr "Rétention des logs bruts (jours)"
+msgstr "Fenêtre de rétention (jours)"
 
 #: src/admin/panels/SettingsPanel.js:448
 msgid "Raw logs purge automatically after the configured window."
@@ -417,6 +447,8 @@ msgid ""
 "Comma-separated list of allowed query keys (used for URL tracking and UTM "
 "aggregation)."
 msgstr ""
+"Liste séparée par des virgules des clés de requête autorisées (utilisée pour "
+"le suivi des URL et l’agrégation UTM)."
 
 #: src/admin/panels/SettingsPanel.js:507
 #, fuzzy
@@ -440,6 +472,8 @@ msgid ""
 "Select roles to exclude from tracking. Select all roles to ignore all logged-"
 "in users."
 msgstr ""
+"Sélectionnez les rôles à exclure du suivi. Sélectionnez tous les rôles pour "
+"ignorer tous les utilisateurs connectés."
 
 #: src/admin/panels/SettingsPanel.js:540
 msgid "No roles available."
@@ -501,7 +535,7 @@ msgstr "Aucune page populaire disponible."
 #: src/admin/panels/TopPagesPanel.js:29
 #, fuzzy
 msgid "Entry pages (approx.)"
-msgstr "Pages d'entrée"
+msgstr "Entrées"
 
 #: src/admin/panels/TopPagesPanel.js:32
 #, fuzzy
@@ -510,12 +544,12 @@ msgstr "Aucune page populaire disponible."
 
 #: src/admin/panels/TopPagesPanel.js:34
 msgid "Entries (approx.)"
-msgstr ""
+msgstr "Entrées"
 
 #: src/admin/panels/TopPagesPanel.js:43
 #, fuzzy
 msgid "Exit pages (approx.)"
-msgstr "Pages de sortie"
+msgstr "Sorties"
 
 #: src/admin/panels/TopPagesPanel.js:46
 #, fuzzy
@@ -524,7 +558,7 @@ msgstr "Aucune page populaire disponible."
 
 #: src/admin/panels/TopPagesPanel.js:48
 msgid "Exits (approx.)"
-msgstr ""
+msgstr "Sorties"
 
 #: src/admin/panels/TopPagesPanel.js:58
 msgid "Entry pages"
@@ -538,22 +572,27 @@ msgstr "Pages de sortie"
 msgid "Pages not found (404)"
 msgstr "Pages introuvables"
 
-#: src/admin/widgets/DeviceSplit.js:24
+#: src/admin/widgets/DeviceSplit.js:18
+msgid "Desktop"
+msgstr "Ordinateur"
+
+#: src/admin/widgets/DeviceSplit.js:36
 msgid "Device page views"
 msgstr "Pages vues par appareil"
 
-#: src/admin/widgets/DeviceSplit.js:29
+#: src/admin/widgets/DeviceSplit.js:41
 msgid "No device data available."
 msgstr "Aucune donnée device disponible."
 
-#: src/admin/widgets/DeviceSplit.js:30
+#: src/admin/widgets/DeviceSplit.js:42
 msgid "Loading device breakdown…"
 msgstr "Chargement de la répartition des devices…"
 
-#: src/admin/widgets/DeviceSplit.js:48
-#, fuzzy
-msgid "views"
-msgstr "%s vues"
+#: src/admin/widgets/DeviceSplit.js:60
+msgid "view"
+msgid_plural "views"
+msgstr[0] "vue"
+msgstr[1] "vues"
 
 #: src/admin/widgets/OverviewKpis.js:77
 #, fuzzy
@@ -596,13 +635,13 @@ msgid "Toggle sort order"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:63
+#, fuzzy
 msgid "Table: Referrer sources"
-msgstr ""
+msgstr "Sources de référence"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:82
-#, fuzzy
 msgid "Referrer sources"
-msgstr "Référent"
+msgstr "Sources de référence"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:85
 #: src/admin/widgets/ReportTableCard.js:126
@@ -612,7 +651,7 @@ msgstr "Trier par"
 #: src/admin/widgets/ReferrerSourcesTableCard.js:97
 #: src/admin/widgets/ReferrerSourcesTableCard.js:149
 msgid "Source category"
-msgstr ""
+msgstr "Catégorie de source"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:119
 #: src/admin/widgets/ReportTableCard.js:171
@@ -627,7 +666,7 @@ msgstr "Aucun referrer disponible."
 #: src/admin/widgets/ReferrerSourcesTableCard.js:138
 #, fuzzy
 msgid "Loading referrer sources…"
-msgstr "Erreur de chargement."
+msgstr "Sources de référence"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:174
 #: src/admin/widgets/ReportTableCard.js:228
@@ -654,23 +693,22 @@ msgstr "Suivant"
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
 #: src/admin/widgets/ReportTableCard.js:245
 msgid "of"
-msgstr ""
+msgstr "sur"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:197
 #: src/admin/widgets/ReportTableCard.js:251
-#, fuzzy
 msgid "items"
-msgstr "%s éléments"
+msgstr "éléments"
 
 #: src/admin/widgets/ReportTableCard.js:37
 #: src/admin/widgets/ReportTableCard.js:145
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #. translators: %s: active first-column label.
 #: src/admin/widgets/ReportTableCard.js:106
 msgid "label"
-msgstr ""
+msgstr "libellé"
 
 #. translators: %s: table title.
 #: src/admin/widgets/ReportTableCard.js:113
@@ -679,7 +717,7 @@ msgstr ""
 
 #: src/admin/widgets/ReportTableCard.js:140
 msgid "Display"
-msgstr ""
+msgstr "Afficher"
 
 #: src/admin/widgets/ReportTableCard.js:143
 msgid "URL"
@@ -753,6 +791,9 @@ msgstr "Courbe quotidienne des pages vues"
 #~ msgid "Device breakdown"
 #~ msgstr "Répartition par device"
 
+#~ msgid "Raw log retention (days)"
+#~ msgstr "Rétention des logs bruts (jours)"
+
 #~ msgid "Remove query parameters."
 #~ msgstr "Supprime les paramètres de requête."
 
@@ -768,6 +809,9 @@ msgstr "Courbe quotidienne des pages vues"
 
 #~ msgid "Anonymous sessions aggregated over the selected period."
 #~ msgstr "Sessions anonymes agrégées sur la période."
+
+#~ msgid "%s views"
+#~ msgstr "%s vues"
 
 #~ msgid "Raw logs store granular view details while debug mode is enabled."
 #~ msgstr ""
@@ -786,3 +830,6 @@ msgstr "Courbe quotidienne des pages vues"
 
 #~ msgid "Page %1$d of %2$d"
 #~ msgstr "Page %1$d sur %2$d"
+
+#~ msgid "%s items"
+#~ msgstr "%s éléments"

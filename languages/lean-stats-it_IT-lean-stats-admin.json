@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Pagine di uscita"
+      ],
+      "Display": [
+        "Mostra"
+      ],
+      "of": [
+        "di"
+      ],
+      "items": [
+        "elementi"
+      ],
+      "label": [
+        "etichetta"
+      ],
+      "Entries (approx.)": [
+        "Ingressi"
+      ],
+      "Exits (approx.)": [
+        "Uscite"
+      ],
+      "Title": [
+        "Titolo"
+      ],
+      "Referrer sources": [
+        "Sorgenti di riferimento"
+      ],
+      "Source category": [
+        "Categoria di origine"
+      ],
+      "No search terms available.": [
+        "Nessun termine di ricerca disponibile."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Lascia vuoto per usare \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "L'ID account e la chiave di licenza MaxMind sono necessari per abilitare la geolocalizzazione IP."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "ID account numerico per la geolocalizzazione IP MaxMind."
+      ],
+      "MaxMind License Key": [
+        "Chiave di licenza MaxMind"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Chiave di licenza per la geolocalizzazione IP MaxMind."
+      ],
+      "Privacy & consent": [
+        "Privacy e consenso"
+      ],
+      "Retention window (days)": [
+        "Finestra di conservazione (giorni)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Elenco separato da virgole di chiavi di query consentite (usato per il tracciamento degli URL e l'aggregazione UTM)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Seleziona i ruoli da escludere dal tracciamento. Seleziona tutti i ruoli per ignorare tutti gli utenti connessi."
+      ],
+      "Desktop": [
+        "Desktop"
+      ],
+      "view": [
+        "visualizzazione",
+        "visualizzazioni"
       ]
     }
   }
