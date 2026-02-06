@@ -235,6 +235,36 @@ function lean_stats_store_aggregate_hit(array $hit, array $utm_params = []): voi
 }
 
 /**
+ * Store a single hit directly into the geolocation aggregation table.
+ */
+function lean_stats_store_geo_aggregate_hit(array $hit): void
+{
+    $timestamp = isset($hit['timestamp_bucket']) ? absint($hit['timestamp_bucket']) : 0;
+    if ($timestamp === 0) {
+        return;
+    }
+
+    $geo = lean_stats_get_geo_aggregate_payload();
+    if ($geo === []) {
+        return;
+    }
+
+    $date_bucket = wp_date('Y-m-d', $timestamp);
+
+    lean_stats_upsert_geo_rows(
+        [
+            [
+                'date_bucket' => $date_bucket,
+                'country_code' => $geo['country_code'],
+                'region_code' => $geo['region_code'],
+                'city_name' => $geo['city_name'],
+                'hits' => 1,
+            ],
+        ]
+    );
+}
+
+/**
  * Upsert entry/exit aggregate rows.
  */
 function lean_stats_upsert_entry_exit_rows(array $rows): void
@@ -260,6 +290,37 @@ function lean_stats_upsert_entry_exit_rows(array $rows): void
     $sql = "INSERT INTO {$table} (date_bucket, page_path, entries, exits) VALUES "
         . implode(', ', $placeholders)
         . ' ON DUPLICATE KEY UPDATE entries = entries + VALUES(entries), exits = exits + VALUES(exits)';
+
+    $wpdb->query($wpdb->prepare($sql, $values));
+}
+
+/**
+ * Upsert geolocation aggregate rows.
+ */
+function lean_stats_upsert_geo_rows(array $rows): void
+{
+    if ($rows === []) {
+        return;
+    }
+
+    global $wpdb;
+
+    $table = $wpdb->prefix . 'lean_stats_geo_daily';
+    $placeholders = [];
+    $values = [];
+
+    foreach ($rows as $row) {
+        $placeholders[] = '(%s, %s, %s, %s, %d)';
+        $values[] = $row['date_bucket'];
+        $values[] = $row['country_code'];
+        $values[] = $row['region_code'];
+        $values[] = $row['city_name'];
+        $values[] = (int) $row['hits'];
+    }
+
+    $sql = "INSERT INTO {$table} (date_bucket, country_code, region_code, city_name, hits) VALUES "
+        . implode(', ', $placeholders)
+        . ' ON DUPLICATE KEY UPDATE hits = hits + VALUES(hits)';
 
     $wpdb->query($wpdb->prepare($sql, $values));
 }

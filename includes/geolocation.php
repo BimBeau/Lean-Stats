@@ -60,6 +60,56 @@ function lean_stats_pick_maxmind_name($names): string
 }
 
 /**
+ * Normalize a country ISO code from MaxMind payloads.
+ */
+function lean_stats_normalize_country_code($code): string
+{
+    if (!is_string($code)) {
+        return '';
+    }
+
+    $code = strtoupper(trim(sanitize_text_field($code)));
+    $code = preg_replace('/[^A-Z]/', '', $code);
+
+    return strlen($code) === 2 ? $code : '';
+}
+
+/**
+ * Normalize a region code for aggregation.
+ */
+function lean_stats_normalize_region_code($code): string
+{
+    if (!is_string($code)) {
+        return 'unknown';
+    }
+
+    $code = strtoupper(trim(sanitize_text_field($code)));
+    $code = preg_replace('/[^A-Z0-9_-]/', '', $code);
+
+    return $code !== '' ? $code : 'unknown';
+}
+
+/**
+ * Normalize a city name for aggregation.
+ */
+function lean_stats_normalize_city_name($city): string
+{
+    if (!is_string($city)) {
+        return 'unknown';
+    }
+
+    $city = trim(sanitize_text_field($city));
+    if ($city === '') {
+        return 'unknown';
+    }
+
+    $city = preg_replace('/\s+/', ' ', $city);
+    $city = mb_strtolower($city);
+
+    return $city !== '' ? $city : 'unknown';
+}
+
+/**
  * Resolve the MaxMind API service.
  */
 function lean_stats_get_maxmind_service(): Lean_Stats_MaxMind_Service
@@ -110,8 +160,46 @@ function lean_stats_get_geolocation_payload(): array
     return [
         'ip' => $ip,
         'country' => $location['country'],
+        'country_code' => $location['country_code'] ?? '',
         'region' => $location['region'],
+        'region_code' => $location['region_code'] ?? '',
         'city' => $location['city'],
         'source' => $location['source'],
+    ];
+}
+
+/**
+ * Resolve normalized geolocation data for aggregation.
+ */
+function lean_stats_get_geo_aggregate_payload(): array
+{
+    $ip = lean_stats_get_client_ip();
+    if ($ip === '') {
+        return [];
+    }
+
+    $settings = lean_stats_get_settings();
+    if (lean_stats_validate_maxmind_settings($settings)) {
+        return [];
+    }
+
+    $account_id = trim((string) ($settings['maxmind_account_id'] ?? ''));
+    $license_key = trim((string) ($settings['maxmind_license_key'] ?? ''));
+    $service = lean_stats_get_maxmind_service();
+    $location = $service->lookup($ip, $account_id, $license_key);
+
+    if (!empty($location['error'])) {
+        return [];
+    }
+
+    $country_code = lean_stats_normalize_country_code($location['country_code'] ?? '');
+    if ($country_code === '') {
+        return [];
+    }
+
+    return [
+        'country_code' => $country_code,
+        'region_code' => lean_stats_normalize_region_code($location['region_code'] ?? ''),
+        'city_name' => lean_stats_normalize_city_name($location['city'] ?? ''),
     ];
 }
