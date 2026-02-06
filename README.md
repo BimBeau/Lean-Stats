@@ -20,7 +20,7 @@ Lean Stats uses **clear, privacy-safe metrics** to avoid ambiguity.
 ### Visits
 - A **visit** represents an anonymous **session** (not a unique person).
 - Sessions are approximated from **entry hits** (non-internal referrers), not unique people.
-- No IP addresses are stored in clear.
+- No IP addresses are stored.
 - No cookies or persistent identifiers are used.
 
 Visits cannot be used to identify individuals.
@@ -40,7 +40,7 @@ Lean Stats focuses on **aggregated metrics**, not user journeys.
 - Time series (per day, optionally per hour)
 - Pages (by page views)
 - Referrers by domain (e.g. `google.com`, `instagram.com`)
-- Device class (mobile / desktop / tablet)
+- Device class (mobile / desktop / tablet / bot)
 
 ### Optional modules (privacy-safe)
 - 404 tracking (top missing URLs + counts)
@@ -56,7 +56,7 @@ Lean Stats stores **aggregated counts**, never person-level records.
 - Page paths (cleaned by default)
 - Daily or hourly hit totals per page
 - Referrer domains (domain only)
-- Device class (mobile / desktop / tablet)
+- Device class (mobile / desktop / tablet / bot)
 - 404 paths with counts
 - Internal search terms with counts
 - Allowlisted UTM campaign values (aggregated)
@@ -86,12 +86,10 @@ To keep Lean Stats lean and avoid consent-driven tracking patterns, the plugin d
 
 Lean Stats is designed to minimize data collection:
 
-- No IP stored in clear (ideally no IP stored at all)
-- Visits use a daily salted, irreversible hash of the IP address (hash only, no IP storage)
+- No IP addresses stored
 - Referrer stored as domain only (no full referrer URLs)
 - URL cleaning by default (strip query strings unless allowlisted)
 - Data retention: aggregated data kept for reporting; optional short-lived raw logs (if enabled) are limited and purged automatically
-- Soft rate limiting uses ephemeral, hashed IPs held in memory cache only; raw IPs are never persisted
 - Short deduplication window prevents repeated identical hits within seconds
 - Optional support for GPC / DNT signals (configurable)
 
@@ -114,7 +112,7 @@ Lean Stats integrates directly inside WordPress Admin:
 - Admin UI uses the Gutenberg design system exclusively with official `@wordpress/components` UI elements.
 - Fast dashboard: KPIs, time series charts, and top lists
 - Minimal interactions: tooltips, skeleton loading, and clear empty states
-- Settings screen for strict mode, DNT / GPC compliance, URL allowlists, retention, and role exclusions
+- Settings screen for DNT / GPC compliance, URL allowlists, retention, role exclusions, debug mode, and MaxMind credentials
 - Geolocation screen that shows the current request country, region, and city without storing IP addresses
 
 ## 🧱 Admin code organization
@@ -154,3 +152,5 @@ Lean Stats includes product documentation for implementation and extension:
 - REST API: `docs/REST_API.md`
 - Database schema: `docs/DB_SCHEMA.md`
 - Architecture: `docs/ARCHITECTURE.md`
+- Debug mode: `docs/DEBUG.md`
+- Docs consistency report: `docs/DOCS_CONSISTENCY_REPORT.md`
