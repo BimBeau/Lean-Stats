@@ -7,6 +7,7 @@ Lean Stats stores settings in the `lean_stats_settings` option and exposes them 
 ### URL cleaning
 
 Lean Stats strips query strings from tracked page paths by default and keeps only allowlisted query keys. The same allowlist controls which UTM parameters are aggregated.
+Server-side tracking always applies the allowlist; the REST hit collector honors the `url_strip_query` toggle.
 
 ### Exclusions
 
@@ -22,7 +23,7 @@ Raw logs are stored only when debug mode is enabled and expire based on the conf
 
 ### Geolocation
 
-Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind GeoLite Web Service is the only supported lookup method. Configuration requires both the MaxMind Account ID and License Key to enable IP geolocation.
+Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind GeoLite Web Service is the only supported lookup method. Saving settings requires both the MaxMind Account ID and License Key.
 
 ### Purge
 
@@ -36,7 +37,7 @@ The purge action deletes aggregated analytics tables and raw logs while leaving 
 | `respect_dnt_gpc` | boolean | `true` | Skips tracking when `DNT: 1` or `Sec-GPC: 1` headers are present. |
 | `url_strip_query` | boolean | `true` | Removes query strings from tracked page paths. |
 | `url_query_allowlist` | array | `[]` | Keeps only listed query keys when query stripping is enabled and aggregates matching UTM values. |
-| `raw_logs_enabled` | boolean | `false` | Mirrors the debug mode state to control raw log storage. |
+| `raw_logs_enabled` | boolean | `false` | Mirrors the debug mode state to control raw log storage; any `true` value for `debug_enabled` or `raw_logs_enabled` enables both. |
 | `raw_logs_retention_days` | integer | `1` | Retention window (1–365 days) for raw logs when debug mode is enabled. |
 | `excluded_roles` | array | `[]` | Skips tracking for logged-in users in the listed WordPress roles. |
 | `excluded_paths` | array | `[]` | Skips tracking for requests that match the listed URL paths. |

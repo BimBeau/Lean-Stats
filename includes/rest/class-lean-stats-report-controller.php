@@ -587,6 +587,9 @@ class Lean_Stats_Report_Controller {
         if ($is_page_path_table && !isset($allowed_orderby['page_title'])) {
             $allowed_orderby['page_title'] = 'page_title';
         }
+        if ($default_orderby !== '' && !isset($allowed_orderby[$default_orderby])) {
+            $allowed_orderby[$default_orderby] = 'metric';
+        }
         if ($default_orderby === '') {
             $default_orderby = array_key_first($allowed_orderby) ?: 'hits';
         }

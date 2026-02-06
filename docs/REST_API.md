@@ -13,8 +13,13 @@ JSON parameters:
 - `page_path` (string, required)
 - `post_id` (integer, optional)
 - `referrer_domain` (string, optional)
-- `device_class` (string, required)
+- `device_class` (string, required; `desktop`, `tablet`, `mobile`, or `bot`)
 - `timestamp_bucket` (integer, required)
+
+Responses:
+
+- `201 Created` when a hit is stored (`{"tracked": true}`)
+- `204 No Content` when tracking is skipped or deduplicated (`{"tracked": false}`)
 
 ### Protected report endpoints
 
@@ -65,14 +70,21 @@ Parameters:
 - `end` (YYYY-MM-DD, optional)
 - `page` (integer, optional, default 1)
 - `per_page` (integer, optional, default 10, max 100)
-- `orderby` (`hits` or `label`, optional, default `hits`)
+- `orderby` (`hits`, `label`, or `page_title`, optional, default `hits`)
 - `order` (`asc` or `desc`, optional, default `desc`)
 
 #### GET `/referrers`
 
 Returns paginated hit totals by referrer domain.
 
-Parameters: same as `/top-pages`.
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits` or `label`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
 
 #### GET `/referrer-sources`
 
@@ -84,13 +96,27 @@ Parameters: same as `/top-pages`, with `orderby` values `hits`, `referrer`, or `
 
 Returns paginated hit totals for 404 paths.
 
-Parameters: same as `/top-pages`.
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits`, `label`, or `page_title`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
 
 #### GET `/search-terms`
 
 Returns paginated hit totals for search terms.
 
-Parameters: same as `/top-pages`.
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits` or `label`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
 
 #### GET `/entry-pages`
 
@@ -104,7 +130,7 @@ Parameters:
 - `end` (YYYY-MM-DD, optional)
 - `page` (integer, optional, default 1)
 - `per_page` (integer, optional, default 10, max 100)
-- `orderby` (`entries` or `label`, optional, default `entries`)
+- `orderby` (`entries`, `label`, or `page_title`, optional, default `entries`)
 - `order` (`asc` or `desc`, optional, default `desc`)
 
 #### GET `/exit-pages`
@@ -119,7 +145,7 @@ Parameters:
 - `end` (YYYY-MM-DD, optional)
 - `page` (integer, optional, default 1)
 - `per_page` (integer, optional, default 10, max 100)
-- `orderby` (`exits` or `label`, optional, default `exits`)
+- `orderby` (`exits`, `label`, or `page_title`, optional, default `exits`)
 - `order` (`asc` or `desc`, optional, default `desc`)
 
 #### POST `/purge`
@@ -148,6 +174,18 @@ Response (200):
     "country": "France",
     "region": "Île-de-France",
     "city": "Paris",
+    "source": "maxmind-api"
+  }
+}
+```
+
+Response (200 when MaxMind is not configured or IP is unavailable):
+
+```json
+{
+  "location": {
+    "error": "MaxMind credentials are required to enable IP geolocation.",
+    "ip": "203.0.113.10",
     "source": "maxmind-api"
   }
 }
@@ -325,6 +363,8 @@ Returned fields:
 - `excluded_roles` (array)
 - `excluded_paths` (array)
 - `debug_enabled` (boolean)
+- `maxmind_account_id` (string)
+- `maxmind_license_key` (string)
 
 `raw_logs_enabled` mirrors `debug_enabled` and reflects whether raw log storage is active.
 
@@ -341,7 +381,9 @@ Response (200):
     "raw_logs_retention_days": 1,
     "excluded_roles": [],
     "excluded_paths": [],
-    "debug_enabled": false
+    "debug_enabled": false,
+    "maxmind_account_id": "",
+    "maxmind_license_key": ""
   }
 }
 ```
@@ -361,6 +403,8 @@ JSON payload:
 - `excluded_roles` (array, optional)
 - `excluded_paths` (array, optional)
 - `debug_enabled` (boolean, optional)
+- `maxmind_account_id` (string, optional)
+- `maxmind_license_key` (string, optional)
 
 Response (200):
 
@@ -375,7 +419,25 @@ Response (200):
     "raw_logs_retention_days": 1,
     "excluded_roles": [],
     "excluded_paths": [],
-    "debug_enabled": false
+    "debug_enabled": false,
+    "maxmind_account_id": "",
+    "maxmind_license_key": ""
+  }
+}
+```
+
+Response (400 when MaxMind credentials are missing or invalid):
+
+```json
+{
+  "code": "lean_stats_invalid_maxmind_credentials",
+  "message": "MaxMind credentials are required to enable IP geolocation.",
+  "data": {
+    "status": 400,
+    "field_errors": {
+      "maxmind_account_id": "MaxMind Account ID is required.",
+      "maxmind_license_key": "MaxMind License Key is required."
+    }
   }
 }
 ```

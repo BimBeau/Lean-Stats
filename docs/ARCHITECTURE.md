@@ -4,16 +4,22 @@
 
 Lean Stats stores analytics in **aggregated counters** and optional raw logs.
 
-- Front-end requests are tracked on `template_redirect` and written as daily counters in:
-  - `wp_lean_stats_hits_daily`
-  - `wp_lean_stats_404s_daily`
-  - `wp_lean_stats_search_terms_daily`
-  - `wp_lean_stats_utm_daily`
+- Server-side tracking runs on `template_redirect` and records:
+  - Referrer source categories in `wp_lean_stats_hits_daily`
+  - Entry/exit counts in `wp_lean_stats_entry_exit_daily`
+  - 404 counts in `wp_lean_stats_404s_daily`
+  - Internal search terms in `wp_lean_stats_search_terms_daily`
+  - Allowlisted UTM values in `wp_lean_stats_utm_daily`
 
-- When raw logs are enabled, the plugin stores raw hits in the `lean_stats_hits` option.
-  A scheduled job (`LEAN_STATS_AGGREGATION_CRON_HOOK`) aggregates these hits with
-  `INSERT ... ON DUPLICATE KEY UPDATE` writes into the `wp_lean_stats_daily` and
-  `wp_lean_stats_hourly` tables.
+- The front-end tracker posts to the REST hit endpoint (`POST /hits`), which stores:
+  - Aggregated page-view rows in `wp_lean_stats_daily`
+  - Optional hourly aggregates in `wp_lean_stats_hourly`
+  - Entry/exit totals in `wp_lean_stats_entry_exit_daily`
+  - Referrer source categories in `wp_lean_stats_hits_daily`
+
+- When raw logs are enabled, the REST hit endpoint also stores raw hits in the
+  `lean_stats_hits` option. A scheduled job (`LEAN_STATS_AGGREGATION_CRON_HOOK`)
+  aggregates any unprocessed raw hits into the daily/hourly tables.
 
 The admin dashboard reads KPIs and time series from the aggregated tables, including
 referrer source categories from the daily hit counters.

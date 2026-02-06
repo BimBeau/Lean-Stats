@@ -19,7 +19,7 @@ Custom REST data sources register on `lean_stats_rest_sources` and are implement
 
 ## Analytics behavior filters
 
-Lean Stats applies filters for cache TTL, deduplication, rate limiting, raw log retention, and maximum raw log size. See `docs/HOOKS.md` for the full list and examples.
+Lean Stats applies filters for cache TTL, deduplication, hourly aggregation, entry/exit classification, raw log retention, cleanup intervals, and maximum raw log size. See `docs/HOOKS.md` for the full list and examples.
 
 ## Reference documentation
 
