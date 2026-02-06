@@ -9,6 +9,22 @@ const GeolocationPanel = () => {
   const location = data?.location || null;
   const hasLocation = location && !location.error;
   const sourceLabel = __("MaxMind API", "lean-stats");
+  const errorDetails = location?.details || null;
+  const detailItems = [
+    { label: __("IP address", "lean-stats"), value: location?.ip },
+    { label: __("HTTP status", "lean-stats"), value: errorDetails?.status },
+    { label: __("MaxMind error code", "lean-stats"), value: errorDetails?.error_code },
+    {
+      label: __("MaxMind error message", "lean-stats"),
+      value: errorDetails?.error_message,
+    },
+    { label: __("Request ID", "lean-stats"), value: errorDetails?.request_id },
+    {
+      label: __("Response excerpt", "lean-stats"),
+      value: errorDetails?.response_excerpt,
+    },
+  ].filter((item) => item.value);
+  const hasDetails = detailItems.length > 0;
 
   return (
     <LsCard title={__("Geolocation", "lean-stats")}>
@@ -21,9 +37,26 @@ const GeolocationPanel = () => {
         skeletonRows={4}
       />
       {!isLoading && !error && location?.error && (
-        <Notice status="warning" isDismissible={false}>
-          {location.error}
-        </Notice>
+        <>
+          <Notice status="warning" isDismissible={false}>
+            {location.error}
+          </Notice>
+          {hasDetails && (
+            <details>
+              <summary>{__("MaxMind API diagnostics", "lean-stats")}</summary>
+              <table className="widefat striped">
+                <tbody>
+                  {detailItems.map((item) => (
+                    <tr key={item.label}>
+                      <th>{item.label}</th>
+                      <td>{item.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </details>
+          )}
+        </>
       )}
       {!isLoading && !error && hasLocation && (
         <>

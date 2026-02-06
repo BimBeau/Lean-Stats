@@ -37,6 +37,8 @@ class Lean_Stats_MaxMind_Service {
 
         if ($code !== 200) {
             $detail = '';
+            $error_code = '';
+            $error_message = '';
             $decoded = json_decode($body, true);
             if (is_array($decoded)) {
                 $error_message = (string) ($decoded['error'] ?? '');
@@ -46,10 +48,29 @@ class Lean_Stats_MaxMind_Service {
                 }
             }
 
+            $details = [
+                'status' => $code,
+            ];
+            $request_id = wp_remote_retrieve_header($response, 'x-request-id');
+            if ($request_id) {
+                $details['request_id'] = sanitize_text_field((string) $request_id);
+            }
+            if ($error_code) {
+                $details['error_code'] = sanitize_text_field($error_code);
+            }
+            if ($error_message) {
+                $details['error_message'] = sanitize_text_field($error_message);
+            }
+            if (empty($error_message) && $body) {
+                $details['response_excerpt'] = mb_substr(trim(wp_strip_all_tags($body)), 0, 200);
+            }
+
             return [
                 'error' => $detail
                     ? sprintf(__('MaxMind API error (%1$s): %2$s.', 'lean-stats'), $code, $detail)
                     : sprintf(__('MaxMind API error (%s).', 'lean-stats'), $code),
+                'details' => $details,
+                'source' => 'maxmind-api',
             ];
         }
 
