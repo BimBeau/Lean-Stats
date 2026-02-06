@@ -110,6 +110,11 @@
     background-color: #fff3cd;
 }
 
+.ls-kpi-card__badge--error {
+    color: #842029;
+    background-color: #f8d7da;
+}
+
 .ls-kpi-card__badge--info {
     color: #0c4a6e;
     background-color: #d9edf7;

@@ -23,15 +23,15 @@ export const formatChangePercent = (value) => {
     return null;
   }
 
-  if (value === 0 || Object.is(value, -0)) {
-    return null;
-  }
-
   const formatter = new Intl.NumberFormat(undefined, {
     maximumFractionDigits: 1,
     minimumFractionDigits: 0,
     signDisplay: "exceptZero",
   });
+
+  if (value === 0 || Object.is(value, -0)) {
+    return `${formatter.format(0)}%`;
+  }
 
   return `${formatter.format(value)}%`;
 };

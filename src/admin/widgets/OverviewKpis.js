@@ -133,6 +133,8 @@ const OverviewKpis = ({ range }) => {
         const changeLabel = formatChangePercent(changePercent);
         const isPositive = changePercent > 0;
         const isNegative = changePercent < 0;
+        const isZero =
+          changePercent === 0 || Object.is(changePercent, -0);
         return (
           <Card key={card.key} className="ls-overview__summary-card">
             <CardBody className="ls-kpi-card__body">
@@ -143,7 +145,13 @@ const OverviewKpis = ({ range }) => {
                   {changeLabel !== null && (
                     <KpiBadge
                       status={
-                        isPositive ? "success" : isNegative ? "warning" : "info"
+                        isPositive
+                          ? "success"
+                          : isNegative
+                          ? "error"
+                          : isZero
+                          ? "warning"
+                          : "info"
                       }
                     >
                       {changeLabel}
