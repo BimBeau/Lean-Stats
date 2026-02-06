@@ -22,7 +22,7 @@ Raw logs are stored only when debug mode is enabled and expire based on the conf
 
 ### Geolocation
 
-Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind is the only supported lookup method. Configuration requires both the MaxMind Account ID and License Key to enable IP geolocation.
+Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind GeoLite Web Service is the only supported lookup method. Configuration requires both the MaxMind Account ID and License Key to enable IP geolocation.
 
 ### Purge
 

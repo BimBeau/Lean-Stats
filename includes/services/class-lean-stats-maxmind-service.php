@@ -6,11 +6,13 @@
 defined('ABSPATH') || exit;
 
 class Lean_Stats_MaxMind_Service {
+    private const GEOLITE_BASE_URL = 'https://geolite.info/geoip/v2.1';
+
     /**
      * Look up geolocation data using the MaxMind API.
      */
     public function lookup(string $ip, string $account_id, string $license_key): array {
-        $url = sprintf('https://geoip.maxmind.com/geoip/v2.1/city/%s', rawurlencode($ip));
+        $url = sprintf('%s/city/%s', self::GEOLITE_BASE_URL, rawurlencode($ip));
         $auth = base64_encode($account_id . ':' . $license_key);
         $version = defined('LEAN_STATS_VERSION') ? LEAN_STATS_VERSION : 'unknown';
         $user_agent = sprintf('Lean Stats/%s; %s', $version, home_url('/'));
@@ -65,6 +67,8 @@ class Lean_Stats_MaxMind_Service {
                 $details['response_excerpt'] = mb_substr(trim(wp_strip_all_tags($body)), 0, 200);
             }
 
+            $this->log_maxmind_error($url, $code, $error_code);
+
             return [
                 'error' => $detail
                     ? sprintf(__('MaxMind API error (%1$s): %2$s.', 'lean-stats'), $code, $detail)
@@ -87,5 +91,24 @@ class Lean_Stats_MaxMind_Service {
             'city' => lean_stats_pick_maxmind_name($payload['city']['names'] ?? []),
             'source' => 'maxmind-api',
         ];
+    }
+
+    /**
+     * Log MaxMind API errors when debug mode is enabled.
+     */
+    private function log_maxmind_error(string $url, int $status, string $error_code): void {
+        $settings = function_exists('lean_stats_get_settings') ? lean_stats_get_settings() : [];
+        if (empty($settings['debug_enabled'])) {
+            return;
+        }
+
+        $message = sprintf(
+            '[LeanStats] MaxMind API request failed. url=%s status=%d error_code=%s',
+            esc_url_raw($url),
+            $status,
+            $error_code !== '' ? $error_code : 'unknown'
+        );
+
+        error_log($message);
     }
 }
