@@ -136,7 +136,7 @@ const TimeseriesChart = ({ range }) => {
                     <stop
                       offset="0%"
                       stopColor="var(--ls-text-2, #2271b1)"
-                      stopOpacity="0.35"
+                      stopOpacity="0.5"
                     />
                     <stop
                       offset="100%"
