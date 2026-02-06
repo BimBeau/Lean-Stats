@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Ausstiegsseiten"
+      ],
+      "Display": [
+        "Anzeige"
+      ],
+      "of": [
+        "von"
+      ],
+      "items": [
+        "Elemente"
+      ],
+      "label": [
+        "Bezeichnung"
+      ],
+      "Entries (approx.)": [
+        "Einstiege"
+      ],
+      "Exits (approx.)": [
+        "Ausstiege"
+      ],
+      "Title": [
+        "Titel"
+      ],
+      "Referrer sources": [
+        "Verweisquellen"
+      ],
+      "Source category": [
+        "Quellenkategorie"
+      ],
+      "No search terms available.": [
+        "Keine Suchbegriffe verfügbar."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Leer lassen, um „Lean Stats“ zu verwenden."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "MaxMind-Konto-ID und Lizenzschlüssel sind erforderlich, um die IP-Geolokalisierung zu aktivieren."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "Numerische Konto-ID für die MaxMind-IP-Geolokalisierung."
+      ],
+      "MaxMind License Key": [
+        "MaxMind-Lizenzschlüssel"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Lizenzschlüssel für die MaxMind-IP-Geolokalisierung."
+      ],
+      "Privacy & consent": [
+        "Datenschutz & Einwilligung"
+      ],
+      "Retention window (days)": [
+        "Aufbewahrungszeitraum (Tage)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Durch Kommas getrennte Liste zulässiger Abfrageparameter (für URL-Tracking und UTM-Aggregation)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Wählen Sie Rollen aus, die vom Tracking ausgeschlossen werden sollen. Wählen Sie alle Rollen aus, um alle angemeldeten Nutzer zu ignorieren."
+      ],
+      "Desktop": [
+        "Desktop"
+      ],
+      "view": [
+        "Aufruf",
+        "Aufrufe"
       ]
     }
   }

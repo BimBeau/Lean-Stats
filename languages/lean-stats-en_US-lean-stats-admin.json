@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Exit pages"
+      ],
+      "Display": [
+        "Display"
+      ],
+      "of": [
+        "of"
+      ],
+      "items": [
+        "items"
+      ],
+      "label": [
+        "label"
+      ],
+      "Entries (approx.)": [
+        "Entries"
+      ],
+      "Exits (approx.)": [
+        "Exits"
+      ],
+      "Title": [
+        "Title"
+      ],
+      "Referrer sources": [
+        "Referrer sources"
+      ],
+      "Source category": [
+        "Source category"
+      ],
+      "No search terms available.": [
+        "No search terms available."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Leave blank to use \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "MaxMind Account ID and License Key are required to enable IP geolocation."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "Numeric Account ID for MaxMind IP geolocation."
+      ],
+      "MaxMind License Key": [
+        "MaxMind License Key"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "License Key for MaxMind IP geolocation."
+      ],
+      "Privacy & consent": [
+        "Privacy & consent"
+      ],
+      "Retention window (days)": [
+        "Retention window (days)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+      ],
+      "Desktop": [
+        "Desktop"
+      ],
+      "view": [
+        "view",
+        "views"
       ]
     }
   }

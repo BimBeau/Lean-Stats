@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Uitstappagina's"
+      ],
+      "Display": [
+        "Weergave"
+      ],
+      "of": [
+        "van"
+      ],
+      "items": [
+        "elementen"
+      ],
+      "label": [
+        "label"
+      ],
+      "Entries (approx.)": [
+        "Ingangen"
+      ],
+      "Exits (approx.)": [
+        "Uitgangen"
+      ],
+      "Title": [
+        "Titel"
+      ],
+      "Referrer sources": [
+        "Verwijzingsbronnen"
+      ],
+      "Source category": [
+        "Broncategorie"
+      ],
+      "No search terms available.": [
+        "Geen zoektermen beschikbaar."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Leeg laten om \"Lean Stats\" te gebruiken."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "MaxMind-account-ID en licentiesleutel zijn vereist om IP-geolocatie in te schakelen."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "Numeriek account-ID voor MaxMind IP-geolocatie."
+      ],
+      "MaxMind License Key": [
+        "MaxMind-licentiesleutel"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Licentiesleutel voor MaxMind IP-geolocatie."
+      ],
+      "Privacy & consent": [
+        "Privacy en toestemming"
+      ],
+      "Retention window (days)": [
+        "Bewaarperiode (dagen)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Door komma's gescheiden lijst met toegestane querysleutels (gebruikt voor URL-tracking en UTM-aggregatie)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Selecteer rollen om uit te sluiten van tracking. Selecteer alle rollen om alle ingelogde gebruikers te negeren."
+      ],
+      "Desktop": [
+        "Desktop"
+      ],
+      "view": [
+        "weergave",
+        "weergaven"
       ]
     }
   }

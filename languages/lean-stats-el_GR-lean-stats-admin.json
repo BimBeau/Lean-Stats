@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Σελίδες εξόδου"
+      ],
+      "Display": [
+        "Εμφάνιση"
+      ],
+      "of": [
+        "από"
+      ],
+      "items": [
+        "στοιχεία"
+      ],
+      "label": [
+        "ετικέτα"
+      ],
+      "Entries (approx.)": [
+        "Είσοδοι"
+      ],
+      "Exits (approx.)": [
+        "Έξοδοι"
+      ],
+      "Title": [
+        "Τίτλος"
+      ],
+      "Referrer sources": [
+        "Πηγές παραπομπής"
+      ],
+      "Source category": [
+        "Κατηγορία πηγής"
+      ],
+      "No search terms available.": [
+        "Δεν υπάρχουν διαθέσιμοι όροι αναζήτησης."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Αφήστε κενό για να χρησιμοποιηθεί το \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "Απαιτούνται το ID λογαριασμού και το κλειδί άδειας MaxMind για την ενεργοποίηση γεωεντοπισμού IP."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "Αριθμητικό ID λογαριασμού για γεωεντοπισμό IP MaxMind."
+      ],
+      "MaxMind License Key": [
+        "Κλειδί άδειας MaxMind"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Κλειδί άδειας για γεωεντοπισμό IP MaxMind."
+      ],
+      "Privacy & consent": [
+        "Απόρρητο και συναίνεση"
+      ],
+      "Retention window (days)": [
+        "Παράθυρο διατήρησης (ημέρες)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Λίστα επιτρεπόμενων κλειδιών ερωτήματος χωρισμένη με κόμματα (χρησιμοποιείται για παρακολούθηση URL και συγκέντρωση UTM)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Επιλέξτε ρόλους για εξαίρεση από την παρακολούθηση. Επιλέξτε όλους τους ρόλους για να αγνοηθούν όλοι οι συνδεδεμένοι χρήστες."
+      ],
+      "Desktop": [
+        "Επιτραπέζιος"
+      ],
+      "view": [
+        "προβολή",
+        "προβολές"
       ]
     }
   }

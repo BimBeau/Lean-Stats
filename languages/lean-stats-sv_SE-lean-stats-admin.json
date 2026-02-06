@@ -236,6 +236,70 @@
       ],
       "Exit pages": [
         "Utgångssidor"
+      ],
+      "Display": [
+        "Visa"
+      ],
+      "of": [
+        "av"
+      ],
+      "items": [
+        "objekt"
+      ],
+      "label": [
+        "etikett"
+      ],
+      "Entries (approx.)": [
+        "Ingångar"
+      ],
+      "Exits (approx.)": [
+        "Utgångar"
+      ],
+      "Title": [
+        "Titel"
+      ],
+      "Referrer sources": [
+        "Hänvisningskällor"
+      ],
+      "Source category": [
+        "Källkategori"
+      ],
+      "No search terms available.": [
+        "Inga söktermer tillgängliga."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Lämna tomt för att använda \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "MaxMind-konto-ID och licensnyckel krävs för att aktivera IP-geolokalisering."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "Numeriskt konto-ID för MaxMind IP-geolokalisering."
+      ],
+      "MaxMind License Key": [
+        "MaxMind-licensnyckel"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Licensnyckel för MaxMind IP-geolokalisering."
+      ],
+      "Privacy & consent": [
+        "Sekretess och samtycke"
+      ],
+      "Retention window (days)": [
+        "Bevaringsfönster (dagar)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Kommaseparerad lista med tillåtna frågeparametrar (används för URL-spårning och UTM-aggregering)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Välj roller som ska exkluderas från spårning. Välj alla roller för att ignorera alla inloggade användare."
+      ],
+      "Desktop": [
+        "Skrivbord"
+      ],
+      "view": [
+        "visning",
+        "visningar"
       ]
     }
   }

@@ -240,3 +240,68 @@ msgstr "Ingångssidor"
 
 msgid "Exit pages"
 msgstr "Utgångssidor"
+
+msgid "Display"
+msgstr "Visa"
+
+msgid "of"
+msgstr "av"
+
+msgid "items"
+msgstr "objekt"
+
+msgid "label"
+msgstr "etikett"
+
+msgid "Entries (approx.)"
+msgstr "Ingångar"
+
+msgid "Exits (approx.)"
+msgstr "Utgångar"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Referrer sources"
+msgstr "Hänvisningskällor"
+
+msgid "Source category"
+msgstr "Källkategori"
+
+msgid "No search terms available."
+msgstr "Inga söktermer tillgängliga."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Lämna tomt för att använda \"Lean Stats\"."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "MaxMind-konto-ID och licensnyckel krävs för att aktivera IP-geolokalisering."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "Numeriskt konto-ID för MaxMind IP-geolokalisering."
+
+msgid "MaxMind License Key"
+msgstr "MaxMind-licensnyckel"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "Licensnyckel för MaxMind IP-geolokalisering."
+
+msgid "Privacy & consent"
+msgstr "Sekretess och samtycke"
+
+msgid "Retention window (days)"
+msgstr "Bevaringsfönster (dagar)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "Kommaseparerad lista med tillåtna frågeparametrar (används för URL-spårning och UTM-aggregering)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Välj roller som ska exkluderas från spårning. Välj alla roller för att ignorera alla inloggade användare."
+
+msgid "Desktop"
+msgstr "Skrivbord"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "visning"
+msgstr[1] "visningar"
