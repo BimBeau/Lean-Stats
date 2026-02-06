@@ -315,3 +315,68 @@ msgstr "Terme de recherche"
 
 msgid "Search terms"
 msgstr "Termes de recherche"
+
+msgid "Display"
+msgstr "Afficher"
+
+msgid "of"
+msgstr "sur"
+
+msgid "items"
+msgstr "éléments"
+
+msgid "label"
+msgstr "libellé"
+
+msgid "Entries (approx.)"
+msgstr "Entrées"
+
+msgid "Exits (approx.)"
+msgstr "Sorties"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "Referrer sources"
+msgstr "Sources de référence"
+
+msgid "Source category"
+msgstr "Catégorie de source"
+
+msgid "No search terms available."
+msgstr "Aucun terme de recherche disponible."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Laisser vide pour utiliser \"Lean Stats\"."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "L’ID de compte et la clé de licence MaxMind sont requis pour activer la géolocalisation IP."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "ID de compte numérique pour la géolocalisation IP MaxMind."
+
+msgid "MaxMind License Key"
+msgstr "Clé de licence MaxMind"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "Clé de licence pour la géolocalisation IP MaxMind."
+
+msgid "Privacy & consent"
+msgstr "Confidentialité et consentement"
+
+msgid "Retention window (days)"
+msgstr "Fenêtre de rétention (jours)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "Liste séparée par des virgules des clés de requête autorisées (utilisée pour le suivi des URL et l’agrégation UTM)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Sélectionnez les rôles à exclure du suivi. Sélectionnez tous les rôles pour ignorer tous les utilisateurs connectés."
+
+msgid "Desktop"
+msgstr "Ordinateur"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "vue"
+msgstr[1] "vues"

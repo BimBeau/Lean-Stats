@@ -240,3 +240,68 @@ msgstr ""
 
 msgid "Exit pages"
 msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "items"
+msgstr ""
+
+msgid "label"
+msgstr ""
+
+msgid "Entries (approx.)"
+msgstr ""
+
+msgid "Exits (approx.)"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Referrer sources"
+msgstr ""
+
+msgid "Source category"
+msgstr ""
+
+msgid "No search terms available."
+msgstr ""
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr ""
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr ""
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr ""
+
+msgid "MaxMind License Key"
+msgstr ""
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr ""
+
+msgid "Privacy & consent"
+msgstr ""
+
+msgid "Retention window (days)"
+msgstr ""
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr ""
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr ""
+
+msgid "Desktop"
+msgstr ""
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] ""
+msgstr[1] ""

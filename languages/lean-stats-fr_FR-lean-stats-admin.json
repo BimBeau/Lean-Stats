@@ -311,6 +311,70 @@
       ],
       "Search terms": [
         "Termes de recherche"
+      ],
+      "Display": [
+        "Afficher"
+      ],
+      "of": [
+        "sur"
+      ],
+      "items": [
+        "éléments"
+      ],
+      "label": [
+        "libellé"
+      ],
+      "Entries (approx.)": [
+        "Entrées"
+      ],
+      "Exits (approx.)": [
+        "Sorties"
+      ],
+      "Title": [
+        "Titre"
+      ],
+      "Referrer sources": [
+        "Sources de référence"
+      ],
+      "Source category": [
+        "Catégorie de source"
+      ],
+      "No search terms available.": [
+        "Aucun terme de recherche disponible."
+      ],
+      "Leave blank to use \"Lean Stats\".": [
+        "Laisser vide pour utiliser \"Lean Stats\"."
+      ],
+      "MaxMind Account ID and License Key are required to enable IP geolocation.": [
+        "L’ID de compte et la clé de licence MaxMind sont requis pour activer la géolocalisation IP."
+      ],
+      "Numeric Account ID for MaxMind IP geolocation.": [
+        "ID de compte numérique pour la géolocalisation IP MaxMind."
+      ],
+      "MaxMind License Key": [
+        "Clé de licence MaxMind"
+      ],
+      "License Key for MaxMind IP geolocation.": [
+        "Clé de licence pour la géolocalisation IP MaxMind."
+      ],
+      "Privacy & consent": [
+        "Confidentialité et consentement"
+      ],
+      "Retention window (days)": [
+        "Fenêtre de rétention (jours)"
+      ],
+      "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation).": [
+        "Liste séparée par des virgules des clés de requête autorisées (utilisée pour le suivi des URL et l’agrégation UTM)."
+      ],
+      "Select roles to exclude from tracking. Select all roles to ignore all logged-in users.": [
+        "Sélectionnez les rôles à exclure du suivi. Sélectionnez tous les rôles pour ignorer tous les utilisateurs connectés."
+      ],
+      "Desktop": [
+        "Ordinateur"
+      ],
+      "view": [
+        "vue",
+        "vues"
       ]
     }
   }

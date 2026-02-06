@@ -240,3 +240,68 @@ msgstr "Entry pages"
 
 msgid "Exit pages"
 msgstr "Exit pages"
+
+msgid "Display"
+msgstr "Display"
+
+msgid "of"
+msgstr "of"
+
+msgid "items"
+msgstr "items"
+
+msgid "label"
+msgstr "label"
+
+msgid "Entries (approx.)"
+msgstr "Entries"
+
+msgid "Exits (approx.)"
+msgstr "Exits"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Referrer sources"
+msgstr "Referrer sources"
+
+msgid "Source category"
+msgstr "Source category"
+
+msgid "No search terms available."
+msgstr "No search terms available."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Leave blank to use \"Lean Stats\"."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "MaxMind Account ID and License Key are required to enable IP geolocation."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "Numeric Account ID for MaxMind IP geolocation."
+
+msgid "MaxMind License Key"
+msgstr "MaxMind License Key"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "License Key for MaxMind IP geolocation."
+
+msgid "Privacy & consent"
+msgstr "Privacy & consent"
+
+msgid "Retention window (days)"
+msgstr "Retention window (days)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "view"
+msgstr[1] "views"

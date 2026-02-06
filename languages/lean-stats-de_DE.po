@@ -240,3 +240,68 @@ msgstr "Einstiegsseiten"
 
 msgid "Exit pages"
 msgstr "Ausstiegsseiten"
+
+msgid "Display"
+msgstr "Anzeige"
+
+msgid "of"
+msgstr "von"
+
+msgid "items"
+msgstr "Elemente"
+
+msgid "label"
+msgstr "Bezeichnung"
+
+msgid "Entries (approx.)"
+msgstr "Einstiege"
+
+msgid "Exits (approx.)"
+msgstr "Ausstiege"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Referrer sources"
+msgstr "Verweisquellen"
+
+msgid "Source category"
+msgstr "Quellenkategorie"
+
+msgid "No search terms available."
+msgstr "Keine Suchbegriffe verfügbar."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Leer lassen, um „Lean Stats“ zu verwenden."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "MaxMind-Konto-ID und Lizenzschlüssel sind erforderlich, um die IP-Geolokalisierung zu aktivieren."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "Numerische Konto-ID für die MaxMind-IP-Geolokalisierung."
+
+msgid "MaxMind License Key"
+msgstr "MaxMind-Lizenzschlüssel"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "Lizenzschlüssel für die MaxMind-IP-Geolokalisierung."
+
+msgid "Privacy & consent"
+msgstr "Datenschutz & Einwilligung"
+
+msgid "Retention window (days)"
+msgstr "Aufbewahrungszeitraum (Tage)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "Durch Kommas getrennte Liste zulässiger Abfrageparameter (für URL-Tracking und UTM-Aggregation)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Wählen Sie Rollen aus, die vom Tracking ausgeschlossen werden sollen. Wählen Sie alle Rollen aus, um alle angemeldeten Nutzer zu ignorieren."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "Aufruf"
+msgstr[1] "Aufrufe"

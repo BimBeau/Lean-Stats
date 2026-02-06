@@ -240,3 +240,68 @@ msgstr "Giriş sayfaları"
 
 msgid "Exit pages"
 msgstr "Çıkış sayfaları"
+
+msgid "Display"
+msgstr "Göster"
+
+msgid "of"
+msgstr "/"
+
+msgid "items"
+msgstr "öğe"
+
+msgid "label"
+msgstr "etiket"
+
+msgid "Entries (approx.)"
+msgstr "Girişler"
+
+msgid "Exits (approx.)"
+msgstr "Çıkışlar"
+
+msgid "Title"
+msgstr "Başlık"
+
+msgid "Referrer sources"
+msgstr "Yönlendiren kaynaklar"
+
+msgid "Source category"
+msgstr "Kaynak kategorisi"
+
+msgid "No search terms available."
+msgstr "Kullanılabilir arama terimi yok."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "\"Lean Stats\" kullanmak için boş bırakın."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "IP coğrafi konumlandırmayı etkinleştirmek için MaxMind Hesap Kimliği ve Lisans Anahtarı gereklidir."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "MaxMind IP coğrafi konumlandırma için sayısal Hesap Kimliği."
+
+msgid "MaxMind License Key"
+msgstr "MaxMind Lisans Anahtarı"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "MaxMind IP coğrafi konumlandırma için lisans anahtarı."
+
+msgid "Privacy & consent"
+msgstr "Gizlilik ve onay"
+
+msgid "Retention window (days)"
+msgstr "Saklama süresi (gün)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "İzin verilen sorgu anahtarlarının virgülle ayrılmış listesi (URL izleme ve UTM birleştirme için kullanılır)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Takipten hariç tutulacak rolleri seçin. Tüm oturum açmış kullanıcıları yok saymak için tüm rolleri seçin."
+
+msgid "Desktop"
+msgstr "Masaüstü"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "görüntüleme"
+msgstr[1] "görüntülemeler"

@@ -240,3 +240,68 @@ msgstr "Landingspagina's"
 
 msgid "Exit pages"
 msgstr "Uitstappagina's"
+
+msgid "Display"
+msgstr "Weergave"
+
+msgid "of"
+msgstr "van"
+
+msgid "items"
+msgstr "elementen"
+
+msgid "label"
+msgstr "label"
+
+msgid "Entries (approx.)"
+msgstr "Ingangen"
+
+msgid "Exits (approx.)"
+msgstr "Uitgangen"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Referrer sources"
+msgstr "Verwijzingsbronnen"
+
+msgid "Source category"
+msgstr "Broncategorie"
+
+msgid "No search terms available."
+msgstr "Geen zoektermen beschikbaar."
+
+msgid "Leave blank to use \"Lean Stats\"."
+msgstr "Leeg laten om \"Lean Stats\" te gebruiken."
+
+msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
+msgstr "MaxMind-account-ID en licentiesleutel zijn vereist om IP-geolocatie in te schakelen."
+
+msgid "Numeric Account ID for MaxMind IP geolocation."
+msgstr "Numeriek account-ID voor MaxMind IP-geolocatie."
+
+msgid "MaxMind License Key"
+msgstr "MaxMind-licentiesleutel"
+
+msgid "License Key for MaxMind IP geolocation."
+msgstr "Licentiesleutel voor MaxMind IP-geolocatie."
+
+msgid "Privacy & consent"
+msgstr "Privacy en toestemming"
+
+msgid "Retention window (days)"
+msgstr "Bewaarperiode (dagen)"
+
+msgid "Comma-separated list of allowed query keys (used for URL tracking and UTM aggregation)."
+msgstr "Door komma's gescheiden lijst met toegestane querysleutels (gebruikt voor URL-tracking en UTM-aggregatie)."
+
+msgid "Select roles to exclude from tracking. Select all roles to ignore all logged-in users."
+msgstr "Selecteer rollen om uit te sluiten van tracking. Selecteer alle rollen om alle ingelogde gebruikers te negeren."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "view"
+msgid_plural "views"
+msgstr[0] "weergave"
+msgstr[1] "weergaven"

@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __, _n } from "@wordpress/i18n";
 
 import useAdminEndpoint from "../api/useAdminEndpoint";
 import DataState from "../components/DataState";
@@ -9,12 +9,24 @@ const DeviceSplit = ({ range }) => {
     range,
   );
   const items = data?.items || [];
-  const labeledItems = items.map((item) => ({
-    ...item,
-    label: item.label
-      ? item.label.charAt(0).toUpperCase() + item.label.slice(1)
-      : __("Unknown", "lean-stats"),
-  }));
+  const labeledItems = items.map((item) => {
+    const normalizedLabel = item.label
+      ? item.label.toLowerCase()
+      : "";
+    const translatedLabel =
+      normalizedLabel === "desktop"
+        ? __("Desktop", "lean-stats")
+        : null;
+
+    return {
+      ...item,
+      label: translatedLabel
+        ? translatedLabel
+        : item.label
+          ? item.label.charAt(0).toUpperCase() + item.label.slice(1)
+          : __("Unknown", "lean-stats"),
+    };
+  });
   const maxHits = labeledItems.reduce(
     (max, item) => Math.max(max, item.hits),
     0,
@@ -45,7 +57,12 @@ const DeviceSplit = ({ range }) => {
                   />
                 </div>
                 <div className="ls-device-breakdown__value">
-                  {`${entry.hits} ${__("views", "lean-stats")}`}
+                  {`${entry.hits} ${_n(
+                    "view",
+                    "views",
+                    entry.hits,
+                    "lean-stats",
+                  )}`}
                 </div>
               </div>
             );
