@@ -271,8 +271,6 @@ msgstr "Quellenkategorie"
 msgid "No search terms available."
 msgstr "Keine Suchbegriffe verfügbar."
 
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "Leer lassen, um „Lean Stats“ zu verwenden."
 
 msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr "MaxMind-Konto-ID und Lizenzschlüssel sind erforderlich, um die IP-Geolokalisierung zu aktivieren."

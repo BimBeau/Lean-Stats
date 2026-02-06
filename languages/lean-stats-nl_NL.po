@@ -271,8 +271,6 @@ msgstr "Broncategorie"
 msgid "No search terms available."
 msgstr "Geen zoektermen beschikbaar."
 
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "Leeg laten om \"Lean Stats\" te gebruiken."
 
 msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr "MaxMind-account-ID en licentiesleutel zijn vereist om IP-geolocatie in te schakelen."

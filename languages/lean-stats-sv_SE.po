@@ -271,8 +271,6 @@ msgstr "Källkategori"
 msgid "No search terms available."
 msgstr "Inga söktermer tillgängliga."
 
-msgid "Leave blank to use \"Lean Stats\"."
-msgstr "Lämna tomt för att använda \"Lean Stats\"."
 
 msgid "MaxMind Account ID and License Key are required to enable IP geolocation."
 msgstr "MaxMind-konto-ID och licensnyckel krävs för att aktivera IP-geolokalisering."
