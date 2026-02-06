@@ -288,6 +288,7 @@ class Lean_Stats_Hit_Controller {
      */
     private function store_hit(array $hit, array $utm_params = []): void {
         lean_stats_store_aggregate_hit($hit, $utm_params);
+        lean_stats_store_geo_aggregate_hit($hit);
 
         if (!lean_stats_raw_logs_enabled()) {
             return;
