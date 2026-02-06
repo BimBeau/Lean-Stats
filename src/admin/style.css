@@ -140,11 +140,6 @@
     fill: #ffffff;
 }
 
-.ls-timeseries__axis {
-    stroke: var(--ls-accent);
-    stroke-width: 1;
-}
-
 .ls-timeseries__grid-line {
     stroke: #dcdcde;
     stroke-width: 1;
