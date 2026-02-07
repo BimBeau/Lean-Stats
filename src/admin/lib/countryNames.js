@@ -59,9 +59,13 @@ export const getCountryLabel = (code) => {
   const locale = getAdminLocale();
   const displayNames = getDisplayNames(locale);
   if (displayNames) {
-    const label = displayNames.of(normalized);
-    if (label && label !== normalized) {
-      return label;
+    try {
+      const label = displayNames.of(normalized);
+      if (label && label !== normalized) {
+        return label;
+      }
+    } catch (error) {
+      // Ignore invalid region codes and fall back to static labels.
     }
   }
 
