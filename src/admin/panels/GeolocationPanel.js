@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { TabPanel } from "@wordpress/components";
 import ReportPanel from "./ReportPanel";
+import { getCountryLabel } from "../lib/countryNames";
 const GeolocationPanel = () => {
   const tabs = [
     { name: "countries", title: __("Top countries", "lean-stats") },
@@ -14,10 +15,11 @@ const GeolocationPanel = () => {
           return (
             <ReportPanel
               title={__("Top countries", "lean-stats")}
-              labelHeader={__("Country code", "lean-stats")}
+              labelHeader={__("Country", "lean-stats")}
               endpoint="/geo-countries"
               emptyLabel={__("No country data available.", "lean-stats")}
-              labelFallback="--"
+              labelFallback={__("Unknown country", "lean-stats")}
+              formatLabel={getCountryLabel}
             />
           );
         }

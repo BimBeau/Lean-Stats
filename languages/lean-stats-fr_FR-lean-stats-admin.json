@@ -108,6 +108,12 @@
       "Ignore tracking if the browser sends DNT or GPC.": [
         "Ignore le suivi si le navigateur envoie DNT ou GPC."
       ],
+      "Country": [
+        "Pays"
+      ],
+      "Unknown country": [
+        "Pays inconnu"
+      ],
       "Unknown": [
         "Inconnu"
       ],

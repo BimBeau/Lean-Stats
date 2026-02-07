@@ -11,6 +11,7 @@ const ReportPanel = ({
   labelHeader,
   emptyLabel,
   labelFallback,
+  formatLabel,
   metricLabel,
   metricKey,
   metricValueKey,
@@ -31,6 +32,7 @@ const ReportPanel = ({
         endpoint={endpoint}
         emptyLabel={emptyLabel}
         labelFallback={labelFallback}
+        formatLabel={formatLabel}
         metricLabel={metricLabel}
         metricKey={metricKey}
         metricValueKey={metricValueKey}
