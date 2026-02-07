@@ -150,10 +150,19 @@
     stroke: none;
 }
 
+.ls-timeseries__area--visits {
+    opacity: 0.6;
+}
+
 .ls-timeseries__line {
     fill: none;
     stroke: var(--ls-border, #2271b1);
     stroke-width: 2.5;
+}
+
+.ls-timeseries__line--visits {
+    stroke: #00a32a;
+    stroke-dasharray: 5 4;
 }
 
 .ls-timeseries__point {
@@ -200,6 +209,15 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
     pointer-events: none;
+}
+
+.ls-timeseries__tooltip-date {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ls-timeseries__tooltip-metric {
+    display: block;
 }
 
 @keyframes ls-timeseries-tooltip-in {

@@ -66,10 +66,17 @@ const TimeseriesChart = ({ range }) => {
       value,
       "lean-stats",
     )}`;
+  const formatVisitsLabel = (value) =>
+    `${formatYAxisValue(value)} ${_n(
+      "visit",
+      "visits",
+      value,
+      "lean-stats",
+    )}`;
 
   const handleChartMouseMove = useCallback(
     (event) => {
-      if (!chartData.points.length) {
+      if (!chartData.pageViewsPoints.length) {
         return;
       }
       const bounds = event.currentTarget.getBoundingClientRect();
@@ -78,9 +85,9 @@ const TimeseriesChart = ({ range }) => {
       }
       const relativeX =
         ((event.clientX - bounds.left) / bounds.width) * chartData.width;
-      let closestPoint = chartData.points[0];
+      let closestPoint = chartData.pageViewsPoints[0];
       let closestDistance = Math.abs(closestPoint.x - relativeX);
-      chartData.points.forEach((point) => {
+      chartData.pageViewsPoints.forEach((point) => {
         const distance = Math.abs(point.x - relativeX);
         if (distance < closestDistance) {
           closestPoint = point;
@@ -91,15 +98,24 @@ const TimeseriesChart = ({ range }) => {
         previous?.label === closestPoint.label ? previous : closestPoint,
       );
     },
-    [chartData.points, chartData.width],
+    [chartData.pageViewsPoints, chartData.width],
   );
 
-  const chartTooltip = activePoint
-    ? `${formatTooltipDate(activePoint.label)} : ${formatPageViewsLabel(
-        activePoint.hits,
-      )}`
-    : null;
-  const gradientId = "ls-timeseries-gradient";
+  const chartTooltip = activePoint ? (
+    <>
+      <div className="ls-timeseries__tooltip-date">
+        {formatTooltipDate(activePoint.label)}
+      </div>
+      <div className="ls-timeseries__tooltip-metric">
+        {formatPageViewsLabel(activePoint.pageViews)}
+      </div>
+      <div className="ls-timeseries__tooltip-metric">
+        {formatVisitsLabel(activePoint.visits)}
+      </div>
+    </>
+  ) : null;
+  const pageViewsGradientId = "ls-timeseries-gradient-pageviews";
+  const visitsGradientId = "ls-timeseries-gradient-visits";
 
   return (
     <LsCard title={__("Daily page views", "lean-stats")}>
@@ -132,7 +148,13 @@ const TimeseriesChart = ({ range }) => {
                 onMouseMove={handleChartMouseMove}
               >
                 <defs>
-                  <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient
+                    id={pageViewsGradientId}
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
                     <stop
                       offset="0%"
                       stopColor="var(--ls-text-2, #2271b1)"
@@ -143,6 +165,16 @@ const TimeseriesChart = ({ range }) => {
                       stopColor="var(--ls-text-2, #2271b1)"
                       stopOpacity="0"
                     />
+                  </linearGradient>
+                  <linearGradient
+                    id={visitsGradientId}
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#00a32a" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#00a32a" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <rect
@@ -186,11 +218,23 @@ const TimeseriesChart = ({ range }) => {
                   className="ls-timeseries__axis"
                 />
                 <path
-                  d={chartData.areaPath}
-                  className="ls-timeseries__area"
-                  fill={`url(#${gradientId})`}
+                  d={chartData.visitsAreaPath}
+                  className="ls-timeseries__area ls-timeseries__area--visits"
+                  fill={`url(#${visitsGradientId})`}
                 />
-                <path d={chartData.linePath} className="ls-timeseries__line" />
+                <path
+                  d={chartData.pageViewsAreaPath}
+                  className="ls-timeseries__area ls-timeseries__area--pageviews"
+                  fill={`url(#${pageViewsGradientId})`}
+                />
+                <path
+                  d={chartData.visitsLinePath}
+                  className="ls-timeseries__line ls-timeseries__line--visits"
+                />
+                <path
+                  d={chartData.pageViewsLinePath}
+                  className="ls-timeseries__line ls-timeseries__line--pageviews"
+                />
                 {chartData.xLabels.map((label) => (
                   <text
                     key={`label-${label.label}`}
@@ -202,9 +246,9 @@ const TimeseriesChart = ({ range }) => {
                     {formatAxisLabel(label.label)}
                   </text>
                 ))}
-                {chartData.points.map((point) => (
+                {chartData.pageViewsPoints.map((point) => (
                   <circle
-                    key={`${point.label}-${point.hits}`}
+                    key={`${point.label}-${point.pageViews}`}
                     cx={point.x}
                     cy={point.y}
                     r="4"
@@ -219,14 +263,16 @@ const TimeseriesChart = ({ range }) => {
                     <title>
                       {`${formatTooltipDate(
                         point.label,
-                      )} : ${formatPageViewsLabel(point.hits)}`}
+                      )} : ${formatPageViewsLabel(
+                        point.pageViews,
+                      )} / ${formatVisitsLabel(point.visits)}`}
                     </title>
                   </circle>
                 ))}
               </svg>
               {activePoint && (
                 <div
-                  key={`${activePoint.label}-${activePoint.hits}`}
+                  key={`${activePoint.label}-${activePoint.pageViews}`}
                   className="ls-timeseries__tooltip"
                   role="status"
                   style={{
