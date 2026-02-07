@@ -83,6 +83,28 @@ class Lean_Stats_Report_Controller {
 
         register_rest_route(
             LEAN_STATS_REST_NAMESPACE,
+            '/geo-countries',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_geo_countries'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => $list_args,
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_NAMESPACE,
+            '/geo-cities',
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_geo_cities'],
+                'permission_callback' => [$this, 'check_permissions'],
+                'args' => $list_args,
+            ]
+        );
+
+        register_rest_route(
+            LEAN_STATS_REST_NAMESPACE,
             '/entry-pages',
             [
                 'methods' => 'GET',
@@ -234,6 +256,28 @@ class Lean_Stats_Report_Controller {
         $table = $wpdb->prefix . 'lean_stats_search_terms_daily';
 
         return $this->build_list_response($request, $table, 'search_term', 'search-terms');
+    }
+
+    /**
+     * Top country aggregation.
+     */
+    public function get_geo_countries(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'lean_stats_geo_daily';
+
+        return $this->build_geo_countries_response($request, $table);
+    }
+
+    /**
+     * Top city aggregation.
+     */
+    public function get_geo_cities(WP_REST_Request $request): WP_REST_Response {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'lean_stats_geo_daily';
+
+        return $this->build_geo_cities_response($request, $table);
     }
 
     /**
@@ -795,6 +839,188 @@ class Lean_Stats_Report_Controller {
     }
 
     /**
+     * Build paginated list response for top countries.
+     */
+    private function build_geo_countries_response(WP_REST_Request $request, string $table): WP_REST_Response {
+        global $wpdb;
+
+        $range = $this->get_day_range($request);
+        $pagination = $this->normalize_pagination($request);
+        $sorting = $this->normalize_sorting(
+            $request,
+            [
+                'hits' => 'hits',
+                'country' => 'country_code',
+            ],
+            'hits'
+        );
+        $cache_key = $this->get_cache_key(
+            'geo-countries',
+            [
+                'range' => $range,
+                'pagination' => $pagination,
+                'sorting' => $sorting,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
+        $count_query = $wpdb->prepare(
+            "SELECT COUNT(*) FROM (SELECT 1
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY country_code) AS totals",
+            $range['start'],
+            $range['end']
+        );
+        $total_items = (int) $wpdb->get_var($count_query);
+
+        $list_query = $wpdb->prepare(
+            "SELECT country_code, SUM(hits) AS hits
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY country_code
+            ORDER BY {$sorting['orderby']} {$sorting['order']}
+            LIMIT %d OFFSET %d",
+            $range['start'],
+            $range['end'],
+            $pagination['per_page'],
+            $pagination['offset']
+        );
+
+        $rows = $wpdb->get_results($list_query, ARRAY_A);
+        $items = array_map(
+            static function (array $row): array {
+                $country_code = isset($row['country_code'])
+                    ? strtoupper(sanitize_text_field((string) $row['country_code']))
+                    : '';
+
+                return [
+                    'label' => $country_code,
+                    'country_code' => $country_code,
+                    'hits' => isset($row['hits']) ? (int) $row['hits'] : 0,
+                ];
+            },
+            $rows ?: []
+        );
+
+        $payload = [
+            'range' => $range,
+            'pagination' => [
+                'page' => $pagination['page'],
+                'perPage' => $pagination['per_page'],
+                'totalItems' => $total_items,
+                'totalPages' => $pagination['per_page'] > 0
+                    ? (int) ceil($total_items / $pagination['per_page'])
+                    : 0,
+            ],
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
+    }
+
+    /**
+     * Build paginated list response for top cities.
+     */
+    private function build_geo_cities_response(WP_REST_Request $request, string $table): WP_REST_Response {
+        global $wpdb;
+
+        $range = $this->get_day_range($request);
+        $pagination = $this->normalize_pagination($request);
+        $sorting = $this->normalize_sorting(
+            $request,
+            [
+                'hits' => 'hits',
+                'city' => 'city_name',
+                'region' => 'region_code',
+                'country' => 'country_code',
+            ],
+            'hits'
+        );
+        $cache_key = $this->get_cache_key(
+            'geo-cities',
+            [
+                'range' => $range,
+                'pagination' => $pagination,
+                'sorting' => $sorting,
+            ]
+        );
+        $cached = $this->get_cached_payload($cache_key);
+        if ($cached !== null) {
+            return new WP_REST_Response($cached, 200);
+        }
+
+        $count_query = $wpdb->prepare(
+            "SELECT COUNT(*) FROM (SELECT 1
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY country_code, region_code, city_name) AS totals",
+            $range['start'],
+            $range['end']
+        );
+        $total_items = (int) $wpdb->get_var($count_query);
+
+        $list_query = $wpdb->prepare(
+            "SELECT country_code, region_code, city_name, SUM(hits) AS hits
+            FROM {$table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY country_code, region_code, city_name
+            ORDER BY {$sorting['orderby']} {$sorting['order']}
+            LIMIT %d OFFSET %d",
+            $range['start'],
+            $range['end'],
+            $pagination['per_page'],
+            $pagination['offset']
+        );
+
+        $rows = $wpdb->get_results($list_query, ARRAY_A);
+        $items = array_map(
+            function (array $row): array {
+                $country_code = isset($row['country_code'])
+                    ? strtoupper(sanitize_text_field((string) $row['country_code']))
+                    : '';
+                $region_code = isset($row['region_code'])
+                    ? strtoupper(sanitize_text_field((string) $row['region_code']))
+                    : '';
+                $city_name = isset($row['city_name'])
+                    ? sanitize_text_field((string) $row['city_name'])
+                    : '';
+
+                return [
+                    'label' => $this->format_geo_city_label($city_name, $region_code, $country_code),
+                    'country_code' => $country_code,
+                    'region_code' => $region_code,
+                    'city_name' => $city_name,
+                    'hits' => isset($row['hits']) ? (int) $row['hits'] : 0,
+                ];
+            },
+            $rows ?: []
+        );
+
+        $payload = [
+            'range' => $range,
+            'pagination' => [
+                'page' => $pagination['page'],
+                'perPage' => $pagination['per_page'],
+                'totalItems' => $total_items,
+                'totalPages' => $pagination['per_page'] > 0
+                    ? (int) ceil($total_items / $pagination['per_page'])
+                    : 0,
+            ],
+            'items' => $items,
+        ];
+
+        $this->set_cached_payload($cache_key, $payload);
+
+        return new WP_REST_Response($payload, 200);
+    }
+
+    /**
      * Resolve a page title from a tracked page path.
      */
     private function resolve_page_title_from_path(string $page_path): string {
@@ -832,6 +1058,33 @@ class Lean_Stats_Report_Controller {
         $title_cache[$page_path] = is_string($title) ? sanitize_text_field($title) : '';
 
         return $title_cache[$page_path];
+    }
+
+    /**
+     * Format a label for city-level geolocation results.
+     */
+    private function format_geo_city_label(string $city, string $region, string $country): string {
+        $city_label = $city;
+        if ($city_label !== '' && function_exists('mb_convert_case')) {
+            $city_label = mb_convert_case($city_label, MB_CASE_TITLE, 'UTF-8');
+        } elseif ($city_label !== '') {
+            $city_label = ucwords($city_label);
+        }
+
+        $suffix_parts = array_values(
+            array_filter(
+                [$region, $country],
+                static function (string $part): bool {
+                    return $part !== '' && $part !== 'unknown';
+                }
+            )
+        );
+
+        if ($suffix_parts === []) {
+            return $city_label;
+        }
+
+        return sprintf('%s (%s)', $city_label, implode(', ', $suffix_parts));
     }
 
     /**

@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 1.5.0\n"
+"Project-Id-Version: Lean Stats 1.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-07T10:46:19+00:00\n"
+"POT-Creation-Date: 2026-02-07T10:51:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: admin/admin.php:285
 #: src/admin/constants/index.js:10
-#: src/admin/panels/GeolocationPanel.js:30
+#: src/admin/panels/GeolocationPanel.js:64
 #: src/admin/panels/SettingsPanel.js:351
 msgid "Geolocation"
 msgstr ""
@@ -77,12 +77,12 @@ msgid "Lean Stats raw log cleanup"
 msgstr ""
 
 #: includes/rest/class-lean-stats-admin-controller.php:160
-#: includes/rest/class-lean-stats-report-controller.php:130
+#: includes/rest/class-lean-stats-report-controller.php:152
 msgid "You are not allowed to access analytics data."
 msgstr ""
 
 #: includes/rest/class-lean-stats-admin-controller.php:173
-#: includes/rest/class-lean-stats-report-controller.php:143
+#: includes/rest/class-lean-stats-report-controller.php:165
 msgid "Invalid REST API nonce."
 msgstr ""
 
@@ -194,70 +194,103 @@ msgstr ""
 msgid "90 days"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:11
+#: src/admin/panels/GeolocationPanel.js:12
 msgid "MaxMind API"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:14
-#: src/admin/panels/GeolocationPanel.js:72
+#: src/admin/panels/GeolocationPanel.js:15
+#: src/admin/panels/GeolocationPanel.js:106
 msgid "IP address"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:15
+#: src/admin/panels/GeolocationPanel.js:16
 msgid "HTTP status"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:16
+#: src/admin/panels/GeolocationPanel.js:17
 msgid "MaxMind error code"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:18
+#: src/admin/panels/GeolocationPanel.js:19
 msgid "MaxMind error message"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:21
+#: src/admin/panels/GeolocationPanel.js:22
 msgid "Request ID"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:23
+#: src/admin/panels/GeolocationPanel.js:24
 msgid "Response excerpt"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:35
-msgid "No geolocation data available."
+#: src/admin/panels/GeolocationPanel.js:31
+msgid "Current lookup"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:36
-msgid "Looking up location…"
+#: src/admin/panels/GeolocationPanel.js:32
+#: src/admin/panels/GeolocationPanel.js:42
+msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:46
-msgid "MaxMind API diagnostics"
+#: src/admin/panels/GeolocationPanel.js:33
+#: src/admin/panels/GeolocationPanel.js:54
+msgid "Top cities"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:64
-msgid "Location is derived from the current request IP and is not stored."
+#: src/admin/panels/GeolocationPanel.js:43
+msgid "Country code"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:76
-msgid "Country"
+#: src/admin/panels/GeolocationPanel.js:45
+msgid "No country data available."
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:77
-#: src/admin/panels/GeolocationPanel.js:81
-#: src/admin/panels/GeolocationPanel.js:85
-msgid "Unavailable"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:80
-msgid "Region"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:84
+#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:118
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:88
+#: src/admin/panels/GeolocationPanel.js:57
+msgid "No city data available."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:58
+#: src/admin/panels/SearchTermsPanel.js:11
+#: src/admin/widgets/DeviceSplit.js:27
+msgid "Unknown"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:69
+msgid "No geolocation data available."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:70
+msgid "Looking up location…"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:80
+msgid "MaxMind API diagnostics"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:98
+msgid "Location is derived from the current request IP and is not stored."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:110
+msgid "Country"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:111
+#: src/admin/panels/GeolocationPanel.js:115
+#: src/admin/panels/GeolocationPanel.js:119
+msgid "Unavailable"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:114
+msgid "Region"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:122
 msgid "Source"
 msgstr ""
 
@@ -307,11 +340,6 @@ msgstr ""
 
 #: src/admin/panels/SearchTermsPanel.js:10
 msgid "No search terms available."
-msgstr ""
-
-#: src/admin/panels/SearchTermsPanel.js:11
-#: src/admin/widgets/DeviceSplit.js:27
-msgid "Unknown"
 msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:54

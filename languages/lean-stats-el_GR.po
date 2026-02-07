@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T10:46:17+00:00\n"
+"POT-Creation-Date: 2026-02-07T10:51:03+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,7 @@ msgid "Internal searches"
 msgstr "Εσωτερικές αναζητήσεις"
 
 #: admin/admin.php:285 src/admin/constants/index.js:10
-#: src/admin/panels/GeolocationPanel.js:30
+#: src/admin/panels/GeolocationPanel.js:64
 #: src/admin/panels/SettingsPanel.js:351
 msgid "Geolocation"
 msgstr ""
@@ -69,12 +69,12 @@ msgid "Lean Stats raw log cleanup"
 msgstr ""
 
 #: includes/rest/class-lean-stats-admin-controller.php:160
-#: includes/rest/class-lean-stats-report-controller.php:130
+#: includes/rest/class-lean-stats-report-controller.php:152
 msgid "You are not allowed to access analytics data."
 msgstr "Δεν επιτρέπεται η πρόσβαση στα δεδομένα αναλυτικών."
 
 #: includes/rest/class-lean-stats-admin-controller.php:173
-#: includes/rest/class-lean-stats-report-controller.php:143
+#: includes/rest/class-lean-stats-report-controller.php:165
 msgid "Invalid REST API nonce."
 msgstr "Μη έγκυρο nonce REST API."
 
@@ -183,73 +183,108 @@ msgstr "30 ημέρες"
 msgid "90 days"
 msgstr "90 ημέρες"
 
-#: src/admin/panels/GeolocationPanel.js:11
+#: src/admin/panels/GeolocationPanel.js:12
 msgid "MaxMind API"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:14
-#: src/admin/panels/GeolocationPanel.js:72
+#: src/admin/panels/GeolocationPanel.js:15
+#: src/admin/panels/GeolocationPanel.js:106
 msgid "IP address"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:15
+#: src/admin/panels/GeolocationPanel.js:16
 msgid "HTTP status"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:16
+#: src/admin/panels/GeolocationPanel.js:17
 msgid "MaxMind error code"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:18
+#: src/admin/panels/GeolocationPanel.js:19
 msgid "MaxMind error message"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:21
+#: src/admin/panels/GeolocationPanel.js:22
 msgid "Request ID"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:23
+#: src/admin/panels/GeolocationPanel.js:24
 msgid "Response excerpt"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:35
+#: src/admin/panels/GeolocationPanel.js:31
+msgid "Current lookup"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:32
+#: src/admin/panels/GeolocationPanel.js:42
+msgid "Top countries"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:33
+#: src/admin/panels/GeolocationPanel.js:54
+#, fuzzy
+msgid "Top cities"
+msgstr "Κορυφαίες σελίδες"
+
+#: src/admin/panels/GeolocationPanel.js:43
+msgid "Country code"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:45
+#, fuzzy
+msgid "No country data available."
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
+
+#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:118
+msgid "City"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:57
+#, fuzzy
+msgid "No city data available."
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
+
+#: src/admin/panels/GeolocationPanel.js:58
+#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: src/admin/panels/GeolocationPanel.js:69
 #, fuzzy
 msgid "No geolocation data available."
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα συσκευών."
 
-#: src/admin/panels/GeolocationPanel.js:36
+#: src/admin/panels/GeolocationPanel.js:70
 #, fuzzy
 msgid "Looking up location…"
 msgstr "Φόρτωση γραφήματος…"
 
-#: src/admin/panels/GeolocationPanel.js:46
+#: src/admin/panels/GeolocationPanel.js:80
 msgid "MaxMind API diagnostics"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:64
+#: src/admin/panels/GeolocationPanel.js:98
 msgid "Location is derived from the current request IP and is not stored."
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:76
+#: src/admin/panels/GeolocationPanel.js:110
 msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:77
-#: src/admin/panels/GeolocationPanel.js:81
-#: src/admin/panels/GeolocationPanel.js:85
+#: src/admin/panels/GeolocationPanel.js:111
+#: src/admin/panels/GeolocationPanel.js:115
+#: src/admin/panels/GeolocationPanel.js:119
 #, fuzzy
 msgid "Unavailable"
 msgstr "Δεν υπάρχουν διαθέσιμα KPI."
 
-#: src/admin/panels/GeolocationPanel.js:80
+#: src/admin/panels/GeolocationPanel.js:114
 msgid "Region"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:84
-msgid "City"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:88
+#: src/admin/panels/GeolocationPanel.js:122
 msgid "Source"
 msgstr ""
 
@@ -295,10 +330,6 @@ msgstr ""
 #: src/admin/panels/SearchTermsPanel.js:10
 msgid "No search terms available."
 msgstr "Δεν υπάρχουν διαθέσιμοι όροι αναζήτησης."
-
-#: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
-msgid "Unknown"
-msgstr "Άγνωστο"
 
 #: src/admin/panels/SettingsPanel.js:54
 msgid "Enable debug mode to display raw logs."
