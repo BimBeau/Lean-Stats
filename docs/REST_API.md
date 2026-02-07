@@ -330,7 +330,8 @@ Response (200):
   "items": [
     {
       "bucket": "2024-01-01",
-      "hits": 42
+      "pageViews": 42,
+      "visits": 17
     }
   ]
 }
@@ -356,11 +357,16 @@ Response (200):
   "items": [
     {
       "bucket": "2024-01-01 08:00:00",
-      "hits": 7
+      "pageViews": 7,
+      "visits": 3
     }
   ]
 }
 ```
+
+Notes:
+
+- `visits` reflects hourly entry counts when the `lean_stats_entry_exit_hourly` table is available. If the table is not present, `visits` returns `0` for each bucket.
 
 ### GET `/admin/device-split`
 

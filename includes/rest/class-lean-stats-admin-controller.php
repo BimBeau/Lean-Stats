@@ -479,11 +479,12 @@ class Lean_Stats_Admin_Controller {
             return new WP_REST_Response($cached, 200);
         }
 
-        $table = $wpdb->prefix . 'lean_stats_daily';
+        $daily_table = $wpdb->prefix . 'lean_stats_daily';
+        $entry_exit_table = $wpdb->prefix . 'lean_stats_entry_exit_daily';
 
-        $query = $wpdb->prepare(
-            "SELECT date_bucket AS bucket, SUM(hits) AS hits
-            FROM {$table}
+        $pageviews_query = $wpdb->prepare(
+            "SELECT date_bucket AS bucket, SUM(hits) AS pageViews
+            FROM {$daily_table}
             WHERE date_bucket BETWEEN %s AND %s
             GROUP BY date_bucket
             ORDER BY date_bucket ASC",
@@ -491,16 +492,37 @@ class Lean_Stats_Admin_Controller {
             $range['end']
         );
 
-        $rows = $wpdb->get_results($query, ARRAY_A);
-        $items = array_map(
-            static function (array $row): array {
-                return [
-                    'bucket' => $row['bucket'],
-                    'hits' => (int) $row['hits'],
-                ];
-            },
-            $rows ?: []
+        $visits_query = $wpdb->prepare(
+            "SELECT date_bucket AS bucket, SUM(entries) AS visits
+            FROM {$entry_exit_table}
+            WHERE date_bucket BETWEEN %s AND %s
+            GROUP BY date_bucket
+            ORDER BY date_bucket ASC",
+            $range['start'],
+            $range['end']
         );
+
+        $pageviews_rows = $wpdb->get_results($pageviews_query, ARRAY_A);
+        $visits_rows = $wpdb->get_results($visits_query, ARRAY_A);
+
+        $pageviews_by_bucket = [];
+        foreach ($pageviews_rows ?: [] as $row) {
+            $pageviews_by_bucket[$row['bucket']] = (int) $row['pageViews'];
+        }
+
+        $visits_by_bucket = [];
+        foreach ($visits_rows ?: [] as $row) {
+            $visits_by_bucket[$row['bucket']] = (int) $row['visits'];
+        }
+
+        $items = [];
+        foreach ($this->get_day_buckets($range['start'], $range['end']) as $bucket) {
+            $items[] = [
+                'bucket' => $bucket,
+                'pageViews' => $pageviews_by_bucket[$bucket] ?? 0,
+                'visits' => $visits_by_bucket[$bucket] ?? 0,
+            ];
+        }
 
         $payload = [
             'range' => $range,
@@ -525,11 +547,12 @@ class Lean_Stats_Admin_Controller {
             return new WP_REST_Response($cached, 200);
         }
 
-        $table = $wpdb->prefix . 'lean_stats_hourly';
+        $hourly_table = $wpdb->prefix . 'lean_stats_hourly';
+        $entry_exit_hourly_table = $wpdb->prefix . 'lean_stats_entry_exit_hourly';
 
-        $query = $wpdb->prepare(
-            "SELECT date_bucket AS bucket, SUM(hits) AS hits
-            FROM {$table}
+        $pageviews_query = $wpdb->prepare(
+            "SELECT date_bucket AS bucket, SUM(hits) AS pageViews
+            FROM {$hourly_table}
             WHERE date_bucket BETWEEN %s AND %s
             GROUP BY date_bucket
             ORDER BY date_bucket ASC",
@@ -537,16 +560,41 @@ class Lean_Stats_Admin_Controller {
             $range['end']
         );
 
-        $rows = $wpdb->get_results($query, ARRAY_A);
-        $items = array_map(
-            static function (array $row): array {
-                return [
-                    'bucket' => $row['bucket'],
-                    'hits' => (int) $row['hits'],
-                ];
-            },
-            $rows ?: []
-        );
+        $pageviews_rows = $wpdb->get_results($pageviews_query, ARRAY_A);
+
+        $visits_rows = [];
+        if ($this->table_exists($entry_exit_hourly_table)) {
+            $visits_query = $wpdb->prepare(
+                "SELECT date_bucket AS bucket, SUM(entries) AS visits
+                FROM {$entry_exit_hourly_table}
+                WHERE date_bucket BETWEEN %s AND %s
+                GROUP BY date_bucket
+                ORDER BY date_bucket ASC",
+                $range['start'],
+                $range['end']
+            );
+
+            $visits_rows = $wpdb->get_results($visits_query, ARRAY_A);
+        }
+
+        $pageviews_by_bucket = [];
+        foreach ($pageviews_rows ?: [] as $row) {
+            $pageviews_by_bucket[$row['bucket']] = (int) $row['pageViews'];
+        }
+
+        $visits_by_bucket = [];
+        foreach ($visits_rows ?: [] as $row) {
+            $visits_by_bucket[$row['bucket']] = (int) $row['visits'];
+        }
+
+        $items = [];
+        foreach ($this->get_hour_buckets($range['start'], $range['end']) as $bucket) {
+            $items[] = [
+                'bucket' => $bucket,
+                'pageViews' => $pageviews_by_bucket[$bucket] ?? 0,
+                'visits' => $visits_by_bucket[$bucket] ?? 0,
+            ];
+        }
 
         $payload = [
             'range' => $range,
@@ -706,6 +754,61 @@ class Lean_Stats_Admin_Controller {
             'start' => $start,
             'end' => $end,
         ];
+    }
+
+    /**
+     * Build an array of daily buckets for a range.
+     */
+    private function get_day_buckets(string $start, string $end): array {
+        $timezone = wp_timezone();
+        $start_date = new DateTimeImmutable($start, $timezone);
+        $end_date = new DateTimeImmutable($end, $timezone);
+
+        $period = new DatePeriod(
+            $start_date,
+            new DateInterval('P1D'),
+            $end_date->modify('+1 day')
+        );
+
+        $buckets = [];
+        foreach ($period as $date) {
+            $buckets[] = $date->format('Y-m-d');
+        }
+
+        return $buckets;
+    }
+
+    /**
+     * Build an array of hourly buckets for a range.
+     */
+    private function get_hour_buckets(string $start, string $end): array {
+        $timezone = wp_timezone();
+        $start_date = new DateTimeImmutable($start, $timezone);
+        $end_date = new DateTimeImmutable($end, $timezone);
+
+        $period = new DatePeriod(
+            $start_date,
+            new DateInterval('PT1H'),
+            $end_date->modify('+1 hour')
+        );
+
+        $buckets = [];
+        foreach ($period as $date) {
+            $buckets[] = $date->format('Y-m-d H:00:00');
+        }
+
+        return $buckets;
+    }
+
+    /**
+     * Determine if a database table exists.
+     */
+    private function table_exists(string $table): bool {
+        global $wpdb;
+
+        $result = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table));
+
+        return $result === $table;
     }
 
     /**
