@@ -17,10 +17,26 @@ const TimeseriesChart = ({ range }) => {
     range,
   );
   const items = data?.items ?? [];
+  const pageViewsSeries = useMemo(
+    () =>
+      items.map((item) => ({
+        bucket: item.bucket,
+        value: item.pageViews ?? item.hits ?? 0,
+      })),
+    [items],
+  );
+  const visitsSeries = useMemo(
+    () =>
+      items.map((item) => ({
+        bucket: item.bucket,
+        value: item.visits ?? 0,
+      })),
+    [items],
+  );
   const [chartWidth, setChartWidth] = useState(LINE_CHART_WIDTH);
   const chartData = useMemo(
-    () => buildLineChartData(items, chartWidth),
-    [items, chartWidth],
+    () => buildLineChartData(pageViewsSeries, visitsSeries, chartWidth),
+    [pageViewsSeries, visitsSeries, chartWidth],
   );
   const [activePoint, setActivePoint] = useState(null);
   // ResizeObserver updates width without changing the fixed 240px height.
