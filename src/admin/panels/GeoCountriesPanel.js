@@ -91,6 +91,7 @@ const GeoCountriesPanel = () => {
           labelFallback={unknownCountryLabel}
           formatLabel={getCountryLabel}
           renderLabel={renderCountryLabel}
+          metricLabel={__("Visits", "lean-stats")}
         />
       </div>
     </div>

@@ -86,7 +86,7 @@ const ReferrerSourcesTableCard = ({ range }) => {
           value={orderBy}
           options={[
             {
-              label: __("Page views", "lean-stats"),
+              label: __("Visits", "lean-stats"),
               value: "hits",
             },
             {
@@ -147,7 +147,7 @@ const ReferrerSourcesTableCard = ({ range }) => {
               <tr>
                 <th scope="col">{__("Referrer", "lean-stats")}</th>
                 <th scope="col">{__("Source category", "lean-stats")}</th>
-                <th scope="col">{__("Page views", "lean-stats")}</th>
+                <th scope="col">{__("Visits", "lean-stats")}</th>
               </tr>
             </thead>
             <tbody>
