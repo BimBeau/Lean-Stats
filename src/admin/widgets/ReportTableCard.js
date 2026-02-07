@@ -22,6 +22,7 @@ const ReportTableCard = ({
   endpoint,
   emptyLabel,
   labelFallback,
+  formatLabel,
   metricLabel = __("Page views", "lean-stats"),
   metricKey = "hits",
   metricValueKey = "hits",
@@ -112,12 +113,18 @@ const ReportTableCard = ({
   /* translators: %s: table title. */
   const tableLabel = `${__("Table", "lean-stats")}: ${title}`;
 
-  const rows = items.map((item, index) => ({
-    key: `${item.label || labelFallback}-${index}`,
-    label: item.label || labelFallback,
-    pageTitle: item.page_title || "",
-    value: item?.[metricValueKey] ?? 0,
-  }));
+  const rows = items.map((item, index) => {
+    const rawLabel = item.label || "";
+    const formattedLabel = formatLabel ? formatLabel(rawLabel, item) : rawLabel;
+    const resolvedLabel = formattedLabel || labelFallback;
+
+    return {
+      key: `${resolvedLabel}-${index}`,
+      label: resolvedLabel,
+      pageTitle: item.page_title || "",
+      value: item?.[metricValueKey] ?? 0,
+    };
+  });
 
   return (
     <LsCard title={title}>

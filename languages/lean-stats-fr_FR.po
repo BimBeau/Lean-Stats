@@ -115,6 +115,12 @@ msgstr "Ignore le suivi si le navigateur envoie DNT ou GPC."
 msgid "Unknown"
 msgstr "Inconnu"
 
+msgid "Country"
+msgstr "Pays"
+
+msgid "Unknown country"
+msgstr "Pays inconnu"
+
 msgid "KPIs"
 msgstr "Indicateurs"
 
