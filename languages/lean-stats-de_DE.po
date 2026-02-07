@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T14:46:41+00:00\n"
+"POT-Creation-Date: 2026-02-07T14:51:25+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -182,42 +182,42 @@ msgstr "30 Tage"
 msgid "90 days"
 msgstr "90 Tage"
 
-#: src/admin/lib/countryNames.js:34 src/admin/lib/countryNames.js:47
-#: src/admin/panels/GeolocationPanel.js:21
+#: src/admin/lib/countryNames.js:56 src/admin/lib/countryNames.js:69
+#: src/admin/panels/GeolocationPanel.js:44
 #, fuzzy
 msgid "Unknown country"
 msgstr "Unbekannt"
 
-#: src/admin/panels/GeolocationPanel.js:7
-#: src/admin/panels/GeolocationPanel.js:17
+#: src/admin/panels/GeolocationPanel.js:11
+#: src/admin/panels/GeolocationPanel.js:40
 msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:8
-#: src/admin/panels/GeolocationPanel.js:30
+#: src/admin/panels/GeolocationPanel.js:12
+#: src/admin/panels/GeolocationPanel.js:54
 #, fuzzy
 msgid "Top cities"
 msgstr "Top-Seiten"
 
-#: src/admin/panels/GeolocationPanel.js:18
+#: src/admin/panels/GeolocationPanel.js:41
 msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:20
+#: src/admin/panels/GeolocationPanel.js:43
 #, fuzzy
 msgid "No country data available."
 msgstr "Keine Gerätedaten verfügbar."
 
-#: src/admin/panels/GeolocationPanel.js:31
+#: src/admin/panels/GeolocationPanel.js:55
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:33
+#: src/admin/panels/GeolocationPanel.js:57
 #, fuzzy
 msgid "No city data available."
 msgstr "Keine Gerätedaten verfügbar."
 
-#: src/admin/panels/GeolocationPanel.js:34
+#: src/admin/panels/GeolocationPanel.js:58
 #: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -285,7 +285,7 @@ msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:74
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
-#: src/admin/widgets/ReportTableCard.js:252
+#: src/admin/widgets/ReportTableCard.js:260
 msgid "Page"
 msgstr "Seite"
 
@@ -576,7 +576,7 @@ msgstr "Besuche"
 #: src/admin/widgets/OverviewKpis.js:96
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
-#: src/admin/widgets/ReportTableCard.js:26
+#: src/admin/widgets/ReportTableCard.js:27
 msgid "Page views"
 msgstr "Seitenaufrufe"
 
@@ -585,18 +585,18 @@ msgid "Period"
 msgstr "Zeitraum"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:56
-#: src/admin/widgets/ReportTableCard.js:104
+#: src/admin/widgets/ReportTableCard.js:105
 msgid "Ascending"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:57
-#: src/admin/widgets/ReportTableCard.js:105
+#: src/admin/widgets/ReportTableCard.js:106
 msgid "Descending"
 msgstr ""
 
 #. translators: %s: current sort order label.
 #: src/admin/widgets/ReferrerSourcesTableCard.js:59
-#: src/admin/widgets/ReportTableCard.js:109
+#: src/admin/widgets/ReportTableCard.js:110
 msgid "Toggle sort order"
 msgstr ""
 
@@ -610,7 +610,7 @@ msgid "Referrer sources"
 msgstr "Verweisquellen"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:85
-#: src/admin/widgets/ReportTableCard.js:133
+#: src/admin/widgets/ReportTableCard.js:135
 msgid "Sort by"
 msgstr ""
 
@@ -620,7 +620,7 @@ msgid "Source category"
 msgstr "Quellenkategorie"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:119
-#: src/admin/widgets/ReportTableCard.js:178
+#: src/admin/widgets/ReportTableCard.js:180
 msgid "Rows"
 msgstr ""
 
@@ -635,60 +635,60 @@ msgid "Loading referrer sources…"
 msgstr "Verweisquellen"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:174
-#: src/admin/widgets/ReportTableCard.js:235
+#: src/admin/widgets/ReportTableCard.js:243
 msgid "Previous page"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:176
-#: src/admin/widgets/ReportTableCard.js:237
+#: src/admin/widgets/ReportTableCard.js:245
 msgid "Previous"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:184
-#: src/admin/widgets/ReportTableCard.js:245
+#: src/admin/widgets/ReportTableCard.js:253
 #, fuzzy
 msgid "Next page"
 msgstr "Ausstiegsseiten"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:186
-#: src/admin/widgets/ReportTableCard.js:247
+#: src/admin/widgets/ReportTableCard.js:255
 msgid "Next"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
-#: src/admin/widgets/ReportTableCard.js:252
+#: src/admin/widgets/ReportTableCard.js:260
 msgid "of"
 msgstr "von"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:197
-#: src/admin/widgets/ReportTableCard.js:258
+#: src/admin/widgets/ReportTableCard.js:266
 msgid "items"
 msgstr "Elemente"
 
-#: src/admin/widgets/ReportTableCard.js:38
-#: src/admin/widgets/ReportTableCard.js:152
+#: src/admin/widgets/ReportTableCard.js:39
+#: src/admin/widgets/ReportTableCard.js:154
 msgid "Title"
 msgstr "Titel"
 
 #. translators: %s: active first-column label.
-#: src/admin/widgets/ReportTableCard.js:107
+#: src/admin/widgets/ReportTableCard.js:108
 msgid "label"
 msgstr "Bezeichnung"
 
 #. translators: %s: table title.
-#: src/admin/widgets/ReportTableCard.js:114
+#: src/admin/widgets/ReportTableCard.js:115
 msgid "Table"
 msgstr ""
 
-#: src/admin/widgets/ReportTableCard.js:147
+#: src/admin/widgets/ReportTableCard.js:149
 msgid "Display"
 msgstr "Anzeige"
 
-#: src/admin/widgets/ReportTableCard.js:150
+#: src/admin/widgets/ReportTableCard.js:152
 msgid "URL"
 msgstr ""
 
-#: src/admin/widgets/ReportTableCard.js:197
+#: src/admin/widgets/ReportTableCard.js:199
 #, fuzzy
 msgid "Loading"
 msgstr "Laden…"
