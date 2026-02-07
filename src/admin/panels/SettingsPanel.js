@@ -106,6 +106,9 @@ const SettingsPanel = () => {
   const logger = useMemo(() => createLogger({ debugEnabled: DEBUG_FLAG }), []);
   const debugEnabled = Boolean(formState.debug_enabled);
   const validateMaxMindFields = (nextState) => {
+    if (!nextState.geo_aggregation_enabled) {
+      return {};
+    }
     const errors = {};
     const accountId = String(nextState.maxmind_account_id || "").trim();
     const licenseKey = String(nextState.maxmind_license_key || "").trim();
@@ -349,13 +352,35 @@ const SettingsPanel = () => {
                     </h3>
                     <p>
                       {__(
-                        "MaxMind Account ID and License Key are required to enable IP geolocation.",
+                        "Geolocation aggregation requires MaxMind GeoLite credentials.",
                         "lean-stats",
                       )}
                     </p>
+                    <ToggleControl
+                      label={__("Enable geolocation aggregation", "lean-stats")}
+                      help={__(
+                        "Aggregates country, region, and city data in analytics dashboards.",
+                        "lean-stats",
+                      )}
+                      checked={Boolean(formState.geo_aggregation_enabled)}
+                      onChange={(value) => {
+                        setFormState((prev) => ({
+                          ...prev,
+                          geo_aggregation_enabled: value,
+                        }));
+                        if (!value) {
+                          setValidationErrors((prev) => ({
+                            ...prev,
+                            maxmind_account_id: null,
+                            maxmind_license_key: null,
+                          }));
+                        }
+                      }}
+                    />
                     <TextControl
                       label={__("MaxMind Account ID", "lean-stats")}
                       type="text"
+                      disabled={!formState.geo_aggregation_enabled}
                       help={
                         validationErrors.maxmind_account_id ||
                         __(
@@ -381,6 +406,7 @@ const SettingsPanel = () => {
                     <TextControl
                       label={__("MaxMind License Key", "lean-stats")}
                       type="password"
+                      disabled={!formState.geo_aggregation_enabled}
                       help={
                         validationErrors.maxmind_license_key ||
                         __(
