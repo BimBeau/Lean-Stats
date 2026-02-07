@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T16:52:03+00:00\n"
+"POT-Creation-Date: 2026-02-07T17:14:48+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -732,27 +732,34 @@ msgstr ""
 msgid "Loading"
 msgstr "A carregar…"
 
-#: src/admin/widgets/TimeseriesChart.js:63
+#: src/admin/widgets/TimeseriesChart.js:79
 #, fuzzy
 msgid "page view"
 msgid_plural "page views"
 msgstr[0] "Visualizações de página"
 msgstr[1] "Visualizações de página"
 
-#: src/admin/widgets/TimeseriesChart.js:105
+#: src/admin/widgets/TimeseriesChart.js:86
+#, fuzzy
+msgid "visit"
+msgid_plural "visits"
+msgstr[0] "Visitas"
+msgstr[1] "Visitas"
+
+#: src/admin/widgets/TimeseriesChart.js:137
 msgid "Daily page views"
 msgstr "Visualizações de página diárias"
 
-#: src/admin/widgets/TimeseriesChart.js:110
+#: src/admin/widgets/TimeseriesChart.js:142
 msgid "No data available for this period."
 msgstr "Nenhum dado disponível para este período."
 
-#: src/admin/widgets/TimeseriesChart.js:111
+#: src/admin/widgets/TimeseriesChart.js:143
 msgid "Loading chart…"
 msgstr "A carregar gráfico…"
 
-#: src/admin/widgets/TimeseriesChart.js:117
-#: src/admin/widgets/TimeseriesChart.js:131
+#: src/admin/widgets/TimeseriesChart.js:149
+#: src/admin/widgets/TimeseriesChart.js:163
 msgid "Daily page views line chart"
 msgstr "Gráfico de linhas de visualizações de página diárias"
 
