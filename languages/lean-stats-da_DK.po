@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T17:41:03+00:00\n"
+"POT-Creation-Date: 2026-02-07T19:51:46+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -246,7 +246,7 @@ msgstr ""
 #: src/admin/panels/OverviewPanel.js:40 src/admin/widgets/OverviewKpis.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
-#: src/admin/widgets/TimeseriesChart.js:174
+#: src/admin/widgets/TimeseriesChart.js:33
 msgid "Visits"
 msgstr "Besøg"
 
@@ -617,7 +617,7 @@ msgid "Loading KPIs…"
 msgstr "Indlæser KPI'er…"
 
 #: src/admin/widgets/OverviewKpis.js:96 src/admin/widgets/ReportTableCard.js:27
-#: src/admin/widgets/TimeseriesChart.js:165
+#: src/admin/widgets/TimeseriesChart.js:20
 msgid "Page views"
 msgstr "Sidevisninger"
 
@@ -734,48 +734,70 @@ msgstr ""
 msgid "Loading"
 msgstr "Indlæser…"
 
-#: src/admin/widgets/TimeseriesChart.js:80
+#: src/admin/widgets/TimeseriesChart.js:21
+msgid "Daily page views"
+msgstr "Daglige sidevisninger"
+
+#: src/admin/widgets/TimeseriesChart.js:22
+msgid "Daily page views line chart"
+msgstr "Linjediagram over daglige sidevisninger"
+
+#: src/admin/widgets/TimeseriesChart.js:24
 #, fuzzy
 msgid "page view"
 msgid_plural "page views"
 msgstr[0] "Sidevisninger"
 msgstr[1] "Sidevisninger"
 
-#: src/admin/widgets/TimeseriesChart.js:87
+#: src/admin/widgets/TimeseriesChart.js:34
+#, fuzzy
+msgid "Daily visits"
+msgstr "Daglige sidevisninger"
+
+#: src/admin/widgets/TimeseriesChart.js:35
+#, fuzzy
+msgid "Daily visits line chart"
+msgstr "Linjediagram over daglige sidevisninger"
+
+#: src/admin/widgets/TimeseriesChart.js:37
 #, fuzzy
 msgid "visit"
 msgid_plural "visits"
 msgstr[0] "Besøg"
 msgstr[1] "Besøg"
 
-#. translators: 1: formatted date, 2: page views count, 3: visits count
-#: src/admin/widgets/TimeseriesChart.js:96
-msgid "%1$s: %2$s, %3$s"
+#. translators: 1: formatted date, 2: current metric count, 3: previous metric count
+#: src/admin/widgets/TimeseriesChart.js:126
+msgid "%1$s: Current %2$s, Previous %3$s"
 msgstr ""
 
-#. translators: 1: page views count, 2: visits count
-#: src/admin/widgets/TimeseriesChart.js:137
-msgid "%1$s, %2$s"
+#. translators: 1: current metric count
+#: src/admin/widgets/TimeseriesChart.js:170
+msgid "Current: %1$s"
 msgstr ""
 
-#: src/admin/widgets/TimeseriesChart.js:148
-#, fuzzy
-msgid "Daily page views and visits"
-msgstr "Daglige sidevisninger"
+#. translators: 1: previous metric count
+#: src/admin/widgets/TimeseriesChart.js:177
+msgid "Previous: %1$s"
+msgstr ""
 
-#: src/admin/widgets/TimeseriesChart.js:153
+#: src/admin/widgets/TimeseriesChart.js:193
 msgid "No data available for this period."
 msgstr "Ingen data tilgængelig for denne periode."
 
-#: src/admin/widgets/TimeseriesChart.js:154
+#: src/admin/widgets/TimeseriesChart.js:194
 msgid "Loading chart…"
 msgstr "Indlæser graf…"
 
-#: src/admin/widgets/TimeseriesChart.js:180
-#: src/admin/widgets/TimeseriesChart.js:194
-#, fuzzy
-msgid "Daily page views and visits line chart"
-msgstr "Linjediagram over daglige sidevisninger"
+#. translators: 1: metric label
+#: src/admin/widgets/TimeseriesChart.js:207
+msgid "Current %s"
+msgstr ""
+
+#. translators: 1: metric label
+#: src/admin/widgets/TimeseriesChart.js:220
+msgid "Previous %s"
+msgstr ""
 
 #~ msgid "%s : %s"
 #~ msgstr "%s : %s"
