@@ -4,6 +4,28 @@ import countryNamesFr from "../data/country-names-fr.json";
 
 const UNKNOWN_CODES = new Set(["", "XX", "UNKNOWN"]);
 
+const normalizeCountryCode = (code) => {
+  if (typeof code !== "string") {
+    return "";
+  }
+
+  return code.trim().toUpperCase();
+};
+
+export const isUnknownCountryCode = (code) => {
+  const normalized = normalizeCountryCode(code);
+  return !normalized || UNKNOWN_CODES.has(normalized);
+};
+
+export const getCountryFlagClass = (code) => {
+  const normalized = normalizeCountryCode(code);
+  if (isUnknownCountryCode(normalized)) {
+    return "";
+  }
+
+  return `fi fi-${normalized.toLowerCase()}`;
+};
+
 const getAdminLocale = () => {
   if (typeof document !== "undefined" && document.documentElement?.lang) {
     return document.documentElement.lang;
@@ -29,8 +51,8 @@ const getDisplayNames = (locale) => {
 };
 
 export const getCountryLabel = (code) => {
-  const normalized = typeof code === "string" ? code.trim().toUpperCase() : "";
-  if (!normalized || UNKNOWN_CODES.has(normalized)) {
+  const normalized = normalizeCountryCode(code);
+  if (isUnknownCountryCode(normalized)) {
     return __("Unknown country", "lean-stats");
   }
 
