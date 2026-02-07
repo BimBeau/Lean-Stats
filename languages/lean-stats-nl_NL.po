@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-06T21:06:13+00:00\n"
+"POT-Creation-Date: 2026-02-07T10:42:53+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Lean Stats\n"
 
 #. Plugin Name of the plugin
-#: lean-stats.php includes/settings.php:172 src/admin/AdminApp.js:33
+#: lean-stats.php includes/settings.php:176 src/admin/AdminApp.js:33
 #: src/admin/panels/registry.js:28
 msgid "Lean Stats"
 msgstr "Lean Stats"
@@ -51,16 +51,16 @@ msgstr "Interne zoekopdrachten"
 
 #: admin/admin.php:285 src/admin/constants/index.js:10
 #: src/admin/panels/GeolocationPanel.js:30
-#: src/admin/panels/SettingsPanel.js:348
+#: src/admin/panels/SettingsPanel.js:351
 msgid "Geolocation"
 msgstr ""
 
 #: admin/admin.php:290 src/admin/constants/index.js:11
-#: src/admin/panels/SettingsPanel.js:293
+#: src/admin/panels/SettingsPanel.js:296
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/geolocation.php:134
+#: includes/geolocation.php:167
 msgid "Unable to determine the visitor IP."
 msgstr ""
 
@@ -109,20 +109,20 @@ msgstr "API-fout (%s)"
 msgid "Invalid MaxMind API response."
 msgstr "Ongeldige REST API-nonce."
 
-#: includes/settings.php:138 src/admin/panels/SettingsPanel.js:114
+#: includes/settings.php:142 src/admin/panels/SettingsPanel.js:117
 msgid "MaxMind Account ID is required."
 msgstr ""
 
-#: includes/settings.php:140 src/admin/panels/SettingsPanel.js:119
+#: includes/settings.php:144 src/admin/panels/SettingsPanel.js:122
 msgid "MaxMind Account ID must be numeric."
 msgstr ""
 
-#: includes/settings.php:144 src/admin/panels/SettingsPanel.js:126
+#: includes/settings.php:148 src/admin/panels/SettingsPanel.js:129
 #, fuzzy
 msgid "MaxMind License Key is required."
 msgstr "MaxMind-licentiesleutel"
 
-#: includes/settings.php:157
+#: includes/settings.php:161
 #, fuzzy
 msgid "MaxMind credentials are required to enable IP geolocation."
 msgstr ""
@@ -137,8 +137,8 @@ msgstr "Ontbrekende beheerconfiguratie."
 msgid "No panel available for this screen."
 msgstr "Geen paneel beschikbaar voor dit scherm."
 
-#: src/admin/api/useAdminEndpoint.js:52 src/admin/panels/SettingsPanel.js:150
-#: src/admin/panels/SettingsPanel.js:231
+#: src/admin/api/useAdminEndpoint.js:52 src/admin/panels/SettingsPanel.js:153
+#: src/admin/panels/SettingsPanel.js:234
 msgid "Missing REST configuration."
 msgstr "Ontbrekende REST-configuratie."
 
@@ -171,15 +171,15 @@ msgstr "Laden…"
 msgid "Loading: %s"
 msgstr "Laden: %s"
 
-#: src/admin/constants/index.js:32
+#: src/admin/constants/index.js:33
 msgid "7 days"
 msgstr "7 dagen"
 
-#: src/admin/constants/index.js:33
+#: src/admin/constants/index.js:34
 msgid "30 days"
 msgstr "30 dagen"
 
-#: src/admin/constants/index.js:34
+#: src/admin/constants/index.js:35
 msgid "90 days"
 msgstr "90 dagen"
 
@@ -328,119 +328,124 @@ msgstr "Pagina"
 msgid "Device"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:191 src/admin/panels/SettingsPanel.js:255
+#: src/admin/panels/SettingsPanel.js:194 src/admin/panels/SettingsPanel.js:258
 #, fuzzy
 msgid "API error"
 msgstr "API-fout (%s)"
 
-#: src/admin/panels/SettingsPanel.js:206
+#: src/admin/panels/SettingsPanel.js:209
 msgid "Settings saved."
 msgstr "Instellingen opgeslagen."
 
-#: src/admin/panels/SettingsPanel.js:215
+#: src/admin/panels/SettingsPanel.js:218
 msgid "Error while saving."
 msgstr "Fout bij opslaan."
 
-#: src/admin/panels/SettingsPanel.js:262
+#: src/admin/panels/SettingsPanel.js:265
 msgid "Analytics data purged."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:271
+#: src/admin/panels/SettingsPanel.js:274
 #, fuzzy
 msgid "Error while purging."
 msgstr "Fout bij opslaan."
 
-#: src/admin/panels/SettingsPanel.js:286 src/admin/panels/SettingsPanel.js:324
+#: src/admin/panels/SettingsPanel.js:289 src/admin/panels/SettingsPanel.js:327
 msgid "General"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:288
+#: src/admin/panels/SettingsPanel.js:291
 msgid "Logs"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:299
+#: src/admin/panels/SettingsPanel.js:302
 msgid "Loading settings…"
 msgstr "Instellingen laden…"
 
-#: src/admin/panels/SettingsPanel.js:327
+#: src/admin/panels/SettingsPanel.js:330
 msgid "Plugin name (menu and dashboard)"
 msgstr "Plug-innaam (menu en dashboard)"
 
-#: src/admin/panels/SettingsPanel.js:331
+#: src/admin/panels/SettingsPanel.js:334
 msgid "Leave blank to use \"Lean Stats\"."
 msgstr "Leeg laten om \"Lean Stats\" te gebruiken."
 
-#: src/admin/panels/SettingsPanel.js:351
-msgid ""
-"MaxMind Account ID and License Key are required to enable IP geolocation."
+#: src/admin/panels/SettingsPanel.js:354
+msgid "Geolocation aggregation requires MaxMind GeoLite credentials."
 msgstr ""
-"MaxMind-account-ID en licentiesleutel zijn vereist om IP-geolocatie in te "
-"schakelen."
 
-#: src/admin/panels/SettingsPanel.js:357
-msgid "MaxMind Account ID"
+#: src/admin/panels/SettingsPanel.js:360
+msgid "Enable geolocation aggregation"
 msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:361
+msgid "Aggregates country, region, and city data in analytics dashboards."
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:381
+msgid "MaxMind Account ID"
+msgstr ""
+
+#: src/admin/panels/SettingsPanel.js:386
 msgid "Numeric Account ID for MaxMind IP geolocation."
 msgstr "Numeriek account-ID voor MaxMind IP-geolocatie."
 
-#: src/admin/panels/SettingsPanel.js:382
+#: src/admin/panels/SettingsPanel.js:407
 msgid "MaxMind License Key"
 msgstr "MaxMind-licentiesleutel"
 
-#: src/admin/panels/SettingsPanel.js:386
+#: src/admin/panels/SettingsPanel.js:412
 msgid "License Key for MaxMind IP geolocation."
 msgstr "Licentiesleutel voor MaxMind IP-geolocatie."
 
-#: src/admin/panels/SettingsPanel.js:411
+#: src/admin/panels/SettingsPanel.js:437
 msgid "Privacy & consent"
 msgstr "Privacy en toestemming"
 
-#: src/admin/panels/SettingsPanel.js:414
+#: src/admin/panels/SettingsPanel.js:440
 msgid "Respect DNT / GPC"
 msgstr "DNT / GPC respecteren"
 
-#: src/admin/panels/SettingsPanel.js:415
+#: src/admin/panels/SettingsPanel.js:441
 msgid "Ignore tracking if the browser sends DNT or GPC."
 msgstr "Negeert tracking als de browser DNT of GPC verzendt."
 
-#: src/admin/panels/SettingsPanel.js:428
+#: src/admin/panels/SettingsPanel.js:454
 msgid "Debug mode"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:429
+#: src/admin/panels/SettingsPanel.js:455
 msgid "Enables detailed console logs and raw log capture."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:443
+#: src/admin/panels/SettingsPanel.js:469
 msgid "Retention window (days)"
 msgstr "Bewaarperiode (dagen)"
 
-#: src/admin/panels/SettingsPanel.js:448
+#: src/admin/panels/SettingsPanel.js:474
 msgid "Raw logs purge automatically after the configured window."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:467
+#: src/admin/panels/SettingsPanel.js:493
 #, fuzzy
 msgid "URL cleaning"
 msgstr "URL-opschoning"
 
-#: src/admin/panels/SettingsPanel.js:470
+#: src/admin/panels/SettingsPanel.js:496
 #, fuzzy
 msgid "Strip query parameters"
 msgstr "Verwijdert queryparameters."
 
-#: src/admin/panels/SettingsPanel.js:471
+#: src/admin/panels/SettingsPanel.js:497
 #, fuzzy
 msgid "Remove query parameters from tracked URLs."
 msgstr "Verwijdert queryparameters."
 
-#: src/admin/panels/SettingsPanel.js:484
+#: src/admin/panels/SettingsPanel.js:510
 msgid "Query parameter allowlist"
 msgstr "Toegestane lijst van queryparameters"
 
-#: src/admin/panels/SettingsPanel.js:485
+#: src/admin/panels/SettingsPanel.js:511
 msgid ""
 "Comma-separated list of allowed query keys (used for URL tracking and UTM "
 "aggregation)."
@@ -448,24 +453,24 @@ msgstr ""
 "Door komma's gescheiden lijst met toegestane querysleutels (gebruikt voor "
 "URL-tracking en UTM-aggregatie)."
 
-#: src/admin/panels/SettingsPanel.js:507
+#: src/admin/panels/SettingsPanel.js:533
 #, fuzzy
 msgid "Exclusions"
 msgstr "Uitsluitingen per rol"
 
-#: src/admin/panels/SettingsPanel.js:510
+#: src/admin/panels/SettingsPanel.js:536
 msgid "Excluded paths"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:511
+#: src/admin/panels/SettingsPanel.js:537
 msgid "One per line or comma-separated (e.g., /privacy, /account)."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:530
+#: src/admin/panels/SettingsPanel.js:556
 msgid "Role exclusions"
 msgstr "Uitsluitingen per rol"
 
-#: src/admin/panels/SettingsPanel.js:533
+#: src/admin/panels/SettingsPanel.js:559
 msgid ""
 "Select roles to exclude from tracking. Select all roles to ignore all logged-"
 "in users."
@@ -473,45 +478,45 @@ msgstr ""
 "Selecteer rollen om uit te sluiten van tracking. Selecteer alle rollen om "
 "alle ingelogde gebruikers te negeren."
 
-#: src/admin/panels/SettingsPanel.js:540
+#: src/admin/panels/SettingsPanel.js:566
 msgid "No roles available."
 msgstr "Geen rol beschikbaar."
 
-#: src/admin/panels/SettingsPanel.js:572
+#: src/admin/panels/SettingsPanel.js:598
 msgid "Data management"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:575
+#: src/admin/panels/SettingsPanel.js:601
 msgid "Remove all aggregated analytics and raw log entries."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:585
+#: src/admin/panels/SettingsPanel.js:611
 msgid "Purge analytics data"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:593
+#: src/admin/panels/SettingsPanel.js:619
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
-#: src/admin/panels/SettingsPanel.js:595
+#: src/admin/panels/SettingsPanel.js:621
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/admin/panels/SettingsPanel.js:599
+#: src/admin/panels/SettingsPanel.js:625
 msgid "Confirm data purge"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:603
+#: src/admin/panels/SettingsPanel.js:629
 msgid ""
 "This action permanently removes all stored analytics and raw logs. Settings "
 "remain unchanged."
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:613
+#: src/admin/panels/SettingsPanel.js:639
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/panels/SettingsPanel.js:621
+#: src/admin/panels/SettingsPanel.js:647
 msgid "Purge now"
 msgstr ""
 

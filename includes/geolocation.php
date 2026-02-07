@@ -124,6 +124,39 @@ function lean_stats_get_maxmind_service(): Lean_Stats_MaxMind_Service
 }
 
 /**
+ * Look up a MaxMind location with a short-lived in-memory cache.
+ */
+function lean_stats_lookup_maxmind_location(
+    string $ip,
+    string $account_id,
+    string $license_key
+): array {
+    static $cache = [];
+    $ttl = 60;
+    $key = hash('sha256', $ip . '|' . $account_id);
+    $now = time();
+
+    if (isset($cache[$key])) {
+        $cached = $cache[$key];
+        if (is_array($cached) && isset($cached['timestamp'], $cached['payload'])) {
+            if (($now - (int) $cached['timestamp']) <= $ttl) {
+                return $cached['payload'];
+            }
+        }
+    }
+
+    $service = lean_stats_get_maxmind_service();
+    $location = $service->lookup($ip, $account_id, $license_key);
+
+    $cache[$key] = [
+        'timestamp' => $now,
+        'payload' => $location,
+    ];
+
+    return $location;
+}
+
+/**
  * Resolve geolocation data for the current request without storing the IP.
  */
 function lean_stats_get_geolocation_payload(): array
@@ -145,8 +178,7 @@ function lean_stats_get_geolocation_payload(): array
 
     $account_id = trim((string) ($settings['maxmind_account_id'] ?? ''));
     $license_key = trim((string) ($settings['maxmind_license_key'] ?? ''));
-    $service = lean_stats_get_maxmind_service();
-    $location = $service->lookup($ip, $account_id, $license_key);
+    $location = lean_stats_lookup_maxmind_location($ip, $account_id, $license_key);
 
     if (!empty($location['error'])) {
         return [
@@ -179,14 +211,16 @@ function lean_stats_get_geo_aggregate_payload(): array
     }
 
     $settings = lean_stats_get_settings();
+    if (empty($settings['geo_aggregation_enabled'])) {
+        return [];
+    }
     if (lean_stats_validate_maxmind_settings($settings)) {
         return [];
     }
 
     $account_id = trim((string) ($settings['maxmind_account_id'] ?? ''));
     $license_key = trim((string) ($settings['maxmind_license_key'] ?? ''));
-    $service = lean_stats_get_maxmind_service();
-    $location = $service->lookup($ip, $account_id, $license_key);
+    $location = lean_stats_lookup_maxmind_location($ip, $account_id, $license_key);
 
     if (!empty($location['error'])) {
         return [];
