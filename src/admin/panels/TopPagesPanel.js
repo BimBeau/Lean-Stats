@@ -79,7 +79,7 @@ const TopPagesPanel = () => {
       <div className="ls-report-panel__header">
         <PeriodFilter value={rangePreset} onChange={setRangePreset} />
       </div>
-      <TimeseriesChart range={range} />
+      <TimeseriesChart range={range} metric="pageViews" />
       <TabPanel className="ls-pages-tabs" tabs={pagesTabs}>
         {(tab) => {
           if (tab.name === "entry-pages") {

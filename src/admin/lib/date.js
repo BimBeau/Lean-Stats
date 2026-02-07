@@ -38,3 +38,31 @@ export const getRangeFromPreset = (preset) => {
     end: formatDate(end),
   };
 };
+
+export const getPreviousRange = (range) => {
+  if (!range?.start || !range?.end) {
+    return null;
+  }
+
+  const startDate = new Date(`${range.start}T00:00:00`);
+  const endDate = new Date(`${range.end}T00:00:00`);
+
+  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    return null;
+  }
+
+  const dayInMs = 24 * 60 * 60 * 1000;
+  const totalDays = Math.max(
+    1,
+    Math.round((endDate - startDate) / dayInMs) + 1,
+  );
+  const previousEnd = new Date(startDate.getTime() - dayInMs);
+  const previousStart = new Date(
+    previousEnd.getTime() - (totalDays - 1) * dayInMs,
+  );
+
+  return {
+    start: formatDate(previousStart),
+    end: formatDate(previousEnd),
+  };
+};

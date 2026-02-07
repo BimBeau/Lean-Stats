@@ -12,32 +12,75 @@ import {
   LINE_CHART_WIDTH,
   buildLineChartData,
 } from "../charts/lineChart";
-const TimeseriesChart = ({ range }) => {
-  const { data, isLoading, error } = useAdminEndpoint(
-    "/admin/timeseries/day",
-    range,
-  );
-  const items = data?.items ?? [];
-  const pageViewsSeries = useMemo(
+import { getPreviousRange } from "../lib/date";
+
+const metricConfig = {
+  pageViews: {
+    key: "pageViews",
+    label: __("Page views", "lean-stats"),
+    title: __("Daily page views", "lean-stats"),
+    ariaLabel: __("Daily page views line chart", "lean-stats"),
+    tooltipLabel: (value) =>
+      `${new Intl.NumberFormat().format(value)} ${_n(
+        "page view",
+        "page views",
+        value,
+        "lean-stats",
+      )}`,
+  },
+  visits: {
+    key: "visits",
+    label: __("Visits", "lean-stats"),
+    title: __("Daily visits", "lean-stats"),
+    ariaLabel: __("Daily visits line chart", "lean-stats"),
+    tooltipLabel: (value) =>
+      `${new Intl.NumberFormat().format(value)} ${_n(
+        "visit",
+        "visits",
+        value,
+        "lean-stats",
+      )}`,
+  },
+};
+
+const TimeseriesChart = ({ range, metric = "pageViews" }) => {
+  const config = metricConfig[metric] ?? metricConfig.pageViews;
+  const previousRange = useMemo(() => getPreviousRange(range), [range]);
+  const {
+    data: currentData,
+    isLoading: isCurrentLoading,
+    error: currentError,
+  } = useAdminEndpoint("/admin/timeseries/day", range);
+  const {
+    data: previousData,
+    isLoading: isPreviousLoading,
+    error: previousError,
+  } = useAdminEndpoint("/admin/timeseries/day", previousRange, {
+    enabled: Boolean(previousRange),
+  });
+  const items = currentData?.items ?? [];
+  const previousItems = previousData?.items ?? [];
+  const currentSeries = useMemo(
     () =>
       items.map((item) => ({
         bucket: item.bucket,
-        value: item.pageViews ?? 0,
+        value: item[config.key] ?? 0,
       })),
-    [items],
+    [items, config.key],
   );
-  const visitsSeries = useMemo(
-    () =>
-      items.map((item) => ({
-        bucket: item.bucket,
-        value: item.visits ?? 0,
-      })),
-    [items],
-  );
+  const previousSeries = useMemo(() => {
+    const previousValues = previousItems.map(
+      (item) => item[config.key] ?? 0,
+    );
+    return items.map((item, index) => ({
+      bucket: item.bucket,
+      value: previousValues[index] ?? 0,
+    }));
+  }, [items, previousItems, config.key]);
   const [chartWidth, setChartWidth] = useState(LINE_CHART_WIDTH);
   const chartData = useMemo(
-    () => buildLineChartData(pageViewsSeries, visitsSeries, chartWidth),
-    [pageViewsSeries, visitsSeries, chartWidth],
+    () => buildLineChartData(currentSeries, previousSeries, chartWidth),
+    [currentSeries, previousSeries, chartWidth],
   );
   const [activePoint, setActivePoint] = useState(null);
   // ResizeObserver updates width without changing the fixed 240px height.
@@ -76,32 +119,22 @@ const TimeseriesChart = ({ range }) => {
     }).format(date);
   };
 
-  const formatPageViewsLabel = (value) =>
-    `${formatYAxisValue(value)} ${_n(
-      "page view",
-      "page views",
-      value,
-      "lean-stats",
-    )}`;
-  const formatVisitsLabel = (value) =>
-    `${formatYAxisValue(value)} ${_n(
-      "visit",
-      "visits",
-      value,
-      "lean-stats",
-    )}`;
+  const formatMetricLabel = (value) => config.tooltipLabel(value);
   const formatTooltipSummary = (point) =>
     sprintf(
-      /* translators: 1: formatted date, 2: page views count, 3: visits count */
-      __("%1$s: %2$s, %3$s", "lean-stats"),
+      /* translators: 1: formatted date, 2: current metric count, 3: previous metric count */
+      __(
+        "%1$s: Current %2$s, Previous %3$s",
+        "lean-stats",
+      ),
       formatTooltipDate(point.label),
-      formatPageViewsLabel(point.pageViews),
-      formatVisitsLabel(point.visits),
+      formatMetricLabel(point.currentValue),
+      formatMetricLabel(point.previousValue),
     );
 
   const handleChartMouseMove = useCallback(
     (event) => {
-      if (!chartData.pageViewsPoints.length) {
+      if (!chartData.currentPoints.length) {
         return;
       }
       const bounds = event.currentTarget.getBoundingClientRect();
@@ -110,9 +143,9 @@ const TimeseriesChart = ({ range }) => {
       }
       const relativeX =
         ((event.clientX - bounds.left) / bounds.width) * chartData.width;
-      let closestPoint = chartData.pageViewsPoints[0];
+      let closestPoint = chartData.currentPoints[0];
       let closestDistance = Math.abs(closestPoint.x - relativeX);
-      chartData.pageViewsPoints.forEach((point) => {
+      chartData.currentPoints.forEach((point) => {
         const distance = Math.abs(point.x - relativeX);
         if (distance < closestDistance) {
           closestPoint = point;
@@ -123,7 +156,7 @@ const TimeseriesChart = ({ range }) => {
         previous?.label === closestPoint.label ? previous : closestPoint,
       );
     },
-    [chartData.pageViewsPoints, chartData.width],
+    [chartData.currentPoints, chartData.width],
   );
 
   const chartTooltip = activePoint ? (
@@ -133,19 +166,26 @@ const TimeseriesChart = ({ range }) => {
       </div>
       <div className="ls-timeseries__tooltip-metric">
         {sprintf(
-          /* translators: 1: page views count, 2: visits count */
-          __("%1$s, %2$s", "lean-stats"),
-          formatPageViewsLabel(activePoint.pageViews),
-          formatVisitsLabel(activePoint.visits),
+          /* translators: 1: current metric count */
+          __("Current: %1$s", "lean-stats"),
+          formatMetricLabel(activePoint.currentValue),
+        )}
+      </div>
+      <div className="ls-timeseries__tooltip-metric">
+        {sprintf(
+          /* translators: 1: previous metric count */
+          __("Previous: %1$s", "lean-stats"),
+          formatMetricLabel(activePoint.previousValue),
         )}
       </div>
     </>
   ) : null;
-  const pageViewsGradientId = "ls-timeseries-gradient-pageviews";
-  const visitsGradientId = "ls-timeseries-gradient-visits";
+  const isLoading = isCurrentLoading || isPreviousLoading;
+  const error = currentError || previousError;
+  const currentGradientId = `ls-timeseries-gradient-${config.key}`;
 
   return (
-    <LsCard title={__("Daily page views and visits", "lean-stats")}>
+    <LsCard title={config.title}>
       <DataState
         isLoading={isLoading}
         error={error}
@@ -154,30 +194,38 @@ const TimeseriesChart = ({ range }) => {
         loadingLabel={__("Loading chart…", "lean-stats")}
       />
       {!isLoading && !error && items.length > 0 && (
-        <div className="ls-timeseries">
+        <div className={`ls-timeseries ls-timeseries--${config.key}`}>
           <Flex className="ls-timeseries__legend" align="center">
             <FlexItem>
               <span className="ls-timeseries__legend-item">
                 <span
-                  className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--pageviews"
+                  className="ls-timeseries__legend-swatch"
                   aria-hidden="true"
                 />
-                {__("Page views", "lean-stats")}
+                {sprintf(
+                  /* translators: 1: metric label */
+                  __("Current %s", "lean-stats"),
+                  config.label,
+                )}
               </span>
             </FlexItem>
             <FlexItem>
-              <span className="ls-timeseries__legend-item ls-timeseries__legend-item--visits">
+              <span className="ls-timeseries__legend-item">
                 <span
-                  className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--visits"
+                  className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--previous"
                   aria-hidden="true"
                 />
-                {__("Visits", "lean-stats")}
+                {sprintf(
+                  /* translators: 1: metric label */
+                  __("Previous %s", "lean-stats"),
+                  config.label,
+                )}
               </span>
             </FlexItem>
           </Flex>
           <ChartFrame
             height={LINE_CHART_HEIGHT}
-            ariaLabel={__("Daily page views and visits line chart", "lean-stats")}
+            ariaLabel={config.ariaLabel}
             onResize={handleChartResize}
           >
             <div
@@ -191,12 +239,12 @@ const TimeseriesChart = ({ range }) => {
                 preserveAspectRatio="xMidYMid meet"
                 className="ls-timeseries__svg"
                 role="img"
-                aria-label={__("Daily page views and visits line chart", "lean-stats")}
+                aria-label={config.ariaLabel}
                 onMouseMove={handleChartMouseMove}
               >
                 <defs>
                   <linearGradient
-                    id={pageViewsGradientId}
+                    id={currentGradientId}
                     x1="0"
                     y1="0"
                     x2="0"
@@ -204,30 +252,12 @@ const TimeseriesChart = ({ range }) => {
                   >
                     <stop
                       offset="0%"
-                      stopColor="var(--ls-border, #2271b1)"
-                      stopOpacity="0.45"
+                      stopColor="var(--ls-timeseries-line-color, #2271b1)"
+                      stopOpacity="var(--ls-timeseries-gradient-opacity, 0.35)"
                     />
                     <stop
                       offset="100%"
-                      stopColor="var(--ls-border, #2271b1)"
-                      stopOpacity="0"
-                    />
-                  </linearGradient>
-                  <linearGradient
-                    id={visitsGradientId}
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop
-                      offset="0%"
-                      stopColor="var(--ls-timeseries-visits-color, var(--ls-text-2, #2271b1))"
-                      stopOpacity="var(--ls-timeseries-visits-gradient-opacity, 0.18)"
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="var(--ls-timeseries-visits-color, var(--ls-text-2, #2271b1))"
+                      stopColor="var(--ls-timeseries-line-color, #2271b1)"
                       stopOpacity="0"
                     />
                   </linearGradient>
@@ -273,22 +303,17 @@ const TimeseriesChart = ({ range }) => {
                   className="ls-timeseries__axis"
                 />
                 <path
-                  d={chartData.visitsAreaPath}
-                  className="ls-timeseries__area ls-timeseries__area--visits"
-                  fill={`url(#${visitsGradientId})`}
+                  d={chartData.currentAreaPath}
+                  className="ls-timeseries__area ls-timeseries__area--current"
+                  fill={`url(#${currentGradientId})`}
                 />
                 <path
-                  d={chartData.pageViewsAreaPath}
-                  className="ls-timeseries__area ls-timeseries__area--pageviews"
-                  fill={`url(#${pageViewsGradientId})`}
+                  d={chartData.currentLinePath}
+                  className="ls-timeseries__line ls-timeseries__line--current"
                 />
                 <path
-                  d={chartData.visitsLinePath}
-                  className="ls-timeseries__line ls-timeseries__line--visits"
-                />
-                <path
-                  d={chartData.pageViewsLinePath}
-                  className="ls-timeseries__line ls-timeseries__line--pageviews"
+                  d={chartData.previousLinePath}
+                  className="ls-timeseries__line ls-timeseries__line--previous"
                 />
                 {chartData.xLabels.map((label) => (
                   <text
@@ -301,9 +326,9 @@ const TimeseriesChart = ({ range }) => {
                     {formatAxisLabel(label.label)}
                   </text>
                 ))}
-                {chartData.pageViewsPoints.map((point) => (
+                {chartData.currentPoints.map((point) => (
                   <circle
-                    key={`${point.label}-${point.pageViews}`}
+                    key={`${point.label}-${point.currentValue}`}
                     cx={point.x}
                     cy={point.y}
                     r="4"
@@ -322,7 +347,7 @@ const TimeseriesChart = ({ range }) => {
               </svg>
               {activePoint && (
                 <div
-                  key={`${activePoint.label}-${activePoint.pageViews}`}
+                  key={`${activePoint.label}-${activePoint.currentValue}`}
                   className="ls-timeseries__tooltip"
                   role="status"
                   style={{

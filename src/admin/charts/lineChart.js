@@ -46,32 +46,32 @@ const buildSmoothPath = (points, smoothing = 0.2) => {
 };
 
 const buildLineChartData = (
-  pageViews = [],
-  visits = [],
+  current = [],
+  previous = [],
   chartWidth = LINE_CHART_WIDTH,
 ) => {
   const maxValue = Math.max(
     0,
-    ...pageViews.map((item) => item.value ?? 0),
-    ...visits.map((item) => item.value ?? 0),
+    ...current.map((item) => item.value ?? 0),
+    ...previous.map((item) => item.value ?? 0),
   );
   const width = Math.max(Math.round(chartWidth), LINE_CHART_PADDING * 2 + 1);
   const height = LINE_CHART_HEIGHT;
   const padding = LINE_CHART_PADDING;
   const innerWidth = Math.max(width - padding * 2, 1);
   const innerHeight = Math.max(height - padding * 2, 1);
-  const totalItems = Math.max(pageViews.length, visits.length);
+  const totalItems = Math.max(current.length, previous.length);
   const totalPoints = Math.max(totalItems - 1, 1);
 
   const resolveLabel = (index) =>
-    pageViews[index]?.bucket ?? visits[index]?.bucket ?? "";
+    current[index]?.bucket ?? previous[index]?.bucket ?? "";
   const resolveValue = (series, index) => series[index]?.value ?? 0;
 
-  const buildPoints = (metricKey) =>
+  const buildPoints = (valueSelector) =>
     Array.from({ length: totalItems }, (_, index) => {
-      const pageViewsValue = resolveValue(pageViews, index);
-      const visitsValue = resolveValue(visits, index);
-      const value = metricKey === "pageViews" ? pageViewsValue : visitsValue;
+      const currentValue = resolveValue(current, index);
+      const previousValue = resolveValue(previous, index);
+      const value = valueSelector(currentValue, previousValue);
       const x = padding + (innerWidth * index) / totalPoints;
       const y =
         height - padding - (maxValue ? (value / maxValue) * innerHeight : 0);
@@ -79,28 +79,22 @@ const buildLineChartData = (
         x,
         y,
         label: resolveLabel(index),
-        pageViews: pageViewsValue,
-        visits: visitsValue,
+        currentValue,
+        previousValue,
       };
     });
 
-  const pageViewsPoints = buildPoints("pageViews");
-  const visitsPoints = buildPoints("visits");
+  const currentPoints = buildPoints((currentValue) => currentValue);
+  const previousPoints = buildPoints((_, previousValue) => previousValue);
 
-  const pageViewsLinePath = buildSmoothPath(pageViewsPoints);
-  const visitsLinePath = buildSmoothPath(visitsPoints);
+  const currentLinePath = buildSmoothPath(currentPoints);
+  const previousLinePath = buildSmoothPath(previousPoints);
   const baselineY = height - padding;
-  const pageViewsAreaPath =
-    pageViewsPoints.length > 0
-      ? `${pageViewsLinePath} L ${
-          pageViewsPoints[pageViewsPoints.length - 1].x
-        } ${baselineY} L ${pageViewsPoints[0].x} ${baselineY} Z`
-      : "";
-  const visitsAreaPath =
-    visitsPoints.length > 0
-      ? `${visitsLinePath} L ${
-          visitsPoints[visitsPoints.length - 1].x
-        } ${baselineY} L ${visitsPoints[0].x} ${baselineY} Z`
+  const currentAreaPath =
+    currentPoints.length > 0
+      ? `${currentLinePath} L ${
+          currentPoints[currentPoints.length - 1].x
+        } ${baselineY} L ${currentPoints[0].x} ${baselineY} Z`
       : "";
 
   const labelCount = Math.min(LINE_CHART_LABEL_COUNT, totalItems);
@@ -139,12 +133,11 @@ const buildLineChartData = (
   });
 
   return {
-    pageViewsPoints,
-    visitsPoints,
-    pageViewsLinePath,
-    visitsLinePath,
-    pageViewsAreaPath,
-    visitsAreaPath,
+    currentPoints,
+    previousPoints,
+    currentLinePath,
+    previousLinePath,
+    currentAreaPath,
     maxValue,
     width,
     height,
