@@ -37,6 +37,7 @@ const OverviewPanel = () => {
           endpoint="/referrers"
           emptyLabel={__("No referrers available.", "lean-stats")}
           labelFallback={__("Direct", "lean-stats")}
+          metricLabel={__("Visits", "lean-stats")}
         />
         <DeviceSplit range={range} />
       </div>
