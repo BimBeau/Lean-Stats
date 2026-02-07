@@ -1,6 +1,6 @@
 {
   "name": "lean-stats",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "private": true,
   "license": "GPL-3.0-or-later",
   "description": "Lean Stats WordPress plugin assets.",
@@ -17,8 +17,11 @@
   },
   "dependencies": {
     "@wordpress/i18n": "^4.16.0",
+    "d3-scale": "^4.0.2",
+    "flag-icons": "^7.2.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-simple-maps": "^3.0.0"
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.0.0"
