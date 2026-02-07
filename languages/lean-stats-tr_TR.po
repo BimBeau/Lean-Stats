@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T14:34:55+00:00\n"
+"POT-Creation-Date: 2026-02-07T14:46:41+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -182,36 +182,42 @@ msgstr "30 gün"
 msgid "90 days"
 msgstr "90 gün"
 
-#: src/admin/panels/GeolocationPanel.js:6
-#: src/admin/panels/GeolocationPanel.js:16
+#: src/admin/lib/countryNames.js:34 src/admin/lib/countryNames.js:47
+#: src/admin/panels/GeolocationPanel.js:21
+#, fuzzy
+msgid "Unknown country"
+msgstr "Bilinmiyor"
+
+#: src/admin/panels/GeolocationPanel.js:7
+#: src/admin/panels/GeolocationPanel.js:17
 msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:7
-#: src/admin/panels/GeolocationPanel.js:28
+#: src/admin/panels/GeolocationPanel.js:8
+#: src/admin/panels/GeolocationPanel.js:30
 #, fuzzy
 msgid "Top cities"
 msgstr "En çok ziyaret edilen sayfalar"
 
-#: src/admin/panels/GeolocationPanel.js:17
-msgid "Country code"
+#: src/admin/panels/GeolocationPanel.js:18
+msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:19
+#: src/admin/panels/GeolocationPanel.js:20
 #, fuzzy
 msgid "No country data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/panels/GeolocationPanel.js:29
+#: src/admin/panels/GeolocationPanel.js:31
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:31
+#: src/admin/panels/GeolocationPanel.js:33
 #, fuzzy
 msgid "No city data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/panels/GeolocationPanel.js:32
+#: src/admin/panels/GeolocationPanel.js:34
 #: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Bilinmiyor"
@@ -279,7 +285,7 @@ msgstr ""
 
 #: src/admin/panels/SettingsPanel.js:74
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
-#: src/admin/widgets/ReportTableCard.js:245
+#: src/admin/widgets/ReportTableCard.js:252
 msgid "Page"
 msgstr "Sayfa"
 
@@ -570,7 +576,7 @@ msgstr "Ziyaretler"
 #: src/admin/widgets/OverviewKpis.js:96
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
-#: src/admin/widgets/ReportTableCard.js:25
+#: src/admin/widgets/ReportTableCard.js:26
 msgid "Page views"
 msgstr "Sayfa görüntülemeleri"
 
@@ -579,18 +585,18 @@ msgid "Period"
 msgstr "Dönem"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:56
-#: src/admin/widgets/ReportTableCard.js:103
+#: src/admin/widgets/ReportTableCard.js:104
 msgid "Ascending"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:57
-#: src/admin/widgets/ReportTableCard.js:104
+#: src/admin/widgets/ReportTableCard.js:105
 msgid "Descending"
 msgstr ""
 
 #. translators: %s: current sort order label.
 #: src/admin/widgets/ReferrerSourcesTableCard.js:59
-#: src/admin/widgets/ReportTableCard.js:108
+#: src/admin/widgets/ReportTableCard.js:109
 msgid "Toggle sort order"
 msgstr ""
 
@@ -604,7 +610,7 @@ msgid "Referrer sources"
 msgstr "Yönlendiren kaynaklar"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:85
-#: src/admin/widgets/ReportTableCard.js:126
+#: src/admin/widgets/ReportTableCard.js:133
 msgid "Sort by"
 msgstr ""
 
@@ -614,7 +620,7 @@ msgid "Source category"
 msgstr "Kaynak kategorisi"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:119
-#: src/admin/widgets/ReportTableCard.js:171
+#: src/admin/widgets/ReportTableCard.js:178
 msgid "Rows"
 msgstr ""
 
@@ -629,60 +635,60 @@ msgid "Loading referrer sources…"
 msgstr "Yönlendiren kaynaklar"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:174
-#: src/admin/widgets/ReportTableCard.js:228
+#: src/admin/widgets/ReportTableCard.js:235
 msgid "Previous page"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:176
-#: src/admin/widgets/ReportTableCard.js:230
+#: src/admin/widgets/ReportTableCard.js:237
 msgid "Previous"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:184
-#: src/admin/widgets/ReportTableCard.js:238
+#: src/admin/widgets/ReportTableCard.js:245
 #, fuzzy
 msgid "Next page"
 msgstr "Çıkış sayfaları"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:186
-#: src/admin/widgets/ReportTableCard.js:240
+#: src/admin/widgets/ReportTableCard.js:247
 msgid "Next"
 msgstr ""
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:191
-#: src/admin/widgets/ReportTableCard.js:245
+#: src/admin/widgets/ReportTableCard.js:252
 msgid "of"
 msgstr "/"
 
 #: src/admin/widgets/ReferrerSourcesTableCard.js:197
-#: src/admin/widgets/ReportTableCard.js:251
+#: src/admin/widgets/ReportTableCard.js:258
 msgid "items"
 msgstr "öğe"
 
-#: src/admin/widgets/ReportTableCard.js:37
-#: src/admin/widgets/ReportTableCard.js:145
+#: src/admin/widgets/ReportTableCard.js:38
+#: src/admin/widgets/ReportTableCard.js:152
 msgid "Title"
 msgstr "Başlık"
 
 #. translators: %s: active first-column label.
-#: src/admin/widgets/ReportTableCard.js:106
+#: src/admin/widgets/ReportTableCard.js:107
 msgid "label"
 msgstr "etiket"
 
 #. translators: %s: table title.
-#: src/admin/widgets/ReportTableCard.js:113
+#: src/admin/widgets/ReportTableCard.js:114
 msgid "Table"
 msgstr ""
 
-#: src/admin/widgets/ReportTableCard.js:140
+#: src/admin/widgets/ReportTableCard.js:147
 msgid "Display"
 msgstr "Göster"
 
-#: src/admin/widgets/ReportTableCard.js:143
+#: src/admin/widgets/ReportTableCard.js:150
 msgid "URL"
 msgstr ""
 
-#: src/admin/widgets/ReportTableCard.js:190
+#: src/admin/widgets/ReportTableCard.js:197
 #, fuzzy
 msgid "Loading"
 msgstr "Yükleniyor…"
