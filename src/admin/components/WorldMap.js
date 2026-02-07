@@ -1,7 +1,6 @@
 import { useMemo } from "@wordpress/element";
 import { __, sprintf } from "@wordpress/i18n";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { scaleQuantize } from "d3-scale";
+import { ResponsiveChoropleth } from "@nivo/geo";
 
 import useAdminEndpoint from "../api/useAdminEndpoint";
 import DataState from "./DataState";
@@ -33,6 +32,62 @@ const normalizeCountryCode = (code) => {
   return normalized;
 };
 
+const resolveFeatureId = (feature) => {
+  const isoA2 = normalizeCountryCode(feature?.properties?.ISO_A2 || "");
+  if (isoA2 && !isUnknownCountryCode(isoA2)) {
+    return isoA2;
+  }
+
+  const isoA3 = normalizeCountryCode(feature?.properties?.ISO_A3 || "");
+  if (isoA3 && !isUnknownCountryCode(isoA3)) {
+    return isoA3;
+  }
+
+  return "";
+};
+
+export const WorldChoropleth = ({
+  data,
+  geoFeatures,
+  maxValue,
+  getTooltipLabel,
+}) => (
+  <ResponsiveChoropleth
+    data={data}
+    features={geoFeatures}
+    featureId={resolveFeatureId}
+    margin={{ top: 10, right: 10, bottom: 40, left: 10 }}
+    colors={COLOR_RANGE}
+    domain={[0, maxValue || 0]}
+    valueScale={{ type: "linear" }}
+    unknownColor={NO_DATA_COLOR}
+    borderWidth={0.5}
+    borderColor="#ffffff"
+    projectionType="equalEarth"
+    projectionScale={120}
+    projectionTranslation={[0.5, 0.6]}
+    enableGraticule={false}
+    tooltip={({ feature }) => (
+      <div className="ls-world-map__tooltip">{getTooltipLabel(feature)}</div>
+    )}
+    legends={[
+      {
+        anchor: "bottom-left",
+        direction: "column",
+        justify: false,
+        translateX: 10,
+        translateY: -10,
+        itemsSpacing: 6,
+        itemWidth: 90,
+        itemHeight: 16,
+        itemDirection: "left-to-right",
+        itemTextColor: "#50575e",
+        symbolSize: 12,
+      },
+    ]}
+  />
+);
+
 const WorldMap = ({
   range,
   endpoint = "/geo-countries",
@@ -53,9 +108,28 @@ const WorldMap = ({
   );
 
   const items = data?.items || [];
+  const geoFeatures = worldGeo?.features || [];
 
-  const { hitLookup, totalHits, maxHits } = useMemo(() => {
+  const isoA3ToA2 = useMemo(() => {
     const lookup = new Map();
+    geoFeatures.forEach((feature) => {
+      const isoA2 = normalizeCountryCode(feature?.properties?.ISO_A2 || "");
+      const isoA3 = normalizeCountryCode(feature?.properties?.ISO_A3 || "");
+      if (
+        isoA2 &&
+        isoA3 &&
+        !isUnknownCountryCode(isoA2) &&
+        !isUnknownCountryCode(isoA3)
+      ) {
+        lookup.set(isoA3, isoA2);
+      }
+    });
+    return lookup;
+  }, [geoFeatures]);
+
+  const { hitLookup, totalHits, maxHits, chartData } = useMemo(() => {
+    const lookup = new Map();
+    const dataLookup = new Map();
     let total = 0;
     let max = 0;
 
@@ -71,47 +145,38 @@ const WorldMap = ({
         return;
       }
 
+      let resolvedCode = code;
+      if (code.length === 3 && isoA3ToA2.has(code)) {
+        resolvedCode = isoA3ToA2.get(code);
+      }
+
       total += hits;
-      max = Math.max(max, hits);
-      lookup.set(code, hits);
+      const currentValue = dataLookup.get(resolvedCode) || 0;
+      const nextValue = currentValue + hits;
+      dataLookup.set(resolvedCode, nextValue);
+      lookup.set(resolvedCode, nextValue);
+      max = Math.max(max, nextValue);
     });
 
     return {
       hitLookup: lookup,
       totalHits: total,
       maxHits: max,
+      chartData: Array.from(dataLookup, ([id, value]) => ({
+        id,
+        value,
+      })),
     };
-  }, [items]);
+  }, [items, isoA3ToA2]);
 
   const hasData = totalHits > 0;
   const formatHits = (value) => new Intl.NumberFormat().format(value);
 
-  const colorScale = useMemo(() => {
-    if (!hasData || maxHits <= 0) {
-      return null;
-    }
-
-    return scaleQuantize().domain([1, maxHits]).range(COLOR_RANGE);
-  }, [hasData, maxHits]);
-
-  const getFill = (geo) => {
-    const rawCode = geo?.properties?.ISO_A2 || "";
-    const code = normalizeCountryCode(rawCode);
-    const hits = code ? hitLookup.get(code) || 0 : 0;
-
-    if (!hasData || hits <= 0 || !colorScale) {
-      return NO_DATA_COLOR;
-    }
-
-    return colorScale(hits);
-  };
-
-  const getTooltip = (geo) => {
-    const rawCode = geo?.properties?.ISO_A2 || "";
-    const code = normalizeCountryCode(rawCode);
+  const getTooltip = (feature) => {
+    const code = resolveFeatureId(feature);
     const isUnknown = !code || isUnknownCountryCode(code);
     const countryName = !isUnknown
-      ? geo?.properties?.NAME_EN || geo?.properties?.NAME || ""
+      ? feature?.properties?.NAME_EN || feature?.properties?.NAME || ""
       : "";
     const resolvedName = countryName || unknownCountryLabel;
     const hits = !isUnknown && code ? hitLookup.get(code) || 0 : 0;
@@ -146,29 +211,12 @@ const WorldMap = ({
       />
       {!isLoading && !error && hasData && (
         <div className="ls-world-map">
-          <ComposableMap
-            projectionConfig={{ scale: 145 }}
-            width={900}
-            height={440}
-          >
-            <Geographies geography={worldGeo}>
-              {({ geographies }) =>
-                geographies.map((geo) => (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={getFill(geo)}
-                    stroke="#ffffff"
-                    strokeWidth={0.5}
-                    role="img"
-                    aria-label={getTooltip(geo)}
-                  >
-                    <title>{getTooltip(geo)}</title>
-                  </Geography>
-                ))
-              }
-            </Geographies>
-          </ComposableMap>
+          <WorldChoropleth
+            data={chartData}
+            geoFeatures={geoFeatures}
+            maxValue={maxHits}
+            getTooltipLabel={getTooltip}
+          />
         </div>
       )}
     </LsCard>

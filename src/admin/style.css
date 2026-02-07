@@ -315,13 +315,24 @@
 
 .ls-world-map {
     width: 100%;
-    overflow-x: auto;
+    min-height: 320px;
+    height: 320px;
+    position: relative;
 }
 
 .ls-world-map svg {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+}
+
+.ls-world-map__tooltip {
+    background: #1d2327;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .ls-country-flag--unknown {
