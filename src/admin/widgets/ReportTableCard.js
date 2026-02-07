@@ -23,6 +23,7 @@ const ReportTableCard = ({
   emptyLabel,
   labelFallback,
   formatLabel,
+  renderLabel,
   metricLabel = __("Page views", "lean-stats"),
   metricKey = "hits",
   metricValueKey = "hits",
@@ -119,8 +120,9 @@ const ReportTableCard = ({
     const resolvedLabel = formattedLabel || labelFallback;
 
     return {
-      key: `${resolvedLabel}-${index}`,
+      key: `${rawLabel || resolvedLabel}-${index}`,
       label: resolvedLabel,
+      item,
       pageTitle: item.page_title || "",
       value: item?.[metricValueKey] ?? 0,
     };
@@ -212,9 +214,15 @@ const ReportTableCard = ({
               {rows.map((row) => (
                 <tr key={row.key}>
                   <td>
-                    {supportsPageLabelToggle && pageLabelDisplay === "title"
-                      ? truncatePageTitle(row.pageTitle || row.label)
-                      : row.label}
+                    {(() => {
+                      const baseLabel =
+                        supportsPageLabelToggle && pageLabelDisplay === "title"
+                          ? truncatePageTitle(row.pageTitle || row.label)
+                          : row.label;
+                      return renderLabel
+                        ? renderLabel(baseLabel, row.item)
+                        : baseLabel;
+                    })()}
                   </td>
                   <td>{row.value}</td>
                 </tr>
