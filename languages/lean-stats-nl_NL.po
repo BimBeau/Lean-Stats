@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T14:51:25+00:00\n"
+"POT-Creation-Date: 2026-02-07T16:17:57+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,6 +170,39 @@ msgstr "Laden…"
 msgid "Loading: %s"
 msgstr "Laden: %s"
 
+#: src/admin/components/WorldMap.js:40 src/admin/lib/countryNames.js:56
+#: src/admin/lib/countryNames.js:73 src/admin/panels/GeoCountriesPanel.js:22
+#, fuzzy
+msgid "Unknown country"
+msgstr "Onbekend"
+
+#. translators: %s: hit count.
+#: src/admin/components/WorldMap.js:122
+#, fuzzy
+msgid "%s visits"
+msgstr "%s weergaven"
+
+#: src/admin/components/WorldMap.js:125
+#: src/admin/panels/GeoCountriesPanel.js:42
+msgid "No data"
+msgstr ""
+
+#. translators: 1: country name, 2: value label.
+#. translators: 1: country name, 2: no data label.
+#: src/admin/components/WorldMap.js:129
+#: src/admin/panels/GeoCountriesPanel.js:40
+msgid "%1$s — %2$s"
+msgstr ""
+
+#: src/admin/components/WorldMap.js:137
+msgid "World map"
+msgstr ""
+
+#: src/admin/components/WorldMap.js:145
+#, fuzzy
+msgid "Loading world map"
+msgstr "Fout bij laden."
+
 #: src/admin/constants/index.js:33
 msgid "7 days"
 msgstr "7 dagen"
@@ -182,53 +215,66 @@ msgstr "30 dagen"
 msgid "90 days"
 msgstr "90 dagen"
 
-#: src/admin/lib/countryNames.js:56 src/admin/lib/countryNames.js:69
-#: src/admin/panels/GeolocationPanel.js:44
-#, fuzzy
-msgid "Unknown country"
-msgstr "Onbekend"
+#: src/admin/panels/GeoCountriesPanel.js:18
+msgid "No country data available. Geolocation aggregation may be disabled."
+msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:11
-#: src/admin/panels/GeolocationPanel.js:40
+#. translators: 1: country name, 2: hit count.
+#: src/admin/panels/GeoCountriesPanel.js:34
+msgid "%1$s — %2$s visits"
+msgstr ""
+
+#: src/admin/panels/GeoCountriesPanel.js:45
+msgid "Unknown country flag"
+msgstr ""
+
+#. translators: %s: country name.
+#: src/admin/panels/GeoCountriesPanel.js:48
+msgid "Flag of %s"
+msgstr ""
+
+#: src/admin/panels/GeoCountriesPanel.js:86
+#: src/admin/panels/GeolocationPanel.js:13
 msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:12
-#: src/admin/panels/GeolocationPanel.js:54
+#: src/admin/panels/GeoCountriesPanel.js:87
+msgid "Country"
+msgstr ""
+
+#: src/admin/panels/GeoCountriesPanel.js:94
+#: src/admin/panels/OverviewPanel.js:40 src/admin/widgets/OverviewKpis.js:89
+#: src/admin/widgets/ReferrerSourcesTableCard.js:89
+#: src/admin/widgets/ReferrerSourcesTableCard.js:150
+msgid "Visits"
+msgstr "Bezoeken"
+
+#: src/admin/panels/GeolocationPanel.js:7
+msgid "No city data available. Geolocation aggregation may be disabled."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:27
 #, fuzzy
 msgid "Top cities"
 msgstr "Top pagina's"
 
-#: src/admin/panels/GeolocationPanel.js:41
-msgid "Country"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:43
-#, fuzzy
-msgid "No country data available."
-msgstr "Geen apparaatgegevens beschikbaar."
-
-#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:28
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:57
-#, fuzzy
-msgid "No city data available."
-msgstr "Geen apparaatgegevens beschikbaar."
-
-#: src/admin/panels/GeolocationPanel.js:58
+#: src/admin/panels/GeolocationPanel.js:31
 #: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: src/admin/panels/OverviewPanel.js:26 src/admin/panels/TopPagesPanel.js:9
-#: src/admin/panels/TopPagesPanel.js:20 src/admin/panels/TopPagesPanel.js:30
-#: src/admin/panels/TopPagesPanel.js:44
+#: src/admin/panels/OverviewPanel.js:26 src/admin/panels/TopPagesPanel.js:14
+#: src/admin/panels/TopPagesPanel.js:26 src/admin/panels/TopPagesPanel.js:37
+#: src/admin/panels/TopPagesPanel.js:52
 msgid "Url"
 msgstr ""
 
-#: src/admin/panels/OverviewPanel.js:29 src/admin/panels/TopPagesPanel.js:11
+#: src/admin/panels/OverviewPanel.js:29 src/admin/panels/TopPagesPanel.js:17
 msgid "No popular pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
@@ -485,56 +531,56 @@ msgstr ""
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:8 src/admin/panels/TopPagesPanel.js:57
+#: src/admin/panels/TopPagesPanel.js:13 src/admin/panels/TopPagesPanel.js:68
 msgid "Top pages"
 msgstr "Top pagina's"
 
-#: src/admin/panels/TopPagesPanel.js:19
+#: src/admin/panels/TopPagesPanel.js:25
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:22
+#: src/admin/panels/TopPagesPanel.js:29
 #, fuzzy
 msgid "No missing pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/panels/TopPagesPanel.js:29
+#: src/admin/panels/TopPagesPanel.js:36
 #, fuzzy
 msgid "Entry pages (approx.)"
 msgstr "Ingangen"
 
-#: src/admin/panels/TopPagesPanel.js:32
+#: src/admin/panels/TopPagesPanel.js:40
 #, fuzzy
 msgid "No entry pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/panels/TopPagesPanel.js:34
+#: src/admin/panels/TopPagesPanel.js:42
 msgid "Entries (approx.)"
 msgstr "Ingangen"
 
-#: src/admin/panels/TopPagesPanel.js:43
+#: src/admin/panels/TopPagesPanel.js:51
 #, fuzzy
 msgid "Exit pages (approx.)"
 msgstr "Uitgangen"
 
-#: src/admin/panels/TopPagesPanel.js:46
+#: src/admin/panels/TopPagesPanel.js:55
 #, fuzzy
 msgid "No exit pages available."
 msgstr "Geen populaire pagina beschikbaar."
 
-#: src/admin/panels/TopPagesPanel.js:48
+#: src/admin/panels/TopPagesPanel.js:57
 msgid "Exits (approx.)"
 msgstr "Uitgangen"
 
-#: src/admin/panels/TopPagesPanel.js:58
+#: src/admin/panels/TopPagesPanel.js:69
 msgid "Entry pages"
 msgstr "Landingspagina's"
 
-#: src/admin/panels/TopPagesPanel.js:59
+#: src/admin/panels/TopPagesPanel.js:70
 msgid "Exit pages"
 msgstr "Uitstappagina's"
 
-#: src/admin/panels/TopPagesPanel.js:62 src/admin/widgets/OverviewKpis.js:110
+#: src/admin/panels/TopPagesPanel.js:73 src/admin/widgets/OverviewKpis.js:110
 msgid "Pages not found (404)"
 msgstr "Niet gevonden pagina's"
 
@@ -569,14 +615,7 @@ msgstr "Geen apparaatgegevens beschikbaar."
 msgid "Loading KPIs…"
 msgstr "Laden van KPI's…"
 
-#: src/admin/widgets/OverviewKpis.js:89
-msgid "Visits"
-msgstr "Bezoeken"
-
-#: src/admin/widgets/OverviewKpis.js:96
-#: src/admin/widgets/ReferrerSourcesTableCard.js:89
-#: src/admin/widgets/ReferrerSourcesTableCard.js:150
-#: src/admin/widgets/ReportTableCard.js:27
+#: src/admin/widgets/OverviewKpis.js:96 src/admin/widgets/ReportTableCard.js:27
 msgid "Page views"
 msgstr "Paginaweergaven"
 
@@ -771,9 +810,6 @@ msgstr "Lijngrafiek van dagelijkse paginaweergaven"
 
 #~ msgid "Anonymous sessions aggregated over the selected period."
 #~ msgstr "Anonieme sessies geaggregeerd over de periode."
-
-#~ msgid "%s views"
-#~ msgstr "%s weergaven"
 
 #~ msgid "Raw logs store granular view details while debug mode is enabled."
 #~ msgstr ""

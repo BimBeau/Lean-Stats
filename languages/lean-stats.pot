@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lean Stats 1.9.0\n"
+"Project-Id-Version: Lean Stats 1.12.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-07T14:51:27+00:00\n"
+"POT-Creation-Date: 2026-02-07T16:17:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-stats\n"
@@ -181,6 +181,40 @@ msgstr ""
 msgid "Loading: %s"
 msgstr ""
 
+#: src/admin/components/WorldMap.js:40
+#: src/admin/lib/countryNames.js:56
+#: src/admin/lib/countryNames.js:73
+#: src/admin/panels/GeoCountriesPanel.js:22
+msgid "Unknown country"
+msgstr ""
+
+#. translators: %s: hit count.
+#: src/admin/components/WorldMap.js:122
+#, js-format
+msgid "%s visits"
+msgstr ""
+
+#: src/admin/components/WorldMap.js:125
+#: src/admin/panels/GeoCountriesPanel.js:42
+msgid "No data"
+msgstr ""
+
+#. translators: 1: country name, 2: value label.
+#. translators: 1: country name, 2: no data label.
+#: src/admin/components/WorldMap.js:129
+#: src/admin/panels/GeoCountriesPanel.js:40
+#, js-format
+msgid "%1$s — %2$s"
+msgstr ""
+
+#: src/admin/components/WorldMap.js:137
+msgid "World map"
+msgstr ""
+
+#: src/admin/components/WorldMap.js:145
+msgid "Loading world map"
+msgstr ""
+
 #: src/admin/constants/index.js:33
 msgid "7 days"
 msgstr ""
@@ -193,54 +227,72 @@ msgstr ""
 msgid "90 days"
 msgstr ""
 
-#: src/admin/lib/countryNames.js:56
-#: src/admin/lib/countryNames.js:69
-#: src/admin/panels/GeolocationPanel.js:44
-msgid "Unknown country"
+#: src/admin/panels/GeoCountriesPanel.js:18
+msgid "No country data available. Geolocation aggregation may be disabled."
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:11
-#: src/admin/panels/GeolocationPanel.js:40
+#. translators: 1: country name, 2: hit count.
+#: src/admin/panels/GeoCountriesPanel.js:34
+#, js-format
+msgid "%1$s — %2$s visits"
+msgstr ""
+
+#: src/admin/panels/GeoCountriesPanel.js:45
+msgid "Unknown country flag"
+msgstr ""
+
+#. translators: %s: country name.
+#: src/admin/panels/GeoCountriesPanel.js:48
+#, js-format
+msgid "Flag of %s"
+msgstr ""
+
+#: src/admin/panels/GeoCountriesPanel.js:86
+#: src/admin/panels/GeolocationPanel.js:13
 msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:12
-#: src/admin/panels/GeolocationPanel.js:54
-msgid "Top cities"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:41
+#: src/admin/panels/GeoCountriesPanel.js:87
 msgid "Country"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:43
-msgid "No country data available."
+#: src/admin/panels/GeoCountriesPanel.js:94
+#: src/admin/panels/OverviewPanel.js:40
+#: src/admin/widgets/OverviewKpis.js:89
+#: src/admin/widgets/ReferrerSourcesTableCard.js:89
+#: src/admin/widgets/ReferrerSourcesTableCard.js:150
+msgid "Visits"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:55
+#: src/admin/panels/GeolocationPanel.js:7
+msgid "No city data available. Geolocation aggregation may be disabled."
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:14
+#: src/admin/panels/GeolocationPanel.js:27
+msgid "Top cities"
+msgstr ""
+
+#: src/admin/panels/GeolocationPanel.js:28
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:57
-msgid "No city data available."
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:58
+#: src/admin/panels/GeolocationPanel.js:31
 #: src/admin/panels/SearchTermsPanel.js:11
 #: src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr ""
 
 #: src/admin/panels/OverviewPanel.js:26
-#: src/admin/panels/TopPagesPanel.js:9
-#: src/admin/panels/TopPagesPanel.js:20
-#: src/admin/panels/TopPagesPanel.js:30
-#: src/admin/panels/TopPagesPanel.js:44
+#: src/admin/panels/TopPagesPanel.js:14
+#: src/admin/panels/TopPagesPanel.js:26
+#: src/admin/panels/TopPagesPanel.js:37
+#: src/admin/panels/TopPagesPanel.js:52
 msgid "Url"
 msgstr ""
 
 #: src/admin/panels/OverviewPanel.js:29
-#: src/admin/panels/TopPagesPanel.js:11
+#: src/admin/panels/TopPagesPanel.js:17
 msgid "No popular pages available."
 msgstr ""
 
@@ -483,52 +535,52 @@ msgstr ""
 msgid "Purge now"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:8
-#: src/admin/panels/TopPagesPanel.js:57
+#: src/admin/panels/TopPagesPanel.js:13
+#: src/admin/panels/TopPagesPanel.js:68
 msgid "Top pages"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:19
+#: src/admin/panels/TopPagesPanel.js:25
 msgid "Top 404s"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:22
+#: src/admin/panels/TopPagesPanel.js:29
 msgid "No missing pages available."
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:29
+#: src/admin/panels/TopPagesPanel.js:36
 msgid "Entry pages (approx.)"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:32
+#: src/admin/panels/TopPagesPanel.js:40
 msgid "No entry pages available."
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:34
+#: src/admin/panels/TopPagesPanel.js:42
 msgid "Entries (approx.)"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:43
+#: src/admin/panels/TopPagesPanel.js:51
 msgid "Exit pages (approx.)"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:46
+#: src/admin/panels/TopPagesPanel.js:55
 msgid "No exit pages available."
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:48
+#: src/admin/panels/TopPagesPanel.js:57
 msgid "Exits (approx.)"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:58
+#: src/admin/panels/TopPagesPanel.js:69
 msgid "Entry pages"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:59
+#: src/admin/panels/TopPagesPanel.js:70
 msgid "Exit pages"
 msgstr ""
 
-#: src/admin/panels/TopPagesPanel.js:62
+#: src/admin/panels/TopPagesPanel.js:73
 #: src/admin/widgets/OverviewKpis.js:110
 msgid "Pages not found (404)"
 msgstr ""
@@ -563,13 +615,7 @@ msgstr ""
 msgid "Loading KPIs…"
 msgstr ""
 
-#: src/admin/widgets/OverviewKpis.js:89
-msgid "Visits"
-msgstr ""
-
 #: src/admin/widgets/OverviewKpis.js:96
-#: src/admin/widgets/ReferrerSourcesTableCard.js:89
-#: src/admin/widgets/ReferrerSourcesTableCard.js:150
 #: src/admin/widgets/ReportTableCard.js:27
 msgid "Page views"
 msgstr ""
