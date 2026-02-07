@@ -1,12 +1,18 @@
 import { TabPanel } from "@wordpress/components";
+import { useMemo } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import ReportPanel from "./ReportPanel";
+import useSharedRangePreset from "../hooks/useSharedRangePreset";
+import { getRangeFromPreset } from "../lib/date";
+import PeriodFilter from "../widgets/PeriodFilter";
+import ReportTableCard from "../widgets/ReportTableCard";
+import TimeseriesChart from "../widgets/TimeseriesChart";
 
-const TopPagesReportPanel = () => (
-  <ReportPanel
+const TopPagesReportPanel = ({ range }) => (
+  <ReportTableCard
     title={__("Top pages", "lean-stats")}
     labelHeader={__("Url", "lean-stats")}
+    range={range}
     endpoint="/top-pages"
     emptyLabel={__("No popular pages available.", "lean-stats")}
     labelFallback="/"
@@ -14,20 +20,22 @@ const TopPagesReportPanel = () => (
   />
 );
 
-const NotFoundPanel = () => (
-  <ReportPanel
+const NotFoundPanel = ({ range }) => (
+  <ReportTableCard
     title={__("Top 404s", "lean-stats")}
     labelHeader={__("Url", "lean-stats")}
+    range={range}
     endpoint="/404s"
     emptyLabel={__("No missing pages available.", "lean-stats")}
     labelFallback="/"
   />
 );
 
-const EntryPagesPanel = () => (
-  <ReportPanel
+const EntryPagesPanel = ({ range }) => (
+  <ReportTableCard
     title={__("Entry pages (approx.)", "lean-stats")}
     labelHeader={__("Url", "lean-stats")}
+    range={range}
     endpoint="/entry-pages"
     emptyLabel={__("No entry pages available.", "lean-stats")}
     labelFallback="/"
@@ -38,10 +46,11 @@ const EntryPagesPanel = () => (
   />
 );
 
-const ExitPagesPanel = () => (
-  <ReportPanel
+const ExitPagesPanel = ({ range }) => (
+  <ReportTableCard
     title={__("Exit pages (approx.)", "lean-stats")}
     labelHeader={__("Url", "lean-stats")}
+    range={range}
     endpoint="/exit-pages"
     emptyLabel={__("No exit pages available.", "lean-stats")}
     labelFallback="/"
@@ -53,6 +62,8 @@ const ExitPagesPanel = () => (
 );
 
 const TopPagesPanel = () => {
+  const [rangePreset, setRangePreset] = useSharedRangePreset();
+  const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
   const pagesTabs = [
     { name: "top-pages", title: __("Top pages", "lean-stats") },
     { name: "entry-pages", title: __("Entry pages", "lean-stats") },
@@ -64,20 +75,26 @@ const TopPagesPanel = () => {
   ];
 
   return (
-    <TabPanel className="ls-pages-tabs" tabs={pagesTabs}>
-      {(tab) => {
-        if (tab.name === "entry-pages") {
-          return <EntryPagesPanel />;
-        }
-        if (tab.name === "exit-pages") {
-          return <ExitPagesPanel />;
-        }
-        if (tab.name === "not-found") {
-          return <NotFoundPanel />;
-        }
-        return <TopPagesReportPanel />;
-      }}
-    </TabPanel>
+    <div className="ls-report-panel">
+      <div className="ls-report-panel__header">
+        <PeriodFilter value={rangePreset} onChange={setRangePreset} />
+      </div>
+      <TimeseriesChart range={range} />
+      <TabPanel className="ls-pages-tabs" tabs={pagesTabs}>
+        {(tab) => {
+          if (tab.name === "entry-pages") {
+            return <EntryPagesPanel range={range} />;
+          }
+          if (tab.name === "exit-pages") {
+            return <ExitPagesPanel range={range} />;
+          }
+          if (tab.name === "not-found") {
+            return <NotFoundPanel range={range} />;
+          }
+          return <TopPagesReportPanel range={range} />;
+        }}
+      </TabPanel>
+    </div>
   );
 };
 
