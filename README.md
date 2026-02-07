@@ -70,7 +70,7 @@ Legal requirements vary by jurisdiction. Site owners remain responsible for comp
 
 - Native WordPress admin interface
 - Built with `@wordpress/components`
-- Dashboard with key metrics and charts
+- Dashboard with key metrics and charts that display visits and page views as dual lines with tooltips
 - Settings for privacy options, exclusions, retention, and debug mode
 - Optional geolocation via MaxMind (no IP storage)
 
