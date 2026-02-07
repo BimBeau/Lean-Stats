@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T17:14:48+00:00\n"
+"POT-Creation-Date: 2026-02-07T17:19:16+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -246,6 +246,7 @@ msgstr "Pays"
 #: src/admin/panels/OverviewPanel.js:40 src/admin/widgets/OverviewKpis.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:89
 #: src/admin/widgets/ReferrerSourcesTableCard.js:150
+#: src/admin/widgets/TimeseriesChart.js:174
 msgid "Visits"
 msgstr "Visites"
 
@@ -618,6 +619,7 @@ msgid "Loading KPIs…"
 msgstr "Chargement des indicateurs…"
 
 #: src/admin/widgets/OverviewKpis.js:96 src/admin/widgets/ReportTableCard.js:27
+#: src/admin/widgets/TimeseriesChart.js:165
 msgid "Page views"
 msgstr "Pages vues"
 
@@ -735,35 +737,47 @@ msgstr ""
 msgid "Loading"
 msgstr "Chargement…"
 
-#: src/admin/widgets/TimeseriesChart.js:79
+#: src/admin/widgets/TimeseriesChart.js:80
 #, fuzzy
 msgid "page view"
 msgid_plural "page views"
 msgstr[0] "Pages vues"
 msgstr[1] "Pages vues"
 
-#: src/admin/widgets/TimeseriesChart.js:86
+#: src/admin/widgets/TimeseriesChart.js:87
 #, fuzzy
 msgid "visit"
 msgid_plural "visits"
 msgstr[0] "Visites"
 msgstr[1] "Visites"
 
+#. translators: 1: formatted date, 2: page views count, 3: visits count
+#: src/admin/widgets/TimeseriesChart.js:96
+msgid "%1$s: %2$s, %3$s"
+msgstr ""
+
+#. translators: 1: page views count, 2: visits count
 #: src/admin/widgets/TimeseriesChart.js:137
-msgid "Daily page views"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#: src/admin/widgets/TimeseriesChart.js:148
+#, fuzzy
+msgid "Daily page views and visits"
 msgstr "Pages vues quotidiennes"
 
-#: src/admin/widgets/TimeseriesChart.js:142
+#: src/admin/widgets/TimeseriesChart.js:153
 msgid "No data available for this period."
 msgstr "Aucune donnée disponible pour cette période."
 
-#: src/admin/widgets/TimeseriesChart.js:143
+#: src/admin/widgets/TimeseriesChart.js:154
 msgid "Loading chart…"
 msgstr "Chargement du graphique…"
 
-#: src/admin/widgets/TimeseriesChart.js:149
-#: src/admin/widgets/TimeseriesChart.js:163
-msgid "Daily page views line chart"
+#: src/admin/widgets/TimeseriesChart.js:180
+#: src/admin/widgets/TimeseriesChart.js:194
+#, fuzzy
+msgid "Daily page views and visits line chart"
 msgstr "Courbe quotidienne des pages vues"
 
 #~ msgid "%s : %s"
