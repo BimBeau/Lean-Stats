@@ -1,5 +1,5 @@
 import { useMemo } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { scaleQuantize } from "d3-scale";
 
@@ -11,14 +11,14 @@ import { isUnknownCountryCode } from "../lib/countryNames";
 import worldGeo from "../data/world-countries.geojson";
 
 const COLOR_RANGE = [
-  "#e7f0fa",
-  "#c8ddf0",
-  "#9fc4e4",
   "#6fa3d2",
-  "#3f82bf",
-  "#1f5fa8",
+  "#4f8ac4",
+  "#3371b5",
+  "#245a98",
+  "#1a467a",
+  "#10345c",
 ];
-const NO_DATA_COLOR = "#f2f2f2";
+const NO_DATA_COLOR = "#8c8c8c";
 
 const normalizeCountryCode = (code) => {
   if (typeof code !== "string") {
@@ -79,6 +79,7 @@ const WorldMap = ({ range, endpoint = "/geo-countries", emptyLabel }) => {
   }, [items]);
 
   const hasData = totalHits > 0;
+  const formatHits = (value) => new Intl.NumberFormat().format(value);
 
   const colorScale = useMemo(() => {
     if (!hasData || maxHits <= 0) {
@@ -98,6 +99,32 @@ const WorldMap = ({ range, endpoint = "/geo-countries", emptyLabel }) => {
     }
 
     return colorScale(hits);
+  };
+
+  const getTooltip = (geo) => {
+    const rawCode = geo?.properties?.ISO_A2 || "";
+    const code = normalizeCountryCode(rawCode);
+    const isUnknown = !code || isUnknownCountryCode(code);
+    const countryName = !isUnknown
+      ? geo?.properties?.NAME_EN || geo?.properties?.NAME || ""
+      : "";
+    const resolvedName = countryName || __("Unknown country", "lean-stats");
+    const hits = !isUnknown && code ? hitLookup.get(code) || 0 : 0;
+    const valueLabel =
+      hits > 0
+        ? sprintf(
+            /* translators: %s: hit count. */
+            __("%s visits", "lean-stats"),
+            formatHits(hits),
+          )
+        : __("No data", "lean-stats");
+
+    return sprintf(
+      /* translators: 1: country name, 2: value label. */
+      __("%1$s — %2$s", "lean-stats"),
+      resolvedName,
+      valueLabel,
+    );
   };
 
   return (
@@ -128,7 +155,11 @@ const WorldMap = ({ range, endpoint = "/geo-countries", emptyLabel }) => {
                     fill={getFill(geo)}
                     stroke="#ffffff"
                     strokeWidth={0.5}
-                  />
+                    role="img"
+                    aria-label={getTooltip(geo)}
+                  >
+                    <title>{getTooltip(geo)}</title>
+                  </Geography>
                 ))
               }
             </Geographies>
