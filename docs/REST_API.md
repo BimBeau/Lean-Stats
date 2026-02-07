@@ -118,6 +118,46 @@ Parameters:
 - `orderby` (`hits` or `label`, optional, default `hits`)
 - `order` (`asc` or `desc`, optional, default `desc`)
 
+#### GET `/geo-countries`
+
+Returns paginated hit totals by country code.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits` or `country`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
+
+Returned fields:
+
+- `items[].label` (country code)
+- `items[].country_code` (country code)
+- `items[].hits` (integer)
+
+#### GET `/geo-cities`
+
+Returns paginated hit totals by city, grouped by country and region.
+
+Parameters:
+
+- `start` (YYYY-MM-DD, optional)
+- `end` (YYYY-MM-DD, optional)
+- `page` (integer, optional, default 1)
+- `per_page` (integer, optional, default 10, max 100)
+- `orderby` (`hits`, `city`, `region`, or `country`, optional, default `hits`)
+- `order` (`asc` or `desc`, optional, default `desc`)
+
+Returned fields:
+
+- `items[].label` (city label)
+- `items[].city_name` (string)
+- `items[].region_code` (string)
+- `items[].country_code` (string)
+- `items[].hits` (integer)
+
 #### GET `/entry-pages`
 
 Returns paginated entry totals by page path.
