@@ -4,6 +4,11 @@ import ReportPanel from "./ReportPanel";
 import GeoCountriesPanel from "./GeoCountriesPanel";
 
 const GeolocationPanel = () => {
+  const emptyCityLabel = __(
+    "No city data available. Geolocation aggregation may be disabled.",
+    "lean-stats",
+  );
+
   const tabs = [
     { name: "countries", title: __("Top countries", "lean-stats") },
     { name: "cities", title: __("Top cities", "lean-stats") },
@@ -22,7 +27,7 @@ const GeolocationPanel = () => {
               title={__("Top cities", "lean-stats")}
               labelHeader={__("City", "lean-stats")}
               endpoint="/geo-cities"
-              emptyLabel={__("No city data available.", "lean-stats")}
+              emptyLabel={emptyCityLabel}
               labelFallback={__("Unknown", "lean-stats")}
             />
           );
