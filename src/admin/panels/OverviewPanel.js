@@ -19,7 +19,7 @@ const OverviewPanel = () => {
         <PeriodFilter value={rangePreset} onChange={setRangePreset} />
         <OverviewKpis range={range} />
       </div>
-      <TimeseriesChart range={range} />
+      <TimeseriesChart range={range} metric="visits" />
       <div className="ls-overview__grid">
         <ReportTableCard
           title={__("Pages", "lean-stats")}

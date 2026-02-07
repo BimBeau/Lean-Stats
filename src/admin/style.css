@@ -125,7 +125,13 @@
     display: grid;
     gap: var(--lean-stats-gap-md);
     --ls-timeseries-visits-color: var(--ls-text-2, #2271b1);
-    --ls-timeseries-visits-gradient-opacity: 0.18;
+    --ls-timeseries-line-color: var(--ls-border, #2271b1);
+    --ls-timeseries-gradient-opacity: 0.35;
+}
+
+.ls-timeseries--visits {
+    --ls-timeseries-line-color: var(--ls-timeseries-visits-color);
+    --ls-timeseries-gradient-opacity: 0.18;
 }
 
 .ls-timeseries__legend {
@@ -144,15 +150,12 @@
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    background: var(--ls-border, #2271b1);
+    background: var(--ls-timeseries-line-color);
 }
 
-.ls-timeseries__legend-swatch--visits {
-    background: var(--ls-text-2, #2271b1);
-}
-
-.ls-timeseries__legend-item--visits {
-    color: var(--ls-timeseries-visits-color);
+.ls-timeseries__legend-swatch--previous {
+    background: transparent;
+    border: 2px dashed var(--ls-timeseries-line-color);
 }
 
 .ls-timeseries__svg {
@@ -179,19 +182,19 @@
     stroke: none;
 }
 
-.ls-timeseries__area--visits {
+.ls-timeseries__area--current {
     opacity: 0.6;
 }
 
 .ls-timeseries__line {
     fill: none;
-    stroke: var(--ls-border, #2271b1);
+    stroke: var(--ls-timeseries-line-color);
     stroke-width: 2.5;
 }
 
-.ls-timeseries__line--visits {
-    stroke: var(--ls-timeseries-visits-color);
-    stroke-dasharray: 5 4;
+.ls-timeseries__line--previous {
+    stroke-dasharray: 6 4;
+    opacity: 0.7;
 }
 
 .ls-timeseries__point {
