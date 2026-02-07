@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T19:51:46+00:00\n"
+"POT-Creation-Date: 2026-02-07T19:56:57+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,34 +170,34 @@ msgstr "Chargement…"
 msgid "Loading: %s"
 msgstr "Chargement : %s"
 
-#: src/admin/components/WorldMap.js:40 src/admin/lib/countryNames.js:56
+#: src/admin/components/WorldMap.js:95 src/admin/lib/countryNames.js:56
 #: src/admin/lib/countryNames.js:73 src/admin/panels/GeoCountriesPanel.js:22
 msgid "Unknown country"
 msgstr "Pays inconnu"
 
 #. translators: %s: hit count.
-#: src/admin/components/WorldMap.js:122
+#: src/admin/components/WorldMap.js:187
 #, fuzzy
 msgid "%s visits"
 msgstr "%s vues"
 
-#: src/admin/components/WorldMap.js:125
+#: src/admin/components/WorldMap.js:190
 #: src/admin/panels/GeoCountriesPanel.js:42
 msgid "No data"
 msgstr ""
 
 #. translators: 1: country name, 2: value label.
 #. translators: 1: country name, 2: no data label.
-#: src/admin/components/WorldMap.js:129
+#: src/admin/components/WorldMap.js:194
 #: src/admin/panels/GeoCountriesPanel.js:40
 msgid "%1$s — %2$s"
 msgstr ""
 
-#: src/admin/components/WorldMap.js:137
+#: src/admin/components/WorldMap.js:202
 msgid "World map"
 msgstr ""
 
-#: src/admin/components/WorldMap.js:145
+#: src/admin/components/WorldMap.js:210
 #, fuzzy
 msgid "Loading world map"
 msgstr "Erreur de chargement."
