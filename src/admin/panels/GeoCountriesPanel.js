@@ -15,11 +15,16 @@ import {
 const GeoCountriesPanel = () => {
   const [rangePreset, setRangePreset] = useSharedRangePreset();
   const range = useMemo(() => getRangeFromPreset(rangePreset), [rangePreset]);
+  const emptyCountryLabel = __(
+    "No country data available. Geolocation aggregation may be disabled.",
+    "lean-stats",
+  );
+  const unknownCountryLabel = __("Unknown country", "lean-stats");
 
   const renderCountryLabel = (label, item) => {
     const flagClass = getCountryFlagClass(item?.label);
     const isUnknown = !flagClass || isUnknownCountryCode(item?.label);
-    const countryLabel = label || __("Unknown country", "lean-stats");
+    const countryLabel = label || unknownCountryLabel;
     const hits = Number(item?.hits || 0);
     const formattedHits = new Intl.NumberFormat().format(hits);
     const tooltipText =
@@ -74,15 +79,16 @@ const GeoCountriesPanel = () => {
       <div className="ls-geo-countries-panel__content">
         <WorldMap
           range={range}
-          emptyLabel={__("No country data available.", "lean-stats")}
+          emptyLabel={emptyCountryLabel}
+          unknownCountryLabel={unknownCountryLabel}
         />
         <ReportTableCard
           title={__("Top countries", "lean-stats")}
           labelHeader={__("Country", "lean-stats")}
           range={range}
           endpoint="/geo-countries"
-          emptyLabel={__("No country data available.", "lean-stats")}
-          labelFallback={__("Unknown country", "lean-stats")}
+          emptyLabel={emptyCountryLabel}
+          labelFallback={unknownCountryLabel}
           formatLabel={getCountryLabel}
           renderLabel={renderCountryLabel}
         />

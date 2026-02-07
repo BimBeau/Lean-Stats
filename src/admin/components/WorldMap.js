@@ -33,7 +33,12 @@ const normalizeCountryCode = (code) => {
   return normalized;
 };
 
-const WorldMap = ({ range, endpoint = "/geo-countries", emptyLabel }) => {
+const WorldMap = ({
+  range,
+  endpoint = "/geo-countries",
+  emptyLabel,
+  unknownCountryLabel = __("Unknown country", "lean-stats"),
+}) => {
   const { data, isLoading, error } = useAdminEndpoint(
     endpoint,
     {
@@ -108,7 +113,7 @@ const WorldMap = ({ range, endpoint = "/geo-countries", emptyLabel }) => {
     const countryName = !isUnknown
       ? geo?.properties?.NAME_EN || geo?.properties?.NAME || ""
       : "";
-    const resolvedName = countryName || __("Unknown country", "lean-stats");
+    const resolvedName = countryName || unknownCountryLabel;
     const hits = !isUnknown && code ? hitLookup.get(code) || 0 : 0;
     const valueLabel =
       hits > 0
