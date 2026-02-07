@@ -5,145 +5,135 @@ Lightweight, cookie-free statistics designed for administrators: no banners, no 
 
 ## 🎯 Goals
 
-Lean Stats is built to provide **useful site insights** while staying **minimal, fast, and privacy-friendly**:
+Lean Stats provides **useful site insights** while staying **minimal, fast, and privacy-safe**:
 
-- No cookies (no `document.cookie`, no localStorage/sessionStorage)
-- No persistent identifiers (no user IDs, no fingerprinting)
-- No third-party scripts (everything runs self-hosted)
-- Admin-first UX with a native Gutenberg-style UI
-- Aggregate-first data model (focus on trends, not people)
+- No cookies or persistent identifiers
+- No fingerprinting or user-level tracking
+- No third-party scripts (fully self-hosted)
+- Admin-first UX with a native Gutenberg-style interface
+- Aggregate-first data model (trends, not people)
 
-## 📊 Metric definitions (important)
+## 📊 Metric definitions
 
-Lean Stats uses **clear, privacy-safe metrics** to avoid ambiguity.
+Lean Stats uses **explicit, privacy-safe metrics**.
 
 ### Visits
-- A **visit** represents an anonymous **session** (not a unique person).
-- Sessions are approximated from **entry hits** (non-internal referrers), not unique people.
-- No IP addresses are stored.
-- No cookies or persistent identifiers are used.
+
+- A **visit** represents an anonymous **session**, not a unique person.
+- Sessions are approximated from **entry hits** (non-internal referrers).
+- No IP addresses, cookies, or persistent identifiers are used.
 
 Visits cannot be used to identify individuals.
 
 ### Page views
+
 - **Page views** represent the **total number of pages displayed**.
 - Each page load increments the counter.
-- Page views are counted across all visits (not unique).
+- Page views are not deduplicated across visits.
 
-## 📊 What Lean Stats tracks (Free)
+## 📈 What Lean Stats tracks (Free)
 
 Lean Stats focuses on **aggregated metrics**, not user journeys.
 
-### Core metrics
-- Page views (total pages displayed)
+- Page views
 - Visits (anonymous sessions)
-- Time series (per day, optionally per hour)
-- Pages (by page views)
-- Referrers by domain (e.g. `google.com`, `instagram.com`)
+- Time series (daily, optionally hourly)
+- Pages ranked by page views
+- Referrer domains (e.g. `google.com`, `instagram.com`)
 - Device class (mobile / desktop / tablet / bot)
-
-### Optional modules (privacy-safe)
-- 404 tracking (top missing URLs + counts)
-- Internal WordPress search terms (counts only, no user info)
-- UTM “safe mode” (basic)
-  - allowlist only (e.g. `utm_source`, `utm_medium`, `utm_campaign`)
-  - normalization to prevent storing arbitrary PII in URLs
+- 404 errors (top missing URLs with counts)
+- Internal WordPress search terms (counts only)
+- UTM tracking (safe mode)
+  - Allowlist-based (`utm_source`, `utm_medium`, `utm_campaign`)
+  - Normalization to prevent storing arbitrary or sensitive data
 
 ## ✅ Collected data (aggregated only)
 
-Lean Stats stores **aggregated counts**, never person-level records.
+Lean Stats stores **counts only**, never person-level records.
 
-- Page paths (cleaned by default)
-- Daily or hourly hit totals per page
+- Cleaned page paths
+- Daily or hourly hit totals
 - Referrer domains (domain only)
-- Device class (mobile / desktop / tablet / bot)
+- Device classes
 - 404 paths with counts
 - Internal search terms with counts
-- Allowlisted UTM campaign values (aggregated)
+- Allowlisted UTM campaign values
 - Time buckets (day or hour)
 
 ## ❌ Data never collected
 
-- Stored full IP addresses or stored precise location data
-- Cookies, localStorage, sessionStorage, or persistent identifiers
+- Full IP addresses or precise location data
+- Cookies, localStorage, sessionStorage, or identifiers
 - User IDs, emails, usernames, or names
 - Full referrer URLs or arbitrary query strings
-- Fingerprints or probabilistic identifiers
+- Fingerprinting or probabilistic identifiers
 - Session replay, heatmaps, or behavioral profiling
 
 ## 🚫 What Lean Stats deliberately does NOT do
 
-To keep Lean Stats lean and avoid consent-driven tracking patterns, the plugin does **not** provide:
+To remain lean and consent-free, Lean Stats does **not** provide:
 
-- Unique visitors (exact), returning visitors, cohorts
+- Exact unique visitors or returning visitor metrics
 - Individual user journeys or clickstreams
-- Fingerprinting or probabilistic identification
-- Heatmaps, session replay, or behavioral profiling
-- Ad / retargeting integrations
-- Any tracking that requires third-party scripts
+- Fingerprinting or behavioral profiling
+- Heatmaps or session replay
+- Advertising or retargeting integrations
+- Any tracking that depends on third-party scripts
 
 ## 🔐 Privacy by design
 
-Lean Stats is designed to minimize data collection:
+Lean Stats minimizes data collection by default:
 
-- No IP addresses stored
-- Referrer stored as domain only (no full referrer URLs)
-- URL cleaning by default (strip query strings unless allowlisted)
-- Data retention: aggregated data kept for reporting; optional short-lived raw logs (if enabled) are limited and purged automatically
-- Short deduplication window prevents repeated identical hits within seconds
-- Optional support for GPC / DNT signals (configurable)
+- No IP storage
+- Referrers stored as domains only
+- URL cleaning enabled by default (query strings stripped unless allowlisted)
+- Aggregated data retained for reporting
+- Optional short-lived raw logs (debug mode only), automatically purged
+- Short deduplication window to prevent repeated identical hits
+- Optional support for DNT (`DNT: 1`) and GPC (`Sec-GPC: 1`)
 
-> Note: Legal requirements vary by jurisdiction and by how a site is configured. Lean Stats is engineered to minimize risk by avoiding common consent-triggering tracking patterns.
+> Legal requirements vary by jurisdiction and configuration. Lean Stats is engineered to reduce compliance risk by avoiding common consent-triggering tracking patterns.
 
 ## ⚙️ Settings overview
 
-- **URL cleaning**: strips query strings by default; allowlists keep only specified parameters.
-- **Exclusions**: skips tracking for specified roles and URL paths.
-- **DNT/GPC**: respects `DNT: 1` and `Sec-GPC: 1` when enabled.
-- **Retention**: raw logs keep a short, configurable retention window when debug mode is enabled.
-- **Geolocation**: MaxMind Account ID and License Key enable IP geolocation via the MaxMind API.
-- **Purge**: a purge action deletes aggregated analytics tables and raw logs while keeping settings.
+- **URL cleaning**: strips query strings by default; allowlists supported
+- **Exclusions**: skip tracking for specific roles and URL paths
+- **DNT / GPC**: optional respect for browser privacy signals
+- **Retention**: configurable retention for debug raw logs
+- **Geolocation**: optional MaxMind API integration (no IP storage)
+- **Purge**: deletes analytics data while preserving settings
 
 ## 🧩 Admin UI
 
-Lean Stats integrates directly inside WordPress Admin:
+Lean Stats integrates directly into WordPress Admin:
 
-- Gutenberg-style UI using `@wordpress/components`
-- Admin UI uses the Gutenberg design system exclusively with official `@wordpress/components` UI elements.
-- Fast dashboard: KPIs, time series charts, and top lists
-- Minimal interactions: tooltips, skeleton loading, and clear empty states
-- Settings screen for DNT / GPC compliance, URL allowlists, retention, role exclusions, debug mode, and MaxMind credentials
-- Geolocation screen that shows the current request country, region, and city without storing IP addresses
+- Native Gutenberg-style UI using `@wordpress/components`
+- Fast dashboard with KPIs, charts, and top lists
+- Minimal interactions (tooltips, skeleton loading, empty states)
+- Settings screens for privacy, retention, exclusions, debug mode, and MaxMind credentials
+- Geolocation view showing current request location without storing IPs
 
-## 🧱 Admin code organization
+## 🌍 Translation
 
-Contribution entry points in `src/admin` follow the modular architecture: `panels/` contains top-level admin screens, `hooks/` provides shared React behavior, and `api/` contains REST helpers consumed by panels and widgets. Shared UI primitives live in `components/`, reusable dashboard blocks live in `widgets/`, and cross-cutting utilities and constants live in `lib/` and `constants/`.
+Lean Stats uses the `lean-stats` text domain for PHP and JavaScript.  
+The admin UI follows the effective WordPress locale (user profile locale overrides site locale).
 
-## 🌍 Localization
-
-Lean Stats uses the `lean-stats` text domain for PHP and JavaScript strings, and the admin UI follows the effective WordPress locale (user profile locale overrides the site locale). The `languages/` directory stores translation sources for French, English, Spanish, German, Italian, Portuguese, Swedish, Danish, Dutch, and Turkish.
+Available translations:
+French, English, Spanish, German, Italian, Portuguese, Swedish, Danish, Dutch, Turkish.
 
 ## 🛠 Requirements
 
 - WordPress **6.4+**
 - PHP **8.0+**
 
-## 📦 Build plugin zip
-
-Use the script to generate a distributable plugin archive in `dist/`.  
-Build command: npm run build:zip  
-The build process generates `.mo` files and JavaScript translation JSON files in `languages/` when WP-CLI is available.
-
 ## 🗺 Roadmap
 
-- UI improvements & reporting enhancements
-- Expanded Content view (pages, 404, internal search)
-- Acquisition view (referrers, safe campaign tracking)
+- UI and reporting improvements
+- Expanded content views (pages, 404, internal search)
+- Acquisition views (referrers and safe campaign tracking)
 - Improved export options
 
 ## 📚 Documentation
-
-Lean Stats includes product documentation for implementation and extension:
 
 - Privacy configuration: `docs/PRIVACY.md`
 - Settings reference: `docs/SETTINGS.md`
