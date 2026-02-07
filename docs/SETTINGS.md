@@ -23,7 +23,7 @@ Raw logs are stored only when debug mode is enabled and expire based on the conf
 
 ### Geolocation
 
-Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind GeoLite Web Service is the only supported lookup method. Saving settings requires both the MaxMind Account ID and License Key.
+Lean Stats resolves the current request IP on demand to display the visitor country, region, and city. MaxMind GeoLite Web Service is the only supported lookup method. Geolocation aggregation depends on the MaxMind Account ID, License Key, and the geolocation aggregation toggle.
 
 ### Purge
 
@@ -42,6 +42,7 @@ The purge action deletes aggregated analytics tables and raw logs while leaving 
 | `excluded_roles` | array | `[]` | Skips tracking for logged-in users in the listed WordPress roles. |
 | `excluded_paths` | array | `[]` | Skips tracking for requests that match the listed URL paths. |
 | `debug_enabled` | boolean | `false` | Enables verbose console logging for Lean Stats admin screens. |
+| `geo_aggregation_enabled` | boolean | `true` | Aggregates geolocation metrics (country, region, city) when MaxMind credentials are configured. |
 | `maxmind_account_id` | string | `""` | MaxMind Account ID used for IP geolocation. |
 | `maxmind_license_key` | string | `""` | MaxMind License Key used for IP geolocation. |
 

@@ -21,6 +21,7 @@ export const DEFAULT_SETTINGS = {
   excluded_roles: [],
   excluded_paths: [],
   debug_enabled: false,
+  geo_aggregation_enabled: true,
   maxmind_account_id: "",
   maxmind_license_key: "",
 };
