@@ -46,7 +46,15 @@ const buildSmoothPath = (points, smoothing = 0.2) => {
 };
 
 const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
-  const maxHits = items.reduce((max, item) => Math.max(max, item.hits), 0);
+  const maxValue = items.reduce(
+    (max, item) =>
+      Math.max(
+        max,
+        item.pageViews ?? item.hits ?? 0,
+        item.visits ?? 0,
+      ),
+    0,
+  );
   const width = Math.max(Math.round(chartWidth), LINE_CHART_PADDING * 2 + 1);
   const height = LINE_CHART_HEIGHT;
   const padding = LINE_CHART_PADDING;
@@ -54,25 +62,41 @@ const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
   const innerHeight = Math.max(height - padding * 2, 1);
   const totalPoints = Math.max(items.length - 1, 1);
 
-  const points = items.map((item, index) => {
-    const x = padding + (innerWidth * index) / totalPoints;
-    const y =
-      height - padding - (maxHits ? (item.hits / maxHits) * innerHeight : 0);
-    return {
-      x,
-      y,
-      label: item.bucket,
-      hits: item.hits,
-    };
-  });
+  const buildPoints = (metricKey) =>
+    items.map((item, index) => {
+      const value =
+        metricKey === "pageViews"
+          ? item.pageViews ?? item.hits ?? 0
+          : item.visits ?? 0;
+      const x = padding + (innerWidth * index) / totalPoints;
+      const y =
+        height - padding - (maxValue ? (value / maxValue) * innerHeight : 0);
+      return {
+        x,
+        y,
+        label: item.bucket,
+        pageViews: item.pageViews ?? item.hits ?? 0,
+        visits: item.visits ?? 0,
+      };
+    });
 
-  const linePath = buildSmoothPath(points);
+  const pageViewsPoints = buildPoints("pageViews");
+  const visitsPoints = buildPoints("visits");
+
+  const pageViewsLinePath = buildSmoothPath(pageViewsPoints);
+  const visitsLinePath = buildSmoothPath(visitsPoints);
   const baselineY = height - padding;
-  const areaPath =
-    points.length > 0
-      ? `${linePath} L ${points[points.length - 1].x} ${baselineY} L ${
-          points[0].x
-        } ${baselineY} Z`
+  const pageViewsAreaPath =
+    pageViewsPoints.length > 0
+      ? `${pageViewsLinePath} L ${
+          pageViewsPoints[pageViewsPoints.length - 1].x
+        } ${baselineY} L ${pageViewsPoints[0].x} ${baselineY} Z`
+      : "";
+  const visitsAreaPath =
+    visitsPoints.length > 0
+      ? `${visitsLinePath} L ${
+          visitsPoints[visitsPoints.length - 1].x
+        } ${baselineY} L ${visitsPoints[0].x} ${baselineY} Z`
       : "";
 
   const labelCount = Math.min(LINE_CHART_LABEL_COUNT, items.length);
@@ -102,21 +126,24 @@ const buildLineChartData = (items, chartWidth = LINE_CHART_WIDTH) => {
     if (LINE_CHART_Y_TICK_COUNT <= 1) {
       return {
         y: padding,
-        value: maxHits,
+        value: maxValue,
       };
     }
     const ratio = index / (LINE_CHART_Y_TICK_COUNT - 1);
     return {
       y: padding + innerHeight * ratio,
-      value: Math.round(maxHits * (1 - ratio)),
+      value: Math.round(maxValue * (1 - ratio)),
     };
   });
 
   return {
-    points,
-    linePath,
-    areaPath,
-    maxHits,
+    pageViewsPoints,
+    visitsPoints,
+    pageViewsLinePath,
+    visitsLinePath,
+    pageViewsAreaPath,
+    visitsAreaPath,
+    maxValue,
     width,
     height,
     padding,
