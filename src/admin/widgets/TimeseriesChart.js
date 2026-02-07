@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "@wordpress/element";
-import { __, _n } from "@wordpress/i18n";
+import { Flex, FlexItem } from "@wordpress/components";
+import { __, _n, sprintf } from "@wordpress/i18n";
 
 import useAdminEndpoint from "../api/useAdminEndpoint";
 import ChartFrame from "../components/ChartFrame";
@@ -21,7 +22,7 @@ const TimeseriesChart = ({ range }) => {
     () =>
       items.map((item) => ({
         bucket: item.bucket,
-        value: item.pageViews ?? item.hits ?? 0,
+        value: item.pageViews ?? 0,
       })),
     [items],
   );
@@ -89,6 +90,14 @@ const TimeseriesChart = ({ range }) => {
       value,
       "lean-stats",
     )}`;
+  const formatTooltipSummary = (point) =>
+    sprintf(
+      /* translators: 1: formatted date, 2: page views count, 3: visits count */
+      __("%1$s: %2$s, %3$s", "lean-stats"),
+      formatTooltipDate(point.label),
+      formatPageViewsLabel(point.pageViews),
+      formatVisitsLabel(point.visits),
+    );
 
   const handleChartMouseMove = useCallback(
     (event) => {
@@ -123,10 +132,12 @@ const TimeseriesChart = ({ range }) => {
         {formatTooltipDate(activePoint.label)}
       </div>
       <div className="ls-timeseries__tooltip-metric">
-        {formatPageViewsLabel(activePoint.pageViews)}
-      </div>
-      <div className="ls-timeseries__tooltip-metric">
-        {formatVisitsLabel(activePoint.visits)}
+        {sprintf(
+          /* translators: 1: page views count, 2: visits count */
+          __("%1$s, %2$s", "lean-stats"),
+          formatPageViewsLabel(activePoint.pageViews),
+          formatVisitsLabel(activePoint.visits),
+        )}
       </div>
     </>
   ) : null;
@@ -134,7 +145,7 @@ const TimeseriesChart = ({ range }) => {
   const visitsGradientId = "ls-timeseries-gradient-visits";
 
   return (
-    <LsCard title={__("Daily page views", "lean-stats")}>
+    <LsCard title={__("Daily page views and visits", "lean-stats")}>
       <DataState
         isLoading={isLoading}
         error={error}
@@ -144,9 +155,29 @@ const TimeseriesChart = ({ range }) => {
       />
       {!isLoading && !error && items.length > 0 && (
         <div className="ls-timeseries">
+          <Flex className="ls-timeseries__legend" align="center">
+            <FlexItem>
+              <span className="ls-timeseries__legend-item">
+                <span
+                  className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--pageviews"
+                  aria-hidden="true"
+                />
+                {__("Page views", "lean-stats")}
+              </span>
+            </FlexItem>
+            <FlexItem>
+              <span className="ls-timeseries__legend-item">
+                <span
+                  className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--visits"
+                  aria-hidden="true"
+                />
+                {__("Visits", "lean-stats")}
+              </span>
+            </FlexItem>
+          </Flex>
           <ChartFrame
             height={LINE_CHART_HEIGHT}
-            ariaLabel={__("Daily page views line chart", "lean-stats")}
+            ariaLabel={__("Daily page views and visits line chart", "lean-stats")}
             onResize={handleChartResize}
           >
             <div
@@ -160,7 +191,7 @@ const TimeseriesChart = ({ range }) => {
                 preserveAspectRatio="xMidYMid meet"
                 className="ls-timeseries__svg"
                 role="img"
-                aria-label={__("Daily page views line chart", "lean-stats")}
+                aria-label={__("Daily page views and visits line chart", "lean-stats")}
                 onMouseMove={handleChartMouseMove}
               >
                 <defs>
@@ -173,12 +204,12 @@ const TimeseriesChart = ({ range }) => {
                   >
                     <stop
                       offset="0%"
-                      stopColor="var(--ls-text-2, #2271b1)"
-                      stopOpacity="0.5"
+                      stopColor="var(--ls-border, #2271b1)"
+                      stopOpacity="0.45"
                     />
                     <stop
                       offset="100%"
-                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopColor="var(--ls-border, #2271b1)"
                       stopOpacity="0"
                     />
                   </linearGradient>
@@ -189,8 +220,16 @@ const TimeseriesChart = ({ range }) => {
                     x2="0"
                     y2="1"
                   >
-                    <stop offset="0%" stopColor="#00a32a" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#00a32a" stopOpacity="0" />
+                    <stop
+                      offset="0%"
+                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopOpacity="0.25"
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopOpacity="0"
+                    />
                   </linearGradient>
                 </defs>
                 <rect
@@ -275,14 +314,9 @@ const TimeseriesChart = ({ range }) => {
                     onFocus={() => setActivePoint(point)}
                     onBlur={() => setActivePoint(null)}
                     tabIndex="0"
+                    aria-label={formatTooltipSummary(point)}
                   >
-                    <title>
-                      {`${formatTooltipDate(
-                        point.label,
-                      )} : ${formatPageViewsLabel(
-                        point.pageViews,
-                      )} / ${formatVisitsLabel(point.visits)}`}
-                    </title>
+                    <title>{formatTooltipSummary(point)}</title>
                   </circle>
                 ))}
               </svg>
