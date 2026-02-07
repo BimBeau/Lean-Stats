@@ -124,6 +124,8 @@
 .ls-timeseries {
     display: grid;
     gap: var(--lean-stats-gap-md);
+    --ls-timeseries-visits-color: var(--ls-text-2, #2271b1);
+    --ls-timeseries-visits-gradient-opacity: 0.18;
 }
 
 .ls-timeseries__legend {
@@ -147,6 +149,10 @@
 
 .ls-timeseries__legend-swatch--visits {
     background: var(--ls-text-2, #2271b1);
+}
+
+.ls-timeseries__legend-item--visits {
+    color: var(--ls-timeseries-visits-color);
 }
 
 .ls-timeseries__svg {
@@ -184,7 +190,7 @@
 }
 
 .ls-timeseries__line--visits {
-    stroke: var(--ls-text-2, #2271b1);
+    stroke: var(--ls-timeseries-visits-color);
     stroke-dasharray: 5 4;
 }
 

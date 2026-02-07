@@ -166,7 +166,7 @@ const TimeseriesChart = ({ range }) => {
               </span>
             </FlexItem>
             <FlexItem>
-              <span className="ls-timeseries__legend-item">
+              <span className="ls-timeseries__legend-item ls-timeseries__legend-item--visits">
                 <span
                   className="ls-timeseries__legend-swatch ls-timeseries__legend-swatch--visits"
                   aria-hidden="true"
@@ -222,12 +222,12 @@ const TimeseriesChart = ({ range }) => {
                   >
                     <stop
                       offset="0%"
-                      stopColor="var(--ls-text-2, #2271b1)"
-                      stopOpacity="0.25"
+                      stopColor="var(--ls-timeseries-visits-color, var(--ls-text-2, #2271b1))"
+                      stopOpacity="var(--ls-timeseries-visits-gradient-opacity, 0.18)"
                     />
                     <stop
                       offset="100%"
-                      stopColor="var(--ls-text-2, #2271b1)"
+                      stopColor="var(--ls-timeseries-visits-color, var(--ls-text-2, #2271b1))"
                       stopOpacity="0"
                     />
                   </linearGradient>
