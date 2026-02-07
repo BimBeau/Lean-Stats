@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lean Stats\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Lean-Stats\n"
-"POT-Creation-Date: 2026-02-07T10:51:03+00:00\n"
+"POT-Creation-Date: 2026-02-07T11:25:55+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,6 @@ msgid "Internal searches"
 msgstr "Dahili aramalar"
 
 #: admin/admin.php:285 src/admin/constants/index.js:10
-#: src/admin/panels/GeolocationPanel.js:64
 #: src/admin/panels/SettingsPanel.js:351
 msgid "Geolocation"
 msgstr ""
@@ -183,110 +182,39 @@ msgstr "30 gün"
 msgid "90 days"
 msgstr "90 gün"
 
-#: src/admin/panels/GeolocationPanel.js:12
-msgid "MaxMind API"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:15
-#: src/admin/panels/GeolocationPanel.js:106
-msgid "IP address"
-msgstr ""
-
+#: src/admin/panels/GeolocationPanel.js:6
 #: src/admin/panels/GeolocationPanel.js:16
-msgid "HTTP status"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:17
-msgid "MaxMind error code"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:19
-msgid "MaxMind error message"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:22
-msgid "Request ID"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:24
-msgid "Response excerpt"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:31
-msgid "Current lookup"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:32
-#: src/admin/panels/GeolocationPanel.js:42
 msgid "Top countries"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:33
-#: src/admin/panels/GeolocationPanel.js:54
+#: src/admin/panels/GeolocationPanel.js:7
+#: src/admin/panels/GeolocationPanel.js:28
 #, fuzzy
 msgid "Top cities"
 msgstr "En çok ziyaret edilen sayfalar"
 
-#: src/admin/panels/GeolocationPanel.js:43
+#: src/admin/panels/GeolocationPanel.js:17
 msgid "Country code"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:45
+#: src/admin/panels/GeolocationPanel.js:19
 #, fuzzy
 msgid "No country data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/panels/GeolocationPanel.js:55
-#: src/admin/panels/GeolocationPanel.js:118
+#: src/admin/panels/GeolocationPanel.js:29
 msgid "City"
 msgstr ""
 
-#: src/admin/panels/GeolocationPanel.js:57
+#: src/admin/panels/GeolocationPanel.js:31
 #, fuzzy
 msgid "No city data available."
 msgstr "Cihaz verisi mevcut değil."
 
-#: src/admin/panels/GeolocationPanel.js:58
+#: src/admin/panels/GeolocationPanel.js:32
 #: src/admin/panels/SearchTermsPanel.js:11 src/admin/widgets/DeviceSplit.js:27
 msgid "Unknown"
 msgstr "Bilinmiyor"
-
-#: src/admin/panels/GeolocationPanel.js:69
-#, fuzzy
-msgid "No geolocation data available."
-msgstr "Cihaz verisi mevcut değil."
-
-#: src/admin/panels/GeolocationPanel.js:70
-#, fuzzy
-msgid "Looking up location…"
-msgstr "Grafik yükleniyor…"
-
-#: src/admin/panels/GeolocationPanel.js:80
-msgid "MaxMind API diagnostics"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:98
-msgid "Location is derived from the current request IP and is not stored."
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:110
-msgid "Country"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:111
-#: src/admin/panels/GeolocationPanel.js:115
-#: src/admin/panels/GeolocationPanel.js:119
-#, fuzzy
-msgid "Unavailable"
-msgstr "KPI mevcut değil."
-
-#: src/admin/panels/GeolocationPanel.js:114
-msgid "Region"
-msgstr ""
-
-#: src/admin/panels/GeolocationPanel.js:122
-msgid "Source"
-msgstr ""
 
 #: src/admin/panels/OverviewPanel.js:26 src/admin/panels/TopPagesPanel.js:9
 #: src/admin/panels/TopPagesPanel.js:20 src/admin/panels/TopPagesPanel.js:30
@@ -784,6 +712,9 @@ msgstr "Günlük sayfa görüntülemeleri çizgi grafiği"
 
 #~ msgid "%s : %s"
 #~ msgstr "%s : %s"
+
+#~ msgid "No KPIs available."
+#~ msgstr "KPI mevcut değil."
 
 #~ msgid "Device breakdown details"
 #~ msgstr "Cihaz dağılımı ayrıntısı"
