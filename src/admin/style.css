@@ -258,6 +258,22 @@
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
+.ls-geo-countries-panel__content {
+    display: grid;
+    gap: var(--lean-stats-gap-md);
+}
+
+.ls-world-map {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.ls-world-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .ls-country-flag--unknown {
     background: #dcdcde;
 }
